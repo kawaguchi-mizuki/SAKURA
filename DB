@@ -1,0 +1,93 @@
+CREATE DATABASE cats;
+
+CREATE TABLE student(
+    student_id  INT NOT NULL,
+    student_name VARCHAR(128) ,
+    student_sex VARCHAR(128) NOT NULL,
+    hobby_id INT AUTO_INCREMENT NOT NULL,
+    school_name VARCHAR(128) ,
+    course VARCHAR(128) ,
+    grade INT ,
+    age INT ,
+    birthplace VARCHAR(128),
+    self_introduction VARCHAR(128) ,
+    password VARCHAR(128) ,
+    image_pass VARCHAR(128) ,
+    point INT ,
+    last_log INT ,
+    continuous_login INT ,
+
+    PRIMARY KEY (student_id)
+    FOREIGN KEY (hobby_id) REFERENCES student_hobby(hobby_id));
+
+
+CREATE TABLE hobby(
+    hobby_id INT AUTO_INCREMENT NOT NULL,
+    hobby_name VARCHAR NOT NULL,
+    PRIMARY KEY (hobby_id),
+);
+
+CREATE TABLE student_hobby(
+    student_id INT NOT NULL,
+    hobyy_id INT AUTO_INCREMENT NOT NULL,
+    PRIMARY KEY (student_id,hobby_id),
+    FOREIGN KEY (hobby_id) REFERENCES hobby (hobby_id),
+    FOREIGN KEY (student_id) REFERENCES student(student_id)
+);
+
+CREATE TABLE talk(
+    request_id INT AUTO_INCREMENT NOT NULL ,
+    student_id_sent INT NOT NULL,
+    student_id_receive INT NOT NULL,
+    approval INT AUTO_INCREMENT ,
+    PRIMARY KEY (request_id),
+    FOREIGN KEY (student_id_sent) student (student_id),
+    FOREIGN KEY (student_id_receive) student (student_id)
+);
+
+CREATE TABLE message(
+    talk_id INT AUTO_INCREMENT NOT NULL ,
+    message_id INT NOT NULL,
+    message VARCHAR(256) NOT NULL
+    send_time TIMESTAMP NOT NULL,
+    student_id_send INT NOT NULL,
+    PRIMARY KEY (talk_id),
+    FOREIGN KEY (student_id_send) REFERENCES student (student_id) 
+);
+
+CREATE TABLE board (
+    board_id INT AUTO_INCREMENT NOT NULL,
+    student_id VARCHAR(128) NOT NULL,
+    board_title VARCHAR(128) NOT NULL,
+    category_id VARCHAR(4) NOT NULL,
+    board_date DATE NOT NULL,
+    PRIMARY KEY (board_id),
+    FOREIGN KEY (student_id) REFERENCES student (student_id)
+);
+
+CREATE TABLE board_comment (
+    board_id INT AUTO_INCREMENT NOT NULL,
+    board_comment_id INT AUTO_INCREMENT NOT NULL,
+    board_comment VARCHAR(128) NOT NULL,
+    board_comment_name VARCHAR (128) NOT NULL,
+    PRIMARY KEY (board_id,board_comment_id)
+    FOREIGN KEY (student_id) board (student_id)
+);
+
+CREATE TABLE category (
+    category_id INT AUTO_INCREMENT NOT NULL,
+    category_name VARCHAR(128) NOT NULL,
+    PRIMARY KEY (category_id)
+);
+
+CREATE TABLE authentication (
+    student_id INT NOT NULL,
+    one_pass VARCHAR(128) NOT NULL,
+    time_limit TIMESTAMP NOT NULL,
+    PRIMARY KEY (student_id)
+)
+
+
+
+
+
