@@ -1,39 +1,46 @@
 CREATE DATABASE cats;
 
-CREATE TABLE student(
-    student_id  INT NOT NULL,
-    student_name VARCHAR(128) ,
-    student_sex VARCHAR(128) NOT NULL,
-    hobby_id INT AUTO_INCREMENT NOT NULL,
-    school_name VARCHAR(128) ,
-    course VARCHAR(128) ,
-    grade INT ,
-    age INT ,
-    birthplace VARCHAR(128),
-    self_introduction VARCHAR(128) ,
-    password VARCHAR(128) ,
-    image_pass VARCHAR(128) ,
-    point INT ,
-    last_log INT ,
-    continuous_login INT ,
-
-    PRIMARY KEY (student_id)
-    FOREIGN KEY (hobby_id) REFERENCES student_hobby(hobby_id));
+use cats;
 
 
 CREATE TABLE hobby(
     hobby_id INT AUTO_INCREMENT NOT NULL,
-    hobby_name VARCHAR NOT NULL,
-    PRIMARY KEY (hobby_id),
+    hobby_name VARCHAR(128) NOT NULL,
+    PRIMARY KEY (hobby_id)
 );
+
+
+
+CREATE TABLE student(
+    student_id  INT NOT NULL,
+    student_name VARCHAR(128) NOT NULL,
+    student_sex VARCHAR(128) NOT NULL,
+    hobby_id INT NOT NULL,
+    school_name VARCHAR(128),
+    course VARCHAR(128) ,
+    grade INT,
+    age INT,
+    birthplace VARCHAR(128),
+    self_introduction VARCHAR(128),
+    password VARCHAR(128),
+    image_pass VARCHAR(128),
+    point INT ,
+    last_log DATE,
+    continuous_login INT,
+
+    PRIMARY KEY (student_id)
+);
+
 
 CREATE TABLE student_hobby(
     student_id INT NOT NULL,
-    hobyy_id INT AUTO_INCREMENT NOT NULL,
+    hobby_id INT NOT NULL,
     PRIMARY KEY (student_id,hobby_id),
     FOREIGN KEY (hobby_id) REFERENCES hobby (hobby_id),
-    FOREIGN KEY (student_id) REFERENCES student(student_id)
+    FOREIGN KEY (student_id) REFERENCES student (student_id)
 );
+
+//Ç±Ç±Ç‹Ç≈ÇÕämîFçœÇ›
 
 CREATE TABLE talk(
     request_id INT AUTO_INCREMENT NOT NULL ,
