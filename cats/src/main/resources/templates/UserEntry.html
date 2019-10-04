@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>会員登録</title>
+<link href="/css/UserEntry.css" th:href="@{/css/UserEntry.css}" rel="stylesheet"></link>
+
+
+</head>
+<body>
+
+	<h1>プロフィール登録</h1>
+
+	<form th:action="@{/User/Check}" th:object="${userbeans}" method="post" >
+
+		<input type="file" name="upload" accept="image/*">
+		<br>
+
+		<label>名　前 : <input type="text" name="name"  th:value="${userbeans.name}"  required></label>
+		<br>
+
+		<label>性　別 : <input type="radio" name="sex" th:value="男" checked>男
+						<input type="radio" name="sex" th:value="女">女</label>
+
+		<br>
+		<label>趣　味 : <select name="hobby" >
+						<option th:each="dto:${hobbylist}" th:value="${dto.hobbyId}" th:text="${dto.hobbyName}"></option>
+					    </select>
+		</label>
+		<br>
+
+		<label>学校名 : <select name="school">
+						<option th:each="dto:${schoollist}" th:value="${dto.schoolId}" th:text="${dto.schoolName}"></option>
+					    </select>
+		</label>
+		<br>
+
+		<label>学　科 : <input type="text" name="subject" th:value="${userbeans.subject}"></input></label>
+
+		<br>
+
+		<label>学　年 : <select name="grade">
+		<script>
+			for (var i = 1; i <= 4; i++) {
+				document.write('<option th:value="'+i+'">' + i + '</option>');
+			}
+		</script>
+					    </select> 年
+		</label>
+		<br>
+
+		<label>年　齢 : <select name="age">
+		<script>
+			for (var i = 18; i <= 40; i++) {
+				document.write('<option th:value="'+i+'">' + i + '</option>');
+			}
+		</script>
+					    </select> 歳
+
+		</label>
+		<br>
+
+		<label>出身地 : <select name="birthplace">
+													<option th:value="北海道">北海道</option>
+													<option th:value="青森県">青森県</option>
+													<option th:value="岩手県">岩手県</option>
+													<option th:value="宮城県">宮城県</option>
+													<option th:value="秋田県">秋田県</option>
+													<option th:value="山形県">山形県</option>
+													<option th:value="福島県">福島県</option>
+													<option th:value="茨城県">茨城県</option>
+													<option th:value="栃木県">栃木県</option>
+													<option th:value="群馬県">群馬県</option>
+													<option th:value="埼玉県">埼玉県</option>
+													<option th:value="千葉県">千葉県</option>
+													<option th:value="東京都">東京都</option>
+													<option th:value="神奈川県">神奈川県</option>
+													<option th:value="新潟県">新潟県</option>
+													<option th:value="富山県">富山県</option>
+													<option th:value="石川県">石川県</option>
+													<option th:value="福井県">福井県</option>
+													<option th:value="山梨県">山梨県</option>
+													<option th:value="長野県">長野県</option>
+													<option th:value="岐阜県">岐阜県</option>
+													<option th:value="静岡県">静岡県</option>
+													<option th:value="愛知県">愛知県</option>
+													<option th:value="三重県">三重県</option>
+													<option th:value="滋賀県">滋賀県</option>
+													<option th:value="京都府">京都府</option>
+													<option th:value="大阪府">大阪府</option>
+													<option th:value="兵庫県">兵庫県</option>
+													<option th:value="奈良県">奈良県</option>
+													<option th:value="和歌山県">和歌山県</option>
+													<option th:value="鳥取県">鳥取県</option>
+													<option th:value="島根県">島根県</option>
+													<option th:value="岡山県">岡山県</option>
+													<option th:value="広島県">広島県</option>
+													<option th:value="山口県">山口県</option>
+													<option th:value="徳島県">徳島県</option>
+													<option th:value="香川県">香川県</option>
+													<option th:value="愛媛県">愛媛県</option>
+													<option th:value="高知県">高知県</option>
+													<option th:value="福岡県">福岡県</option>
+													<option th:value="佐賀県">佐賀県</option>
+													<option th:value="長崎県">長崎県</option>
+													<option th:value="熊本県">熊本県</option>
+													<option th:value="大分県">大分県</option>
+													<option th:value="宮崎県">宮崎県</option>
+													<option th:value="鹿児島県">鹿児島県</option>
+													<option th:value="沖縄県">沖縄県</option>
+						</select>
+								</label>
+		<br>
+
+		<label>自己紹介 </label>
+		<br>
+			<textarea name="introduction" rows="4" cols="40"></textarea>
+		<br>
+
+		<label>パスワード　 : <input type="password" name="password" ></label>
+		<br>
+
+		<label>パスワード再 :  <input type="password" name="r_password" ></label>
+
+		<p th:text="${msg}" class="err"></p>
+
+		<input type="button" onclick="history.back()" value="戻る">
+		<input type="submit" value="登録">
+
+	</form>
+
+</body>
+
+</html>
