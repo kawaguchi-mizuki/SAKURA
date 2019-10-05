@@ -9,6 +9,12 @@ CREATE TABLE hobby(
     PRIMARY KEY (hobby_id)
 );
 
+CREATE TABLE school(
+    school_id INT AUTO_INCREMENT ,
+    school_name VARCHAR(128),
+    PRIMARY KEY (school_id)
+);
+
 
 
 CREATE TABLE student(

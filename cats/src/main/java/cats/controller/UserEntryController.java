@@ -32,8 +32,8 @@ public class UserEntryController {
 	@Autowired
 	SchoolService schoolService;
 
-//	@Autowired
-//	UserService userService;
+	//	@Autowired
+	//	UserService userService;
 
 	@Autowired
 	HttpSession session;
@@ -44,10 +44,11 @@ public class UserEntryController {
 	public ModelAndView TwoConf( ModelAndView mav) {
 
 
-
+		//趣味一覧を取得
 		List<HobbyDto> hobbylist = hobbyService.getAllList();
-		List<SchoolDto> schoollist = schoolService.getAllList();
 
+		//学校一覧を取得
+		List<SchoolDto> schoollist = schoolService.getAllList();
 
 		//空のデータを作る
 		CreateUserDto dto = new CreateUserDto();
