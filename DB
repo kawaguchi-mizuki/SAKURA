@@ -1,5 +1,6 @@
 CREATE DATABASE cats;
 
+<<<<<<< Updated upstream
 use cats;
 
 
@@ -10,6 +11,21 @@ CREATE TABLE hobby(
 );
 
 
+=======
+CREATE TABLE authentication (
+    student_id INT NOT NULL,
+    one_pass VARCHAR(128) NOT NULL,
+    time_limit TIMESTAMP NOT NULL,
+    PRIMARY KEY (student_id)
+);
+
+
+CREATE TABLE category (
+    category_id INT AUTO_INCREMENT NOT NULL,
+    category_name VARCHAR(128) NOT NULL,
+    PRIMARY KEY (category_id)
+);
+>>>>>>> Stashed changes
 
 CREATE TABLE student(
     student_id  INT NOT NULL,
@@ -29,8 +45,12 @@ CREATE TABLE student(
     continuous_login INT,
 
     PRIMARY KEY (student_id)
+<<<<<<< Updated upstream
 );
 
+=======
+    FOREIGN KEY (hobby_id) REFERENCES student_hobby(hobby_id));
+>>>>>>> Stashed changes
 
 CREATE TABLE student_hobby(
     student_id INT NOT NULL,
@@ -43,13 +63,22 @@ CREATE TABLE student_hobby(
 //ここまでは確認済み
 
 CREATE TABLE talk(
+    talk_id INT AUTO_INCREMENT NOT NULL,
+    student_id_sent INT NOT NULL,
+    student_id_receive INT NOT NULL,
+    PRIMARY KEY (talk_id),
+    FOREIGN KEY (student_id_sent)REFERENCES student (student_id),
+    FOREIGN KEY (student_id_receive)REFERENCES student (student_id)   
+);
+
+CREATE TABLE request(
     request_id INT AUTO_INCREMENT NOT NULL ,
     student_id_sent INT NOT NULL,
     student_id_receive INT NOT NULL,
-    approval INT AUTO_INCREMENT ,
+    approval INT ,
     PRIMARY KEY (request_id),
-    FOREIGN KEY (student_id_sent) student (student_id),
-    FOREIGN KEY (student_id_receive) student (student_id)
+    FOREIGN KEY (student_id_sent)REFERENCES student (student_id),
+    FOREIGN KEY (student_id_receive)REFERENCES student (student_id)
 );
 
 CREATE TABLE message(
@@ -59,40 +88,31 @@ CREATE TABLE message(
     send_time TIMESTAMP NOT NULL,
     student_id_send INT NOT NULL,
     PRIMARY KEY (talk_id),
-    FOREIGN KEY (student_id_send) REFERENCES student (student_id) 
+    FOREIGN KEY (talk_id) REFERENCES talk (talk_id) 
 );
 
 CREATE TABLE board (
     board_id INT AUTO_INCREMENT NOT NULL,
-    student_id VARCHAR(128) NOT NULL,
+    student_id INT NOT NULL,
     board_title VARCHAR(128) NOT NULL,
-    category_id VARCHAR(4) NOT NULL,
+    category_id INT NOT NULL,
     board_date DATE NOT NULL,
     PRIMARY KEY (board_id),
-    FOREIGN KEY (student_id) REFERENCES student (student_id)
+    FOREIGN KEY (student_id) REFERENCES student (student_id),
+    FOREIGN KEY (category_id) REFERENCES category (category_id)
 );
 
 CREATE TABLE board_comment (
-    board_id INT AUTO_INCREMENT NOT NULL,
+    board_id INT NOT NULL,
     board_comment_id INT AUTO_INCREMENT NOT NULL,
     board_comment VARCHAR(128) NOT NULL,
-    board_comment_name VARCHAR (128) NOT NULL,
-    PRIMARY KEY (board_id,board_comment_id)
-    FOREIGN KEY (student_id) board (student_id)
+    board_comment_name VARCHAR(128) NOT NULL,
+    PRIMARY KEY (board_comment_id,board_id),
+    FOREIGN KEY (board_id) REFERENCES board (board_id)
 );
 
-CREATE TABLE category (
-    category_id INT AUTO_INCREMENT NOT NULL,
-    category_name VARCHAR(128) NOT NULL,
-    PRIMARY KEY (category_id)
-);
+//確認済み
 
-CREATE TABLE authentication (
-    student_id INT NOT NULL,
-    one_pass VARCHAR(128) NOT NULL,
-    time_limit TIMESTAMP NOT NULL,
-    PRIMARY KEY (student_id)
-)
 
 
 
