@@ -17,14 +17,14 @@
 		<input type="file" name="upload" accept="image/*">
 		<br>
 
-		<label>名　前 : <input type="text" name="name"  th:value="${userbeans.name}"  required></label>
+		<label>名　前 : <input type="text" name="name" th:value="${createUserDto.studentName}" required></label>
 		<br>
 
 		<label>性　別 : <input type="radio" name="sex" th:value="男" checked>男
 						<input type="radio" name="sex" th:value="女">女</label>
 
 		<br>
-		<label>趣　味 : <select name="hobby" >
+		<label>趣　味 : <select name="hobbyId" >
 						<option th:each="dto:${hobbylist}" th:value="${dto.hobbyId}" th:text="${dto.hobbyName}"></option>
 					    </select>
 		</label>
@@ -36,7 +36,7 @@
 		</label>
 		<br>
 
-		<label>学　科 : <input type="text" name="subject" th:value="${userbeans.subject}"></input></label>
+		<label>学　科 : <input type="text" name="course" th:value="${createUserDto.course}"></input></label>
 
 		<br>
 
@@ -118,7 +118,7 @@
 			<textarea name="introduction" rows="4" cols="40"></textarea>
 		<br>
 
-		<label>パスワード　 : <input type="password" name="password" ></label>
+		<label>パスワード　 : <input type="password" name="password" th:value= "${createUserDto.password}" ></label>
 		<br>
 
 		<label>パスワード再 :  <input type="password" name="r_password" ></label>

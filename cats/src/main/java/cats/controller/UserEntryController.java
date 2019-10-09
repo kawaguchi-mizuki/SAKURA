@@ -19,6 +19,7 @@ import cats.dto.HobbyDto;
 import cats.dto.SchoolDto;
 import cats.service.HobbyService;
 import cats.service.SchoolService;
+import cats.service.UserService;
 
 
 @RestController
@@ -32,8 +33,8 @@ public class UserEntryController {
 	@Autowired
 	SchoolService schoolService;
 
-	//	@Autowired
-	//	UserService userService;
+	@Autowired
+	UserService userService;
 
 	@Autowired
 	HttpSession session;
@@ -56,6 +57,7 @@ public class UserEntryController {
 		UserBeans userbeans = new UserBeans();
 
 		mav.addObject("userbeans",userbeans);
+		mav.addObject("createUserDto",dto);
 		mav.setViewName("UserEntry");
 		mav.addObject("hobbylist", hobbylist);
 		mav.addObject("schoollist",schoollist);
@@ -73,20 +75,33 @@ public class UserEntryController {
 		List<SchoolDto> schoollist = schoolService.getAllList();
 
 
+
+
+
+
+
 		//	パスワードとパスワード再入力値が一致しない場合
 		if(!(password.equals(r_password))) {
+
+			CreateUserDto dto = new CreateUserDto();
 
 			String errMsg = "パスワードが一致していません";
 
 			mav.setViewName("UserEntry");
 			mav.addObject("userbeans",userbeans);
+			mav.addObject("createUserDto",dto);
 			mav.addObject("hobbylist", hobbylist);
 			mav.addObject("schoollist",schoollist);
 			mav.addObject("msg",errMsg);
 
 		}else {
 
+			CreateUserDto dto = getCreateUserDto(userbeans,password);
 
+			//ポイントを付与
+			dto.setPoint(500);
+
+			userService.insert(dto);
 
 
 			mav.setViewName("login");
@@ -95,6 +110,30 @@ public class UserEntryController {
 
 
 		return mav;
+	}
+
+
+	private CreateUserDto getCreateUserDto(@Valid UserBeans userbeans,String password) {
+
+		CreateUserDto dto = new CreateUserDto();
+
+		dto.setStudentId(userbeans.getStudentId());
+		dto.setStudentName(userbeans.getName());
+		dto.setStudentSex(userbeans.getSex());
+		dto.setHobbyId(userbeans.getHobbyId());
+		dto.setSchoolName(userbeans.getSchool());
+		dto.setCourse(userbeans.getCourse());
+		dto.setGrade(userbeans.getGrade());
+		dto.setAge(userbeans.getAge());
+		dto.setBirthplace(userbeans.getBirthplace());
+		dto.setSelfIntroduction(userbeans.getIntroduction());
+		dto.setPassword(password);
+		dto.setImagePass("aaa");
+		dto.setLastLog(null);
+		dto.setContinuousLogin(4);
+
+		return dto;
+
 	}
 
 }
