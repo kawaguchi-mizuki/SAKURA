@@ -5,14 +5,14 @@ import org.springframework.stereotype.Service;
 
 import cats.dto.CreateUserDto;
 import cats.entity.StudentTblEntity;
-import cats.repository.UserRepository;
+import cats.repository.StudentRepository;
 
 
 
 @Service
-public class UserService {
+public class StudentService {
 	@Autowired
-	UserRepository userRepository;
+	StudentRepository studentRepository;
 
 	/**
 	 * 登録処理
@@ -27,7 +27,7 @@ public class UserService {
 
 				System.out.println(entity);
 
-				userRepository.saveAndFlush(entity);
+				studentRepository.saveAndFlush(entity);
 
 
 

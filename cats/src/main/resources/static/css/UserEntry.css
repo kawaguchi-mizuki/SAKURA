@@ -1,5 +1,16 @@
 @charset "UTF-8";
 
-.err{
-	color:red;
+.title{
+	margin:auto;
+}
+
+form.input{
+	margin: auto;
+
+	max-width: 1070px;
+	text-align: left;
+}
+
+.err {
+	color: red;
 }

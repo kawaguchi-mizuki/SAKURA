@@ -5,63 +5,73 @@
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 <title>会員登録</title>
 <link href="/css/UserEntry.css" th:href="@{/css/UserEntry.css}" rel="stylesheet"></link>
-
+<link href="https://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
 
 </head>
 <body>
 
-	<h1>プロフィール登録</h1>
+	<h1 class="title">プロフィール登録</h1>
 
-	<form th:action="@{/User/Check}" th:object="${userbeans}" method="post" >
+	<form class="input" th:action="@{/User/Check}" th:object="${userbeans}"   method="post" enctype="multipart/form-data" >
 
-		<input type="file" name="upload" accept="image/*">
-		<br>
+		<input type="file" th:field="*{multipartFile}"/>
+		<br/>
 
-		<label>名　前 : <input type="text" name="name" th:value="${createUserDto.studentName}" required></label>
-		<br>
+		<label>名　前</label>
+		<br/>
+		<input type="text" name="name" th:value="${createUserDto.studentName}" required />
+		<br/>
 
-		<label>性　別 : <input type="radio" name="sex" th:value="男" checked>男
-						<input type="radio" name="sex" th:value="女">女</label>
+		<label>性　別</label>
+		<br/>
+		<input type="radio" name="sex" th:value="男" checked/>男
+		<input type="radio" name="sex" th:value="女"/>女
+		<br/>
 
-		<br>
-		<label>趣　味 : <select name="hobbyId" >
-						<option th:each="dto:${hobbylist}" th:value="${dto.hobbyId}" th:text="${dto.hobbyName}"></option>
-					    </select>
-		</label>
-		<br>
+		<label>趣　味</label>
+		<br/>
+		 <select name="hobbyId" >
+			<option th:each="dto:${hobbylist}" th:value="${dto.hobbyId}" th:text="${dto.hobbyName}"></option>
+		 </select>
+		<br/>
 
-		<label>学校名 : <select name="school">
-						<option th:each="dto:${schoollist}" th:value="${dto.schoolId}" th:text="${dto.schoolName}"></option>
-					    </select>
-		</label>
-		<br>
+		<label>学校名</label>
+		<br/>
+		 <select name="school">
+			<option th:each="dto:${schoollist}" th:value="${dto.schoolId}" th:text="${dto.schoolName}"></option>
+		 </select>
+		<br/>
 
-		<label>学　科 : <input type="text" name="course" th:value="${createUserDto.course}"></input></label>
+		<label>学　科</label>
+		<br/>
+		<input type="text" name="course" th:value="${createUserDto.course}"/>
+		<br/>
 
-		<br>
+		<label>学　年 </label>
+		<br/>
+		<select name="grade">
+			<script>
+				for (var i = 1; i <= 4; i++) {
+					document.write('<option th:value="'+i+'">' + i + '</option>');
+				}
+			</script>
+	    </select> 年
+		<br/>
 
-		<label>学　年 : <select name="grade">
-		<script>
-			for (var i = 1; i <= 4; i++) {
-				document.write('<option th:value="'+i+'">' + i + '</option>');
-			}
-		</script>
-					    </select> 年
-		</label>
-		<br>
+		<label>年　齢</label>
+		<br/>
+		<select name="age">
+			<script>
+				for (var i = 18; i <= 40; i++) {
+					document.write('<option th:value="'+i+'">' + i + '</option>');
+				}
+			</script>
+	    </select> 歳
+		<br/>
 
-		<label>年　齢 : <select name="age">
-		<script>
-			for (var i = 18; i <= 40; i++) {
-				document.write('<option th:value="'+i+'">' + i + '</option>');
-			}
-		</script>
-					    </select> 歳
-
-		</label>
-		<br>
-
-		<label>出身地 : <select name="birthplace">
+		<label>出身地</label>
+		<br/>
+		<select name="birthplace">
 													<option th:value="北海道">北海道</option>
 													<option th:value="青森県">青森県</option>
 													<option th:value="岩手県">岩手県</option>
@@ -109,24 +119,27 @@
 													<option th:value="宮崎県">宮崎県</option>
 													<option th:value="鹿児島県">鹿児島県</option>
 													<option th:value="沖縄県">沖縄県</option>
-						</select>
-								</label>
-		<br>
+		</select>
+		<br/>
 
 		<label>自己紹介 </label>
-		<br>
+		<br/>
 			<textarea name="introduction" rows="4" cols="40"></textarea>
-		<br>
+		<br/>
 
-		<label>パスワード　 : <input type="password" name="password" th:value= "${createUserDto.password}" ></label>
-		<br>
+		<label>パスワード</label>
+		<br/>
+		 <input type="password" name="password" th:value= "${createUserDto.password}" />
+		<br/>
 
-		<label>パスワード再 :  <input type="password" name="r_password" ></label>
+		<label>パスワード再</label>
+		<br/>
+		<input type="password" name="r_password" />
 
 		<p th:text="${msg}" class="err"></p>
 
-		<input type="button" onclick="history.back()" value="戻る">
-		<input type="submit" value="登録">
+		<input type="button" class="btn btn-default" onclick="history.back()" value="戻る"/>
+		<input type="submit"  value="登録"/>
 
 	</form>
 

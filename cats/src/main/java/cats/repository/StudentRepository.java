@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import cats.entity.StudentTblEntity;
 
 @Repository
-public interface UserRepository  extends JpaRepository<StudentTblEntity,Integer>,JpaSpecificationExecutor<StudentTblEntity> {
+public interface StudentRepository  extends JpaRepository<StudentTblEntity,Integer>,JpaSpecificationExecutor<StudentTblEntity> {
 
 
 
