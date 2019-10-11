@@ -1,6 +1,6 @@
 CREATE DATABASE cats;
 
-<<<<<<< Updated upstream
+
 use cats;
 
 
@@ -10,8 +10,14 @@ CREATE TABLE hobby(
     PRIMARY KEY (hobby_id)
 );
 
+CREATE TABLE school(
+    school_id INT AUTO_INCREMENT,
+    school_name VARCHAR(128) ,
+    PRIMARY KEY (school_id)
+);
 
-=======
+
+
 CREATE TABLE authentication (
     student_id INT NOT NULL,
     one_pass VARCHAR(128) NOT NULL,
@@ -25,7 +31,7 @@ CREATE TABLE category (
     category_name VARCHAR(128) NOT NULL,
     PRIMARY KEY (category_id)
 );
->>>>>>> Stashed changes
+
 
 CREATE TABLE student(
     student_id  INT NOT NULL,
@@ -48,9 +54,7 @@ CREATE TABLE student(
 <<<<<<< Updated upstream
 );
 
-=======
-    FOREIGN KEY (hobby_id) REFERENCES student_hobby(hobby_id));
->>>>>>> Stashed changes
+
 
 CREATE TABLE student_hobby(
     student_id INT NOT NULL,
@@ -60,7 +64,7 @@ CREATE TABLE student_hobby(
     FOREIGN KEY (student_id) REFERENCES student (student_id)
 );
 
-//ここまでは確認済み
+
 
 CREATE TABLE talk(
     talk_id INT AUTO_INCREMENT NOT NULL,
@@ -72,7 +76,7 @@ CREATE TABLE talk(
 );
 
 CREATE TABLE request(
-    request_id INT AUTO_INCREMENT NOT NULL ,
+    request_id INT AUTO_INCREMENT NOT NULL,
     student_id_sent INT NOT NULL,
     student_id_receive INT NOT NULL,
     approval INT ,
@@ -82,7 +86,7 @@ CREATE TABLE request(
 );
 
 CREATE TABLE message(
-    talk_id INT AUTO_INCREMENT NOT NULL ,
+    talk_id INT AUTO_INCREMENT NOT NULL,
     message_id INT NOT NULL,
     message VARCHAR(256) NOT NULL
     send_time TIMESTAMP NOT NULL,
@@ -111,7 +115,7 @@ CREATE TABLE board_comment (
     FOREIGN KEY (board_id) REFERENCES board (board_id)
 );
 
-//確認済み
+
 
 
 
