@@ -16,13 +16,6 @@ public class AppSettingProperty extends ConfigBase {
 	private static final String CATS_UPLOAD_WK_DIR = "cats.upload.work.directory";
 
 
-
-
-
-
-
-
-
 	public AppSettingProperty() throws Exception {
 		super();
 		// TODO 自動生成されたコンストラクター・スタブ
