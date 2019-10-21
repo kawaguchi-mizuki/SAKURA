@@ -1,4 +1,8 @@
 
+ALTER TABLE hobby auto_increment = 1;
+ALTER TABLE school auto_increment = 1;
+
+
 insert into hobby(hobby_name) values ('カラオケ');
 insert into hobby(hobby_name) values ('映画鑑賞');
 insert into hobby(hobby_name) values ('スポーツ観戦');
@@ -7,12 +11,12 @@ insert into hobby(hobby_name) values ('カフェ巡り');
 insert into hobby(hobby_name) values ('グルメ巡り');
 insert into hobby(hobby_name) values ('音楽フェス');
 
-insert into school(school_name) values ('');
+insert into school(school_name) values ('学校を選択してください');
 insert into school(school_name) values ('麻生情報ビジネス専門学校');
-insert into school(school_name) values ('麻生情報外語観光＆製菓専門学校');
-insert into school(school_name) values ('麻生情報医療福祉専門学校');
-insert into school(school_name) values ('麻生情報建築＆デザイン専門学校');
-insert into school(school_name) values ('麻生情報公務員専門学校');
-insert into school(school_name) values ('麻生情報ポップカルチャー専門学校');
+insert into school(school_name) values ('麻生外語観光＆製菓専門学校');
+insert into school(school_name) values ('麻生医療福祉専門学校');
+insert into school(school_name) values ('麻生建築＆デザイン専門学校');
+insert into school(school_name) values ('麻生公務員専門学校');
+insert into school(school_name) values ('麻生ポップカルチャー専門学校');
 
 insert into student values(1701129,"川口瑞貴","男",1,"麻生情報ビジネス専門学校","情報システム専攻科",3,21,"鹿児島","よろしくお願いいたします。","pass","img/aaa",500,"2018-05-31",4);
