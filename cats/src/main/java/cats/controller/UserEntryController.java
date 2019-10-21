@@ -108,10 +108,10 @@ public class UserEntryController {
 			//画像アップロード
 			uploadFiles(studentbeans);
 
-			 dto = getCreateUserDto(studentbeans, password);
+			dto = getCreateUserDto(studentbeans, password);
 
-			//ポイントを付与
-			dto.setPoint(500);
+			//初期ポイント追加
+			dto = getCreatePoint(dto);
 
 			studentService.insert(dto);
 
@@ -120,6 +120,46 @@ public class UserEntryController {
 		}
 
 		return mav;
+	}
+
+	/**追加ポイント処理
+	 * @param dto
+	 * @return
+	 */
+	private CreateUserDto getCreatePoint(CreateUserDto dto) {
+
+		//初期ポイントを付与
+		 dto.setPoint(500);
+
+		//任意項目を入力していたら追加ポイント
+
+		if(dto.getSchoolName().contains("学校")){
+			dto.setPoint(dto.getPoint()+50);
+		}
+
+		if(!(dto.getCourse().equals(""))){
+			dto.setPoint(dto.getPoint()+50);
+		}
+
+		if(dto.getGrade()!=0){
+			dto.setPoint(dto.getPoint()+50);
+		}
+
+		if(dto.getAge()!=0){
+			dto.setPoint(dto.getPoint()+50);
+		}
+
+		if(!(dto.getBirthplace().equals("未選択"))){
+			dto.setPoint(dto.getPoint()+50);
+		}
+
+
+		if(!(dto.getSelfIntroduction().equals(""))){
+			dto.setPoint(dto.getPoint()+50);
+		}
+
+
+		return dto;
 	}
 
 	/**ファイルのコピー
@@ -166,7 +206,7 @@ public class UserEntryController {
 		}
 
 		// フォルダ作成
-		  FileUtils.makeDir( uploadDir.toString());
+		FileUtils.makeDir( uploadDir.toString());
 
 		return uploadDir;
 	}
