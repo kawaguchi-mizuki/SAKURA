@@ -3,7 +3,12 @@ h1{
 	margin: auto;
 	max-width: 1070px;
 	padding-top:30px;
-	padding-bottom:60px;
+	padding-bottom:40px;
+}
+.err{
+	margin: auto;
+	max-width: 1070px;
+	padding-bottom:30px;
 }
 .file{
 	margin-bottom:30px;
@@ -11,11 +16,27 @@ h1{
 .hobby{
 	margin-top:25px;
 }
+.sex{
+	margin-left:30px;
+}
 form.input{
 	margin: auto;
 	max-width: 1070px;
+
 }
 span{
 	margin-left:15px;
+}
+.back{
+	width: 40%;
+	float:left;
+	margin-right:10px;
+	margin-top:50px;
+}
+.entry{
+	width: 40%;
+	float:right;
+	margin-bottom:50px;
+	margin-top:50px;
 }
 

@@ -12,6 +12,8 @@
 
 	<h1>プロフィール登録</h1>
 
+	<p th:text="${msg}"class="text-danger err"></p>
+
 	<form class="input" th:action="@{/User/Check}" th:object="${userbeans}"   method="post" enctype="multipart/form-data" >
 
 		<input type="file" class="file" th:field="*{multipartFile}"/>
@@ -24,8 +26,8 @@
 
 		<label>性別</label><span class="badge badge-danger">必須</span>
 		<br/>
-		<input type="radio" name="sex" th:value="男" class="text-primary" checked/>   男
-		<input type="radio" name="sex" th:value="女"   />  女
+		<input type="radio" name="sex" th:value="男" checked/>   男性
+		<input type="radio" name="sex" th:value="女" class="sex" />  女性
 		<br/>
 
 		<label class="hobby">趣味</label><span class="badge badge-danger">必須</span>
@@ -139,10 +141,10 @@
 		<br/>
 		<input type="password" class="form-control" name="r_password" />
 
-		<p th:text="${msg}"class="text-danger"></p>
 
-		<input type="button" class="btn btn-primary" onclick="history.back()" value="戻る"/>
-		<input type="submit" class="btn btn-primary" value="登録"/>
+
+		<input type="button" class="btn btn-primary back"  onclick="history.back()" value="戻る"/>
+		<input type="submit" class="btn btn-danger entry"  value="登録"/>
 
 
 	</form>
