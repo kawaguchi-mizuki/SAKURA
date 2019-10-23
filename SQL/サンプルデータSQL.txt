@@ -2,7 +2,7 @@
 ALTER TABLE hobby auto_increment = 1;
 ALTER TABLE school auto_increment = 1;
 
-
+insert into hobby(hobby_name) values ('お酒');
 insert into hobby(hobby_name) values ('カラオケ');
 insert into hobby(hobby_name) values ('映画鑑賞');
 insert into hobby(hobby_name) values ('スポーツ観戦');
