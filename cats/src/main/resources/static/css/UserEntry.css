@@ -1,16 +1,21 @@
 @charset "UTF-8";
-
-.title{
-	margin:auto;
+h1{
+	margin: auto;
+	max-width: 1070px;
+	padding-top:30px;
+	padding-bottom:60px;
 }
-
+.file{
+	margin-bottom:30px;
+}
+.hobby{
+	margin-top:25px;
+}
 form.input{
 	margin: auto;
-
 	max-width: 1070px;
-	text-align: left;
+}
+span{
+	margin-left:15px;
 }
 
-.err {
-	color: red;
-}

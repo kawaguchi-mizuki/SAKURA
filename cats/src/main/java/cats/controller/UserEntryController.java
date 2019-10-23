@@ -86,40 +86,53 @@ public class UserEntryController {
 
 		CreateUserDto dto = new CreateUserDto();
 
+		String ErrMsg;
 
+		//入力値チェック
+		ErrMsg = ValidationCheck(password,r_password);
 
-
-		//	パスワードとパスワード再入力値が一致しない場合
-		if (!(password.equals(r_password))) {
-
-
-
-			String errMsg = "パスワードが一致していません";
-
+		//エラーメッセージがあればリダイレクト
+		if(!(ErrMsg.equals(""))){
+			mav.addObject("hobbylist", hobbylist);
+			mav.addObject("schoollist", schoollist);
 			mav.setViewName("UserEntry");
 			mav.addObject("userbeans", studentbeans);
 			mav.addObject("createUserDto", dto);
-			mav.addObject("hobbylist", hobbylist);
-			mav.addObject("schoollist", schoollist);
-			mav.addObject("msg", errMsg);
-
-		} else {
-
-			//画像アップロード
-			uploadFiles(studentbeans);
-
-			dto = getCreateUserDto(studentbeans, password);
-
-			//初期ポイント追加
-			dto = getCreatePoint(dto);
-
-			studentService.insert(dto);
-
-			mav.setViewName("login");
-
+			mav.addObject("msg", ErrMsg);
+			return mav;
 		}
 
+		//画像アップロード
+		uploadFiles(studentbeans);
+
+		dto = getCreateUserDto(studentbeans, password);
+
+		//初期ポイント追加
+		dto = getCreatePoint(dto);
+
+		studentService.insert(dto);
+
+		mav.setViewName("login");
+
 		return mav;
+	}
+
+	/**入力チェック処理
+	 * @param password
+	 * @param r_password
+	 * @return
+	 */
+	private String ValidationCheck(String password, String r_password) {
+
+		String errMsg = "";
+
+		if(!(password.equals(r_password))){
+			errMsg = "パスワードが一致していません";
+		}else if(password.length()<7){
+			errMsg = "パスワードが短すぎます";
+		}
+
+		return errMsg;
 	}
 
 	/**追加ポイント処理
@@ -129,11 +142,10 @@ public class UserEntryController {
 	private CreateUserDto getCreatePoint(CreateUserDto dto) {
 
 		//初期ポイントを付与
-		 dto.setPoint(500);
+		dto.setPoint(500);
 
 		//任意項目を入力していたら追加ポイント
-
-		if(dto.getSchoolName().contains("学校")){
+		if(dto.getSchoolName().contains("麻生")){
 			dto.setPoint(dto.getPoint()+50);
 		}
 
@@ -153,11 +165,9 @@ public class UserEntryController {
 			dto.setPoint(dto.getPoint()+50);
 		}
 
-
 		if(!(dto.getSelfIntroduction().equals(""))){
 			dto.setPoint(dto.getPoint()+50);
 		}
-
 
 		return dto;
 	}
@@ -184,7 +194,6 @@ public class UserEntryController {
 			//アップロードしたファイル名を覚えておく
 			studentbeans.addUploadFilePath(uploadFilePath.toString(),uploadFile.getSize());
 		}
-
 
 	}
 
@@ -234,8 +243,7 @@ public class UserEntryController {
 		dto.setSelfIntroduction(userbeans.getIntroduction());
 		dto.setPassword(password);
 		dto.setImagePass("aaa");
-		dto.setLastLog(null);
-		dto.setContinuousLogin(4);
+
 
 		return dto;
 
