@@ -22,7 +22,7 @@
 
 
 
-	<form class="input" th:action="@{/User/Check}" th:object="${userbeans}"   method="post" enctype="multipart/form-data" >
+	<form class="input" th:action="@{/User/Check}" th:object="${studentbeans}"   method="post" enctype="multipart/form-data" >
 
 
 		<input type="file" class="file" th:field="*{multipartFile}"/>
@@ -31,7 +31,7 @@
 
 		<label class="h5">名前</label><span class="badge badge-danger">必須</span>
 		<br/>
-		<input type="text" class="form-control" name="name" th:value="${userbeans.name}" placeholder="名前を入力してください" required />
+		<input type="text" class="form-control" name="name" th:value="${studentbeans.name}" placeholder="名前を入力してください" required />
 		<br/>
 
 		<label class="h5">性別</label><span class="badge badge-danger">必須</span>

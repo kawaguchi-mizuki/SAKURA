@@ -56,9 +56,9 @@ public class UserEntryController {
 		CreateUserDto dto = new CreateUserDto();
 
 
-		StudentBeans userbeans = new StudentBeans();
+		StudentBeans studentbeans = new StudentBeans();
 
-		mav.addObject("userbeans", userbeans);
+		mav.addObject("studentbeans", studentbeans);
 		mav.addObject("createUserDto", dto);
 		mav.setViewName("UserEntry");
 		mav.addObject("hobbylist", hobbylist);

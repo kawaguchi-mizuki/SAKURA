@@ -2,9 +2,27 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>プロフィール変更</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link href="/css/ProfileUpdate.css" th:href="@{/css/ProfileUpdate.css}" rel="stylesheet"></link>
 </head>
 <body>
+
+
+	<form class="input" th:action="@{/User/Check}" th:object="${studentbeans}"   method="post" enctype="multipart/form-data" >
+
+		<input type="text" class="form-control"  th:value="${ProfileDto.studentName}" readonly/>
+		<br/>
+
+		<input type="text" class="form-control"  th:value="${ProfileDto.studentSex}" readonly/>
+		<br/>
+
+		<input type="text" class="form-control"  th:value="${ProfileDto.hobbyName}" readonly/>
+		<br/>
+
+		<input type="text" class="form-control"  th:value="${ProfileDto.course}" readonly/>
+
+	</form>
 
 </body>
 </html>
