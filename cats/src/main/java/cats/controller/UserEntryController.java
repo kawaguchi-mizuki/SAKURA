@@ -49,12 +49,12 @@ public class UserEntryController {
 
 		//趣味一覧を取得
 		List<HobbyDto> hobbylist = hobbyService.getAllList();
-
 		//学校一覧を取得
 		List<SchoolDto> schoollist = schoolService.getAllList();
 
 		//空のデータを作る
 		CreateUserDto dto = new CreateUserDto();
+
 
 		StudentBeans userbeans = new StudentBeans();
 
@@ -63,6 +63,7 @@ public class UserEntryController {
 		mav.setViewName("UserEntry");
 		mav.addObject("hobbylist", hobbylist);
 		mav.addObject("schoollist", schoollist);
+
 
 		return mav;
 	}

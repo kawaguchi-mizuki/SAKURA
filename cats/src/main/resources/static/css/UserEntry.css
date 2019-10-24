@@ -3,12 +3,13 @@ h1{
 	margin: auto;
 	max-width: 1070px;
 	padding-top:30px;
-	padding-bottom:40px;
+	padding-bottom:10px;
 }
 .err{
 	margin: auto;
 	max-width: 1070px;
-	padding-bottom:30px;
+	padding-bottom:50px;
+	font-weight:bold;
 }
 .file{
 	margin-bottom:30px;
