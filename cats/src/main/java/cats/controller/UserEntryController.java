@@ -45,7 +45,7 @@ public class UserEntryController {
 	HttpSession session;
 
 	@RequestMapping(value = { "/Entry" }, method = RequestMethod.GET)
-	public ModelAndView TwoConf(ModelAndView mav) {
+	public ModelAndView UserEntry(ModelAndView mav) {
 
 		//趣味一覧を取得
 		List<HobbyDto> hobbylist = hobbyService.getAllList();
