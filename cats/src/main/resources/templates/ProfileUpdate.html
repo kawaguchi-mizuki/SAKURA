@@ -11,17 +11,41 @@
 
 	<form class="input" th:action="@{/User/Check}" th:object="${studentbeans}"   method="post" enctype="multipart/form-data" >
 
+		<label class="h5 a">名前</label>
 		<input type="text" class="form-control"  th:value="${ProfileDto.studentName}" readonly/>
 		<br/>
 
+		<label class="h5">性別</label>
 		<input type="text" class="form-control"  th:value="${ProfileDto.studentSex}" readonly/>
 		<br/>
 
+		<label class="h5 hobby">趣味</label>
 		<input type="text" class="form-control"  th:value="${ProfileDto.hobbyName}" readonly/>
 		<br/>
 
-		<input type="text" class="form-control"  th:value="${ProfileDto.course}" readonly/>
+		<label class="h5">学校名</label>
+		<input type="text" class="form-control"  th:value="${ProfileDto.schoolName}" readonly/>
+		<br/>
 
+		<label class="h5">学科 </label>
+		<input type="text" class="form-control"  th:value="${ProfileDto.course}" readonly/>
+		<br/>
+
+		<label class="h5">学年</label>
+		<input type="text" class="form-control"  th:value="${ProfileDto.age}" readonly/>
+		<br/>
+
+		<label class="h5">年齢</label>
+		<input type="text" class="form-control"  th:value="${ProfileDto.birthplace}" readonly/>
+		<br/>
+
+		<label class="h5">自己紹介</label>
+		<input type="text" class="form-control"  th:value="${ProfileDto.selfIntroduction}" readonly/>
+		<br/>
+
+		<label class="h5">パスワード</label>
+		<input type="text" class="form-control"  th:value="${ProfileDto.password}" readonly/>
+		<br/>
 	</form>
 
 </body>

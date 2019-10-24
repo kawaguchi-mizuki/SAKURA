@@ -15,15 +15,15 @@ public class ProfileDto {
 
 	private String course = "情報システム専攻科";
 
-	private Integer grade;
+	private Integer grade = 1;
 
-	private Integer age;
+	private Integer age = 19;
 
-	private String birthplace;
+	private String birthplace = "鹿児島";
 
-	private String selfIntroduction;
+	private String selfIntroduction = "よろしくお願いいたします。";
 
-	private String password;
+	private String password = "abccabcc";
 
 	private String imagePass;
 
