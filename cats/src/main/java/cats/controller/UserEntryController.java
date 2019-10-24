@@ -45,7 +45,7 @@ public class UserEntryController {
 	HttpSession session;
 
 	@RequestMapping(value = { "/Entry" }, method = RequestMethod.GET)
-	public ModelAndView TwoConf(ModelAndView mav) {
+	public ModelAndView UserEntry(ModelAndView mav) {
 
 		//趣味一覧を取得
 		List<HobbyDto> hobbylist = hobbyService.getAllList();
@@ -78,7 +78,7 @@ public class UserEntryController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = { "/Check" }, method = RequestMethod.POST)
-	public ModelAndView UserEntry(@Valid StudentBeans studentbeans,
+	public ModelAndView UserCheck(@Valid StudentBeans studentbeans,
 			@RequestParam("password") String password, @RequestParam("r_password") String r_password,
 			BindingResult bindingResult, ModelAndView mav) throws Exception {
 
