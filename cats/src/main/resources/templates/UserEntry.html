@@ -1,0 +1,164 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<title>会員登録</title>
+<link href="/css/UserEntry.css" th:href="@{/css/UserEntry.css}" rel="stylesheet"></link>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<body>
+
+	<h1>プロフィール登録</h1>
+
+	<div th:if="${msg}">
+		<p th:text="${msg}"class="text-danger err"></p>
+	</div>
+	<div th:unless="${msg}">
+    	<p class="err text-muted"><span class="badge badge-success">任意</span> を入力すると追加ポイントもらえるよ！</p>
+	</div>
+
+
+
+
+	<form class="input" th:action="@{/User/Check}" th:object="${userbeans}"   method="post" enctype="multipart/form-data" >
+
+
+		<input type="file" class="file" th:field="*{multipartFile}"/>
+
+		<br/>
+
+		<label class="h5">名前</label><span class="badge badge-danger">必須</span>
+		<br/>
+		<input type="text" class="form-control" name="name" th:value="${userbeans.name}" placeholder="名前を入力してください" required />
+		<br/>
+
+		<label class="h5">性別</label><span class="badge badge-danger">必須</span>
+		<br/>
+		<input type="radio" name="sex" th:value="男" checked/>   男性
+		<input type="radio" name="sex" th:value="女" class="sex" />  女性
+		<br/>
+
+		<label class="h5 hobby">趣味</label><span class="badge badge-danger">必須</span>
+		<br/>
+		 <select name="hobbyId" class="form-control"  >
+			<option th:each="dto:${hobbylist}" th:value="${dto.hobbyId}" th:text="${dto.hobbyName}"></option>
+		 </select>
+		<br/>
+
+		<label class="h5">学校名</label><span class="badge badge-success">任意</span>
+		<br/>
+		 <select name="school" class="form-control" >
+			<option th:each="dto:${schoollist}" th:value="${dto.schoolName}" th:text="${dto.schoolName}"></option>
+		 </select>
+		<br/>
+
+		<label class="h5">学科</label><span class="badge badge-success">任意</span>
+		<br/>
+		<input type="text" class="form-control" name="course" th:value="${createUserDto.course}" placeholder="学科を入力してください"/>
+		<br/>
+
+		<label class="h5">学年 </label><span class="badge badge-success">任意</span>
+		<br/>
+		<select name="grade" class="form-control" >
+				<option th:value="0" selected>学年を選択してください</option>
+			<script>
+				for (var i = 1; i <= 4; i++) {
+						document.write('<option th:value="'+i+'">' + i + '</option>');
+				}
+			</script>
+	    </select>
+		<br/>
+
+		<label class="h5">年齢</label><span class="badge badge-success">任意</span>
+		<br/>
+		<select name="age" class="form-control" >
+				<option th:value="0" selected>年齢を選択してください</option>
+			<script>
+				for (var i = 18; i <= 40; i++) {
+						document.write('<option th:value="'+i+'">' + i + '</option>');
+				}
+			</script>
+	    </select>
+		<br/>
+
+		<label class="h5">出身地</label><span class="badge badge-success">任意</span>
+		<br/>
+		<select name="birthplace" class="form-control" >
+													<option th:value="未選択" selected >出身地を選択してください</option>
+													<option th:value="北海道">北海道</option>
+													<option th:value="青森県">青森県</option>
+													<option th:value="岩手県">岩手県</option>
+													<option th:value="宮城県">宮城県</option>
+													<option th:value="秋田県">秋田県</option>
+													<option th:value="山形県">山形県</option>
+													<option th:value="福島県">福島県</option>
+													<option th:value="茨城県">茨城県</option>
+													<option th:value="栃木県">栃木県</option>
+													<option th:value="群馬県">群馬県</option>
+													<option th:value="埼玉県">埼玉県</option>
+													<option th:value="千葉県">千葉県</option>
+													<option th:value="東京都">東京都</option>
+													<option th:value="神奈川県">神奈川県</option>
+													<option th:value="新潟県">新潟県</option>
+													<option th:value="富山県">富山県</option>
+													<option th:value="石川県">石川県</option>
+													<option th:value="福井県">福井県</option>
+													<option th:value="山梨県">山梨県</option>
+													<option th:value="長野県">長野県</option>
+													<option th:value="岐阜県">岐阜県</option>
+													<option th:value="静岡県">静岡県</option>
+													<option th:value="愛知県">愛知県</option>
+													<option th:value="三重県">三重県</option>
+													<option th:value="滋賀県">滋賀県</option>
+													<option th:value="京都府">京都府</option>
+													<option th:value="大阪府">大阪府</option>
+													<option th:value="兵庫県">兵庫県</option>
+													<option th:value="奈良県">奈良県</option>
+													<option th:value="和歌山県">和歌山県</option>
+													<option th:value="鳥取県">鳥取県</option>
+													<option th:value="島根県">島根県</option>
+													<option th:value="岡山県">岡山県</option>
+													<option th:value="広島県">広島県</option>
+													<option th:value="山口県">山口県</option>
+													<option th:value="徳島県">徳島県</option>
+													<option th:value="香川県">香川県</option>
+													<option th:value="愛媛県">愛媛県</option>
+													<option th:value="高知県">高知県</option>
+													<option th:value="福岡県">福岡県</option>
+													<option th:value="佐賀県">佐賀県</option>
+													<option th:value="長崎県">長崎県</option>
+													<option th:value="熊本県">熊本県</option>
+													<option th:value="大分県">大分県</option>
+													<option th:value="宮崎県">宮崎県</option>
+													<option th:value="鹿児島県">鹿児島県</option>
+													<option th:value="沖縄県">沖縄県</option>
+		</select>
+		<br/>
+
+		<label class="h5">自己紹介 </label><span class="badge badge-success">任意</span>
+		<br/>
+			<textarea name="introduction" class="form-control" rows="4" cols="40"></textarea>
+		<br/>
+
+		<label class="h5">パスワード (7文字以上) </label><span class="badge badge-danger">必須</span>
+		<br/>
+		 <input type="password" class="form-control" name="password" th:value= "${createUserDto.password}"  />
+		<br/>
+
+		<label class="h5">パスワード再入力</label><span class="badge badge-danger">必須</span>
+		<br/>
+		<input type="password" class="form-control" name="r_password" />
+
+
+
+		<input type="button" class="btn btn-primary back"  onclick="history.back()" value="戻る"/>
+		<input type="submit" class="btn btn-danger entry"  value="登録"/>
+
+
+	</form>
+
+</body>
+
+</html>
