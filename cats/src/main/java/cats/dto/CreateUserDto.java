@@ -10,8 +10,8 @@ public class CreateUserDto {
 	private String studentName;
 	private String studentSex;
 	private Integer hobbyId;
-	private String schoolName;
-	private String course;
+	private Integer schoolId;
+	private Integer courseId;
 	private Integer grade;
 	private Integer age;
 	private String birthplace;

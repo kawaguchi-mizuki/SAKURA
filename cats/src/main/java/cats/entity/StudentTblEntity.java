@@ -33,9 +33,9 @@ public class StudentTblEntity implements Serializable{
 
 	private Integer hobbyId;
 
-	private String schoolName;
+	private Integer schoolId;
 
-	private String course;
+	private Integer courseId;
 
 	private Integer grade;
 

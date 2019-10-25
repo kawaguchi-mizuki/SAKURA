@@ -42,8 +42,8 @@ public class StudentService {
 		entity.setStudentName(userdto.getStudentName());
 		entity.setStudentSex(userdto.getStudentSex());
 		entity.setHobbyId(userdto.getHobbyId());
-		entity.setSchoolName(userdto.getSchoolName());
-		entity.setCourse(userdto.getCourse());
+		entity.setSchoolId(userdto.getSchoolId());
+		entity.setCourseId(userdto.getCourseId());
 		entity.setGrade(userdto.getGrade());
 		entity.setAge(userdto.getAge());
 		entity.setBirthplace(userdto.getBirthplace());
