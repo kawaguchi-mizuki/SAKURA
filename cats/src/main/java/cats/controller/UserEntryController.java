@@ -19,9 +19,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import cats.beans.StudentBeans;
 import cats.config.AppSettingProperty;
+import cats.dto.CourseDto;
 import cats.dto.CreateUserDto;
 import cats.dto.HobbyDto;
 import cats.dto.SchoolDto;
+import cats.service.CourseService;
 import cats.service.HobbyService;
 import cats.service.SchoolService;
 import cats.service.StudentService;
@@ -34,6 +36,9 @@ public class UserEntryController {
 
 	@Autowired
 	HobbyService hobbyService;
+
+	@Autowired
+	CourseService courseService;
 
 	@Autowired
 	SchoolService schoolService;
@@ -118,6 +123,20 @@ public class UserEntryController {
 		return mav;
 	}
 
+	/**
+	 * @return
+	 */
+	@RequestMapping("/GetCourseList")
+    public List<CourseDto> getucourselist(
+    		@RequestParam("schoolId")Integer schoolId) {
+        return courseService.getList(schoolId);
+    }
+
+
+
+
+
+
 	/**入力チェック処理
 	 * @param password
 	 * @param r_password
@@ -146,12 +165,8 @@ public class UserEntryController {
 		dto.setPoint(500);
 
 		//任意項目を入力していたら追加ポイント
-		if(dto.getSchoolName().contains("麻生")){
-			dto.setPoint(dto.getPoint()+50);
-		}
-
-		if(!(dto.getCourse().equals(""))){
-			dto.setPoint(dto.getPoint()+50);
+		if(dto.getSchoolId()!=1){
+			dto.setPoint(dto.getPoint()+100);
 		}
 
 		if(dto.getGrade()!=0){
@@ -236,8 +251,8 @@ public class UserEntryController {
 		dto.setStudentName(userbeans.getName());
 		dto.setStudentSex(userbeans.getSex());
 		dto.setHobbyId(userbeans.getHobbyId());
-		dto.setSchoolName(userbeans.getSchool());
-		dto.setCourse(userbeans.getCourse());
+		dto.setSchoolId(userbeans.getSchoolId());
+		dto.setCourseId(userbeans.getCourseId());
 		dto.setGrade(userbeans.getGrade());
 		dto.setAge(userbeans.getAge());
 		dto.setBirthplace(userbeans.getBirthplace());

@@ -49,14 +49,16 @@
 
 		<label class="h5">学校名</label><span class="badge badge-success">任意</span>
 		<br/>
-		 <select name="school" class="form-control" >
-			<option th:each="dto:${schoollist}" th:value="${dto.schoolName}" th:text="${dto.schoolName}"></option>
+		 <select id="school" name="schoolId" class="form-control" >
+			<option  th:each="dto:${schoollist}" th:value="${dto.schoolId}" th:text="${dto.schoolName}"></option>
 		 </select>
 		<br/>
 
-		<label class="h5">学科</label><span class="badge badge-success">任意</span>
+		<label class="h5">学科名</label><span class="badge badge-success">任意</span>
 		<br/>
-		<input type="text" class="form-control" name="course" th:value="${createUserDto.course}" placeholder="学科を入力してください"/>
+		 <select id="course"  name="courseId" class="form-control" >
+			<option ></option>
+		 </select>
 		<br/>
 
 		<label class="h5">学年 </label><span class="badge badge-success">任意</span>
@@ -158,6 +160,42 @@
 
 
 	</form>
+	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+	<script>
+
+	$(function(){
+		//学校の選択が変わった時
+	    $("#school").change(function(){
+	        var value = $("#school option:selected").val();
+			var params ="schoolId="+value;
+
+
+
+			  $.ajax({
+			    	cache: false,
+			        type : 'GET',
+			        url : /*[[@{/User/GetCourseList}]]*/"GetCourseList",
+			        data : params,
+			        dataType : 'json',
+			        processData : false,
+			        contentType : false,
+			        timeout : 360000, // milliseconds
+
+			  }).done(function(json) {
+			    	//var obj = $.parseJSON(json);
+		            $("#course").html("");
+
+		            for(var i=0;i<json.length;i++){
+		                $("#course").append("<option value="+json[i].courseId+">"+json[i].courseName+"</option>");
+		            }
+			  });
+	    });
+	});
+
+
+
+
+	</script>
 
 </body>
 

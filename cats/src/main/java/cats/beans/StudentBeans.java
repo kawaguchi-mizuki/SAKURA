@@ -15,8 +15,8 @@ public class StudentBeans implements Serializable {
 	private String name;
 	private String sex;
 	private int hobbyId;
-	private String school;
-	private String course;
+	private int schoolId;
+	private int courseId;
 	private int grade;
 	private int age;
 	private String birthplace;

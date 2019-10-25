@@ -1,6 +1,7 @@
 
 ALTER TABLE hobby auto_increment = 1;
 ALTER TABLE school auto_increment = 1;
+ALTER TABLE course auto_increment = 1;
 
 insert into hobby(hobby_name) values ('お酒');
 insert into hobby(hobby_name) values ('カラオケ');
@@ -19,4 +20,58 @@ insert into school(school_name) values ('麻生建築＆デザイン専門学校');
 insert into school(school_name) values ('麻生公務員専門学校');
 insert into school(school_name) values ('麻生ポップカルチャー専門学校');
 
-insert into student values(1701129,"川口瑞貴","男",1,"麻生情報ビジネス専門学校","情報システム専攻科",3,21,"鹿児島","よろしくお願いいたします。","pass","img/aaa",500,"2018-05-31",4);
+insert into course(school_id,course_name) values(2,'プログラミング専攻科');
+insert into course(school_id,course_name) values(2,'システムエンジニア専攻科');
+insert into course(school_id,course_name) values(2,'高度ITシステム専攻科');
+insert into course(school_id,course_name) values(2,'ネットワーク専攻科');
+insert into course(school_id,course_name) values(2,'ネットワークエンジニア専攻科');
+insert into course(school_id,course_name) values(2,'高度ネットワークセキュリティ');
+insert into course(school_id,course_name) values(2,'電子システム先専攻科');
+insert into course(school_id,course_name) values(2,'電子システムエンジニア専攻科');
+insert into course(school_id,course_name) values(2,'電子システム工学専攻科');
+insert into course(school_id,course_name) values(2,'経営ビジネス科');
+insert into course(school_id,course_name) values(2,'ビジネスエキスパート科');
+insert into course(school_id,course_name) values(2,'情報ビジネス科');
+insert into course(school_id,course_name) values(2,'経理');
+insert into course(school_id,course_name) values(2,'経理専攻科');
+insert into course(school_id,course_name) values(2,'国際ビジネス科');
+insert into course(school_id,course_name) values(2,'国際ITエンジニア科');
+insert into course(school_id,course_name) values(2,'日本語科');
+insert into course(school_id,course_name) values(3,'エアライン科');
+insert into course(school_id,course_name) values(3,'エアポート科');
+insert into course(school_id,course_name) values(3,'ブライダル・ウエディング科');
+insert into course(school_id,course_name) values(3,'トラベル科');
+insert into course(school_id,course_name) values(3,'ホテル・リゾート科');
+insert into course(school_id,course_name) values(3,'海外ビジネス科');
+insert into course(school_id,course_name) values(3,'英語コミュニケーション科');
+insert into course(school_id,course_name) values(3,'製菓パティシエ科');
+insert into course(school_id,course_name) values(3,'国際ホテル・リゾート科');
+insert into course(school_id,course_name) values(3,'日本語科');
+insert into course(school_id,course_name) values(4,'医療秘書・事務科');
+insert into course(school_id,course_name) values(4,'診療情報管理士科');
+insert into course(school_id,course_name) values(4,'診療情報管理士専攻科');
+insert into course(school_id,course_name) values(4,'こども未来学科');
+insert into course(school_id,course_name) values(4,'社会福祉科');
+insert into course(school_id,course_name) values(4,'福祉心理学科');
+insert into course(school_id,course_name) values(4,'ソーシャルワーカー科');
+insert into course(school_id,course_name) values(4,'介護福祉科');
+insert into course(school_id,course_name) values(4,'社会福祉士通信課程');
+insert into course(school_id,course_name) values(4,'精神保健福祉士通信課程');
+insert into course(school_id,course_name) values(4,'国際介護福祉科');
+insert into course(school_id,course_name) values(5,'建築工学科');
+insert into course(school_id,course_name) values(5,'建築士専攻科');
+insert into course(school_id,course_name) values(5,'建築学科');
+insert into course(school_id,course_name) values(5,'建築学科（夜間）');
+insert into course(school_id,course_name) values(5,'建築CAD科');
+insert into course(school_id,course_name) values(5,'インテリアデザイン科');
+insert into course(school_id,course_name) values(5,'クリエイティブデザイン学科');
+insert into course(school_id,course_name) values(6,'公務員専攻科');
+insert into course(school_id,course_name) values(6,'公務員総合科');
+insert into course(school_id,course_name) values(6,'公務員中上級専攻科');
+insert into course(school_id,course_name) values(6,'公務員中上級教養科');
+insert into course(school_id,course_name) values(7,'ゲーム・CG・アニメ専攻科');
+insert into course(school_id,course_name) values(7,'ゲーム・CG・アニメ科');
+insert into course(school_id,course_name) values(7,'マンガ・イラスト・CG科');
+
+
+
