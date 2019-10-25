@@ -16,6 +16,15 @@ CREATE TABLE school(
     PRIMARY KEY (school_id)
 );
 
+CREATE TABLE course(
+    course_id INT AUTO_INCREMENT,
+    school_id INT NOT NULL,
+    course_name VARCHAR(128),
+    PRIMARY KEY (course_id),
+    FOREIGN KEY (school_id) REFERENCES school (school_id)
+);
+
+
 
 
 CREATE TABLE authentication (
@@ -38,8 +47,8 @@ CREATE TABLE student(
     student_name VARCHAR(128) NOT NULL,
     student_sex VARCHAR(128) NOT NULL,
     hobby_id INT NOT NULL,
-    school_name VARCHAR(128),
-    course VARCHAR(128) ,
+    school_id INT,
+    course_id INT,
     grade INT,
     age INT,
     birthplace VARCHAR(128),
@@ -49,9 +58,7 @@ CREATE TABLE student(
     point INT ,
     last_log DATE,
     continuous_login INT,
-
     PRIMARY KEY (student_id)
-<<<<<<< Updated upstream
 );
 
 
@@ -88,7 +95,7 @@ CREATE TABLE request(
 CREATE TABLE message(
     talk_id INT AUTO_INCREMENT NOT NULL,
     message_id INT NOT NULL,
-    message VARCHAR(256) NOT NULL
+    message VARCHAR(256) NOT NULL,
     send_time TIMESTAMP NOT NULL,
     student_id_send INT NOT NULL,
     PRIMARY KEY (talk_id),
