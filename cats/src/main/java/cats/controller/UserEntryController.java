@@ -102,7 +102,7 @@ public class UserEntryController {
 			mav.addObject("hobbylist", hobbylist);
 			mav.addObject("schoollist", schoollist);
 			mav.setViewName("UserEntry");
-			mav.addObject("userbeans", studentbeans);
+			mav.addObject("studentbeans", studentbeans);
 			mav.addObject("createUserDto", dto);
 			mav.addObject("msg", ErrMsg);
 			return mav;
