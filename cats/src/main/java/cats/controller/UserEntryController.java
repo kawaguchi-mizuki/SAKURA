@@ -63,7 +63,7 @@ public class UserEntryController {
 
 		StudentBeans studentbeans = new StudentBeans();
 
-		mav.addObject("userbeans", studentbeans);
+		mav.addObject("studentbeans", studentbeans);
 		mav.addObject("createUserDto", dto);
 		mav.setViewName("UserEntry");
 		mav.addObject("hobbylist", hobbylist);
@@ -105,6 +105,7 @@ public class UserEntryController {
 			mav.addObject("studentbeans", studentbeans);
 			mav.addObject("createUserDto", dto);
 			mav.addObject("msg", ErrMsg);
+
 			return mav;
 		}
 
@@ -239,24 +240,24 @@ public class UserEntryController {
 
 
 	/**
-	 * @param userbeans
+	 * @param studentbeans
 	 * @param password
 	 * @return
 	 */
-	private CreateUserDto getCreateUserDto(@Valid StudentBeans userbeans, String password) {
+	private CreateUserDto getCreateUserDto(@Valid StudentBeans studentbeans, String password) {
 
 		CreateUserDto dto = new CreateUserDto();
 
-		dto.setStudentId(userbeans.getStudentId());
-		dto.setStudentName(userbeans.getName());
-		dto.setStudentSex(userbeans.getSex());
-		dto.setHobbyId(userbeans.getHobbyId());
-		dto.setSchoolId(userbeans.getSchoolId());
-		dto.setCourseId(userbeans.getCourseId());
-		dto.setGrade(userbeans.getGrade());
-		dto.setAge(userbeans.getAge());
-		dto.setBirthplace(userbeans.getBirthplace());
-		dto.setSelfIntroduction(userbeans.getIntroduction());
+		dto.setStudentId(studentbeans.getStudentId());
+		dto.setStudentName(studentbeans.getName());
+		dto.setStudentSex(studentbeans.getSex());
+		dto.setHobbyId(studentbeans.getHobbyId());
+		dto.setSchoolId(studentbeans.getSchoolId());
+		dto.setCourseId(studentbeans.getCourseId());
+		dto.setGrade(studentbeans.getGrade());
+		dto.setAge(studentbeans.getAge());
+		dto.setBirthplace(studentbeans.getBirthplace());
+		dto.setSelfIntroduction(studentbeans.getIntroduction());
 		dto.setPassword(password);
 		dto.setImagePass("aaa");
 
