@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>プロフィール変更</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link href="/css/ProfileUpdate.css" th:href="@{/css/ProfileUpdate.css}" rel="stylesheet"></link>
+</head>
+<body>
+
+
+	<form class="input" th:action="@{/User/Check}" th:object="${studentbeans}"   method="post" enctype="multipart/form-data" >
+
+		<label class="h5 a">名前</label>
+		<input type="text" class="form-control"  th:value="${ProfileDto.studentName}" readonly/>
+		<br/>
+
+		<label class="h5">性別</label>
+		<input type="text" class="form-control"  th:value="${ProfileDto.studentSex}" readonly/>
+		<br/>
+
+		<label class="h5 hobby">趣味</label>
+		<input type="text" class="form-control"  th:value="${ProfileDto.hobbyName}" readonly/>
+		<br/>
+
+		<label class="h5">学校名</label>
+		<input type="text" class="form-control"  th:value="${ProfileDto.schoolName}" readonly/>
+		<br/>
+
+		<label class="h5">学科 </label>
+		<input type="text" class="form-control"  th:value="${ProfileDto.course}" readonly/>
+		<br/>
+
+		<label class="h5">学年</label>
+		<input type="text" class="form-control"  th:value="${ProfileDto.age}" readonly/>
+		<br/>
+
+		<label class="h5">年齢</label>
+		<input type="text" class="form-control"  th:value="${ProfileDto.birthplace}" readonly/>
+		<br/>
+
+		<label class="h5">自己紹介</label>
+		<input type="text" class="form-control"  th:value="${ProfileDto.selfIntroduction}" readonly/>
+		<br/>
+
+		<label class="h5">パスワード</label>
+		<input type="text" class="form-control"  th:value="${ProfileDto.password}" readonly/>
+		<br/>
+	</form>
+
+</body>
+</html>
