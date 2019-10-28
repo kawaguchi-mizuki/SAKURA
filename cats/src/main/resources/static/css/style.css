@@ -1,0 +1,257 @@
+.cp_iptxt {
+	position: relative;
+}
+
+.cp_iptxt input[type=text] {
+	font: 15px/24px sans-serif;
+	box-sizing: border-box;
+	width: 50%;
+	margin: 8px 0;
+	padding: 0.3em;
+	transition: 0.3s;
+	border: 1px solid #1b2538;
+	border-radius: 4px;
+	outline: none;
+}
+
+/** テキストフィールドにカーソル当たったときの処理 **/
+.cp_iptxt input[type=text]:focus {
+	border-color: #da3c41;
+}
+/** アイコンを左端に表示するので、その分を左側余白を空ける **/
+.cp_iptxt input[type=text] {
+	padding-left: 40px;
+}
+
+/** アイコンの位置を動かす **/
+.cp_iptxt i {
+	position: absolute;
+	top: 10px;
+	left: 355px;
+	padding: 9px 8px;
+	transition: 0.3s;
+	color: #aaaaaa;
+}
+
+.cp_iptxt input[type=text]:focus+i {
+	color: #da3c41;
+}
+
+.stylebutton {
+	text-align: center;
+}
+
+.button {
+	display: inline-block;
+	border-radius: 5%; /* 角丸       */
+	font-size: 18pt; /* 文字サイズ */
+	text-align: center; /* 文字位置   */
+	cursor: pointer; /* カーソル   */
+	padding: 25px 25px; /* 余白       */
+	background: #cccccc; /* 背景色     */
+	color: #1a1aff; /* 文字色     */
+	line-height: 1em; /* 1行の高さ  */
+	transition: .3s; /* なめらか変化 */
+	box-shadow: 6px 6px 3px #666666; /* 影の設定 */
+	border: 2px solid #cccccc; /* 枠の指定 */
+	margin-right: 100px;
+	width: 150px;
+}
+
+.button:hover {
+	box-shadow: none; /* カーソル時の影消去 */
+	color: #cccccc; /* 背景色     */
+	background: #1a1aff; /* 文字色     */
+}
+
+p {
+	text-align: center;
+}
+
+.t-center {
+	text-align: center;
+}
+
+.usericon {
+	display: inline-block;
+	font-family: "Font Awesome 5 Free";
+	font-weight: bold;
+}
+
+input[type=text] {
+	width: 80%;
+	height: 40px;
+	margin: 40px 3%;
+	font-size: 1.5rem;
+}
+
+.wrapper {
+	height: 100%;
+	min-height: 100vh;
+	position: relative; /*←相対位置*/
+	padding-bottom: 120px; /*←footerの高さ*/
+	box-sizing: border-box; /*←全て含めてmin-height:100vhに*/
+}
+
+footer img {
+	width: 50px;
+}
+
+footer {
+	width: 100%;
+	background-color: rgba(238, 238, 238, 0.9);
+	text-align: center;
+	padding: 30px 0;
+	position: fixed; /*←絶対位置*/
+	bottom: 0; /*下に固定*/
+}
+
+.explain {
+	border: 2px solid #000000;
+	width: auto;
+	height: auto;
+}
+
+.txt {
+	background-color: #66ccff;
+}
+
+.icon-image {
+	width: 100px;
+}
+
+.d-in-block {
+	display: inline-block;
+}
+
+.topic {
+	width: 60%;
+	margin-left: auto;
+	margin-right: auto;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.d-flex {
+	display: flex;
+}
+
+.box-icon {
+	width: 30%;
+}
+
+.box-info {
+	width: 70%;
+}
+
+/*buttonタグは一律、横幅150pxで角丸 */
+button {
+	width: 150px;
+	border-radius: 10px;
+}
+
+/* カテゴリーボタンのデザイン設定 */
+.btn-category {
+	background-color: #629cff;
+	border: 1px solid #629cff;
+	color: #f1f1f1;
+}
+
+/* 削除ボタンのデザイン設定 */
+.btn-delete {
+	background-color: #a80a0a;
+	border: 1px solid #a80a0a;
+	color: #f1f1f1;
+}
+
+.topiclist {
+	padding: 110px 0;
+}
+
+
+
+.serchs {
+	text-align: right;
+}
+
+input[class=serch] {
+	width: 35%;
+	font-size: 1rem;
+}
+
+.txt {
+	font-size: 150%;
+	text-align: center;
+}
+
+.bg-primary {
+	width: 20%;
+	padding: 10px;
+}
+
+.border-warning {
+	width: 45%;
+}
+
+.title {
+	margin-left:3%;
+}
+
+.bord-title {
+	margin-top: 10px !important;
+}
+/*注意事項のところ */
+.explain {
+	margin: 10px 0;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+/*セレクトボタンの設定*/
+.pldown {
+	margin:auto;
+	width:80% !important;
+	margin-top: 10px !important;
+	margin-left:3% !important;
+	margin-bottom:20px !important;
+}
+/*コメントエリアの設定*/
+.chat {
+	overflow: auto;
+	height: 500px;
+	padding: 0 0 0 50px;
+	margin-left:10px;
+	margin-right:10px;
+	border:1px solid #000000;
+}
+
+.chat p {
+	text-align: left
+}
+
+@media screen and (max-width:600px) {
+	/*　画面サイズが600px以下はここを読み込む　*/
+	body {
+		font-size: 0.5rem;
+	}
+	button {
+		width: 80px;
+	}
+}
+
+input[class=serch] {
+	width: 35%;
+	font-size: 1rem;
+}
+
+#page {
+	position: fixed; /*位置を固定*/
+	bottom: 110px;
+	right:20px; /*右から２０px*/
+}
+
+#page img {
+	z-index: 999; /*重なりの順番を最上位に*/
+	width: 60px; /*横幅*/
+	height: 60px; /*縦幅*/
+	cursor: pointer; /*カーソルを指にする*/
+}
