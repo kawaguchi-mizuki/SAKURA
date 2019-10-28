@@ -20,6 +20,7 @@ insert into school(school_name) values ('麻生建築＆デザイン専門学校');
 insert into school(school_name) values ('麻生公務員専門学校');
 insert into school(school_name) values ('麻生ポップカルチャー専門学校');
 
+insert into course(school_id,course_name) values(1,'※学校から選択してください');
 insert into course(school_id,course_name) values(2,'プログラミング専攻科');
 insert into course(school_id,course_name) values(2,'システムエンジニア専攻科');
 insert into course(school_id,course_name) values(2,'高度ITシステム専攻科');
