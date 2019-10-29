@@ -65,7 +65,7 @@ public class UserEntryController {
 
 		mav.addObject("studentbeans", studentbeans);
 		mav.addObject("createUserDto", dto);
-		mav.setViewName("BordCreat");
+		mav.setViewName("UserEntry");
 		mav.addObject("hobbylist", hobbylist);
 		mav.addObject("schoollist", schoollist);
 
