@@ -115,7 +115,8 @@ public class LoginController {
 			//loginService.InsertDate(studentId,date);
 			//	セッションにログイン情報を保存
 			session.setAttribute(SessionConst.LOGININFO, loginInfo);
-			url = "redirect:DayCheck";
+			url = "redirect:home";
+			//url = "redirect:DayCheck";
 			
 		}else {
 			url = "redirect:Login";
@@ -169,7 +170,6 @@ public class LoginController {
 	}
 	
 	*/
-	
 	
 	/**
 	 * ログアウト処理
