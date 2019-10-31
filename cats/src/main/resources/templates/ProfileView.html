@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>プロフィール変更</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<link href="/css/UserEntry.css" th:href="@{/css/UserEntry.css}" rel="stylesheet"></link>
+<link href="/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"></link>
+</head>
+<body>
+
+
+	<form class="input" th:action="@{/Profile/Update}" th:object="${studentbeans}"   method="post" enctype="multipart/form-data" >
+
+		<label class="h5 a">名前</label>
+		<input type="text" name="name" class="form-control"  th:value="${ProfileDto.studentName}" readonly/>
+		<br/>
+
+		<label class="h5">性別</label>
+		<input type="text" name="sex" class="form-control"  th:value="${ProfileDto.studentSex}" readonly/>
+		<br/>
+
+		<label class="h5 hobby">趣味</label>
+		<input type="text" class="form-control"  th:value="${ProfileDto.hobbyName}" readonly/>
+		<br/>
+
+		<label class="h5">学校名</label>
+		<input type="text" class="form-control"  th:value="${ProfileDto.schoolName}" readonly/>
+		<br/>
+
+		<label class="h5">学科 </label>
+		<input type="text" class="form-control"  th:value="${ProfileDto.courseName}" readonly/>
+		<br/>
+
+		<label class="h5">学年</label>
+		<input type="text" class="form-control"  th:value="${ProfileDto.grade}" readonly/>
+		<br/>
+
+		<label class="h5">年齢</label>
+		<input type="text" class="form-control"  th:value="${ProfileDto.age}" readonly/>
+		<br/>
+
+		<label class="h5">出身地</label>
+		<input type="text" class="form-control"  th:value="${ProfileDto.birthplace}" readonly/>
+		<br/>
+
+		<label class="h5">自己紹介</label>
+		<input type="text" class="form-control"  th:value="${ProfileDto.selfIntroduction}" readonly/>
+		<br/>
+
+		<label class="h5">パスワード</label>
+		<input type="text" class="form-control"  th:value="${ProfileDto.password}" readonly/>
+		<br/>
+
+		<input type="submit" class="btn btn-primary back"  value="修正"/>
+	</form>
+	<form class="input" th:action="@{/Profile/Delete}" th:object="${studentbeans}"   method="delete" >
+		<input type="submit" class="btn btn-danger entry"  value="退会"/>
+	</form>
+
+</body>
+</html>
