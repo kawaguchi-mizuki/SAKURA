@@ -47,12 +47,12 @@ public class UserEntryController {
 	@RequestMapping(value = { "/Entry" }, method = RequestMethod.GET)
 	public ModelAndView TwoConf(ModelAndView mav) {
 
-		//趣味一覧を取得
+		//	趣味一覧を取得
 		List<HobbyDto> hobbylist = hobbyService.getAllList();
-		//学校一覧を取得
+		//	学校一覧を取得
 		List<SchoolDto> schoollist = schoolService.getAllList();
 
-		//空のデータを作る
+		//	空のデータを作る
 		CreateUserDto dto = new CreateUserDto();
 
 
@@ -89,10 +89,10 @@ public class UserEntryController {
 
 		String ErrMsg;
 
-		//入力値チェック
+		//	入力値チェック
 		ErrMsg = ValidationCheck(password,r_password);
 
-		//エラーメッセージがあればリダイレクト
+		//	エラーメッセージがあればリダイレクト
 		if(!(ErrMsg.equals(""))){
 			mav.addObject("hobbylist", hobbylist);
 			mav.addObject("schoollist", schoollist);
@@ -103,12 +103,12 @@ public class UserEntryController {
 			return mav;
 		}
 
-		//画像アップロード
+		//	画像アップロード
 		uploadFiles(studentbeans);
 
 		dto = getCreateUserDto(studentbeans, password);
 
-		//初期ポイント追加
+		//	初期ポイント追加
 		dto = getCreatePoint(dto);
 
 		studentService.insert(dto);
@@ -118,7 +118,7 @@ public class UserEntryController {
 		return mav;
 	}
 
-	/**入力チェック処理
+	/**	入力チェック処理
 	 * @param password
 	 * @param r_password
 	 * @return
@@ -136,16 +136,16 @@ public class UserEntryController {
 		return errMsg;
 	}
 
-	/**追加ポイント処理
+	/**	追加ポイント処理
 	 * @param dto
 	 * @return
 	 */
 	private CreateUserDto getCreatePoint(CreateUserDto dto) {
 
-		//初期ポイントを付与
+		//	初期ポイントを付与
 		dto.setPoint(500);
 
-		//任意項目を入力していたら追加ポイント
+		//	任意項目を入力していたら追加ポイント
 		if(dto.getSchoolName().contains("麻生")){
 			dto.setPoint(dto.getPoint()+50);
 		}
@@ -173,7 +173,7 @@ public class UserEntryController {
 		return dto;
 	}
 
-	/**ファイルのコピー
+	/**	ファイルのコピー
 	 * @param studentbeans
 	 * @throws Exception
 	 */
@@ -183,16 +183,16 @@ public class UserEntryController {
 
 		File uploadDir = null;
 
-		//ファイルがあれば保存して、パスを覚えておく
+		//	ファイルがあれば保存して、パスを覚えておく
 
 		if( !uploadFile.isEmpty() ) {
-			//アップロードディレクトリを取得する
+			//	アップロードディレクトリを取得する
 			uploadDir = (uploadDir == null ? mkdirs() : uploadDir);
-			//出力ファイル名を決定する
+			//	出力ファイル名を決定する
 			File uploadFilePath = new File(uploadDir.getPath() + "/" + uploadFile.getOriginalFilename());
-			//ファイルコピー
+			//	ファイルコピー
 			uploadFile.transferTo(uploadFilePath);
-			//アップロードしたファイル名を覚えておく
+			//	アップロードしたファイル名を覚えておく
 			studentbeans.addUploadFilePath(uploadFilePath.toString(),uploadFile.getSize());
 		}
 
@@ -201,13 +201,13 @@ public class UserEntryController {
 
 	private File mkdirs() throws Exception{
 
-		//アップロードディレクトリを取得する
+		//	アップロードディレクトリを取得する
 		StringBuffer filePath = new StringBuffer(AppSettingProperty.getInstance().getCatsUploadWorkDirectory());
 
 		Date now = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
 		File uploadDir = new File(filePath.toString(), sdf.format(now));
-		// 既に存在する場合はプレフィックスをつける
+		//	既に存在する場合はプレフィックスをつける
 		int prefix = 0;
 		while(uploadDir.exists()){
 			prefix++;
@@ -215,7 +215,7 @@ public class UserEntryController {
 					new File(filePath.toString() + sdf.format(now) + "-" + String.valueOf(prefix));
 		}
 
-		// フォルダ作成
+		//	フォルダ作成
 		FileUtils.makeDir( uploadDir.toString());
 
 		return uploadDir;
