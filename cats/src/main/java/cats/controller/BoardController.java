@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import cats.dto.CategoryDto;
 import cats.service.CategoryService;
 
+//掲示板
 @RestController
 @RequestMapping(value = { "/Board" })
 public class BoardController {

@@ -29,7 +29,7 @@ import cats.service.SchoolService;
 import cats.service.StudentService;
 import cats.utils.FileUtils;
 
-
+//会員登録
 @RestController
 @RequestMapping(value = { "/User" })
 public class UserEntryController {

@@ -17,6 +17,7 @@ import cats.service.HobbyService;
 import cats.service.SchoolService;
 import cats.service.StudentService;
 
+//プロフィールの更新、削除、閲覧
 @RestController
 @RequestMapping(value = { "/Profile" })
 public class ProfileController {
