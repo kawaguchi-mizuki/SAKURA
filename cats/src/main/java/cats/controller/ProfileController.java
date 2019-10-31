@@ -11,11 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import cats.dto.HobbyDto;
+import cats.dto.LoginInfoDto;
 import cats.dto.ProfileDto;
 import cats.dto.SchoolDto;
 import cats.service.HobbyService;
+import cats.service.ProfileService;
 import cats.service.SchoolService;
 import cats.service.StudentService;
+
 
 @RestController
 @RequestMapping(value = { "/Profile" })
@@ -30,6 +33,9 @@ public class ProfileController {
 	StudentService studentService;
 
 	@Autowired
+	ProfileService profileService;
+
+	@Autowired
 	HttpSession session;
 
 
@@ -40,7 +46,12 @@ public class ProfileController {
 	@RequestMapping(value = { "/View" }, method = RequestMethod.GET)
 	public ModelAndView ProfileView(ModelAndView mav) {
 
-		ProfileDto dto = new ProfileDto();
+		//ログイン情報を取得する
+		LoginInfoDto loginInfo = new LoginInfoDto();
+
+		loginInfo.setStudentId(1701119);
+
+		ProfileDto dto = profileService.getDisplayBoard(loginInfo);
 
 
 		mav.addObject("ProfileDto", dto);
@@ -85,6 +96,7 @@ public class ProfileController {
 	 */
 	@RequestMapping(value = { "/Delete" }, method = RequestMethod.DELETE)
 	public ModelAndView Profile(ModelAndView mav) {
+
 
 
 

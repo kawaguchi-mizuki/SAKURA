@@ -5,9 +5,9 @@ import lombok.Data;
 @Data
 public class ProfileDto {
 
-	private String studentName = "川口";
+	private String studentName;
 
-	private String studentSex = "男";
+	private String studentSex;
 
 	private String hobbyName = "カラオケ";
 
@@ -15,15 +15,15 @@ public class ProfileDto {
 
 	private String courseName = "情報システム専攻科";
 
-	private Integer grade = 1;
+	private Integer grade;
 
-	private Integer age = 19;
+	private Integer age;
 
-	private String birthplace = "鹿児島";
+	private String birthplace;
 
-	private String selfIntroduction = "よろしくお願いいたします。";
+	private String selfIntroduction ;
 
-	private String password = "abccabcc";
+	private String password ;
 
 	private String imagePass;
 
