@@ -9,9 +9,15 @@ public class ProfileDto {
 
 	private String studentSex;
 
-	private String hobbyName = "カラオケ";
+	private Integer hobbyId;
 
-	private String schoolName = "麻生情報ビジネス専門学校";
+	private String hobbyName;
+
+	private Integer schoolId;
+
+	private String schoolName;
+
+	private Integer courseId;
 
 	private String courseName = "情報システム専攻科";
 

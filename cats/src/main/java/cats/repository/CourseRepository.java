@@ -15,4 +15,8 @@ JpaSpecificationExecutor<CourseTblEntity>{
 	@Query("select c from CourseTblEntity c where schoolId = :schoolId")
 	public List<CourseTblEntity>getCourse(@Param("schoolId")Integer schoolId);
 
+
+	@Query("select c from CourseTblEntity c where courseId = :courseId")
+	public CourseTblEntity getCourseSelect(@Param("courseId")Integer courseId);
+
 }
