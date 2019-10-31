@@ -35,8 +35,11 @@
 		</div>
 		<div class="col-8">掲示板投稿</div>
 		<div class="col-2"></div>
+
 	</div>
+
 	<div class=" border border-info explain">
+
 		<p>※注意事項※</p>
 		<br>
 		<p><font color="red">個人情報</font>や他人を<font color="red">誹謗中傷</font>する内容は禁止しています。</p>
@@ -45,23 +48,22 @@
 
 	</div>
 	<form action="">
-		<p>タイトルを入力してください</p>
+
+	    <p class="bg-primary rounded text-white title">カテゴリー</p>
+		<select name="puldown" class="pldown form-control">
+			<option th:each="dto:${categorylist}" th:value="${dto.categoryId}" th:text="${dto.categoryName}"></option>
+		</select>
 
 		<p class="bg-primary rounded text-white title">タイトル</p>
-		<input type="text" name="title" class="bord-title">
-	</form>
-	<select name="puldown" class="pldown form-control">
-<option value="サンプル1">サンプル1</option>
-<option value="サンプル2">サンプル2</option>
-<option value="サンプル3">サンプル3</option>
-</select>
+		<input type="text" name="title" class="bord-title" required >
 
 
-<div class="stylebutton">
+
+		<div class="stylebutton">
 			 <input type="submit" value="投稿" class="button">
-			</div>
+		</div>
 
-
+	</form>
 	<footer>
 		<div class="row">
 			<div class="col">

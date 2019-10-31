@@ -24,38 +24,38 @@ public class HobbyTblEntity implements Serializable {
 	private String hobbyName;
 
 	/**
-	 * COURSE_ID を設定します.
+	 * HOBBY_ID を設定します.
 	 *
 	 * @param hobbyId
-	 *            COURSE_ID
+	 *            HOBBY_ID
 	 */
 	public void sethobbyId(Integer hobbyId) {
 		this.hobbyId = hobbyId;
 	}
 
 	/**
-	 * COURSE_ID を取得します.
+	 * HOBBY_ID を取得します.
 	 *
-	 * @return COURSE_ID
+	 * @return HOBBY_ID
 	 */
 	public Integer gethobbyId() {
 		return this.hobbyId;
 	}
 
 	/**
-	 * COURSE_NAME を設定します.
+	 * HOBBY_NAME を設定します.
 	 *
 	 * @param hobbyName
-	 *            COURSE_NAME
+	 *            HOBBY_NAME
 	 */
 	public void sethobbyName(String hobbyName) {
 		this.hobbyName = hobbyName;
 	}
 
 	/**
-	 * COURSE_NAME を取得します.
+	 * HOBBY_NAME を取得します.
 	 *
-	 * @return COURSE_NAME
+	 * @return HOBBY_NAME
 	 */
 	public String gethobbyName() {
 		return this.hobbyName;
