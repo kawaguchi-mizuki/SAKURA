@@ -74,5 +74,10 @@ insert into course(school_id,course_name) values(7,'ゲーム・CG・アニメ専攻科');
 insert into course(school_id,course_name) values(7,'ゲーム・CG・アニメ科');
 insert into course(school_id,course_name) values(7,'マンガ・イラスト・CG科');
 
-
+insert into category(category_name) values ('今からあそぼ');
+insert into category(category_name) values ('楽しくしゃべろう');
+insert into category(category_name) values ('ご飯に行きたい');
+insert into category(category_name) values ('合コンしよう');
+insert into category(category_name) values ('同じ趣味募集');
+insert into category(category_name) values ('');
 
