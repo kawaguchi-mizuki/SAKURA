@@ -1,6 +1,7 @@
 package cats.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -20,6 +21,8 @@ public class AuthenticationEntity implements Serializable{
 	private Integer studentId;
 	
 	private String pass;
+	
+	private Date nowDate;
 
 	public void setStudentId(int studentId) {
 		// TODO Auto-generated method stub
@@ -27,6 +30,11 @@ public class AuthenticationEntity implements Serializable{
 	}
 
 	public void setPass(String pass) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setNowDate(Date nowDate) {
 		// TODO Auto-generated method stub
 		
 	}
