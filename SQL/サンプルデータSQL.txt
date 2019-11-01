@@ -19,4 +19,4 @@ insert into school(school_name) values ('麻生建築＆デザイン専門学校');
 insert into school(school_name) values ('麻生公務員専門学校');
 insert into school(school_name) values ('麻生ポップカルチャー専門学校');
 
-insert into student values(1701129,"川口瑞貴","男",1,"麻生情報ビジネス専門学校","情報システム専攻科",3,21,"鹿児島","よろしくお願いいたします。","pass","img/aaa",500,"2018-05-31",4);
+insert into student values(1701150,"test","男",1,2,3,3,31,"広島","よろしくお願いいたします。","pass","img/aaa",500,"2019-10-31",1);

@@ -1,23 +1,26 @@
 package cats.controller;
 
+
+
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import cats.dto.CreateUserDto;
+
 import cats.dto.LoginDayDto;
 import cats.dto.LoginInfoDto;
 import cats.from.LoginFrom;
@@ -111,12 +114,12 @@ public class LoginController {
 		loginInfo = loginService.Login(studentId, pass);
 		
 		if(loginInfo != null) {
-			//Date date = new Date();	
-			//loginService.InsertDate(studentId,date);
+			
 			//	セッションにログイン情報を保存
 			session.setAttribute(SessionConst.LOGININFO, loginInfo);
+			
+			DayCheck(loginInfo);
 			url = "redirect:home";
-			//url = "redirect:DayCheck";
 			
 		}else {
 			url = "redirect:Login";
@@ -128,48 +131,67 @@ public class LoginController {
 	 * 連続ログイン判定
 	 * 
 	 * 
-	 
+	 * 
+	 */
+	private void DayCheck(LoginInfoDto loginInfo)throws Exception {
 	
-	@RequestMapping(value = {"/DayCheck"}, method = RequestMethod.POST)
-	public ModelAndView DayCheck(
-			ModelAndView mav,
-			LoginDayDto dto,
-			HttpServletRequest request,
-			HttpServletResponse response
-			)throws Exception {
+		LoginDayDto dto = null;
+		Date cheinday = null;
+		Date day = null;
+		int num = 0;
 		
-		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
-		
-		LoginDayDto dto = loginService.LastDay(loginInfo.getStudentId());
-		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = new Date();
 		
-		//	連続日付の判定
-		if(date.after(loginInfo.getLastLog())) {
-			if() {
-			loginService.UpdateDate(loginInfo.getStudentId(),date);
-			mav.setViewName("home");
+		dto = loginService.LastDay(loginInfo.getStudentId());
+		
+
+		//	Date型の日時をCalendar型に変換
+        Calendar calendar = Calendar.getInstance();
+        Calendar calenday = Calendar.getInstance();
+        
+        calendar.setTime(date);
+        calenday.setTime(dto.getLastLog());
+        
+        //	日時を減算する
+        calendar.add(Calendar.DATE, -1);
+        cheinday = calendar.getTime();
+        
+        day = calenday.getTime();
+        
+		sdf.format(cheinday);
+        sdf.format(day);
+        sdf.format(date);
+        
+        System.out.println(cheinday);
+        System.out.println(day);
+        System.out.println(date);
+		//	現在の日付を超えているか
+		if(dto.getLastLog().after(date)) {
+			
+			//	最後にログインした値を取得して＋１したものと現在日付が一致するか
+			if(date.equals(cheinday)) {
+				num = dto.getContinuousLogin();
+				if(num < 6) {
+					num = num+1;
+				}
+				if(num >= 6) {
+					num = 0;
+				}
+				loginService.UpdateCount(loginInfo.getStudentId(),num);
+				loginService.UpdateDate(loginInfo.getStudentId(),date);
 			}
-			
-		}else if(date.before(loginInfo.getLastLog())){
+			else {
+			//loginService.UpdateCount(loginInfo.getStudentId(),num);
+			//loginService.UpdateDate(loginInfo.getStudentId(),date);
+			}
+		}else if(loginInfo.getLastLog().before(date)){
 			//	エラー文
-			mav.setViewName("login");
 		}
-		
-		//	日付の更新
-		if(date.after(loginInfo.getLastLog())) {
-			loginService.UpdateDate(loginInfo.getStudentId(),date);
-			mav.setViewName("home");
-			
-		}else if(date.before(loginInfo.getLastLog())){
-			mav.setViewName("login");
-		}
-		
-	
-	return mav;
 	}
 	
-	*/
+	
+	
 	
 	/**
 	 * ログアウト処理

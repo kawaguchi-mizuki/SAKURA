@@ -34,10 +34,10 @@ public class StudentTblEntity implements Serializable{
 	private int hobbyId;
 	
 	/**		 学校名 **/
-	private String schoolName;
+	private Integer schoolId;
 	
 	/**		 学科 **/
-	private String course;
+	private Integer courseId;
 	
 	/** 	学年 **/
 	private Integer grade;

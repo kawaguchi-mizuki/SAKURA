@@ -58,18 +58,18 @@ public class LoginService {
 	 */
 	
 	public LoginDayDto LastDay(Integer studentId) {
-		LoginDayDto dto = null;
-//		ユーザ情報取得
-			StudentTblEntity entity = loginRepository.getloginByStudentId(studentId);
+		 StudentTblEntity entity = null;
+		 	//	ユーザ情報取得
+			 entity = loginRepository.getloginByStudentId(studentId);
 	
 			//entity -> dto
 				
-			dto = new LoginDayDto();
+			LoginDayDto dto = new LoginDayDto();
 				
-			entity.getLastLog();
-			entity.getContinuousLogin();
+			dto.setLastLog(entity.getLastLog());
+			dto.setContinuousLogin(entity.getContinuousLogin());
 			
-			System.out.println(dto);
+			//System.out.println(dto);
 			return dto;
 	}
 	
