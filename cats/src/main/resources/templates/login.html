@@ -9,8 +9,9 @@
 </head>
 <body>
    <h1>ログイン</h1>
-   <p id = "error" th:text = "${msg}"></p>
-   
+   <div th:if="${msg}">
+		<p th:text="${msg}"class="text-danger err"></p>
+	</div>
    
 	<p id="msg" style="color:red"></p>
 	<p id="result" style="color:red"></p>

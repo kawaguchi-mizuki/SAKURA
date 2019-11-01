@@ -107,6 +107,7 @@ public class LoginController {
 			HttpServletResponse response
 			)throws Exception {
 		
+		String ErrMsg;
 		String url = "";
 		LoginInfoDto loginInfo= null;
 		
@@ -136,11 +137,14 @@ public class LoginController {
 	private void DayCheck(LoginInfoDto loginInfo)throws Exception {
 	
 		LoginDayDto dto = null;
-		Date cheinday = null;
-		Date day = null;
+		String cheinday = null;
+		String lastday = null;
+		String today =null;
+		Date chein = null;
+		Date last = null;
 		int num = 0;
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 		Date date = new Date();
 		
 		dto = loginService.LastDay(loginInfo.getStudentId());
@@ -155,22 +159,25 @@ public class LoginController {
         
         //	日時を減算する
         calendar.add(Calendar.DATE, -1);
-        cheinday = calendar.getTime();
         
-        day = calenday.getTime();
+        cheinday = sdf.format(calendar.getTime());
+        lastday = sdf.format(calenday.getTime());
+        today = sdf.format(date);
         
-		sdf.format(cheinday);
-        sdf.format(day);
-        sdf.format(date);
+        //test
+        last = sdf.parse(lastday);
+        chein = sdf.parse(cheinday);
+        date = sdf.parse(today);
         
-        System.out.println(cheinday);
-        System.out.println(day);
+        System.out.println(last);
+        System.out.println(chein);
         System.out.println(date);
+        
 		//	現在の日付を超えているか
-		if(dto.getLastLog().after(date)) {
+		if(last.before(date)) {
 			
-			//	最後にログインした値を取得して＋１したものと現在日付が一致するか
-			if(date.equals(cheinday)) {
+			//	最後にログインした値を取得して-1したものと現在日付が一致するか
+			if(last.equals(chein)) {
 				num = dto.getContinuousLogin();
 				if(num < 6) {
 					num = num+1;
@@ -182,8 +189,8 @@ public class LoginController {
 				loginService.UpdateDate(loginInfo.getStudentId(),date);
 			}
 			else {
-			//loginService.UpdateCount(loginInfo.getStudentId(),num);
-			//loginService.UpdateDate(loginInfo.getStudentId(),date);
+			loginService.UpdateCount(loginInfo.getStudentId(),num);
+			loginService.UpdateDate(loginInfo.getStudentId(),date);
 			}
 		}else if(loginInfo.getLastLog().before(date)){
 			//	エラー文
