@@ -69,6 +69,12 @@ public class ProfileService {
 
 	}
 
+	public void ProfileDelete(Integer studentId) {
+
+		this.studentRepository.deleteById(studentId);
+
+	}
+
 
 
 }

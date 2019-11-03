@@ -87,6 +87,8 @@ public class ProfileController {
 
 
 
+
+
 		return mav;
 	}
 
@@ -94,12 +96,15 @@ public class ProfileController {
 	 * @param mav
 	 * @return
 	 */
-	@RequestMapping(value = { "/Delete" }, method = RequestMethod.DELETE)
+	@RequestMapping(value = { "/Delete" }, method = RequestMethod.GET)
 	public ModelAndView Profile(ModelAndView mav) {
 
 
+		LoginInfoDto loginInfo = new LoginInfoDto();
 
+		loginInfo.setStudentId(1701119);
 
+		profileService.ProfileDelete(loginInfo.getStudentId());
 
 		mav.setViewName("login");
 
