@@ -99,12 +99,12 @@ public class ProfileController {
 	@RequestMapping(value = { "/Delete" }, method = RequestMethod.GET)
 	public ModelAndView Profile(ModelAndView mav) {
 
-
 		LoginInfoDto loginInfo = new LoginInfoDto();
-
 		loginInfo.setStudentId(1701119);
 
 		profileService.ProfileDelete(loginInfo.getStudentId());
+
+		session.invalidate();
 
 		mav.setViewName("login");
 
