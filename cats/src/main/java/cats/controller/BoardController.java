@@ -37,8 +37,6 @@ public class BoardController {
 		//カテゴリ一覧を取得
 		List<CategoryDto> categorylist = categoryService.getAllList();
 
-
-
 		mav.setViewName("BordCreate");
 		mav.addObject("categorylist", categorylist);
 
@@ -50,14 +48,11 @@ public class BoardController {
 	public ModelAndView BoardInsert(@Valid BoardBeans boardbeans,ModelAndView mav) {
 
 
-
-		System.out.println(boardbeans.getCategoryId());
-		System.out.println(boardbeans.getBoardTitle());
-
 		CreateBoardDto dto = new CreateBoardDto();
 
 		dto = getCreateBoardDto(boardbeans);
 
+		//掲示板作成
 	    boardService.insert(dto);
 
 		mav.setViewName("Bord");
