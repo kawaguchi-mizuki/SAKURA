@@ -1,6 +1,7 @@
 package cats.controller;
 
-import java.sql.Date;
+
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -50,6 +51,8 @@ public class BoardController {
 
 		CreateBoardDto dto = new CreateBoardDto();
 
+		//ログイン情報から学籍番号を取得、格納する処理を書く
+
 		dto = getCreateBoardDto(boardbeans);
 
 		//掲示板作成
@@ -67,7 +70,8 @@ public class BoardController {
 		dto.setStudentId(1701129);
 		dto.setBoardTitle(boardbeans.getBoardTitle());
 		dto.setCategoryId(boardbeans.getCategoryId());
-		Date date = new Date(7, 0, 0);
+		Date date = new Date();
+
 		dto.setBoardDate(date);
 
 
