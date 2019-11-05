@@ -3,13 +3,16 @@ package cats.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import cats.beans.StudentBeans;
 import cats.dto.HobbyDto;
 import cats.dto.LoginInfoDto;
 import cats.dto.ProfileDto;
@@ -49,7 +52,7 @@ public class ProfileController {
 		//ログイン情報を取得する
 		LoginInfoDto loginInfo = new LoginInfoDto();
 
-		loginInfo.setStudentId(1701119);
+		loginInfo.setStudentId(1701129);
 
 		ProfileDto dto = profileService.getDisplayBoard(loginInfo);
 
@@ -60,7 +63,7 @@ public class ProfileController {
 	}
 
 	@RequestMapping(value = { "/Update" }, method = RequestMethod.POST)
-	public ModelAndView ProfileUpdate(ModelAndView mav) {
+	public ModelAndView ProfileUpdate(@Valid StudentBeans studentbeans,@RequestParam("password")String password,ModelAndView mav) {
 
 		//趣味一覧を取得
 		List<HobbyDto> hobbylist = hobbyService.getAllList();
@@ -70,6 +73,8 @@ public class ProfileController {
 		ProfileDto dto = new ProfileDto();
 
 		mav.addObject("ProfileDto", dto);
+		mav.addObject("studentbeans",studentbeans);
+		mav.addObject("password",password);
 		mav.setViewName("ProfileUpdate");
 		mav.addObject("hobbylist", hobbylist);
 		mav.addObject("schoollist", schoollist);
@@ -100,7 +105,7 @@ public class ProfileController {
 	public ModelAndView Profile(ModelAndView mav) {
 
 		LoginInfoDto loginInfo = new LoginInfoDto();
-		loginInfo.setStudentId(1701119);
+		loginInfo.setStudentId(1701129);
 
 		profileService.ProfileDelete(loginInfo.getStudentId());
 
