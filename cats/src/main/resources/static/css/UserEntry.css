@@ -33,11 +33,15 @@ span{
 	float:left;
 	margin-right:10px;
 	margin-top:50px;
+	cursor: pointer;
+	cursor: hand;
 }
 .entry{
 	width: 40%;
 	float:right;
 	margin-bottom:50px;
 	margin-top:50px;
+	cursor: pointer;
+	cursor: hand;
 }
 
