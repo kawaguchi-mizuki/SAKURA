@@ -3,6 +3,7 @@ ALTER TABLE hobby auto_increment = 1;
 ALTER TABLE school auto_increment = 1;
 ALTER TABLE course auto_increment = 1;
 ALTER TABLE board auto_increment = 1;
+ALTER TABLE category auto_increment = 1;
 
 
 insert into hobby(hobby_name) values ('‚¨Žð');
