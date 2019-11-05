@@ -1,8 +1,11 @@
 package cats.service;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cats.beans.StudentBeans;
 import cats.dto.LoginInfoDto;
 import cats.dto.ProfileDto;
 import cats.entity.CourseTblEntity;
@@ -74,6 +77,39 @@ public class ProfileService {
 		this.studentRepository.deleteById(studentId);
 
 	}
+
+	public ProfileDto updateProfile(@Valid StudentBeans studentbeans, String password) {
+
+		ProfileDto dto = new ProfileDto();
+
+		StudentTblEntity studentTblEntity;
+		HobbyTblEntity hobbyTblEntity;
+		SchoolTblEntity schoolTblEntity;
+		CourseTblEntity courseTblEntity;
+
+		hobbyTblEntity = hobbyRepository.getHobby(studentbeans.getHobbyId());
+		schoolTblEntity = schoolRepository.getSchool(studentbeans.getSchoolId());
+		courseTblEntity = courseRepository.getCourseSelect(studentbeans.getCourseId());
+
+
+		dto.setStudentName(studentbeans.getName());
+		dto.setStudentSex(studentbeans.getSex());
+		dto.setHobbyId(studentbeans.getHobbyId());
+		dto.setHobbyName(hobbyTblEntity.gethobbyName());
+		dto.setSchoolId(studentbeans.getSchoolId());
+		dto.setSchoolName(schoolTblEntity.getschoolName());
+		dto.setCourseId(studentbeans.getCourseId());
+		dto.setCourseName(courseTblEntity.getcourseName());
+		dto.setGrade(studentbeans.getGrade());
+		dto.setAge(studentbeans.getAge());
+		dto.setBirthplace(studentbeans.getBirthplace());
+		dto.setSelfIntroduction(studentbeans.getIntroduction());
+		dto.setPassword(password);
+
+
+		return dto;
+	}
+
 
 
 

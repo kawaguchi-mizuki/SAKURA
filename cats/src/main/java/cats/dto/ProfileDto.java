@@ -19,7 +19,7 @@ public class ProfileDto {
 
 	private Integer courseId;
 
-	private String courseName = "情報システム専攻科";
+	private String courseName;
 
 	private Integer grade;
 
