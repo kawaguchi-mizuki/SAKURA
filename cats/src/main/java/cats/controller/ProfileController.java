@@ -94,13 +94,37 @@ public class ProfileController {
 	 * @return
 	 */
 	@RequestMapping(value = { "/Correction" }, method = RequestMethod.GET)
-	public ModelAndView ProfileCorrection(ModelAndView mav) {
+	public ModelAndView ProfileCorrection(@Valid StudentBeans studentbeans,@RequestParam("password") String password,ModelAndView mav) {
 
+		ProfileDto dto = new ProfileDto();
+
+		dto = updateProfile(studentbeans,password);
 
 
 
 
 		return mav;
+	}
+
+	private ProfileDto updateProfile(@Valid StudentBeans studentbeans, String password) {
+
+		ProfileDto dto = new ProfileDto();
+
+		dto.setStudentName(studentbeans.getName());
+		dto.setStudentSex(studentbeans.getSex());
+		dto.setHobbyId(studentbeans.getHobbyId());
+
+		dto.setSchoolId(studentbeans.getSchoolId());
+
+		dto.setCourseId(studentbeans.getCourseId());
+		dto.setGrade(studentbeans.getGrade());
+		dto.setAge(studentbeans.getAge());
+		dto.setBirthplace(studentbeans.getBirthplace());
+		dto.setSelfIntroduction(studentbeans.getIntroduction());
+		dto.setPassword(password);
+
+
+		return dto;
 	}
 
 	/**退会処理
