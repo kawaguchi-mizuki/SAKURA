@@ -44,25 +44,40 @@
 
 		<label class="h5">学年 </label>
 		<br/>
-		<select name="grade" class="form-control" >
+		<select id="grade" name="grade" class="form-control" >
 				<option th:value="0" selected>学年を選択してください</option>
 			<script>
 				for (var i = 1; i <= 4; i++) {
 						document.write('<option th:value="'+i+'">' + i + '</option>');
 				}
 			</script>
-	    </select>
+			<script th:inline="javascript">
+
+			/*<![CDATA[*/
+		    var grade = /*[[${studentbeans.grade}]]*/ 'Sebastian';
+			/*]]>*/
+				document.getElementById('grade').options[grade].selected = true;
+			</script>
+		</select>
 		<br/>
 
 		<label class="h5">年齢</label>
 		<br/>
-		<select name="age" class="form-control" >
+		<select id="age" name="age" class="form-control" >
 				<option th:value="0" selected>年齢を選択してください</option>
 			<script>
 				for (var i = 18; i <= 40; i++) {
 						document.write('<option th:value="'+i+'">' + i + '</option>');
 				}
 			</script>
+			<script th:inline="javascript">
+
+			/*<![CDATA[*/
+		    var age = /*[[${studentbeans.age}]]*/ 'Sebastian';
+			/*]]>*/
+				document.getElementById('age').options[age].selected = true;
+			</script>
+		</select>
 	    </select>
 		<br/>
 

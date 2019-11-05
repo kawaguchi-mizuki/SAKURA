@@ -42,7 +42,7 @@ public class ProfileController {
 	HttpSession session;
 
 
-	/**プロフィール更新画面表示
+	/**マイページ表示
 	 * @param mav
 	 * @return
 	 */
@@ -62,6 +62,12 @@ public class ProfileController {
 		return mav;
 	}
 
+	/**マイページ修正画面表示
+	 * @param studentbeans
+	 * @param password
+	 * @param mav
+	 * @return
+	 */
 	@RequestMapping(value = { "/Update" }, method = RequestMethod.POST)
 	public ModelAndView ProfileUpdate(@Valid StudentBeans studentbeans,@RequestParam("password")String password,ModelAndView mav) {
 
@@ -83,12 +89,12 @@ public class ProfileController {
 		return mav;
 	}
 
-	/**プロフィール閲覧画面表示
+	/**マイページ更新処理
 	 * @param mav
 	 * @return
 	 */
-	@RequestMapping(value = { "/Reading" }, method = RequestMethod.GET)
-	public ModelAndView ProfileReading(ModelAndView mav) {
+	@RequestMapping(value = { "/Correction" }, method = RequestMethod.GET)
+	public ModelAndView ProfileCorrection(ModelAndView mav) {
 
 
 
