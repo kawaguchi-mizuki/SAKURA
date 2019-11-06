@@ -9,7 +9,11 @@
 <body>
 
 
-	<form class="input" th:action="@{/Profile/Update}" th:object="${studentbeans}"   method="post" enctype="multipart/form-data" >
+	<form class="input" th:action="@{/Profile/Correction}" th:object="${studentbeans}"   method="post" enctype="multipart/form-data" >
+
+		<div th:if="${msg}">
+			<p th:text="${msg}"class="text-danger err"></p>
+		</div>
 
 		<label class="h5 a">名前</label>
 		<input type="text" name="name" class="form-control"  th:value="${studentbeans.name}" required/>
@@ -134,13 +138,6 @@
 													<option th:value="鹿児島県">鹿児島県</option>
 													<option th:value="沖縄県">沖縄県</option>
 		</select>
-		<script th:inline="javascript">
-
-			/*<![CDATA[*/
-		    var place = /*[[${studentbeans.birthplace}]]*/ 'Sebastian';
-			/*]]>*/
-				document.getElementById('birthplace').options[].selected = true;
-		</script>
 		<br/>
 
 		<label class="h5">自己紹介 </label>
@@ -152,9 +149,13 @@
 		<input name="password" type="text" class="form-control"  th:value="${password}" />
 		<br/>
 
+		<label class="h5">パスワード再入力</label>
+		<input name="r_password" type="text" class="form-control"  />
+		<br/>
+
 		<input type="button" class="btn btn-primary back"  onclick="history.back()" value="戻る"/>
 		<input type="button" class="btn btn-danger entry" data-toggle="modal" data-target="#blockModal"  value="修正"/>
-	</form>
+
 
 	<!-- Modal -->
 	<div class="modal fade" id="blockModal" tabindex="-1" role="dialog"
@@ -170,7 +171,7 @@
 				</div>
 				<div class="modal-body">この内容で修正します。</div>
 				<div class="modal-footer">
-				<form th:action="@{/Profile/Delete}"  method="get"  >
+
 					<button type="button" class="btn btn-secondary"
 						data-dismiss="modal">戻る</button>
 					<button type="submit" class="btn btn-primary">修正する</button>
@@ -178,6 +179,7 @@
 			</div>
 		</div>
 	</div>
+	</form>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous"></script>

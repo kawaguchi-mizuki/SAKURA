@@ -93,10 +93,32 @@ public class ProfileController {
 	 * @param mav
 	 * @return
 	 */
-	@RequestMapping(value = { "/Correction" }, method = RequestMethod.GET)
-	public ModelAndView ProfileCorrection(@Valid StudentBeans studentbeans,@RequestParam("password") String password,ModelAndView mav) {
+	@RequestMapping(value = { "/Correction" }, method = RequestMethod.POST)
+	public ModelAndView ProfileCorrection(@Valid StudentBeans studentbeans,@RequestParam("password") String password,
+			@RequestParam("r_password") String r_password,ModelAndView mav) {
 
 		ProfileDto dto = new ProfileDto();
+		String ErrMsg;
+
+		//入力値チェック
+		ErrMsg = ValidationCheck(password,r_password);
+
+		//エラーメッセージがあればリダイレクト
+		if(!(ErrMsg.equals(""))){
+
+			//趣味一覧を取得
+			List<HobbyDto> hobbylist = hobbyService.getAllList();
+			//学校一覧を取得
+			List<SchoolDto> schoollist = schoolService.getAllList();
+
+			mav.addObject("hobbylist", hobbylist);
+			mav.addObject("schoollist", schoollist);
+			mav.setViewName("ProfileUpdate");
+			mav.addObject("studentbeans", studentbeans);
+			mav.addObject("msg", ErrMsg);
+
+			return mav;
+		}
 
 		dto = profileService.updateProfile(studentbeans,password);
 
@@ -105,6 +127,24 @@ public class ProfileController {
 
 
 		return mav;
+	}
+
+	/**入力チェック処理
+	 * @param password
+	 * @param r_password
+	 * @return
+	 */
+	private String ValidationCheck(String password, String r_password) {
+
+		String errMsg = "";
+
+		if(!(password.equals(r_password))){
+			errMsg = "パスワードが一致していません";
+		}else if(password.length()<7){
+			errMsg = "パスワードが短すぎます";
+		}
+
+		return errMsg;
 	}
 
 	/**退会処理
