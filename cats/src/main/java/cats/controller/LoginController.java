@@ -77,7 +77,12 @@ public class LoginController {
 	
 	@RequestMapping(value = {"/Home"}, method = RequestMethod.GET)
 	public ModelAndView home(ModelAndView mav) {
-
+		
+		//	ユーザー情報をセッションから取得
+		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
+		
+		mav.addObject("add",loginInfo.getStudentId());
+		
 		mav.setViewName("home");
 
 		return mav;
