@@ -54,7 +54,10 @@ public class ProfileController {
 
 		loginInfo.setStudentId(1701129);
 
+
+
 		ProfileDto dto = profileService.getDisplayBoard(loginInfo);
+
 
 
 		mav.addObject("ProfileDto", dto);
@@ -69,7 +72,7 @@ public class ProfileController {
 	 * @return
 	 */
 	@RequestMapping(value = { "/Update" }, method = RequestMethod.POST)
-	public ModelAndView ProfileUpdate(@Valid StudentBeans studentbeans,@RequestParam("password")String password,ModelAndView mav) {
+	public ModelAndView ProfileUpdate(@Valid StudentBeans studentbeans,@RequestParam("password")String password,@RequestParam("hobbyname") String hobbyName,ModelAndView mav) {
 
 		//趣味一覧を取得
 		List<HobbyDto> hobbylist = hobbyService.getAllList();
@@ -77,6 +80,10 @@ public class ProfileController {
 		List<SchoolDto> schoollist = schoolService.getAllList();
 
 		ProfileDto dto = new ProfileDto();
+
+		int hobbyId = hobbyService.getHobbyId(hobbyName);
+
+		studentbeans.setHobbyId(hobbyId);
 
 		mav.addObject("ProfileDto", dto);
 		mav.addObject("studentbeans",studentbeans);
@@ -110,6 +117,8 @@ public class ProfileController {
 			List<HobbyDto> hobbylist = hobbyService.getAllList();
 			//学校一覧を取得
 			List<SchoolDto> schoollist = schoolService.getAllList();
+
+
 
 			mav.addObject("hobbylist", hobbylist);
 			mav.addObject("schoollist", schoollist);

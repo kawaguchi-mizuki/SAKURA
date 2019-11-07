@@ -15,5 +15,8 @@ JpaSpecificationExecutor<HobbyTblEntity>{
 	@Query("select h from HobbyTblEntity h where hobbyId = :hobbyId")
 	public HobbyTblEntity  getHobby(@Param("hobbyId")Integer hobbyId);
 
+	@Query("select hobbyId from HobbyTblEntity h where hobbyName = :hobbyName")
+	public int getHobbyId(String hobbyName);
+
 }
 

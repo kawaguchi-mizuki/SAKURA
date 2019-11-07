@@ -39,5 +39,14 @@ public class HobbyService {
 		return list;
 	}
 
+	public int getHobbyId(String hobbyName) {
+
+		int hobbyId =  hobbyRepository.getHobbyId(hobbyName);
+
+		return hobbyId;
+	}
+
+
+
 
 }

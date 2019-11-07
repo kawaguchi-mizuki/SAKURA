@@ -91,6 +91,8 @@ public class ProfileService {
 		schoolTblEntity = schoolRepository.getSchool(studentbeans.getSchoolId());
 		courseTblEntity = courseRepository.getCourseSelect(studentbeans.getCourseId());
 
+		//本来は、ログインインフォから取得する
+		dto.setStudentId(1701129);
 
 		dto.setStudentName(studentbeans.getName());
 		dto.setStudentSex(studentbeans.getSex());
@@ -106,8 +108,29 @@ public class ProfileService {
 		dto.setSelfIntroduction(studentbeans.getIntroduction());
 		dto.setPassword(password);
 
+		studentTblEntity = updateUserTblEntityFromDto(dto);
+
+		studentRepository.saveAndFlush(studentTblEntity);
+
 
 		return dto;
+	}
+
+	private StudentTblEntity updateUserTblEntityFromDto(ProfileDto dto) {
+		StudentTblEntity entity = new StudentTblEntity();
+
+		entity.setStudentId(dto.getStudentId());
+		entity.setStudentName(dto.getStudentName());
+		entity.setStudentSex(dto.getStudentSex());
+		entity.setHobbyId(dto.getHobbyId());
+		entity.setSchoolId(dto.getSchoolId());
+		entity.setCourseId(dto.getCourseId());
+		entity.setGrade(dto.getGrade());
+		entity.setAge(dto.getAge());
+		entity.setBirthplace(dto.getBirthplace());
+		entity.setSelfIntroduction(dto.getSelfIntroduction());
+		entity.setPassword(dto.getPassword());
+		return entity;
 	}
 
 

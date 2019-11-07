@@ -21,8 +21,23 @@
 
 		<label class="h5">性別</label>
 		<br/>
-		<input type="radio" name="sex" th:value="男" checked/>   男性
-		<input type="radio" name="sex" th:value="女" class="sex" />  女性
+
+			<input type="radio" name="sex" th:value="男"/>   男性
+			<input type="radio" name="sex" th:value="女" class="sex" />  女性
+
+		<script th:inline="javascript">
+		/*<![CDATA[*/
+		    var studentsex = /*[[${studentbeans.sex}]]*/ 'Sebastian';
+		/*]]>*/
+
+			var elements = document.getElementsByName( "sex" ) ;
+
+			if(studentsex=="男"){
+				elements[0].checked = true ;
+			}else{
+				elements[1].checked = true ;
+			}
+		</script>
 		<br/>
 
 		<label class="h5 hobby">趣味</label>
@@ -30,7 +45,13 @@
 		 <select id="hobby" name="hobbyId" class="form-control"  >
 			<option th:each="dto:${hobbylist}" th:value="${dto.hobbyId}" th:text="${dto.hobbyName}"></option>
 		 </select>
+		 <script th:inline="javascript">
 
+			/*<![CDATA[*/
+		    var hobbyId = /*[[${studentbeans.hobbyId}]]*/ 'Sebastian';
+			/*]]>*/
+				document.getElementById('hobby').options[hobbyId-1].selected = true;
+			</script>
 		<br/>
 
 		<label class="h5">学校名</label>
