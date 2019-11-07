@@ -16,15 +16,15 @@
 	<p id="msg" style="color:red"></p>
 	<p id="result" style="color:red"></p>
 	<p id="Pmsg" style="color:red"></p>
+	<p id="Lmsg" style="color:red"></p>
 	
-   <form th:action="@{/auth}" method="post"  role="form" th:object="${LoginFrom}">
-        <div th:if="${error}" style="color:red">
-            <p>ログインできませんでした。やりなおしてください。</p>
-        </div>
+   <form th:action="@{/auth}" method="post" role="form" th:object="${LoginFrom}"name="form">
+
         <p>学籍番号</p>
-        <input type="text" placeholder="学籍番号" id="studentId" name="studentId" />
+        <input type="number" placeholder="学籍番号" id="studentId" name="studentId" />
+		
         <p>パスワード</p>
-        <input type="password" placeholder="PASSWORD" id="password" name="password" /><br/>
+        <input type="password" placeholder="PASSWORD" id="password" name="password"/><br/>
         
         <input type="submit" id="login" value="ログイン" onclick ="return check()">
    </form>
@@ -42,14 +42,14 @@ var Pmsg = "";
 		//	現在地を取得
 		navigator.geolocation.getCurrentPosition(
 			//	第1引数の取得に成功した時
-			function( position ){
+			function(position){
 				
 				var data = position.coords;
 
 				//	緯度
-				var lat = 33.583561;//data.latitude;
+				var lat = 40;//33.583561;//data.latitude;
 				//	経度
-				var lng = 130.421263;//data.longitude;
+				var lng = 140;//130.421263;//data.longitude;
 			
 				//	学校範囲指定
 				if (lat > 33.583163 && lat < 33.585223 &&
@@ -64,38 +64,46 @@ var Pmsg = "";
 	            	//	エラーメッセージ
 	            	var errorMessage = {
 	                	0: "原因不明のエラーが発生しました。",
-	                	1: "位置情報の取得が許可されていません。",
+	                	1: "位置情報の取得を許可してください",
 	                	2: "電波状況などで位置情報が取得できませんでした。",
 	                	3: "位置情報の取得に時間がかかり過ぎてタイムアウトしました。",
 	            	};
-	            	document.getElementById("result").textContent = errorMessage[error.code];
-	        	}
-	    	);
-		}else {
-	    	//	対応していない
-	   		document.getElementById("msg").textContent="Geolocation APIに対応していない";
-		}
-	
-	
-//	フォーム判定
-	function check(){
-	
-	//	範囲内
-	if(hako == "key"){ 
-		return true;
-		
+	            document.getElementById("result").textContent = errorMessage[error.code];
+	        }
+	    );
+	} else {
+	    // Geolocation APIに対応していない
+	    document.getElementById("msg").textContent="Geolocation APIに対応していない";
 	}
+
+//	フォーム判定
+function check(){
+	
 	//	範囲外
-	else if(hako == "path"){ 
+	if(hako == "path"){ 
 		document.getElementById("Pmsg").textContent = "麻生学区の範囲内でログインしてください！";
 		return false; 
 	}
-	// 	位置情報の許可がない時
-	else{
-		document.getElementById("Pmsg").textContent = "位置情報を許可してログインしてください";
-		return false; 
+	//	範囲内
+	if(hako == "key"){ 
+           return true;   
 	}
-
+	else if(document.form.studentId.value == "" && document.form.password.value == ""){
+		document.getElementById("Lmsg").textContent = "学籍番号とパスワードを入力してください";
+		return false;
+    }else if(document.form.studentId.value == ""){
+		document.getElementById("Lmsg").textContent = "学籍番号を入力してください";
+		return false;
+    }else if(document.form.password.value == ""){
+		document.getElementById("Lmsg").textContent = "パスワードを入力してください";
+		return false;
+    }else{
+    	document.getElementById("Lmsg").textContent = "位置情報が許可されていません";
+    	return false;
+    }
 }
+
+
+
 	
 </script>

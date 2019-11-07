@@ -53,8 +53,11 @@ public class LoginService {
 	
 	/**
 	 *　過去の日付・連続ログイン情報の取得
-	 *studentTblから前回のログイン情報を取得する処理を書く
-	 *
+	 *　
+	 * @param studentId
+	 * @return 
+	 * @throws Exception
+	 * 
 	 */
 	
 	public LoginDayDto LastDay(Integer studentId) {
@@ -77,7 +80,11 @@ public class LoginService {
 	/**
 	 * 現在日付　更新
 	 * 
+	 * @param studentId
 	 * @param date
+	 * @return
+	 * @throws Exception
+	 * 
 	 */
 	public void UpdateDate(Integer studentId,Date date)throws Exception{
 		//	ユーザ情報取得
@@ -97,6 +104,10 @@ public class LoginService {
 	/**
 	 * 連続ログイン　更新
 	 * 
+	 * @param studentId
+	 * @param num
+	 * @return
+	 * @throws Exception
 	 *
 	*/
 	public void UpdateCount(Integer studentId,int num)throws Exception{
@@ -108,6 +119,25 @@ public class LoginService {
 	private void UpdateCount(StudentTblEntity entity,int num)throws Exception{
 		
 		entity.setContinuousLogin(num);
+
+		StudentRepository.save(entity);
+		
+	}
+	
+	/**
+	 * 連続ログインに応じてポイントの取得
+	 * 
+	 * 
+	 */
+	public void LoginPoint(Integer studentId,int  point)throws Exception{
+//		ユーザ情報取得
+			StudentTblEntity entity = loginRepository.getloginByStudentId(studentId);
+			LoginPoint(entity,point);
+	}
+	
+	private void LoginPoint(StudentTblEntity entity,int point)throws Exception{
+		
+		entity.setPoint(point);
 
 		StudentRepository.save(entity);
 		

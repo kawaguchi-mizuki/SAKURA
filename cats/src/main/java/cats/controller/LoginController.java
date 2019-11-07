@@ -68,14 +68,14 @@ public class LoginController {
 	}*/
 	
 	@RequestMapping(value = {"/Login"}, method = RequestMethod.GET)
-	public ModelAndView login(ModelAndView mav) {
+	public ModelAndView login(ModelAndView mav)throws Exception{
 
 		mav.setViewName("Login");
 
 		return mav;
 	}
 	
-	@RequestMapping(value = {"/home"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/Home"}, method = RequestMethod.GET)
 	public ModelAndView home(ModelAndView mav) {
 
 		mav.setViewName("home");
@@ -96,7 +96,7 @@ public class LoginController {
 	 * @return
 	 * @throws Exception
 	 */
-	
+	//string hennkou
 	@RequestMapping(value = {"/auth"}, method = RequestMethod.POST)
 	public String auth(
 			RedirectAttributes redirectAttributes,
@@ -108,21 +108,22 @@ public class LoginController {
 			)throws Exception {
 		
 		String ErrMsg;
-		String url = "";
+		String url;
+		
 		LoginInfoDto loginInfo= null;
 		
 		//	ログイン処理
 		loginInfo = loginService.Login(studentId, pass);
 		
 		if(loginInfo != null) {
-			
 			//	セッションにログイン情報を保存
 			session.setAttribute(SessionConst.LOGININFO, loginInfo);
-			
 			DayCheck(loginInfo);
-			url = "redirect:home";
+			url = "redirect:Home";
 			
-		}else {
+		}else{
+			ErrMsg = "学籍番号とパスワードが一致しません";
+			redirectAttributes.addFlashAttribute("msg",ErrMsg);
 			url = "redirect:Login";
 		}
 		return url;
@@ -130,19 +131,23 @@ public class LoginController {
 	
 	/**
 	 * 連続ログイン判定
-	 * 
-	 * 
-	 * 
+	 * @param loginInfo
+	 * @return
+	 * @throws Exception
 	 */
 	private void DayCheck(LoginInfoDto loginInfo)throws Exception {
 	
-		LoginDayDto dto = null;
+		LoginDayDto dto = null;	
 		String cheinday = null;
 		String lastday = null;
 		String today =null;
 		Date chein = null;
 		Date last = null;
 		int num = 0;
+		int point = 0;
+		//	ログインボーナス（ポイント）
+		int[] bar  = {50,100,150,200,300};
+		
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 		Date date = new Date();
@@ -164,7 +169,7 @@ public class LoginController {
         lastday = sdf.format(calenday.getTime());
         today = sdf.format(date);
         
-        //test
+        //format
         last = sdf.parse(lastday);
         chein = sdf.parse(cheinday);
         date = sdf.parse(today);
@@ -181,6 +186,18 @@ public class LoginController {
 				num = dto.getContinuousLogin();
 				if(num < 6) {
 					num = num+1;
+					//	ログインポイント追加処理 for
+					for(int i = 0;i<6;i++) {
+						for(int j = 0;j<bar.length;j++) {
+							if(num == i) {
+								if(i-1 == j) {
+									point = loginInfo.getPoint();
+									point = point+bar[j];
+									loginService.LoginPoint(loginInfo.getStudentId(),point);	
+								}
+							}
+						}
+					}		
 				}
 				if(num >= 6) {
 					num = 0;
@@ -192,13 +209,8 @@ public class LoginController {
 			loginService.UpdateCount(loginInfo.getStudentId(),num);
 			loginService.UpdateDate(loginInfo.getStudentId(),date);
 			}
-		}else if(loginInfo.getLastLog().before(date)){
-			//	エラー文
 		}
 	}
-	
-	
-	
 	
 	/**
 	 * ログアウト処理
@@ -206,33 +218,14 @@ public class LoginController {
 	 * @return
 	 * @throws AsoBbsSystemErrException
 	 */
-	@RequestMapping(value= {"/logout"}, method=RequestMethod.GET)
+	@RequestMapping(value= {"/Logout"}, method=RequestMethod.GET)
 	public String logout(HttpServletRequest request,RedirectAttributes redirectAttributes) throws Exception {
 				
 		//	セッション破棄
 		session.invalidate();
 		
 		//	ログイン画面へリダイレクト
-		//	ログアウトの時はauto=falseをつけて自動ログインを防ぐ
 		return "redirect:Login";
 	}
-	
-	
-	/**
-	 * エラーメッセージ
-	 * 
-	 * 
-	 * 
-	 */
-	
-	/*
- 	@RequestMapping(value = {"/login-error"}, method = RequestMethod.GET)
-	public ModelAndView UserEntry(Model model) {
-		 model.addAttribute("error",true);
-		 return "Login";
-	}
-	*/
-
-	
 	
 }
