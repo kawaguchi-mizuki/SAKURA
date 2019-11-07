@@ -122,9 +122,8 @@ public class ProfileController {
 
 		dto = profileService.updateProfile(studentbeans,password);
 
-
-
-
+		mav.addObject("ProfileDto", dto);
+		mav.setViewName("ProfileView");
 
 		return mav;
 	}
