@@ -4,29 +4,54 @@
 <meta charset="UTF-8">
 <title>プロフィール変更</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<link href="/css/ProfileUpdate.css" th:href="@{/css/ProfileUpdate.css}" rel="stylesheet"></link>
 <link href="/css/UserEntry.css" th:href="@{/css/UserEntry.css}" rel="stylesheet"></link>
 </head>
 <body>
 
 
-	<form class="input" th:action="@{/Profile/Update}" th:object="${studentbeans}"   method="post" enctype="multipart/form-data" >
+	<form class="input" th:action="@{/Profile/Correction}" th:object="${studentbeans}"   method="post" enctype="multipart/form-data" >
+
+		<div th:if="${msg}">
+			<p th:text="${msg}"class="text-danger err"></p>
+		</div>
 
 		<label class="h5 a">名前</label>
-		<input type="text" name="name" class="form-control"  th:value="${ProfileDto.studentName}" required/>
+		<input type="text" name="name" class="form-control"  th:value="${studentbeans.name}" required/>
 		<br/>
 
 		<label class="h5">性別</label>
 		<br/>
-		<input type="radio" name="sex" th:value="男" checked/>   男性
-		<input type="radio" name="sex" th:value="女" class="sex" />  女性
+
+			<input type="radio" name="sex" th:value="男"/>   男性
+			<input type="radio" name="sex" th:value="女" class="sex" />  女性
+
+		<script th:inline="javascript">
+		/*<![CDATA[*/
+		    var studentsex = /*[[${studentbeans.sex}]]*/ 'Sebastian';
+		/*]]>*/
+
+			var elements = document.getElementsByName( "sex" ) ;
+
+			if(studentsex=="男"){
+				elements[0].checked = true ;
+			}else{
+				elements[1].checked = true ;
+			}
+		</script>
 		<br/>
 
 		<label class="h5 hobby">趣味</label>
 		<br/>
-		 <select name="hobbyId" class="form-control"  >
+		 <select id="hobby" name="hobbyId" class="form-control"  >
 			<option th:each="dto:${hobbylist}" th:value="${dto.hobbyId}" th:text="${dto.hobbyName}"></option>
 		 </select>
+		 <script th:inline="javascript">
+
+			/*<![CDATA[*/
+		    var hobbyId = /*[[${studentbeans.hobbyId}]]*/ 'Sebastian';
+			/*]]>*/
+				document.getElementById('hobby').options[hobbyId-1].selected = true;
+			</script>
 		<br/>
 
 		<label class="h5">学校名</label>
@@ -39,37 +64,52 @@
 		<label class="h5">学科名</label>
 		<br/>
 		 <select id="course"  name="courseId" class="form-control" >
-			<option  th:value="0">※学校から選択してください</option>
+			<option  th:value="1">※学校から選択してください</option>
 		 </select>
 		<br/>
 
 		<label class="h5">学年 </label>
 		<br/>
-		<select name="grade" class="form-control" >
+		<select id="grade" name="grade" class="form-control" >
 				<option th:value="0" selected>学年を選択してください</option>
 			<script>
 				for (var i = 1; i <= 4; i++) {
 						document.write('<option th:value="'+i+'">' + i + '</option>');
 				}
 			</script>
-	    </select>
+			<script th:inline="javascript">
+
+			/*<![CDATA[*/
+		    var grade = /*[[${studentbeans.grade}]]*/ 'Sebastian';
+			/*]]>*/
+				document.getElementById('grade').options[grade].selected = true;
+			</script>
+		</select>
 		<br/>
 
 		<label class="h5">年齢</label>
 		<br/>
-		<select name="age" class="form-control" >
+		<select id="age" name="age" class="form-control" >
 				<option th:value="0" selected>年齢を選択してください</option>
 			<script>
 				for (var i = 18; i <= 40; i++) {
 						document.write('<option th:value="'+i+'">' + i + '</option>');
 				}
 			</script>
+			<script th:inline="javascript">
+
+			/*<![CDATA[*/
+		    var age = /*[[${studentbeans.age}]]*/ 'Sebastian';
+			/*]]>*/
+				document.getElementById('age').options[age-17].selected = true;
+			</script>
+		</select>
 	    </select>
 		<br/>
 
 		<label class="h5">出身地</label>
 		<br/>
-		<select name="birthplace" class="form-control" >
+		<select id="birthplace" name="birthplace" class="form-control" >
 													<option th:value="未選択">出身地を選択してください</option>
 													<option th:value="北海道">北海道</option>
 													<option th:value="青森県">青森県</option>
@@ -126,14 +166,52 @@
 			<textarea name="introduction" class="form-control"  rows="4" cols="40"></textarea>
 		<br/>
 
-		<label class="h5">パスワード</label>
-		<input type="text" class="form-control"  th:value="${ProfileDto.password}" readonly/>
+		<label class="h5">パスワード (7文字以上) </label>
+		<input name="password" type="text" class="form-control"  th:value="${password}" />
+		<br/>
+
+		<label class="h5">パスワード再入力</label>
+		<input name="r_password" type="text" class="form-control"  />
 		<br/>
 
 		<input type="button" class="btn btn-primary back"  onclick="history.back()" value="戻る"/>
-		<input type="submit" class="btn btn-danger entry"  value="修正"/>
-	</form>
+		<input type="button" class="btn btn-danger entry" data-toggle="modal" data-target="#blockModal"  value="修正"/>
 
+
+	<!-- Modal -->
+	<div class="modal fade" id="blockModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">修正確認</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">この内容で修正します。</div>
+				<div class="modal-footer">
+
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">戻る</button>
+					<button type="submit" class="btn btn-primary">修正する</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	</form>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 	<script>
 

@@ -4,26 +4,33 @@ import lombok.Data;
 
 @Data
 public class ProfileDto {
+	private Integer studentId;
 
-	private String studentName = "川口";
+	private String studentName;
 
-	private String studentSex = "男";
+	private String studentSex;
 
-	private String hobbyName = "カラオケ";
+	private Integer hobbyId;
 
-	private String schoolName = "麻生情報ビジネス専門学校";
+	private String hobbyName;
 
-	private String courseName = "情報システム専攻科";
+	private Integer schoolId;
 
-	private Integer grade = 1;
+	private String schoolName;
 
-	private Integer age = 19;
+	private Integer courseId;
 
-	private String birthplace = "鹿児島";
+	private String courseName;
 
-	private String selfIntroduction = "よろしくお願いいたします。";
+	private Integer grade;
 
-	private String password = "abccabcc";
+	private Integer age;
+
+	private String birthplace;
+
+	private String selfIntroduction ;
+
+	private String password ;
 
 	private String imagePass;
 
