@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"></link>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+</head>
+<body class="wrapper">
+	<header>
+		<div class="row">
+
+			<div class="col-5">
+				<a href=""> <img src="/img/rogo.jpg" width="150">
+
+				</a>
+			</div>
+
+			<div class="col-5">
+				<img src="/img/coin.png" width="50">300ポイント
+			</div>
+			<div class="col-2">
+				<a href="">ログアウト</a>
+			</div>
+		</div>
+	</header>
+
+	<div class="txt row">
+
+		<div class="col-2">
+			<a href=" " class="back"> ＜戻る </a>
+		</div>
+		<div class="col-8">掲示板投稿</div>
+		<div class="col-2"></div>
+
+	</div>
+
+	<div class=" border border-info explain">
+
+		<p>※注意事項※</p>
+		<br>
+		<p><font color="red">個人情報</font>や他人を<font color="red">誹謗中傷</font>する内容は禁止しています。</p>
+		<br>
+		<p><font color="red">アダルト</font>内容のタイトルも禁止しています。</p>
+
+	</div>
+	<form th:action="@{/Board/Insert}" th:object="${boardbeans}"   method="post">
+
+	    <p class="bg-primary rounded text-white title">カテゴリー</p>
+		<select name="categoryId" class="pldown form-control">
+			<option th:each="dto:${categorylist}" th:value="${dto.categoryId}" th:text="${dto.categoryName}"></option>
+		</select>
+
+		<p class="bg-primary rounded text-white title">タイトル</p>
+		<input type="text" name="boardTitle" class="bord-title" required >
+
+
+
+		<div class="stylebutton">
+			 <input type="submit" value="投稿" class="button">
+		</div>
+
+	</form>
+	<footer>
+		<div class="row">
+			<div class="col">
+				<a href=""><img src="/img/ie.png"> </a>
+			</div>
+			<div class="col">
+				<a href=""><img src="/img/mrmo.png"> </a>
+			</div>
+
+			<div class="col">
+				<a href=""><img src="/img/hart.png"> </a>
+			</div>
+
+			<div class="col">
+				<a href=""><img src="/img/fukidashi.png"> </a>
+			</div>
+
+			<div class="col">
+				<a href=""><img src="/img/hito.png"> </a>
+			</div>
+
+		</div>
+	</footer>
+</body>
+</html>
