@@ -1,9 +1,9 @@
-spring:
+wspring:
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/cats?serverTimezone=JST
     username: root
-    password: mizuking0
+    password: takumi1057
   jpa:
     hibernate:
       ddl-auto: none
