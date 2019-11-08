@@ -22,7 +22,7 @@ public class LoginFilter implements Filter {
 	//	チェック除外画面"/sbadmin/.+","/favicon.ico",
 		private String excludeDispList[] =
 			{
-				"/","/Login","/auth","/Logout","/css/.+","/img/.+","/error/.*"
+				"/","/Login","/auth","/Logout","/css/.+","/img/.+","/error/.*","/User/Entry"
 			};
 
 		@Autowired
