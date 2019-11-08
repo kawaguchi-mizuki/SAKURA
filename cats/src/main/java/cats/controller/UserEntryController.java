@@ -121,7 +121,7 @@ public class UserEntryController {
 
 		studentService.insert(dto);
 
-		mav.setViewName("login");
+		mav.setViewName("Login");
 
 		return mav;
 	}
