@@ -52,10 +52,7 @@ public class LoginController {
 
 	@RequestMapping(value = {"/Home"}, method = RequestMethod.GET)
 	public ModelAndView home(ModelAndView mav, HttpServletResponse response) {
-		//ブラウザバック対策
-		response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate");
-        response.setHeader("Pragma", "no-cache");
-        response.setDateHeader("Expires", 0);
+
 
 		//	ユーザー情報をセッションから取得
 		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);

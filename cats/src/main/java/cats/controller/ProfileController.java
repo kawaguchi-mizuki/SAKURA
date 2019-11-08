@@ -54,6 +54,9 @@ public class ProfileController {
 		//ログイン情報を取得する
 		LoginInfoDto loginInfo = new LoginInfoDto();
 
+		//ユーザー情報をセッションから取得
+		//LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
+
 		loginInfo.setStudentId(1701129);
 
 
@@ -165,13 +168,17 @@ public class ProfileController {
 	public ModelAndView Profile(ModelAndView mav) {
 
 		LoginInfoDto loginInfo = new LoginInfoDto();
+
+		//ユーザー情報をセッションから取得
+		//LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
+
 		loginInfo.setStudentId(1701129);
 
 		profileService.ProfileDelete(loginInfo.getStudentId());
 
 		session.invalidate();
 
-		mav.setViewName("login");
+		mav.setViewName("Login");
 
 		return mav;
 	}
