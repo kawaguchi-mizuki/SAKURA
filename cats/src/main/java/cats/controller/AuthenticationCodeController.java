@@ -85,7 +85,7 @@ public class AuthenticationCodeController {
 	@Autowired
     private MailSender sender;
 	
-	@Bean
+	
 	public void sendMail(String mail,String pass) {
 		
         SimpleMailMessage msg = new SimpleMailMessage();
