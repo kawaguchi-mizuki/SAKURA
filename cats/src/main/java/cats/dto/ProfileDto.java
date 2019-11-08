@@ -1,5 +1,7 @@
 package cats.dto;
 
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
@@ -31,6 +33,12 @@ public class ProfileDto {
 	private String selfIntroduction ;
 
 	private String password ;
+
+	private Integer point;
+
+	private Date lastlog;
+
+	private Integer continuouslogin;
 
 	private String imagePass;
 
