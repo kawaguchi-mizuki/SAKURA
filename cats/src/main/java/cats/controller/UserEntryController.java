@@ -132,6 +132,8 @@ public class UserEntryController {
 	@RequestMapping("/GetCourseList")
     public List<CourseDto> getucourselist(
     		@RequestParam("schoolId")Integer schoolId) {
+
+
         return courseService.getList(schoolId);
     }
 

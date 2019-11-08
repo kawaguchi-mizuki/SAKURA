@@ -1,5 +1,6 @@
 package cats.service;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import cats.entity.CourseTblEntity;
 import cats.entity.HobbyTblEntity;
 import cats.entity.SchoolTblEntity;
 import cats.entity.StudentTblEntity;
+import cats.param.SessionConst;
 import cats.repository.CourseRepository;
 import cats.repository.HobbyRepository;
 import cats.repository.SchoolRepository;

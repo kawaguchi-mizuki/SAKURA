@@ -22,12 +22,12 @@ public class LoginFilter implements Filter {
 	//	チェック除外画面"/sbadmin/.+","/favicon.ico",
 		private String excludeDispList[] =
 			{
-				"/","/Login","/auth","/Logout","/css/.+","/img/.+","/error/.*","/User/Entry"
+				"/","/Login","/auth","/Logout","/css/.+","/img/.+","/error/.*","/User/Entry","/User/Check","/User/GetCourseList"
 			};
 
 		@Autowired
 		HttpSession session;
-		
+
 		@Override
 		public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 				throws IOException, ServletException {
@@ -38,35 +38,35 @@ public class LoginFilter implements Filter {
 				chain.doFilter(request, response);
 				return;
 			}
-			
+
 			//	セッションからユーザー情報を取得
 			LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
-			
+
 			if( loginInfo == null ) {
 				//	ログイン画面へ転送
 				((HttpServletResponse)response).sendRedirect( "/Login");
 				return;
 			}
-			
+
 			chain.doFilter(request, response);
 
 		}
 		/**
 		 * 除外URLかどうかの判定を行う
-		 * 
+		 *
 		 * @param servletPath
 		 * @return
 		 */
 		private boolean ExcludeCheck(String servletPath) {
 			boolean ret = false;
-			
+
 			for( String exclude :excludeDispList ) {
 				if(servletPath.matches(exclude)) {
 					ret = true;
 					break;
 				}
 			}
-			
+
 			return ret;
 		}
 }
