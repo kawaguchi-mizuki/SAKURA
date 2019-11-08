@@ -23,10 +23,12 @@ h1{
 form.input{
 	margin: auto;
 	max-width: 1070px;
+	margin-bottom:130px;
 
 }
 span{
 	margin-left:15px;
+
 }
 .back{
 	width: 40%;
@@ -35,13 +37,14 @@ span{
 	margin-top:50px;
 	cursor: pointer;
 	cursor: hand;
+	margin-bottom:200px;
 }
 .entry{
 	width: 40%;
 	float:right;
-	margin-bottom:50px;
 	margin-top:50px;
 	cursor: pointer;
 	cursor: hand;
 }
+
 
