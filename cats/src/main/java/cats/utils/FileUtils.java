@@ -2,22 +2,22 @@ package cats.utils;
 
 import java.io.File;
 
-/**ファイルのユーティリティ
+/**	ファイルのユーティリティ
  *
  *
  */
 public class FileUtils {
 
 
-	/** ディレクトリ作成
+	/** 	ディレクトリ作成
 	 * @param dir
 	 */
 	public static void makeDir(String dir){
-		//Fileオブジェクトを生成する
+		//	Fileオブジェクトを生成する
 		File f = new File(dir);
 
 		if (!f.exists()) {
-			//フォルダ作成実行
+			//	フォルダ作成実行
 			f.mkdirs();
 		}
 	}

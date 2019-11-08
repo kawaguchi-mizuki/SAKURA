@@ -1,3 +1,4 @@
+
 package cats.entity;
 
 import java.io.Serializable;
