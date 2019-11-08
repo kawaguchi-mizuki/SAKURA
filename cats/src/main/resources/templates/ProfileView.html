@@ -6,10 +6,29 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 <link href="/css/UserEntry.css" th:href="@{/css/UserEntry.css}" rel="stylesheet"></link>
+<link href="/css/common.css" th:href="@{/css/common.css}" rel="stylesheet"></link>
 </head>
 <body>
+	<header>
+		<div class="row">
+			<div class="col-5">
+				<a href=""> <img src="/img/rogo.jpg" width="150">
+				</a>
+			</div>
+			<div class="col-5">
+				<img src="/img/coin.png" width="50"> 300ポイント
+			</div>
+			<div class="col-2">
+				<a href="">ログアウト</a>
+			</div>
+		</div>
+	</header>
 
+	<div class="txt">
+		<p>掲示板</p>
+	</div>
 
+	<div class="PL">
 	<form class="input" th:action="@{/Profile/Update}" th:object="${studentbeans}"   method="post" enctype="multipart/form-data" >
 
 		<label class="h5 a">名前</label>
@@ -56,8 +75,6 @@
 		<input type="botton" class="btn btn-danger entry" data-toggle="modal" data-target="#blockModal" value="退会"/>
 	</form>
 
-
-
 	<!-- Modal -->
 	<div class="modal fade" id="blockModal" tabindex="-1" role="dialog"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -80,6 +97,34 @@
 			</div>
 		</div>
 	</div>
+
+	</div>
+
+
+	<footer>
+		<div class="row">
+			<div class="col">
+				<a href=""><img src="/img/ie.png"> </a>
+			</div>
+			<div class="col">
+				<a href=""><img src="/img/mrmo.png"> </a>
+			</div>
+
+			<div class="col">
+				<a href=""><img src="/img/hart.png"> </a>
+			</div>
+
+			<div class="col">
+				<a href=""><img src="/img/fukidashi.png"> </a>
+			</div>
+
+			<div class="col">
+				<a href=""><img src="/img/hito.png"> </a>
+			</div>
+
+		</div>
+	</footer>
+
 
 
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
