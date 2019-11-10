@@ -46,7 +46,21 @@ public class BoardController {
 		return mav;
 	}
 
-	@RequestMapping(value = { "/Insert" }, method = RequestMethod.POST)
+	@RequestMapping(value = { "/Read" }, method = RequestMethod.GET)
+	public ModelAndView BoardRead(ModelAndView mav) {
+
+		mav.setViewName("Bord");
+
+		return mav;
+	}
+
+
+	/**掲示板作成
+	 * @param boardbeans
+	 * @param mav
+	 * @return
+	 */
+	@RequestMapping(value = { "/Insert" }, method = RequestMethod.GET)
 	public ModelAndView BoardInsert(@Valid BoardBeans boardbeans,ModelAndView mav) {
 
 
@@ -56,13 +70,15 @@ public class BoardController {
 
 		dto = getCreateBoardDto(boardbeans);
 
-		//掲示板作成
-	    boardService.insert(dto);
+			//掲示板作成
+			boardService.insert(dto);
 
 		mav.setViewName("Bord");
 
 		return mav;
 	}
+
+
 
 	private CreateBoardDto getCreateBoardDto(@Valid BoardBeans boardbeans) {
 

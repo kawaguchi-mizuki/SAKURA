@@ -199,7 +199,7 @@
 			<!-- スレ１つ分 ここまで for文とかで、スレ分ぐるぐる回してちょ-->
 
 
-			<a href="BordCreat.html"><p id = "page"><img src="/img/create.png" ></p></a>
+			<a th:href="@{/Board/Create}"><p id = "page"><img src="/img/create.png" ></p></a>
 
 			<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 				integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -228,7 +228,7 @@
 				<a href=""><img src="/img/ie.png"> </a>
 			</div>
 			<div class="col">
-				<a href=""><img src="/img/mrmo.png"> </a>
+				<a th:href="@{/Board/Read}"><img src="/img/mrmo.png"> </a>
 			</div>
 
 			<div class="col">
@@ -240,7 +240,7 @@
 			</div>
 
 			<div class="col">
-				<a href=""><img src="/img/hito.png"> </a>
+				<a th:href="@{/Profile/View}"><img src="/img/hito.png"> </a>
 			</div>
 
 		</div>

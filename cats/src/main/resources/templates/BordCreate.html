@@ -47,7 +47,7 @@
 		<p><font color="red">アダルト</font>内容のタイトルも禁止しています。</p>
 
 	</div>
-	<form th:action="@{/Board/Insert}" th:object="${boardbeans}"   method="post">
+	<form th:action="@{/Board/Insert}" th:object="${boardbeans}"   method="get">
 
 	    <p class="bg-primary rounded text-white title">カテゴリー</p>
 		<select name="categoryId" class="pldown form-control">
