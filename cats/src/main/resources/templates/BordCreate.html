@@ -31,7 +31,7 @@
 	<div class="txt row">
 
 		<div class="col-2">
-			<a href=" " class="back"> ＜戻る </a>
+			<a th:href="@{/Board/Read}" class="back"> 戻る </a>
 		</div>
 		<div class="col-8">掲示板投稿</div>
 		<div class="col-2"></div>
@@ -70,7 +70,7 @@
 				<a href=""><img src="/img/ie.png"> </a>
 			</div>
 			<div class="col">
-				<a href=""><img src="/img/mrmo.png"> </a>
+				<a th:href="@{/Board/Read}"><img src="/img/mrmo.png"> </a>
 			</div>
 
 			<div class="col">
@@ -82,10 +82,11 @@
 			</div>
 
 			<div class="col">
-				<a href=""><img src="/img/hito.png"> </a>
+				<a th:href="@{/Profile/View}"><img src="/img/hito.png"> </a>
 			</div>
 
 		</div>
 	</footer>
+
 </body>
 </html>
