@@ -63,7 +63,11 @@ public class BoardController {
 
 		List<BoardListDto> boardlist = boardService.getAllList();
 
+		//ユーザー情報をセッションから取得
+		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
 
+
+		mav.addObject("studentId",loginInfo.getStudentId());
 		mav.addObject("boardlist",boardlist);
 		mav.setViewName("Bord");
 
@@ -84,30 +88,43 @@ public class BoardController {
 
 		dto = getCreateBoardDto(boardbeans);
 
-			//掲示板作成
+			//掲示板作成処理
 		boardService.insert(dto);
 
 		List<BoardListDto> boardlist = boardService.getAllList();
+		//ユーザー情報をセッションから取得
+		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
+
+
+		mav.addObject("studentId",loginInfo.getStudentId());
 		mav.addObject("boardlist",boardlist);
 		mav.setViewName("Bord");
 
 		return mav;
 	}
 
+	/**掲示板削除
+	 * @param boardId
+	 * @param mav
+	 * @return
+	 */
 	@RequestMapping(value = { "/Delete" }, method = RequestMethod.GET)
 	public ModelAndView BoardDelete(@RequestParam("boardId") Integer boardId, ModelAndView mav) {
 
-		boardService.BoardDelete();
 
-		System.out.println(111);
+		boardService.BoardDelete(boardId);
 
+		List<BoardListDto> boardlist = boardService.getAllList();
+		mav.addObject("boardlist",boardlist);
 
+		//ユーザー情報をセッションから取得
+		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
+
+		mav.addObject("studentId",loginInfo.getStudentId());
 		mav.setViewName("Bord");
 
 		return mav;
 	}
-
-
 
 	private CreateBoardDto getCreateBoardDto(@Valid BoardBeans boardbeans) {
 
@@ -122,8 +139,6 @@ public class BoardController {
 		Date date = new Date();
 
 		dto.setBoardDate(date);
-
-
 
 		return dto;
 	}
