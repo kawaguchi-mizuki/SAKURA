@@ -1,5 +1,6 @@
 package cats.service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,7 +74,10 @@ public class BoardService {
 			CategoryTblEntity categoryTblEntity;
 			categoryTblEntity = categoryRepository.getId(dto.getCategoryId());
 			dto.setCategoryName(categoryTblEntity.getcategoryName());
-			dto.setBoardDate(entity.getBoardDate());
+
+			 SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+
+			dto.setBoardDate(sdf.format(entity.getBoardDate()));
 
 			list.add(dto);
 		}

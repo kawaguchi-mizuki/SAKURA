@@ -145,7 +145,7 @@ footer {
 
 /*buttonタグは一律、横幅150pxで角丸 */
 button {
-	width: 150px;
+	width: 200px;
 	border-radius: 10px;
 }
 
@@ -194,6 +194,9 @@ input[class=serch] {
 
 .title {
 	margin-left:3%;
+}
+.bring{
+	text-align: left;
 }
 
 .bord-title {

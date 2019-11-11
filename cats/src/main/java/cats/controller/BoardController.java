@@ -17,6 +17,8 @@ import cats.beans.BoardBeans;
 import cats.dto.BoardListDto;
 import cats.dto.CategoryDto;
 import cats.dto.CreateBoardDto;
+import cats.dto.LoginInfoDto;
+import cats.param.SessionConst;
 import cats.service.BoardService;
 import cats.service.CategoryService;
 
@@ -72,8 +74,6 @@ public class BoardController {
 
 		CreateBoardDto dto = new CreateBoardDto();
 
-		//ログイン情報から学籍番号を取得、格納する処理を書く
-
 		dto = getCreateBoardDto(boardbeans);
 
 			//掲示板作成
@@ -92,7 +92,10 @@ public class BoardController {
 
 		CreateBoardDto dto = new CreateBoardDto();
 
-		dto.setStudentId(1701129);
+		//ユーザー情報をセッションから取得
+		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
+
+		dto.setStudentId(loginInfo.getStudentId());
 		dto.setBoardTitle(boardbeans.getBoardTitle());
 		dto.setCategoryId(boardbeans.getCategoryId());
 		Date date = new Date();

@@ -1,7 +1,5 @@
 package cats.dto;
 
-import java.util.Date;
-
 import lombok.Data;
 
 @Data
@@ -19,5 +17,5 @@ public class BoardListDto {
 
 	private String categoryName;
 
-	private Date boardDate;
+	private String boardDate;
 }
