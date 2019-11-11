@@ -59,7 +59,7 @@ public class LoginController {
 
 		mav.addObject("add",loginInfo.getStudentId());
 
-		mav.setViewName("Gacha");
+		mav.setViewName("Home");
 
 		return mav;
 	}

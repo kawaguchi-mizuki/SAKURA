@@ -64,7 +64,9 @@
 					</div>
 					<div class="row mt-2 mb-2">
 						<!--右 2段目-->
-						<div class="col-12"><p class="bring" th:text="${dto.boardTitle}" ></p></div>
+						<form th:action="@{/Board/Comment}" method="get" >
+							<div class="col-12"><p class="bring" th:text="${dto.boardTitle}" ></p></div>
+						</form>
 					</div>
 					<div class="row mt-2 mb-2">
 						<!--右 3段目-->
