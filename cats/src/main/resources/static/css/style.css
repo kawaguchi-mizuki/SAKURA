@@ -145,7 +145,7 @@ footer {
 
 /*buttonタグは一律、横幅150pxで角丸 */
 button {
-	width: 150px;
+	width: 200px;
 	border-radius: 10px;
 }
 
@@ -154,6 +154,8 @@ button {
 	background-color: #629cff;
 	border: 1px solid #629cff;
 	color: #f1f1f1;
+	padding-top:10px;
+	padding-bottom:0;
 }
 
 /* 削除ボタンのデザイン設定 */
@@ -194,6 +196,9 @@ input[class=serch] {
 
 .title {
 	margin-left:3%;
+}
+.bring{
+	text-align: left;
 }
 
 .bord-title {
