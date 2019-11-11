@@ -84,8 +84,9 @@ public class BoardService {
 		return list;
 	}
 
-	public void BoardDelete() {
+	public void BoardDelete(Integer boardId) {
 
+		this.boardRepository.deleteById(boardId);
 
 	}
 
