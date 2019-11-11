@@ -45,7 +45,7 @@
 		<div class="border border-primary topiclist">
 			<div class="text-center"></div>
 			<!-- スレ１つ分 ここから-->
-			<div class="d-flex topic pb-2 mt-3">
+			<div class="d-flex topic pb-2 mt-3"  th:each="dto:${boardlist}">
 				<!--1つ分の一番外枠-->
 				<div class="box-icon">
 					<!--左 アイコン部分-->
@@ -57,17 +57,17 @@
 					<div class="row mt-2 mb-2">
 						<!--右 1段目-->
 						<div class="col-7">
-							<button type="button" name="button" class="btn-category">カテゴリー</button>
+							<button type="button" name="button" class="btn-category"><p th:text="${dto.categoryName}"></p></button>
 						</div>
-						<div class="col-5">2019/10/03 16:20</div>
+						<div class="col-5"><p th:text="${dto.boardDate}"></p></div>
 					</div>
 					<div class="row mt-2 mb-2">
 						<!--右 2段目-->
-						<div class="col-12">タイトルタイトルタイトル</div>
+						<div class="col-12"><p th:text="${dto.boardTitle}"></p></div>
 					</div>
 					<div class="row mt-2 mb-2">
 						<!--右 3段目-->
-						<div class="col-8">名無し太郎</div>
+						<div class="col-8"><p th:text="${dto.studentName}"></p></div>
 						<div class="col-4">
 							<button type="button" name="button" class="btn-delete">削除</button>
 						</div>
@@ -76,127 +76,7 @@
 			</div>
 			<!-- スレ１つ分 ここまで for文とかで、スレ分ぐるぐる回してちょ-->
 
-			<div class="d-flex topic pb-2 mt-3">
-				<!--1つ分の一番外枠-->
-				<div class="box-icon">
-					<!--左 アイコン部分-->
-					<img src="/img/icon.jpg" alt="アイコン" class="icon-image rounded img-fluid">
-				</div>
 
-				<div class="box-info">
-					<!--右 情報部分-->
-					<div class="row mt-2 mb-2">
-						<!--右 1段目-->
-						<div class="col-7">
-							<button type="button" name="button" class="btn-category">カテゴリー</button>
-						</div>
-						<div class="col-5">2019/10/03 15:20</div>
-					</div>
-					<div class="row mt-2 mb-2">
-						<!--右 2段目-->
-						<div class="col-12">タイトルタイトルタイトル</div>
-					</div>
-					<div class="row mt-2 mb-2">
-						<!--右 3段目-->
-						<div class="col-8">名無し太郎</div>
-						<div class="col-4">
-							<button type="button" name="button" class="btn-delete">削除</button>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="d-flex topic pb-2 mt-3">
-				<!--1つ分の一番外枠-->
-				<div class="box-icon">
-					<!--左 アイコン部分-->
-					<img src="/img/icon.jpg" alt="アイコン" class="icon-image rounded img-fluid">
-				</div>
-
-				<div class="box-info">
-					<!--右 情報部分-->
-					<div class="row mt-2 mb-2">
-						<!--右 1段目-->
-						<div class="col-7">
-							<button type="button" name="button" class="btn-category">カテゴリー</button>
-						</div>
-						<div class="col-5">2019/10/03 13:40</div>
-					</div>
-					<div class="row mt-2 mb-2">
-						<!--右 2段目-->
-						<div class="col-12">タイトルタイトルタイトル</div>
-					</div>
-					<div class="row mt-2 mb-2">
-						<!--右 3段目-->
-						<div class="col-8">名無し太郎</div>
-						<div class="col-4">
-							<button type="button" name="button" class="btn-delete">削除</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- スレ１つ分 ここから-->
-			<div class="d-flex topic pb-2 mt-3">
-				<!--1つ分の一番外枠-->
-				<div class="box-icon">
-					<!--左 アイコン部分-->
-					<img src="/img/icon.jpg" alt="アイコン" class="icon-image rounded img-fluid">
-				</div>
-
-				<div class="box-info">
-					<!--右 情報部分-->
-					<div class="row mt-2 mb-2">
-						<!--右 1段目-->
-						<div class="col-7">
-							<button type="button" name="button" class="btn-category">カテゴリー</button>
-						</div>
-						<div class="col-5">2019/10/03 16:20</div>
-					</div>
-					<div class="row mt-2 mb-2">
-						<!--右 2段目-->
-						<div class="col-12">タイトルタイトルタイトル</div>
-					</div>
-					<div class="row mt-2 mb-2">
-						<!--右 3段目-->
-						<div class="col-8">名無し太郎</div>
-						<div class="col-4">
-							<button type="button" name="button" class="btn-delete">削除</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- スレ１つ分 ここまで for文とかで、スレ分ぐるぐる回してちょ-->
-			<!-- スレ１つ分 ここから-->
-			<div class="d-flex topic pb-2 mt-3">
-				<!--1つ分の一番外枠-->
-				<div class="box-icon">
-					<!--左 アイコン部分-->
-					<img src="/img/icon.jpg" alt="アイコン" class="icon-image rounded img-fluid">
-				</div>
-
-				<div class="box-info">
-					<!--右 情報部分-->
-					<div class="row mt-2 mb-2">
-						<!--右 1段目-->
-						<div class="col-7">
-							<button type="button" name="button" class="btn-category">カテゴリー</button>
-						</div>
-						<div class="col-5">2019/10/03 16:20</div>
-					</div>
-					<div class="row mt-2 mb-2">
-						<!--右 2段目-->
-						<div class="col-12">タイトルタイトルタイトル</div>
-					</div>
-					<div class="row mt-2 mb-2">
-						<!--右 3段目-->
-						<div class="col-8">名無し太郎</div>
-						<div class="col-4">
-							<button type="button" name="button" class="btn-delete">削除</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- スレ１つ分 ここまで for文とかで、スレ分ぐるぐる回してちょ-->
 
 
 			<a th:href="@{/Board/Create}"><p id = "page"><img src="/img/create.png" ></p></a>

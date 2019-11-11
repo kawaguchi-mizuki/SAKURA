@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import cats.beans.BoardBeans;
+import cats.dto.BoardListDto;
 import cats.dto.CategoryDto;
 import cats.dto.CreateBoardDto;
 import cats.service.BoardService;
@@ -49,6 +50,11 @@ public class BoardController {
 	@RequestMapping(value = { "/Read" }, method = RequestMethod.GET)
 	public ModelAndView BoardRead(ModelAndView mav) {
 
+		List<BoardListDto> boardlist = boardService.getAllList();
+
+		System.out.println(boardlist);
+
+		mav.addObject("boardlist",boardlist);
 		mav.setViewName("Bord");
 
 		return mav;
@@ -71,8 +77,10 @@ public class BoardController {
 		dto = getCreateBoardDto(boardbeans);
 
 			//掲示板作成
-			boardService.insert(dto);
+		boardService.insert(dto);
 
+		List<BoardListDto> boardlist = boardService.getAllList();
+		mav.addObject("boardlist",boardlist);
 		mav.setViewName("Bord");
 
 		return mav;
