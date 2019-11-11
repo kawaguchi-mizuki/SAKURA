@@ -56,7 +56,7 @@ public class BoardService {
 
 		List<BoardListDto> list = new ArrayList<BoardListDto>();
 
-		List<BoardTblEntity> boardList = boardRepository.findAll(new Sort(Sort.Direction.DESC,"boardDate"));
+		List<BoardTblEntity> boardList = boardRepository.findAll(new Sort(Sort.Direction.DESC,"boardId"));
 
 		//entity -> DTO
 		for( BoardTblEntity entity : boardList ) {
