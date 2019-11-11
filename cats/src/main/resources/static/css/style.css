@@ -154,6 +154,8 @@ button {
 	background-color: #629cff;
 	border: 1px solid #629cff;
 	color: #f1f1f1;
+	padding-top:10px;
+	padding-bottom:0;
 }
 
 /* 削除ボタンのデザイン設定 */

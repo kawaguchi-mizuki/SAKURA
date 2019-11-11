@@ -36,6 +36,10 @@ public class BoardController {
 	@Autowired
 	HttpSession session;
 
+	/**掲示板投稿画面表示
+	 * @param mav
+	 * @return
+	 */
 	@RequestMapping(value = { "/Create" }, method = RequestMethod.GET)
 	public ModelAndView BoardCreate(ModelAndView mav) {
 
@@ -49,6 +53,10 @@ public class BoardController {
 		return mav;
 	}
 
+	/**掲示板表示
+	 * @param mav
+	 * @return
+	 */
 	@RequestMapping(value = { "/Read" }, method = RequestMethod.GET)
 	public ModelAndView BoardRead(ModelAndView mav) {
 
@@ -81,6 +89,15 @@ public class BoardController {
 
 		List<BoardListDto> boardlist = boardService.getAllList();
 		mav.addObject("boardlist",boardlist);
+		mav.setViewName("Bord");
+
+		return mav;
+	}
+
+	@RequestMapping(value = { "/Delete" }, method = RequestMethod.GET)
+	public ModelAndView BoardDelete(ModelAndView mav) {
+
+
 		mav.setViewName("Bord");
 
 		return mav;

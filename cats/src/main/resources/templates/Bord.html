@@ -68,13 +68,36 @@
 					<div class="row mt-2 mb-2">
 						<!--右 3段目-->
 						<div class="col-8 "><p th:text="${dto.studentName}" class="bring"></p></div>
-						<div class="col-4">
-							<button type="button" name="button" class="btn-delete">削除</button>
+						<div class="col-4"><input type="botton" class="btn btn-danger entry" data-toggle="modal" data-target="#blockModal" value="削除"/>
+
 						</div>
 					</div>
 				</div>
 			</div>
-			<!-- スレ１つ分 ここまで for文とかで、スレ分ぐるぐる回してちょ-->
+
+			<!-- Modal -->
+			<div class="modal fade" id="blockModal" tabindex="-1" role="dialog"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">削除確認</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">この投稿を削除します</div>
+						<div class="modal-footer">
+							<form th:action="@{/Board/Delete}"  method="get"  >
+								<button type="button" class="btn btn-secondary"
+									data-dismiss="modal">戻る</button>
+								<button type="submit" class="btn btn-primary">削除する</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
 
 
 
