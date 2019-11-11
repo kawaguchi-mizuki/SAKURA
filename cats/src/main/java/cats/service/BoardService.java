@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import cats.dto.BoardListDto;
@@ -55,7 +56,7 @@ public class BoardService {
 
 		List<BoardListDto> list = new ArrayList<BoardListDto>();
 
-		List<BoardTblEntity> boardList = boardRepository.findAll();
+		List<BoardTblEntity> boardList = boardRepository.findAll(new Sort(Sort.Direction.DESC,"boardDate"));
 
 		//entity -> DTO
 		for( BoardTblEntity entity : boardList ) {

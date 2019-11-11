@@ -30,7 +30,7 @@
 	<div class="txt">
 		<p>掲示板</p>
 	</div>
-	<form action="">
+
 		<div class ="serchs mr-3">
 			<input type="text" class="serch" placeholder="ワード検索"> <input
 				type="submit" value="検索" class="btn btn-primary">
@@ -64,17 +64,17 @@
 					</div>
 					<div class="row mt-2 mb-2">
 						<!--右 2段目-->
-						<div class="col-12"><p class="bring" th:text="${dto.boardTitle}" th:value="${dto.boardId}"></p></div>
+						<div class="col-12"><p class="bring" th:text="${dto.boardId}" ></p></div>
 					</div>
 					<div class="row mt-2 mb-2">
 						<!--右 3段目-->
 						<div class="col-8 "><p th:text="${dto.studentName}"  class="bring"></p></div>
-						<div class="col-4"><input type="botton" class="btn btn-danger entry" data-toggle="modal" data-target="#blockModal" value="削除"/>
+						<div class="col-4"><input type="botton" class="btn btn-danger entry" data-toggle="modal" data-target="#blockModal" th:data-whatever="${dto.boardId}" value="削除"/>
 
 						</div>
 					</div>
 				</div>
-			</div>
+
 
 			<!-- Modal -->
 			<div class="modal fade" id="blockModal" tabindex="-1" role="dialog"
@@ -90,7 +90,8 @@
 						</div>
 						<div class="modal-body">この投稿を削除します</div>
 						<div class="modal-footer">
-							<form th:action="@{/Board/Delete}" method="get">
+							<form th:action="@{/Board/Delete}" method="get" >
+								<input type="hidden" name="boardId" id="DeleteSelect">
 								<button type="button" class="btn btn-secondary"
 									data-dismiss="modal">戻る</button>
 								<button type="submit" class="btn btn-primary">削除する</button>
@@ -100,6 +101,8 @@
 				</div>
 			</div>
 
+			</div>
+		</div>
 
 
 
@@ -118,14 +121,27 @@
 				integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 				crossorigin="anonymous"></script>
 
+	<script>
+		$('#blockModal').on('show.bs.modal', function(event) {
+			var button = $(event.relatedTarget) //モーダルを呼び出すときに使われたボタンを取得
+			var recipient = button.data('whatever') //data-whatever の値を取得
+
+
+
+			//Ajaxの処理はここに
+
+			var modal = $(this) //モーダルを取得
+			modal.find('DeleteSelect').val(recipient) //モーダルのタイトルに値を表示
+		})
+	</script>
 
 
 
 
-		</div>
 
 
-	</form>
+
+
 
 	<footer>
 		<div class="row">
