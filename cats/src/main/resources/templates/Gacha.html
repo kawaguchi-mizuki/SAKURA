@@ -3,34 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="css/style.css">
+<link href="/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"></link>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
 </head>
 <body class="wrapper">
+
+
 	<header>
 		<div class="row">
-
 			<div class="col-5">
-				<a href=""> <img src="rogo.jpg" width="150">
-
+				<a href=""> <img src="/img/rogo.jpg" width="150">
 				</a>
 			</div>
-
 			<div class="col-5">
-				<img src="coin.png" width="50">300ポイント
+				<img src="/img/coin.png" width="50">  300ポイント
 			</div>
 			<div class="col-2">
-				<a href="">ログアウト</a>
+				<a th:href="@{/Logout}">ログアウト</a>
 			</div>
 		</div>
 	</header>
+
 	<div class="txt row">
 
 		<div class="col-2">
-			<a href=" " class="back"> ＜戻る </a>
+			<a href=" " class="back"> 戻る </a>
 		</div>
 		<div class="col-8">きっかけガチャ</div>
 		<div class="col-2"></div>
@@ -61,22 +61,22 @@
 	<footer>
 		<div class="row">
 			<div class="col">
-				<a href=""><img src="ie.png"> </a>
+				<a href=""><img src="/img/ie.png"> </a>
 			</div>
 			<div class="col">
-				<a href=""><img src="mrmo.png"> </a>
-			</div>
-
-			<div class="col">
-				<a href=""><img src="hart.png"> </a>
+				<a th:href="@{/Board/Read}"><img src="/img/mrmo.png"> </a>
 			</div>
 
 			<div class="col">
-				<a href=""><img src="fukidashi.png"> </a>
+				<a href=""><img src="/img/hart.png"> </a>
 			</div>
 
 			<div class="col">
-				<a href=""><img src="hito.png"> </a>
+				<a href=""><img src="/img/fukidashi.png"> </a>
+			</div>
+
+			<div class="col">
+				<a th:href="@{/Profile/View}"><img src="/img/hito.png"> </a>
 			</div>
 
 		</div>

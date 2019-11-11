@@ -59,7 +59,7 @@ public class LoginController {
 
 		mav.addObject("add",loginInfo.getStudentId());
 
-		mav.setViewName("Home");
+		mav.setViewName("Gacha");
 
 		return mav;
 	}
@@ -119,8 +119,8 @@ public class LoginController {
 	 * @throws Exception
 	 */
 	private void DayCheck(LoginInfoDto loginInfo)throws Exception {
-	
-		LoginDayDto dto = null;	
+
+		LoginDayDto dto = null;
 		String cheinday = null;
 		String lastday = null;
 		String today =null;
@@ -130,40 +130,40 @@ public class LoginController {
 		int point = 0;
 		//	ログインボーナス（ポイント）
 		int[] bar  = {50,100,150,200,300};
-		
-		
+
+
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 		Date date = new Date();
-		
+
 		dto = loginService.LastDay(loginInfo.getStudentId());
-		
+
 		if(dto.getLastLog() != null) {
 		//	Date型の日時をCalendar型に変換
         Calendar calendar = Calendar.getInstance();
         Calendar calenday = Calendar.getInstance();
-        
+
         calendar.setTime(date);
         calenday.setTime(dto.getLastLog());
-        
+
         //	日時を減算する
         calendar.add(Calendar.DATE, -1);
-        
+
         cheinday = sdf.format(calendar.getTime());
         lastday = sdf.format(calenday.getTime());
         today = sdf.format(date);
-        
+
         //format
         last = sdf.parse(lastday);
         chein = sdf.parse(cheinday);
         date = sdf.parse(today);
-        
+
         System.out.println(last);
         System.out.println(chein);
         System.out.println(date);
-        
+
 		//	現在の日付を超えているか
 		if(last.before(date)) {
-			
+
 			//	最後にログインした値を取得して-1したものと現在日付が一致するか
 			if(last.equals(chein)) {
 				num = dto.getContinuousLogin();
@@ -176,11 +176,11 @@ public class LoginController {
 								if(i-1 == j) {
 									point = loginInfo.getPoint();
 									point = point+bar[j];
-									loginService.LoginPoint(loginInfo.getStudentId(),point);	
+									loginService.LoginPoint(loginInfo.getStudentId(),point);
 								}
 							}
 						}
-					}		
+					}
 				}
 				if(num >= 6) {
 					num = 0;
