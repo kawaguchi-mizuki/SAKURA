@@ -64,9 +64,7 @@
 					</div>
 					<div class="row mt-2 mb-2">
 						<!--右 2段目-->
-						<form th:action="@{/Board/Comment}" method="get" >
-							<div class="col-12"><p class="bring" th:text="${dto.boardTitle}" ></p></div>
-						</form>
+							<div class="col-12"><a href="/BoardComment/Read" th:href="@{/BoardComment/Read(boardId=${dto.boardId},boardTitle=${dto.boardTitle})}"><p class="bring" th:text="${dto.boardTitle}" ></p></a></div>
 					</div>
 					<div class="row mt-2 mb-2">
 						<!--右 3段目-->

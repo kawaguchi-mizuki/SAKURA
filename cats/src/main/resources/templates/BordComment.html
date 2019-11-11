@@ -26,16 +26,22 @@
 		</div>
 	</header>
 
-	<div class="txt">
-		<p>掲示板コメント</p>
+	<div class="txt row">
+
+		<div class="col-2">
+			<a th:href="@{/Board/Read}" class="back"> 戻る </a>
+		</div>
+		<div class="col-8">掲示板コメント</div>
+		<div class="col-2"></div>
 	</div>
 
 	<div class="wrapper">
 	<form action="">
 
+
+
 		<div class="explain">
-			<p>タイトル</p>
-      <br>
+			<p  th:text="${boardTitle}" class="h4  text-primary "></p>
 		</div>
 		<p></p>
 
