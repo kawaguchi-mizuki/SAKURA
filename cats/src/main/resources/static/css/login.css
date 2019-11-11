@@ -1,43 +1,82 @@
 @charset "UTF-8";
-h1{
-	margin: auto;
-	max-width: 1070px;
-	padding-top:30px;
-	padding-bottom:10px;
-}
-.err{
-	margin: auto;
-	max-width: 1070px;
-	padding-bottom:50px;
-	font-weight:bold;
-}
-.file{
-	margin-bottom:30px;
-}
-.hobby{
-	margin-top:25px;
-}
-.sex{
-	margin-left:30px;
-}
-form.input{
-	margin: auto;
-	max-width: 1070px;
 
-}
-span{
-	margin-left:15px;
-}
-.back{
-	width: 40%;
-	float:left;
-	margin-right:10px;
-	margin-top:50px;
-}
-.entry{
-	width: 40%;
-	float:right;
-	margin-bottom:50px;
-	margin-top:50px;
+/*	ナンバー矢印消す	*/
+input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
+input[type=number] {
+	-moz-appearance:textfield;
+	width: 80%;
+	height: 40px;
+	margin: 40px 3%;
+	font-size: 1.5rem;
+}
+
+.errtext {
+	color: red;
+}
+
+/*ログイン内のクラスに書いてあったものまとめ*/
+style-button{
+	text-align:center;
+}
+
+input[type=password] {
+	width: 80%;
+	height: 40px;
+	margin: 40px 3%;
+	font-size: 1.5rem;
+}
+
+.t-center {
+	text-align: center;
+}
+
+.usericon {
+ display: inline-block;
+ font-family: "Font Awesome 5 Free";
+ font-weight: bold;
+}
+
+p {
+	text-align: center;
+}
+
+button {
+ 	width: 150px;
+ 	border-radius: 10px;
+}
+
+.button:hover {
+	box-shadow: none; /* カーソル時の影消去 */
+	color: #cccccc; /* 背景色     */
+	background: #1a1aff; /* 文字色     */
+}
+
+.buttons {
+ 	display: inline-block;
+ 	border-radius: 5%; /* 角丸       */
+ 	font-size: 18pt; /* 文字サイズ */
+ 	text-align: center; /* 文字位置   */
+ 	cursor: pointer; /* カーソル   */
+ 	padding: 25px 25px; /* 余白       */
+	background: #cccccc; /* 背景色     */
+	color: #1a1aff; /* 文字色     */
+	line-height: 1em; /* 1行の高さ  */
+	transition: .3s; /* なめらか変化 */
+	box-shadow: 6px 6px 3px #666666; /* 影の設定 */
+	border: 2px solid #cccccc; /* 枠の指定 */
+	margin-top: 40px;
+	width: 300px;
+}
+
+.pix{
+	width: 50px;
+	margin-bottom: 15px;
+}
+
+.errtext{
+	margin-top: 10px;
+}

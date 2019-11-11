@@ -18,7 +18,7 @@
 </head>
 <body>
 <div class="t-center">
-<img  src="cats.jpg">
+<img  src="img/rogo.jpg">
    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 
    
@@ -34,9 +34,11 @@
    <form th:action="@{/auth}" method="post" role="form" th:object="${LoginFrom}"name="form">
 
         <div class="txbox">
+        <img  src="img/IDcard.png" class="pix">
         <input type="number" class="usericon" placeholder="学籍番号" id="studentId" name="studentId" />
 		</div>
         <div class="password">
+        <img  src="img/zyou.png" class="pix">
         <input type="password" class="usericon" placeholder="PASSWORD" id="password" name="password"/><br/>
         </div>
         
@@ -46,7 +48,7 @@
    		</div>
         
         <div class="style-button">
-        <input type="submit" id="login" value="Login" onclick ="return check()">
+        <input type="submit" id="login" value="Login" onclick ="return check()" class ="buttons">
         </div>
    </form>
 </div>
