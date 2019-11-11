@@ -33,7 +33,6 @@ public class BoardService {
 		//dto -> entity
 		BoardTblEntity entity = createBoardTblEntityFromDto(dto);
 
-		System.out.println(entity);
 
 		boardRepository.saveAndFlush(entity);
 
@@ -82,6 +81,11 @@ public class BoardService {
 			list.add(dto);
 		}
 		return list;
+	}
+
+	public void BoardDelete() {
+
+
 	}
 
 

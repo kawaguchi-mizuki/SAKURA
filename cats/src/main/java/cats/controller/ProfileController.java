@@ -52,17 +52,10 @@ public class ProfileController {
 	@RequestMapping(value = { "/View" }, method = RequestMethod.GET)
 	public ModelAndView ProfileView(ModelAndView mav) {
 
-
 		//ユーザー情報をセッションから取得
 		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
 
-
-
-
-
 		ProfileDto dto = profileService.getDisplayBoard(loginInfo);
-
-
 
 		mav.addObject("ProfileDto", dto);
 		mav.setViewName("ProfileView");

@@ -45,6 +45,7 @@
 		<div class="border border-primary topiclist">
 			<div class="text-center"></div>
 			<!-- スレ１つ分 ここから-->
+
 			<div class="d-flex topic pb-2 mt-3"  th:each="dto:${boardlist}">
 				<!--1つ分の一番外枠-->
 				<div class="box-icon">
@@ -63,11 +64,11 @@
 					</div>
 					<div class="row mt-2 mb-2">
 						<!--右 2段目-->
-						<div class="col-12"><p class="bring" th:text="${dto.boardTitle}"></p></div>
+						<div class="col-12"><p class="bring" th:text="${dto.boardTitle}" th:value="${dto.boardId}"></p></div>
 					</div>
 					<div class="row mt-2 mb-2">
 						<!--右 3段目-->
-						<div class="col-8 "><p th:text="${dto.studentName}" class="bring"></p></div>
+						<div class="col-8 "><p th:text="${dto.studentName}"  class="bring"></p></div>
 						<div class="col-4"><input type="botton" class="btn btn-danger entry" data-toggle="modal" data-target="#blockModal" value="削除"/>
 
 						</div>
@@ -89,7 +90,7 @@
 						</div>
 						<div class="modal-body">この投稿を削除します</div>
 						<div class="modal-footer">
-							<form th:action="@{/Board/Delete}"  method="get"  >
+							<form th:action="@{/Board/Delete}" method="get">
 								<button type="button" class="btn btn-secondary"
 									data-dismiss="modal">戻る</button>
 								<button type="submit" class="btn btn-primary">削除する</button>
@@ -98,6 +99,7 @@
 					</div>
 				</div>
 			</div>
+
 
 
 

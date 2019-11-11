@@ -10,6 +10,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -62,7 +63,6 @@ public class BoardController {
 
 		List<BoardListDto> boardlist = boardService.getAllList();
 
-		System.out.println(boardlist);
 
 		mav.addObject("boardlist",boardlist);
 		mav.setViewName("Bord");
@@ -95,7 +95,11 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = { "/Delete" }, method = RequestMethod.GET)
-	public ModelAndView BoardDelete(ModelAndView mav) {
+	public ModelAndView BoardDelete(@RequestParam("boardId") Integer boardId, ModelAndView mav) {
+
+		boardService.BoardDelete();
+
+		System.out.println(111);
 
 
 		mav.setViewName("Bord");
