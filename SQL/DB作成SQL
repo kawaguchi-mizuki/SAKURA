@@ -121,7 +121,7 @@ CREATE TABLE board_comment (
     board_comment VARCHAR(128) NOT NULL,
     board_comment_name VARCHAR(128) NOT NULL,
     PRIMARY KEY (board_comment_id,board_id) ,
-    FOREIGN KEY (board_id) REFERENCES board (board_id) 
+    FOREIGN KEY (board_id) REFERENCES board (board_id) ON DELETE CASCADE
 );
 
 
