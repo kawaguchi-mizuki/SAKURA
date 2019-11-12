@@ -76,7 +76,7 @@ public class BoardCommentService {
 
 		List<BoardCommentDto> list = new ArrayList<BoardCommentDto>();
 
-		List<BoardCommentTblEntity> commentList = boardCommentRepository.findAll(Specification.where(IdEqules(boardId)) ,new Sort(Sort.Direction.DESC,"boardCommentId"));
+		List<BoardCommentTblEntity> commentList = boardCommentRepository.findAll(Specification.where(IdEqules(boardId)) ,new Sort(Sort.Direction.ASC,"boardCommentId"));
 
 		System.out.println(commentList);
 

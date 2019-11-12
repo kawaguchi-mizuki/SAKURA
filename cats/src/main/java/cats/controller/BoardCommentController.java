@@ -43,7 +43,7 @@ public class BoardCommentController {
 		List<BoardCommentDto> commentlist = boardcommnetService.getAllList(boardId);
 
 
-		System.out.println(commentlist);
+		mav.addObject("commentlist",commentlist);
 		mav.addObject("boardcommentbeans",boardcommentbeans);
 		mav.addObject("boardId",boardId);
 		mav.addObject("boardTitle",boardTitle);
@@ -64,10 +64,16 @@ public class BoardCommentController {
 		dto = boardcommnetService.insert(dto);
 
 
+		List<BoardCommentDto> commentlist = boardcommnetService.getAllList(dto.getBoardId());
+
+
+		mav.addObject("commentlist",commentlist);
+
+		int boardId = dto.getBoardId();
 
 
 
-
+		mav.addObject("boardId",boardId);
 		mav.addObject("boardTitle",boardTitle);
 		mav.setViewName("BordComment");
 
