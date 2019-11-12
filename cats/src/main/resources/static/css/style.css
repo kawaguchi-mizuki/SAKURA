@@ -332,5 +332,6 @@ select.gacha-category {
 }
 .comment{
 	float:left;
-	margin-right:40px;
+	padding-right:100px;
 }
+
