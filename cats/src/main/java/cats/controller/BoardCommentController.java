@@ -1,6 +1,9 @@
 package cats.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import cats.service.BoardService;
+import cats.beans.BoardCommentBeans;
+import cats.dto.BoardCommentDto;
+import cats.service.BoardCommentService;
 
 //掲示板
 @RestController
@@ -17,7 +22,7 @@ import cats.service.BoardService;
 public class BoardCommentController {
 
 	@Autowired
-	BoardService boardService;
+	BoardCommentService boardcommnetService;
 
 	@Autowired
 	HttpSession session;
@@ -33,8 +38,13 @@ public class BoardCommentController {
 	public ModelAndView BoardCommentRead(@RequestParam Integer boardId,@RequestParam String boardTitle, ModelAndView mav) {
 
 
+		BoardCommentBeans boardcommentbeans = new BoardCommentBeans();
+
+		List<BoardCommentDto> commentlist = boardcommnetService.getAllList(boardId);
 
 
+		System.out.println(commentlist);
+		mav.addObject("boardcommentbeans",boardcommentbeans);
 		mav.addObject("boardId",boardId);
 		mav.addObject("boardTitle",boardTitle);
 		mav.setViewName("BordComment");
@@ -44,22 +54,38 @@ public class BoardCommentController {
 	}
 
 	@RequestMapping(value = { "/Insert" }, method = RequestMethod.POST)
-	public ModelAndView BoardCommentInsert(@RequestParam Integer boardId,@RequestParam String boardTitle,@RequestParam String boardComment,ModelAndView mav) {
+	public ModelAndView BoardCommentInsert(@Valid BoardCommentBeans boardcommetbeans,@RequestParam String boardTitle, ModelAndView mav) {
+
+		BoardCommentDto dto = new BoardCommentDto();
+
+		dto = getCreateComment(boardcommetbeans);
+
+
+		dto = boardcommnetService.insert(dto);
 
 
 
 
 
-		System.out.println(boardComment);
 
-
-		mav.addObject("boardId",boardId);
 		mav.addObject("boardTitle",boardTitle);
 		mav.setViewName("BordComment");
 
 
 		return mav;
 	}
+
+	private BoardCommentDto getCreateComment( @Valid BoardCommentBeans boardcommetbeans) {
+
+		BoardCommentDto dto = new BoardCommentDto();
+
+		dto.setBoardId(boardcommetbeans.getBoardId());
+		dto.setComment(boardcommetbeans.getBoardComment());
+
+		return dto;
+	}
+
+
 
 
 }
