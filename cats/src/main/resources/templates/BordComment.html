@@ -50,7 +50,10 @@
 
       	<div  th:each="dto:${commentlist}" >
 
-      		 <p th:text="${dto.comment}"></p>
+
+			 <p th:text="${dto.commentName}" class="comment"></p>
+      		 <p th:text="${dto.comment}" ></p>
+
 
       	</div>
 

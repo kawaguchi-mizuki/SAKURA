@@ -330,3 +330,7 @@ select.gacha-category {
 .chat-list a{
 	display:block;
 }
+.comment{
+	float:left;
+	margin-right:40px;
+}
