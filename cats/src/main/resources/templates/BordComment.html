@@ -36,7 +36,7 @@
 	</div>
 
 	<div class="wrapper">
-	<form action="">
+	<form  th:action="@{/BoardComment/Insert}"  method="post">
 
 
 
@@ -73,7 +73,9 @@
 
       </div>
 
-      <input type="text" name="" value="">　<button type="button" name="button">送信</button>
+	  <input type="hidden" name="boardId" th:value="${boardId}">
+	  <input type="hidden" name="boardTitle" th:value="${boardTitle}">
+      <input type="text" name="boardComment"><button type="submit" name="button">送信</button>
 
 
     </div>

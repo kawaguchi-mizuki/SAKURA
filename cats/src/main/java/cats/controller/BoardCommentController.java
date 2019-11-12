@@ -23,17 +23,43 @@ public class BoardCommentController {
 	HttpSession session;
 
 
+	/**掲示板コメント画面表示
+	 * @param boardId
+	 * @param boardTitle
+	 * @param mav
+	 * @return
+	 */
 	@RequestMapping(value = { "/Read" }, method = RequestMethod.GET)
 	public ModelAndView BoardCommentRead(@RequestParam Integer boardId,@RequestParam String boardTitle, ModelAndView mav) {
 
 
-		System.out.println(boardTitle);
 
 
+		mav.addObject("boardId",boardId);
 		mav.addObject("boardTitle",boardTitle);
 		mav.setViewName("BordComment");
 
 
 		return mav;
 	}
+
+	@RequestMapping(value = { "/Insert" }, method = RequestMethod.POST)
+	public ModelAndView BoardCommentInsert(@RequestParam Integer boardId,@RequestParam String boardTitle,@RequestParam String boardComment,ModelAndView mav) {
+
+
+
+
+
+		System.out.println(boardComment);
+
+
+		mav.addObject("boardId",boardId);
+		mav.addObject("boardTitle",boardTitle);
+		mav.setViewName("BordComment");
+
+
+		return mav;
+	}
+
+
 }
