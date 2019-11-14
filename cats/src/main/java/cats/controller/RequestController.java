@@ -26,8 +26,16 @@ public class RequestController {
 	 * @return
 	 */
 
-	@RequestMapping(value = {"/"}, method = RequestMethod.GET)
-	public ModelAndView login(ModelAndView mav)throws Exception{
+	@RequestMapping(value = {"/Approval"}, method = RequestMethod.GET)
+	public ModelAndView RequestApproval(ModelAndView mav)throws Exception{
+
+		mav.setViewName("Login");
+
+		return mav;
+	}
+
+	@RequestMapping(value = {"/Delete"}, method = RequestMethod.GET)
+	public ModelAndView RequestDelete(ModelAndView mav)throws Exception{
 
 		mav.setViewName("Login");
 
