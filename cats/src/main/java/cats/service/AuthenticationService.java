@@ -16,6 +16,9 @@ public class AuthenticationService {
 	@Autowired
 	AuthenticationRepository authRepository;
 	
+	@Autowired
+	AuthenticationEntity authEntity;
+	
 	public void insert(int studentId,String pass,Date NowDate) {
 		
 		//登録
@@ -37,8 +40,6 @@ public class AuthenticationService {
 		
 		AuthenticationDto dto = new AuthenticationDto();
 		
-		AuthenticationEntity authEntity;
-		
 		authEntity = authRepository.getPass(student_id);
 		
 		dto.setStudentId(authEntity.getStudent_id());
@@ -46,9 +47,14 @@ public class AuthenticationService {
 		dto.setNowDate(authEntity.getTime_limit());
 		
 		
-		return dto;
+		return dto;	 
+	}
+
+	public void delete(Integer authStudent) {
 		
-		 
+		authRepository.delete(authStudent);
+		
+		
 	}
 	
 
