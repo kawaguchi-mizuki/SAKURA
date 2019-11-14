@@ -1,46 +1,54 @@
 package cats.service;
 
 import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import cats.dto.AuthenticationDto;
 import cats.entity.AuthenticationEntity;
 import cats.repository.AuthenticationRepository;
 
 @Service
+@Transactional
 public class AuthenticationService {
 	
 	@Autowired
-	AuthenticationRepository authrepository;
+	AuthenticationRepository authRepository;
 	
 	public void insert(int studentId,String pass,Date NowDate) {
 		
-		
-		
-		AuthenticationEntity entity = authInsert(studentId,pass,NowDate);
-		
-		authrepository.saveAndFlush(entity);
-		
-	}
-	
-	private AuthenticationEntity authInsert(int studentId, String pass, Date NowDate) {
+		//登録
 		
 		AuthenticationEntity entity = new AuthenticationEntity();
 		
-		entity.setStudentId(studentId);
-		entity.setPass(pass);
-		entity.setNowDate(NowDate);
+		entity.setStudent_id(studentId);
+		entity.setOne_pass(pass);
+		entity.setTime_limit(NowDate);
+		
+		 authRepository.save(entity);
 		
 		
-		return entity;
+		
 	}
 
-	public void apptova(String pass2) {
+	public  AuthenticationDto apptova(Integer student_id) {
+		
+		
+		AuthenticationDto dto = new AuthenticationDto();
+		
+		AuthenticationEntity authEntity;
+		
+		authEntity = authRepository.getPass(student_id);
+		
+		dto.setStudentId(authEntity.getStudent_id());
+		dto.setPass(authEntity.getOne_pass());
+		dto.setNowDate(authEntity.getTime_limit());
+		
+		
+		return dto;
 		
 		 
-		
-		
 	}
 	
 

@@ -1,7 +1,6 @@
 package cats.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import cats.dto.AuthenticationDto;
 import cats.service.AuthenticationService;
 
 import java.text.SimpleDateFormat;
@@ -21,7 +21,6 @@ import org.apache.commons.lang3.RandomStringUtils;
 
 @Controller
 
-@RequestMapping(value = {"/auth"})
 public class AuthenticationCodeController {
 	
 	@Autowired
@@ -30,10 +29,11 @@ public class AuthenticationCodeController {
 	@Autowired
 	AuthenticationService authentication;
 	
-	@RequestMapping(value = {"/start"})
+	@RequestMapping(value = {"/start"},method=RequestMethod.GET)
 	
-	public void start(ModelAndView mav) {
+	public ModelAndView start(ModelAndView mav)  {
 		mav.setViewName("send");
+		return mav;
 	}
 	
 	@RequestMapping(value = {"/send"},method=RequestMethod.POST)
@@ -70,14 +70,13 @@ public class AuthenticationCodeController {
 			mav.addObject("errMsg",errMsg);
 			
 			return mav;
-			
 		}
 	
 		
 		authentication.insert(studentId, pass, NowDate);
 		
 		
-		mav.setViewName("send");
+		mav.setViewName("get");
 		
 				return mav;
 	}
@@ -92,8 +91,7 @@ public class AuthenticationCodeController {
 
         msg.setTo(mail);
         msg.setSubject("認証コード送信");
-        msg.setText("下記の認証コードを入力欄に入力してください。/n"+pass);
-
+        msg.setText("下記の認証コードを入力欄に入力してください。\n\n\n"+pass);
         this.sender.send(msg);
     }
 	
@@ -103,9 +101,13 @@ public class AuthenticationCodeController {
 			@RequestParam("passapp") String passapp
 			){
 		
-		authentication.apptova(passapp);
+		AuthenticationDto dto = new AuthenticationDto();
 		
+		dto = authentication.apptova(1701164);
 		
+		System.out.println(dto.getPass());
+		
+		mav.setViewName("keikou");
 		
 		return mav;
 		

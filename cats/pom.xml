@@ -41,11 +41,12 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		
 		<dependency>
 		    <groupId>org.projectlombok</groupId>
-		    <artifactId>lombok-maven</artifactId>
-		    <version>1.18.4.0</version>
-		    <type>pom</type>
+		    <artifactId>lombok</artifactId>
+		    <version>1.18.10</version>
+		    <scope>provided</scope>
 		</dependency>
 
 		<dependency>
@@ -70,11 +71,6 @@
 			<groupId> org.apache.commons </groupId>
 			<artifactId> commons-lang3 </artifactId>
 			</dependency>
-		<dependency>
-    		<groupId>org.projectlombok</groupId>
-    		<artifactId>lombok</artifactId>
-    		<scope>provided</scope>
-  		</dependency>
 	</dependencies>
 
 	<build>
