@@ -65,18 +65,12 @@ public class LoginController {
 		//	ユーザー情報をセッションから取得
 		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
 
-		mav.addObject("add",loginInfo.getStudentId());
-
-
-
 		//受け取ったリクエスト一覧を取得
 		List<HomeRequestDto> requestlist = homeService.getAllList(loginInfo);
 
-
+		//受け取ったリクエスト数を取得
 		int requestcount = requestlist.size();
 
-
-		System.out.print(requestlist);
 
 		mav.addObject("count",requestcount);
 		mav.addObject("requestlist", requestlist);

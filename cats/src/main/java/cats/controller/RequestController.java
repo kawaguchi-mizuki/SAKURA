@@ -1,5 +1,6 @@
 package cats.controller;
 
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,25 +9,27 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import cats.service.HomeService;
+
 @RestController
-@RequestMapping(value = { "/Home" })
-public class HomeController {
+@RequestMapping(value = { "/Request" })
+public class RequestController {
 
 	@Autowired
 	HttpSession session;
 
-	/**ホーム画面表示
+	@Autowired
+	HomeService homeService;
+
+	/**
 	 * @param mav
 	 * @return
 	 */
-	@RequestMapping(value = { "/Read" }, method = RequestMethod.GET)
-	public ModelAndView HomeRead(ModelAndView mav) {
 
+	@RequestMapping(value = {"/"}, method = RequestMethod.GET)
+	public ModelAndView login(ModelAndView mav)throws Exception{
 
-
-
-
-		mav.setViewName("Home");
+		mav.setViewName("Login");
 
 		return mav;
 	}
