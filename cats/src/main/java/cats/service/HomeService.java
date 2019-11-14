@@ -1,11 +1,15 @@
 package cats.service;
 
+import static cats.repository.RequestSpecification.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import cats.dto.HomeRequestDto;
@@ -25,7 +29,7 @@ public class HomeService {
 
 		List<HomeRequestDto> list = new ArrayList<HomeRequestDto>();
 
-		List<HomeRequestTblEntity> requestList = homeRequestRepository.findAll();
+		List<HomeRequestTblEntity> requestList = homeRequestRepository.findAll(Specification.where(studentIdEqules(loginInfo.getStudentId()).and(ApprovalEqules())),new Sort(Sort.Direction.DESC,"requestId"));
 
 		//entity -> DTO
 		for( HomeRequestTblEntity entity : requestList ) {
@@ -33,8 +37,8 @@ public class HomeService {
 			HomeRequestDto dto = new HomeRequestDto();
 
 			dto.setRequestId(entity.getRequestId());
-			dto.setSentId(entity.getStudentIdSent());
-			dto.setReceiveId(entity.getStudentIdTbl());
+			dto.setSentId(entity.getStudentIdTbl());
+			dto.setReceiveId(entity.getStudentIdReceive());
 			dto.setApproval(entity.getApproval());
 			dto.setStudentName(entity.getStudentIdTbl().getStudentName());
 

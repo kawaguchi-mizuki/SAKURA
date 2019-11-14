@@ -8,9 +8,9 @@ public class HomeRequestDto {
 
 	private Integer requestId;
 
-	private Integer sentId;
+	private StudentTblEntity sentId;
 
-	private StudentTblEntity receiveId;
+	private Integer receiveId;
 
 	private Integer approval;
 

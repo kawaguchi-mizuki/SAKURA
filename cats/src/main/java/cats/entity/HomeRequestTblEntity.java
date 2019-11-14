@@ -23,12 +23,12 @@ public class HomeRequestTblEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer requestId;
 
-	private Integer studentIdSent;
+	private Integer studentIdReceive;
 
 	private Integer approval;
 
 	@OneToOne
-	@JoinColumn(name="studentIdReceive",insertable=true ,updatable=true)
+	@JoinColumn(name="studentIdSent",insertable=true ,updatable=true)
 	private StudentTblEntity studentIdTbl;
 
 
