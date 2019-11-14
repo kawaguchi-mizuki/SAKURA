@@ -14,6 +14,12 @@ public interface StudentRepository  extends JpaRepository<StudentTblEntity,Integ
 	@Query("select s from StudentTblEntity s where studentId = :studentId")
 	public StudentTblEntity getProfile(@Param("studentId")Integer studentId);
 
+	@Query("select s from StudentTblEntity s where studentId = :studentId")
+	public StudentTblEntity getstatus(int studentId);
+
+	@Query("select s from StudentTblEntity s where studentId = :studentId")
+	public StudentTblEntity getId(Integer studentId);
+
 
 
 

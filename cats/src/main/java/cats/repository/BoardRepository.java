@@ -10,4 +10,6 @@ import cats.entity.BoardTblEntity;
 public interface BoardRepository  extends JpaRepository<BoardTblEntity,Integer>,JpaSpecificationExecutor<BoardTblEntity> {
 
 
+
+
 }

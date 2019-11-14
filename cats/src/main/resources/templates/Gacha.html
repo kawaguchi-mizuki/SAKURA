@@ -10,17 +10,16 @@
 	crossorigin="anonymous">
 </head>
 <body class="wrapper">
+
+
 	<header>
 		<div class="row">
-
 			<div class="col-5">
 				<a href=""> <img src="/img/rogo.jpg" width="150">
-
 				</a>
 			</div>
-
 			<div class="col-5">
-				<img src="/img/coin.png" width="50">300ポイント
+				<img src="/img/coin.png" width="50">  300ポイント
 			</div>
 			<div class="col-2">
 				<a th:href="@{/Logout}">ログアウト</a>
@@ -31,39 +30,34 @@
 	<div class="txt row">
 
 		<div class="col-2">
-			<a th:href="@{/Board/Read}" class="back"> 戻る </a>
+			<a href=" " class="back"> 戻る </a>
 		</div>
-		<div class="col-8">掲示板投稿</div>
+		<div class="col-8">きっかけガチャ</div>
 		<div class="col-2"></div>
-
 	</div>
-
-	<div class=" border border-info explain">
-
-		<p>※注意事項※</p>
-		<br>
-		<p><font color="red">個人情報</font>や他人を<font color="red">誹謗中傷</font>する内容は禁止しています。</p>
-		<br>
-		<p><font color="red">アダルト</font>内容のタイトルも禁止しています。</p>
-
+	<font color="red">
+		<p>項目を選択してガチャアイコンをタップ</p>
+		<p>ポイントが不足しています</p>
+	</font>
+	<div class="center">
+		<img src="/img/gacha.jpeg" width="150" class="gacha-img">
 	</div>
-	<form th:action="@{/Board/Insert}" th:object="${boardbeans}"   method="get">
-
-	    <p class="bg-primary rounded text-white title">カテゴリー</p>
-		<select name="categoryId" class="pldown form-control">
-			<option th:each="dto:${categorylist}" th:value="${dto.categoryId}" th:text="${dto.categoryName}"></option>
+	<div class="center">
+		<select name="puldown" class="pldown gacha-category">
+			<option value="">カテゴリを選択</option>
+			<option value="サンプル1">サンプル1</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
 		</select>
+	</div>
 
-		<p class="bg-primary rounded text-white title">タイトル</p>
-		<input type="text" name="boardTitle" class="bord-title" required >
-
-
-
-		<div class="stylebutton">
-			 <input type="submit" value="投稿" class="button">
+	<div class="gacha-message fadeout center">
+		<div class="img-box">
+			<img src="/img/heart.png" alt="" class="img-heart img-fluid">
 		</div>
 
-	</form>
+	</div>
+
 	<footer>
 		<div class="row">
 			<div class="col">
@@ -87,6 +81,7 @@
 
 		</div>
 	</footer>
-
+	<script src="main.js"></script>
+</body>
 </body>
 </html>

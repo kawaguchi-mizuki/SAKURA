@@ -5,9 +5,28 @@
 <title>プロフィール変更</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link href="/css/UserEntry.css" th:href="@{/css/UserEntry.css}" rel="stylesheet"></link>
+<link href="/css/common.css" th:href="@{/css/common.css}" rel="stylesheet"></link>
 </head>
 <body>
 
+	<header>
+		<div class="row">
+			<div class="col-5">
+				<a href=""> <img src="/img/rogo.jpg" width="150">
+				</a>
+			</div>
+			<div class="col-5">
+				<img src="/img/coin.png" width="50"> 300ポイント
+			</div>
+			<div class="col-2">
+				<a th:href="@{/Logout}">ログアウト</a>
+			</div>
+		</div>
+	</header>
+
+	<div class="txt">
+		<p>マイページ変更</p>
+	</div>
 
 	<form class="input" th:action="@{/Profile/Correction}" th:object="${studentbeans}"   method="post" enctype="multipart/form-data" >
 
@@ -248,6 +267,30 @@
 
 
 	</script>
+
+	<footer>
+		<div class="row">
+			<div class="col">
+				<a th:href="@{/Home/Read}"><img src="/img/ie.png"> </a>
+			</div>
+			<div class="col">
+				<a th:href="@{/Board/Read}"><img src="/img/mrmo.png"> </a>
+			</div>
+
+			<div class="col">
+				<a href=""><img src="/img/hart.png"> </a>
+			</div>
+
+			<div class="col">
+				<a href=""><img src="/img/fukidashi.png"> </a>
+			</div>
+
+			<div class="col">
+				<a th:href="@{/Profile/View}"><img src="/img/hito.png"> </a>
+			</div>
+
+		</div>
+	</footer>
 
 
 </body>

@@ -21,21 +21,27 @@
 				<img src="/img/coin.png" width="50">300ポイント
 			</div>
 			<div class="col-2">
-				<a href="">ログアウト</a>
+				<a th:href="@{/Logout}">ログアウト</a>
 			</div>
 		</div>
 	</header>
 
-	<div class="txt">
-		<p>掲示板コメント</p>
+	<div class="txt row">
+
+		<div class="col-2">
+			<a th:href="@{/Board/Read}" class="back"> 戻る </a>
+		</div>
+		<div class="col-8">掲示板コメント</div>
+		<div class="col-2"></div>
 	</div>
 
 	<div class="wrapper">
 	<form action="">
 
+
+
 		<div class="explain">
-			<p>タイトル</p>
-      <br>
+			<p  th:text="${boardTitle}" class="h4  text-primary "></p>
 		</div>
 		<p></p>
 
@@ -83,10 +89,10 @@
 	<footer>
 		<div class="row">
 			<div class="col">
-				<a href=""><img src="/img/ie.png"> </a>
+				<a th:href="@{/Home/Read}"><img src="/img/ie.png"> </a>
 			</div>
 			<div class="col">
-				<a href=""><img src="/img/mrmo.png"> </a>
+				<a th:href="@{/Board/Read}"><img src="/img/mrmo.png"> </a>
 			</div>
 
 			<div class="col">
@@ -98,12 +104,11 @@
 			</div>
 
 			<div class="col">
-				<a href=""><img src="/img/hito.png"> </a>
+				<a th:href="@{/Profile/View}"><img src="/img/hito.png"> </a>
 			</div>
 
 		</div>
 	</footer>
-
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>

@@ -17,6 +17,7 @@ import cats.dto.HobbyDto;
 import cats.dto.LoginInfoDto;
 import cats.dto.ProfileDto;
 import cats.dto.SchoolDto;
+import cats.param.SessionConst;
 import cats.service.HobbyService;
 import cats.service.ProfileService;
 import cats.service.SchoolService;
@@ -51,16 +52,10 @@ public class ProfileController {
 	@RequestMapping(value = { "/View" }, method = RequestMethod.GET)
 	public ModelAndView ProfileView(ModelAndView mav) {
 
-		//ログイン情報を取得する
-		LoginInfoDto loginInfo = new LoginInfoDto();
-
-		loginInfo.setStudentId(1701129);
-
-
+		//ユーザー情報をセッションから取得
+		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
 
 		ProfileDto dto = profileService.getDisplayBoard(loginInfo);
-
-
 
 		mav.addObject("ProfileDto", dto);
 		mav.setViewName("ProfileView");
@@ -164,14 +159,16 @@ public class ProfileController {
 	@RequestMapping(value = { "/Delete" }, method = RequestMethod.GET)
 	public ModelAndView Profile(ModelAndView mav) {
 
-		LoginInfoDto loginInfo = new LoginInfoDto();
-		loginInfo.setStudentId(1701129);
+
+		//ユーザー情報をセッションから取得
+		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
+
 
 		profileService.ProfileDelete(loginInfo.getStudentId());
 
 		session.invalidate();
 
-		mav.setViewName("login");
+		mav.setViewName("Login");
 
 		return mav;
 	}

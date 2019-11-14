@@ -121,7 +121,7 @@ public class UserEntryController {
 
 		studentService.insert(dto);
 
-		mav.setViewName("login");
+		mav.setViewName("Login");
 
 		return mav;
 	}
@@ -132,6 +132,8 @@ public class UserEntryController {
 	@RequestMapping("/GetCourseList")
     public List<CourseDto> getucourselist(
     		@RequestParam("schoolId")Integer schoolId) {
+
+
         return courseService.getList(schoolId);
     }
 

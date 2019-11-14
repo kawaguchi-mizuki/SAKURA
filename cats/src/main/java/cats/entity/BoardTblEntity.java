@@ -35,4 +35,6 @@ public class BoardTblEntity implements Serializable{
 	private Date boardDate;
 
 
+
+
 }
