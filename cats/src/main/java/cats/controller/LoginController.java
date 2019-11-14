@@ -73,8 +73,12 @@ public class LoginController {
 		List<HomeRequestDto> requestlist = homeService.getAllList(loginInfo);
 
 
+		int requestcount = requestlist.size();
+
+
 		System.out.print(requestlist);
 
+		mav.addObject("count",requestcount);
 		mav.addObject("requestlist", requestlist);
 		mav.setViewName("Home");
 
