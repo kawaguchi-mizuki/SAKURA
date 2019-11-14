@@ -15,12 +15,15 @@ public class HomeController {
 	@Autowired
 	HttpSession session;
 
-	/**掲示板投稿画面表示
+	/**ホーム画面表示
 	 * @param mav
 	 * @return
 	 */
 	@RequestMapping(value = { "/Read" }, method = RequestMethod.GET)
 	public ModelAndView HomeRead(ModelAndView mav) {
+
+
+
 
 
 		mav.setViewName("Home");

@@ -78,7 +78,6 @@ public class BoardCommentService {
 
 		List<BoardCommentTblEntity> commentList = boardCommentRepository.findAll(Specification.where(IdEqules(boardId)) ,new Sort(Sort.Direction.ASC,"boardCommentId"));
 
-		System.out.println(commentList);
 
 		//entity -> DTO
 				for( BoardCommentTblEntity entity : commentList ) {
