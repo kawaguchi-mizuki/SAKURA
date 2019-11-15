@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import cats.entity.AuthSearchEntity;
 import cats.entity.AuthenticationEntity;
 
 @Repository
@@ -14,6 +15,8 @@ extends JpaRepository<AuthenticationEntity,Integer>{
 	@Query("select a from AuthenticationEntity a where student_id = :student_id")
 	public AuthenticationEntity getPass(@Param("student_id")Integer student_id);
 
-	public void delete(Integer authStudent);
+	@Query("select student_id  from AuthSearchEntity where student_id = :studentId")
+	public AuthSearchEntity searchstudentId(@Param("studentId")Integer studentId);
+
 
 }

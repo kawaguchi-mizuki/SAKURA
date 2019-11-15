@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cats.dto.AuthenticationDto;
+import cats.entity.AuthSearchEntity;
 import cats.entity.AuthenticationEntity;
 import cats.repository.AuthenticationRepository;
 
@@ -16,8 +17,7 @@ public class AuthenticationService {
 	@Autowired
 	AuthenticationRepository authRepository;
 	
-	@Autowired
-	AuthenticationEntity authEntity;
+	
 	
 	public void insert(int studentId,String pass,Date NowDate) {
 		
@@ -40,6 +40,8 @@ public class AuthenticationService {
 		
 		AuthenticationDto dto = new AuthenticationDto();
 		
+		AuthenticationEntity authEntity;
+		
 		authEntity = authRepository.getPass(student_id);
 		
 		dto.setStudentId(authEntity.getStudent_id());
@@ -50,11 +52,21 @@ public class AuthenticationService {
 		return dto;	 
 	}
 
-	public void delete(Integer authStudent) {
+	public Integer search(Integer studentId) {
+		// TODO Auto-generated method stub
 		
-		authRepository.delete(authStudent);
+		AuthSearchEntity authEntity;
 		
+		authEntity = authRepository.searchstudentId(studentId);
 		
+		Integer presence = null ;
+		
+		if(authEntity.getStudent_id() != null) {
+			
+			presence = authEntity.getStudent_id();
+					
+		}
+		return presence;
 	}
 	
 

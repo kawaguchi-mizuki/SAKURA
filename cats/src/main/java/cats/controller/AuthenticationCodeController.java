@@ -62,6 +62,8 @@ public class AuthenticationCodeController {
         Date date = new Date();
         
         
+        
+        
         //日時計算
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
@@ -70,6 +72,21 @@ public class AuthenticationCodeController {
         
         Date NowDate = calendar.getTime();
 		
+        //登録確認
+        Integer student = authentication.search(studentId);
+        
+        if(student != null) {
+        	
+        	String errMsg = "この学籍番号は既に登録されています。";
+        	mav.addObject("errMsg",errMsg);
+        	
+        	
+        	return mav;
+        	
+        }
+        
+        
+        //メールアドレス設定
         if(1700000<=studentId&&studentId<=1799999) {
 			mail = studentId + "@st.asojuku.ac.jp";
 			sendMail(mail,pass);
@@ -116,22 +133,26 @@ public class AuthenticationCodeController {
 		
 		Integer authStudent = (Integer)session.getAttribute("authStudent");
 		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+		
 		dto = authentication.apptova(authStudent);
 		
-		if(dto.getPass().equals(passauth) ) {
+		Integer time = date.compareTo(dto.getNowDate());
+		
+		
+		if(dto.getPass().equals(passauth) && time<=0){
 			//セッションの破棄
 			session.invalidate();
 			
-			//認証コードの破棄
-			authentication.delete(authStudent);
-			
 			//認証成功
-			mav.setViewName("keikou");
+			mav.setViewName("");
 			
 		}else {
 			//認証失敗
 			String errMsg = "認証コードが正しくありません";
 			mav.addObject("errMsg",errMsg);
+			mav.setViewName("");
 		}
 		
 		
