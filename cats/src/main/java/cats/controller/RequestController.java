@@ -43,7 +43,6 @@ public class RequestController {
 			homeService.approvalId(requestId);
 
 
-
 			//ユーザー情報をセッションから取得
 			LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
 
@@ -61,15 +60,32 @@ public class RequestController {
 		return mav;
 	}
 
+	/**リクエスト破棄
+	 * @param requestId
+	 * @param mav
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(value = {"/Delete"}, method = RequestMethod.POST)
 	public ModelAndView RequestDelete(@RequestParam Integer requestId,ModelAndView mav)throws Exception{
 
-		System.out.println(requestId);
+
+		homeService.delete(requestId);
 
 
+		//ユーザー情報をセッションから取得
+		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
 
+		//受け取ったリクエスト一覧を取得
+		List<HomeRequestDto> requestlist = homeService.getAllList(loginInfo);
+
+		//受け取ったリクエスト数を取得
+		int requestcount = requestlist.size();
+
+
+		mav.addObject("count",requestcount);
+		mav.addObject("requestlist", requestlist);
 		mav.setViewName("Home");
-
 		return mav;
 	}
 

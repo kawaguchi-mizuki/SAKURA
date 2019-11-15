@@ -65,6 +65,15 @@ public class HomeService {
 		homeRequestRepository.save(entity);
 	}
 
+	/**リクエスト削除
+	 * @param requestId
+	 */
+	public void delete(Integer requestId) {
+
+		this.homeRequestRepository.deleteById(requestId);
+
+	}
+
 
 
 }
