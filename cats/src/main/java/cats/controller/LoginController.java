@@ -5,6 +5,7 @@ package cats.controller;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,9 +19,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import cats.dto.HomeRequestDto;
 import cats.dto.LoginDayDto;
 import cats.dto.LoginInfoDto;
 import cats.param.SessionConst;
+import cats.service.HomeService;
 import cats.service.LoginService;
 
 
@@ -37,8 +40,13 @@ public class LoginController {
 
 	@Autowired
 	LoginService loginService;
+
 	@Autowired
 	HttpSession session;
+
+	@Autowired
+	HomeService homeService;
+
 
 
 
@@ -57,8 +65,15 @@ public class LoginController {
 		//	ユーザー情報をセッションから取得
 		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
 
-		mav.addObject("add",loginInfo.getStudentId());
+		//受け取ったリクエスト一覧を取得
+		List<HomeRequestDto> requestlist = homeService.getAllList(loginInfo);
 
+		//受け取ったリクエスト数を取得
+		int requestcount = requestlist.size();
+
+
+		mav.addObject("count",requestcount);
+		mav.addObject("requestlist", requestlist);
 		mav.setViewName("Home");
 
 		return mav;
