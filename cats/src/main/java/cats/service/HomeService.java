@@ -25,6 +25,10 @@ public class HomeService {
 	@Autowired
 	HttpSession session;
 
+	/**リクエスト取得
+	 * @param loginInfo
+	 * @return
+	 */
 	public List<HomeRequestDto> getAllList(LoginInfoDto loginInfo) {
 
 		List<HomeRequestDto> list = new ArrayList<HomeRequestDto>();
@@ -47,6 +51,18 @@ public class HomeService {
 
 
 		return list;
+	}
+
+	/**リクエスト承認処理
+	 * @param requestId
+	 */
+	public void approvalId(Integer requestId) {
+
+		HomeRequestTblEntity entity = homeRequestRepository.getOne(requestId);
+
+		entity.setApproval(1);
+
+		homeRequestRepository.save(entity);
 	}
 
 

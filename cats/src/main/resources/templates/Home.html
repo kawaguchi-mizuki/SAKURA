@@ -38,20 +38,25 @@
 	</div>
 
 
-
-
 	<p th:text="${count}"></p>
 
-	<div  th:each="dto:${requestlist}">
 
 
 
-	  <p th:text="${dto.studentName}"></p>
+	<div th:each="dto:${requestlist}">
 
-	  <p>
+		<form class="input" th:action="@{/Request/Approval}"  method="post">
+		<input type="hidden" name="requestId" th:value="${dto.requestId}">
+		<input type="submit" value="承認">
+		</form>
+		<form class="input" th:action="@{/Request/Delete}"  method="post">
+		<input type="hidden" name="requestId" th:value="${dto.requestId}">
+		<input type="submit" value="削除">
+		</form>
 
+		<p th:text="${dto.requestId}"></p>
 
-
+		<p>
 	</div>
 
 
