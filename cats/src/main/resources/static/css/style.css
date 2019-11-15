@@ -104,6 +104,7 @@ footer {
 	padding: 30px 0;
 	position: fixed; /*←絶対位置*/
 	bottom: 0; /*下に固定*/
+	z-index: 999;
 }
 
 .explain {
@@ -145,7 +146,7 @@ footer {
 
 /*buttonタグは一律、横幅150pxで角丸 */
 button {
-	width: 200px;
+	/*idth: 150px;*/
 	border-radius: 10px;
 }
 
@@ -154,8 +155,6 @@ button {
 	background-color: #629cff;
 	border: 1px solid #629cff;
 	color: #f1f1f1;
-	padding-top:10px;
-	padding-bottom:0;
 }
 
 /* 削除ボタンのデザイン設定 */
@@ -197,9 +196,6 @@ input[class=serch] {
 .title {
 	margin-left:3%;
 }
-.bring{
-	text-align: left;
-}
 
 .bord-title {
 	margin-top: 10px !important;
@@ -233,15 +229,7 @@ input[class=serch] {
 	text-align: left
 }
 
-@media screen and (max-width:600px) {
-	/*　画面サイズが600px以下はここを読み込む　*/
-	body {
-		font-size: 0.5rem;
-	}
-	button {
-		width: 80px;
-	}
-}
+
 
 input[class=serch] {
 	width: 35%;
@@ -317,21 +305,96 @@ select.gacha-category {
 		font-size: 0.5rem;
 	}
 	button {
-		width: 80px;
+		/*width: 80px;*/
+		font-size: 0.5rem;
+	}
+	.btn {
+		font-size: 0.5rem;
 	}
 }
 
+/* チャット一覧画面の設定 start *************************************/
 .chat-list{
 	border-bottom:1px solid #007bff;
 	padding-bottom:10px;
 	padding-top:10px;
+
+	position: relative;
+	z-index: 1;
 }
 
 .chat-list a{
-	display:block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	text-indent: -999px;
+	z-index: 2;
 }
-.comment{
-	float:left;
-	padding-right:100px;
+.chat-list .box-icon a {
+	position: relative; /*「別リンク」は普通に配置するため */
+	z-index: 3; /* リンク要素の重なり順を上にするため */
 }
 
+/* チャット一覧画面の設定 e.n.d *************************************/
+
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family:'Avenir','Helvetica, Neue','Helvetica','Arial';
+}
+
+
+/* モーダルCSS */
+.modalArea {
+  display: none;
+  position: fixed;
+  z-index: 10; /*サイトによってここの数値は調整 */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.modalBg {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(30,30,30,0.9);
+}
+
+.modalWrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform:translate(-50%,-50%);
+  width: 70%;
+  max-width: 500px;
+  padding: 10px 30px;
+  background-color: #fff;
+}
+
+.closeModal {
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  cursor: pointer;
+}
+
+
+/* 以下ボタンスタイル */
+button {
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #282828;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+#openModal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform:translate(-50%,-50%);
+}
