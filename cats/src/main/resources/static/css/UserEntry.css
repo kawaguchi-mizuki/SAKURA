@@ -46,5 +46,11 @@ span{
 	cursor: pointer;
 	cursor: hand;
 }
+.countpop{
+	float:left;
+	margin:0;
+	padding:7px;
+}
+
 
 

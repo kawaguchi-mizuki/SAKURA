@@ -38,13 +38,14 @@
 	</div>
 
 
-	<p th:text="${count}"></p>
 
 
 
 
-	<div th:each="dto:${requestlist}">
 
+
+
+		<!--
 		<form class="input" th:action="@{/Request/Approval}"  method="post">
 		<input type="hidden" name="requestId" th:value="${dto.requestId}">
 		<input type="submit" value="承認">
@@ -53,55 +54,32 @@
 		<input type="hidden" name="requestId" th:value="${dto.requestId}">
 		<input type="submit" value="削除">
 		</form>
+		-->
 
-		<p th:text="${dto.requestId}"></p>
 
-		<p>
-	</div>
-	<body class="wrapper">
-		<header>
-			<div class="row">
-	
-				<div class="col-5">
-					<a href=""> <img src="rogo.jpg" width="150">
-	
-					</a>
-				</div>
-	
-				<div class="col-5">
-					<img src="coin.png" width="50">300ポイント
-				</div>
-				<div class="col-2">
-					<a href="">ログアウト</a>
-				</div>
-			</div>
-		</header>
-	
-		<div class="txt">
-			<p>チャット</p>
-		</div>
+
 		<div class="center">
-			<span class="badge badge-danger">新しいリクエストが３件届いています！</span>
-	
+			<span class="badge badge-danger"><p  class="countpop">新しいリクエストが</p><p th:text="${count}" class="countpop"></p><p  class="countpop">件届いています</p></span>
+
 		</div>
-	
-	
-	
+
+
+
 		<!-- スレ１つ分 ここから-->
-		<div>
+		<div th:each="dto:${requestlist}">
 			<div class="d-flex topic p-3 mt-3 border border-success rounded">
 				<!--1つ分の一番外枠-->
 				<div class="box-icon ">
 					<!--左 アイコン部分-->
-					<img src="icon.jpg" alt="アイコン" class="icon-image rounded img-fluid">
+					<img src="/img/icon.jpg" alt="アイコン" class="icon-image rounded img-fluid">
 				</div>
-	
+
 				<div class="box-info">
 					<!--右 情報部分-->
 					<div class="row mt-2 mb-2">
 						<!--右 1段目-->
 						<div class="col-4">
-							<p>名前</p>
+							<p th:text="${dto.studentName}"></p>
 						</div>
 						<div class="col-8"></div>
 					</div>
@@ -111,66 +89,54 @@
 					</div>
 					<div class="row mt-2 mb-2">
 						<!--右 3段目-->
-						<div class="col-8">
+						<div class="col-7"></div>
+						<div class="col-2">
 							<button type="button" name="button" id="openModal"
 								class="btn-insert btn btn-primary">追加</button>
 						</div>
-	
-	
-	
-						<div class="col-4">
+
+						<div class="col-2">
 							<button type="button" name="button"
-								class="btn-delete btn btn-danger">拒否</button>
+								class="btn-delete btn btn-danger" data-toggle="modal" data-target="#blockModal" th:data-whatever="${dto.requestId}">拒否</button>
+
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<!-- スレ１つ分 ここまで for文とかで、スレ分ぐるぐる回してちょ-->
-		<!-- スレ１つ分 ここから-->
-		<div>
-			<div class="d-flex topic p-3 mt-3 border border-success rounded">
-				<!--1つ分の一番外枠-->
-				<div class="box-icon ">
-					<!--左 アイコン部分-->
-					<img src="icon.jpg" alt="アイコン" class="icon-image rounded img-fluid">
-				</div>
-	
-				<div class="box-info">
-					<!--右 情報部分-->
-					<div class="row mt-2 mb-2">
-						<!--右 1段目-->
-						<div class="col-4">
-							<p>名前</p>
+
+			<!-- Modal -->
+			<div class="modal fade" id="blockModal" tabindex="-1" role="dialog"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">拒否確認</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
 						</div>
-						<div class="col-8"></div>
-					</div>
-					<div class="row mt-2 mb-2">
-						<!--右 2段目-->
-						<div class="col-12"></div>
-					</div>
-					<div class="row mt-2 mb-2">
-						<!--右 3段目-->
-						<div class="col-8">
-							<button type="button" name="button" id="openModal"
-								class="btn-insert btn btn-primary">追加</button>
-						</div>
-	
-	
-	
-						<div class="col-4">
-							<button type="button" name="button"
-								class="btn-delete btn btn-danger">拒否</button>
+						<div class="modal-body">※リクエストを拒否します</div>
+						<div class="modal-footer">
+							<form th:action="@{/Request/Delete}" method="post" >
+								<input type="hidden" name="requestId" th:value="${dto.requestId}">
+								<button type="button" class="btn btn-secondary"
+									data-dismiss="modal">戻る</button>
+								<button type="submit" class="btn btn-primary">拒否する</button>
+							</form>
 						</div>
 					</div>
 				</div>
 			</div>
+
+
+
 		</div>
 		<!-- スレ１つ分 ここまで for文とかで、スレ分ぐるぐる回してちょ-->
-	
 
 
-	<p th:text="${add}"></p>
+
+
 
 	<footer>
 		<div class="row">

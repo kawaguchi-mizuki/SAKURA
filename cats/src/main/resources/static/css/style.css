@@ -145,7 +145,7 @@ footer {
 
 /*buttonタグは一律、横幅150pxで角丸 */
 button {
-	
+
 	border-radius: 10px;
 }
 
@@ -330,7 +330,6 @@ select.gacha-category {
 }
 
 .chat-list a{
-	display:block;
 	position: absolute;
 	top: 0;
 	left: 0;

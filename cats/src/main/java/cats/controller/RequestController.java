@@ -70,6 +70,7 @@ public class RequestController {
 	public ModelAndView RequestDelete(@RequestParam Integer requestId,ModelAndView mav)throws Exception{
 
 
+		System.out.println(requestId);
 		homeService.delete(requestId);
 
 
