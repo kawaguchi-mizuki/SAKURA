@@ -145,7 +145,7 @@ footer {
 
 /*buttonタグは一律、横幅150pxで角丸 */
 button {
-	width: 200px;
+	
 	border-radius: 10px;
 }
 
@@ -325,13 +325,89 @@ select.gacha-category {
 	border-bottom:1px solid #007bff;
 	padding-bottom:10px;
 	padding-top:10px;
+	position: relative;
+	z-index: 1;
 }
 
 .chat-list a{
 	display:block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	text-indent: -999px;
+	z-index: 2;
+
 }
 .comment{
 	float:left;
 	padding-right:100px;
+}
+.chat-list .box-icon a {
+	position: relative; /*「別リンク」は普通に配置するため */
+	z-index: 3; /* リンク要素の重なり順を上にするため */
+}
+
+/* チャット一覧画面の設定 e.n.d *************************************/
+
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family:'Avenir','Helvetica, Neue','Helvetica','Arial';
+}
+
+
+/* モーダルCSS */
+.modalArea {
+  display: none;
+  position: fixed;
+  z-index: 10; /*サイトによってここの数値は調整 */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.modalBg {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(30,30,30,0.9);
+}
+
+.modalWrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform:translate(-50%,-50%);
+  width: 70%;
+  max-width: 500px;
+  padding: 10px 30px;
+  background-color: #fff;
+}
+
+.closeModal {
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  cursor: pointer;
+}
+
+
+/* 以下ボタンスタイル */
+button {
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #282828;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+#openModal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform:translate(-50%,-50%);
 }
 
