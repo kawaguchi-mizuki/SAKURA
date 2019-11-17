@@ -37,10 +37,12 @@ public class RequestController {
 	@RequestMapping(value = {"/Approval"}, method = RequestMethod.POST)
 	public ModelAndView RequestApproval(@RequestParam Integer requestId,ModelAndView mav)throws Exception{
 
-			System.out.println(requestId);
 
 			//リクエスト承認フラグ更新処理
 			homeService.approvalId(requestId);
+
+			//リクエスト承認したユーザーの名前を取得
+			String approvalName = homeService.getName(requestId);
 
 
 			//ユーザー情報をセッションから取得
@@ -55,6 +57,7 @@ public class RequestController {
 
 			mav.addObject("count",requestcount);
 			mav.addObject("requestlist", requestlist);
+			mav.addObject("approvalName",approvalName);
 			mav.setViewName("Home");
 
 		return mav;
@@ -70,7 +73,6 @@ public class RequestController {
 	public ModelAndView RequestDelete(@RequestParam Integer requestId,ModelAndView mav)throws Exception{
 
 
-		System.out.println(requestId);
 		homeService.delete(requestId);
 
 

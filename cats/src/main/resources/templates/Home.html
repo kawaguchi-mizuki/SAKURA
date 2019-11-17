@@ -58,8 +58,12 @@
 
 
 
-		<div class="center">
+		<div th:if="${count != 0}"class="center">
 			<span class="badge badge-danger"><p  class="countpop">新しいリクエストが</p><p th:text="${count}" class="countpop"></p><p  class="countpop">件届いています</p></span>
+		</div>
+
+		<div th:if="${approvalName}" class="center">
+			<span class="badge badge-success"><p th:text="${approvalName}" class="countpop"></p><p  class="countpop">さんを追加しました</p></span>
 
 		</div>
 
