@@ -91,8 +91,11 @@
 						<!--右 3段目-->
 						<div class="col-7"></div>
 						<div class="col-2">
-							<button type="button" name="button" id="openModal"
+						<form th:action="@{/Request/Approval}"  method="post">
+							<input type="hidden" name="requestId" th:value="${dto.requestId}">
+							<button type="submit" name="button" id="openModal"
 								class="btn-insert btn btn-primary">追加</button>
+						</form>
 						</div>
 
 						<div class="col-2">
