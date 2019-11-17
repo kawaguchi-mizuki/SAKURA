@@ -74,6 +74,19 @@ public class HomeService {
 
 	}
 
+	public String getName(Integer requestId) {
+
+		String approvalName;
+
+		HomeRequestTblEntity entity = homeRequestRepository.getOne(requestId);
+
+		approvalName = entity.getStudentIdTbl().getStudentName();
+
+
+		return approvalName;
+
+	}
+
 
 
 }
