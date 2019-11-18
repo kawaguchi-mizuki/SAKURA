@@ -16,6 +16,7 @@ import cats.dto.HomeRequestDto;
 import cats.dto.LoginInfoDto;
 import cats.param.SessionConst;
 import cats.service.HomeService;
+import cats.service.TalkService;
 
 @RestController
 @RequestMapping(value = { "/Request" })
@@ -26,6 +27,9 @@ public class RequestController {
 
 	@Autowired
 	HomeService homeService;
+
+	@Autowired
+	TalkService talkService;
 
 
 
@@ -39,11 +43,13 @@ public class RequestController {
 
 
 			//リクエスト承認フラグ更新処理
-			homeService.approvalId(requestId);
+			Integer approvalId = homeService.approvalId(requestId);
+
+			//承認したユーザーとのトークを作成
+			 talkService.getCreateTalk(approvalId);
 
 			//リクエスト承認したユーザーの名前を取得
 			String approvalName = homeService.getName(requestId);
-
 
 			//ユーザー情報をセッションから取得
 			LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);

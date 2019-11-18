@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+</body>
+
+	<div  th:each="dto:${talkselectlist}">
+
+		<p th:text="${dto.TalkId}">
+		<p th:text="${dto.studentIdReceive}">
+		<p th:text="${dto.studentIdSent}">
+
+
+	</div>
+</html>
