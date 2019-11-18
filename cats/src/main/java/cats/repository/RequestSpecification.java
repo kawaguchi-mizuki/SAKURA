@@ -8,6 +8,7 @@ import javax.persistence.criteria.Root;
 import org.springframework.data.jpa.domain.Specification;
 
 import cats.entity.HomeRequestTblEntity;
+import cats.entity.TalkTblEntity;
 
 public class RequestSpecification {
 
@@ -37,6 +38,21 @@ public class RequestSpecification {
 		};
 
 	}
+
+	public static Specification<TalkTblEntity> approvelIdEqules(Integer studentId){
+
+		return studentId == null?null:new Specification<TalkTblEntity>() {
+
+			@Override
+			public Predicate toPredicate(Root<TalkTblEntity> root, CriteriaQuery<?> query,
+					CriteriaBuilder cb) {
+				// TODO 自動生成されたメソッド・スタブ
+				return cb.equal(root.get("studentIdReceive"),studentId);
+			}
+		};
+
+	}
+
 
 
 }

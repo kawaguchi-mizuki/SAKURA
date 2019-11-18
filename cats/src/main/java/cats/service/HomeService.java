@@ -56,13 +56,17 @@ public class HomeService {
 	/**リクエスト承認処理
 	 * @param requestId
 	 */
-	public void approvalId(Integer requestId) {
+	public Integer approvalId(Integer requestId) {
 
 		HomeRequestTblEntity entity = homeRequestRepository.getOne(requestId);
 
 		entity.setApproval(1);
 
 		homeRequestRepository.save(entity);
+
+		Integer approvelId = entity.getStudentIdTbl().getStudentId();
+
+		return approvelId;
 	}
 
 	/**リクエスト削除
