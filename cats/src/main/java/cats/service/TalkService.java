@@ -50,10 +50,7 @@ public class TalkService {
 
 
 
-
-
-
-		List<TalkTblEntity> talkList = talkRepository.findAll(Specification.where(IdEqules(loginInfo.getStudentId())),new Sort(Sort.Direction.DESC,"TalkId"));
+		List<TalkTblEntity> talkList = talkRepository.findAll(Specification.where(IdEqules(loginInfo.getStudentId()).or(RIdEqules(loginInfo.getStudentId()))),new Sort(Sort.Direction.DESC,"TalkId"));
 
 
 		//entity -> DTO

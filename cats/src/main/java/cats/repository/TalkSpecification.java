@@ -25,4 +25,18 @@ public class TalkSpecification {
 		};
 	}
 
+	public static Specification<TalkTblEntity> RIdEqules(Integer studentId){
+
+		return studentId == null?null:new Specification<TalkTblEntity>() {
+
+
+			@Override
+			public Predicate toPredicate(Root<TalkTblEntity> root, CriteriaQuery<?> query,
+					CriteriaBuilder cb) {
+				// TODO 自動生成されたメソッド・スタブ
+				return cb.equal(root.get("studentIdReceive"),studentId);
+			}
+		};
+	}
+
 }

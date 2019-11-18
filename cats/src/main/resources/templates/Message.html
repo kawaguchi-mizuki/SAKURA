@@ -29,42 +29,45 @@
 	<div class="txt row">
 
 		<div class="col-2">
-			<a href=" " class="back"> 戻る </a>
+			<a href="/Message/View" th:href="@{/Talk/Select}" class="back"> 戻る </a>
 		</div>
 		<div class="col-8"><p th:text="${receiveName}"></p></div>
 		<div class="col-2"></div>
 	</div>
 
-	<div class="line-bc">
+	<div class="line-bc" th:each="dto:${messagelist}">
 		<!--①LINE会話全体を囲う-->
 
 		<!--②左コメント始-->
-		<div class="balloon6">
+		<div class="balloon6"  th:if="${dto.studentIdSend != studentId}">
 			<div class="faceicon">
 				<img src="/img/icon.jpg">
 			</div>
-			<div class="chatting">
+			<div class="chatting"  >
 				<div class="says">
-					<p>左ふきだし文左ふきだし文左ふきだし文左ふきだし文左ふきだし文左ふきだし文左ふきだし文左ふきだし文左ふきだし文</p>
+					<p th:text="${dto.message}"></p>
 				</div>
 			</div>
 		</div>
 		<!--②/左コメント終-->
 
 		<!--③右コメント始-->
-		<div class="mycomment">
-			<p>右ふきだし文</p>
+		<div class="mycomment" th:if="${dto.studentIdSend == studentId}">
+			<p th:text="${dto.message}">右ふきだし文</p>
 		</div>
 		<!--/③右コメント終-->
 
 	</div>
 	<!--/①LINE会話終了-->
 	<div class="chatsend">
-		<form action="">
+		<form th:action="@{/Message/Insert}" method="post" >
+			<input type="hidden" name="receiveName" th:value="${receiveName}">
+			<input type="hidden" name="talkId" th:value="${talkId}">
 			<input type="text" name="talk"> <input type="submit"
 				value="送信">
+		</form>
 	</div>
-	</form>
+
 
 
 </body>
