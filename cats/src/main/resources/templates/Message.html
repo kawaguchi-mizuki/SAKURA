@@ -31,7 +31,8 @@
 		<div class="col-2">
 			<a href="/Message/View" th:href="@{/Talk/Select}" class="back"> 戻る </a>
 		</div>
-		<div class="col-8"><p th:text="${receiveName}"></p></div>
+		<div class="col-8"   th:if="${dto.studentIdSend == studentId}"><p th:text="${receiveName}"></p></div>
+		<div class="col-8"  th:if="${dto.studentIdSend != studentId}"><p th:text="${sendName}"></p></div>
 		<div class="col-2"></div>
 	</div>
 
@@ -62,6 +63,7 @@
 	<div class="chatsend">
 		<form th:action="@{/Message/Insert}" method="post" >
 			<input type="hidden" name="receiveName" th:value="${receiveName}">
+			<input type="hidden" name="sendName" th:value="${sendName}">
 			<input type="hidden" name="talkId" th:value="${talkId}">
 			<input type="text" name="talk"> <input type="submit"
 				value="送信">

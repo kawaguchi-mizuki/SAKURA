@@ -14,8 +14,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import cats.dto.LoginInfoDto;
 import cats.dto.MessageDto;
+import cats.dto.TalkSelectDto;
 import cats.param.SessionConst;
 import cats.service.MessageService;
+import cats.service.TalkService;
 
 @RestController
 @RequestMapping(value = { "/Message" })
@@ -27,6 +29,9 @@ public class MessageController {
 	@Autowired
 	MessageService messageService;
 
+	@Autowired
+	TalkService talkSerivce;
+
 	/**トーク画面表示
 	 * @param talkId
 	 * @param receiveName
@@ -34,27 +39,30 @@ public class MessageController {
 	 * @return
 	 */
 	@RequestMapping(value = { "/View" }, method = RequestMethod.GET)
-	public ModelAndView MessageView(@RequestParam Integer talkId,@RequestParam String receiveName, ModelAndView mav) {
+	public ModelAndView MessageView(@RequestParam Integer talkId,@RequestParam String receiveName,@RequestParam String sendName, ModelAndView mav) {
 
 
 		List<MessageDto> messagelist = messageService.getAllList(talkId);
 
 
+		TalkSelectDto dto = talkSerivce.getTalk(talkId);
 
 		//ユーザー情報をセッションから取得
 		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
 
+		mav.addObject("dto",dto);
 		mav.addObject("studentId",loginInfo.getStudentId());
 		mav.addObject("messagelist",messagelist);
 		mav.addObject("talkId",talkId);
 		mav.addObject("receiveName",receiveName);
+		mav.addObject("sendName",sendName);
 		mav.setViewName("Message");
 
 		return mav;
 
 	}
 	@RequestMapping(value = { "/Insert" }, method = RequestMethod.POST)
-	public ModelAndView MessageInsert(@RequestParam Integer talkId,@RequestParam String talk,@RequestParam String receiveName,ModelAndView mav) {
+	public ModelAndView MessageInsert(@RequestParam Integer talkId,@RequestParam String talk,@RequestParam String receiveName,@RequestParam String sendName,ModelAndView mav) {
 
 
 		MessageDto dto = new MessageDto();
@@ -63,16 +71,19 @@ public class MessageController {
 
 		messageService.insert(dto);
 
+		TalkSelectDto talkdto = talkSerivce.getTalk(talkId);
 
 		List<MessageDto> messagelist = messageService.getAllList(talkId);
 
 		//ユーザー情報をセッションから取得
 		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
 
+		mav.addObject("dto",talkdto);
 		mav.addObject("studentId",loginInfo.getStudentId());
 		mav.addObject("messagelist",messagelist);
 		mav.addObject("talkId",talkId);
 		mav.addObject("receiveName",receiveName);
+		mav.addObject("sendName",sendName);
 		mav.setViewName("Message");
 
 		return mav;
