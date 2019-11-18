@@ -28,15 +28,6 @@
 
 
 
-	<!-- <div th:each="dto:${talkselectlist}">
-
-		<p th:text="${dto.TalkId}">
-		<p th:text="${dto.studentIdReceive}">
-		<p th:text="${dto.studentIdSent}">
-		</div>
-
-	 -->
-
 	<div class="txt">
 		<p>チャット</p>
 	</div>
@@ -44,7 +35,7 @@
 	<!-- 一人分のチャット -->
 
 	<div class="chat-list row" th:each="dto:${talkselectlist}">
-		<a href="chat.html"></a>
+		<a href="/Message/View" th:href="@{/Message/View(talkId=${dto.talkId},receiveName=${dto.studentName})}"></a>
 		<!-- このリンククリック範囲が親<div>まで広がる -->
 		<div class="box-icon col-3 center">
 			<!--左 アイコン部分-->
