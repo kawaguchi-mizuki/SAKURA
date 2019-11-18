@@ -14,9 +14,11 @@ import org.springframework.stereotype.Service;
 
 import cats.dto.LoginInfoDto;
 import cats.dto.TalkSelectDto;
+import cats.entity.StudentTblEntity;
 import cats.entity.TalkTblEntity;
 import cats.param.SessionConst;
 import cats.repository.HomeRequestRepository;
+import cats.repository.StudentRepository;
 import cats.repository.TalkRepository;
 
 
@@ -29,6 +31,9 @@ public class TalkService {
 
 	@Autowired
 	HomeRequestRepository requestRepository;
+
+	@Autowired
+	StudentRepository studentRepository;
 
 	@Autowired
 	HttpSession session;
@@ -56,8 +61,14 @@ public class TalkService {
 					TalkSelectDto dto = new TalkSelectDto();
 
 					dto.setTalkId(entity.getTalkId());
-					dto.setStudentIdSent(entity.getStudentIdReceive());
-					dto.setStudentIdReceive(entity.getStudentIdSent());
+					dto.setStudentIdSent(entity.getStudentIdSent());
+					dto.setStudentIdReceive(entity.getStudentIdReceive());
+
+					StudentTblEntity studentEntity;
+
+					studentEntity = studentRepository.getOne(dto.getStudentIdReceive());
+
+					dto.setStudentName(studentEntity.getStudentName());
 
 					list.add(dto);
 				}

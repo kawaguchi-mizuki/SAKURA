@@ -11,5 +11,7 @@ public class TalkSelectDto {
 
 	private Integer studentIdReceive;
 
+	private String studentName;
+
 
 }
