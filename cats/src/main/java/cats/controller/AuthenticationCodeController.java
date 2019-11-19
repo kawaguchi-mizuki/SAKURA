@@ -5,15 +5,14 @@ import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import cats.dto.AuthSearchDto;
 import cats.dto.AuthenticationDto;
-import cats.form.authForm;
 import cats.service.AuthenticationService;
 
 import java.text.SimpleDateFormat;
@@ -42,14 +41,23 @@ public class AuthenticationCodeController {
 	@RequestMapping(value = {"/start"},method=RequestMethod.GET)
 	
 	public ModelAndView start(ModelAndView mav)  {
-		mav.setViewName("send");
+		mav.setViewName("Login");
 		return mav;
 	}
 	
-	@RequestMapping(value = {"/send"},method=RequestMethod.POST)
+	@RequestMapping(value = {"/check"})
+	
+	public ModelAndView check(ModelAndView mav)  {
+		mav.setViewName("TwoCheck");
+		return mav;
+	}
+	
+	@RequestMapping(value = {"/TwoCheck"},method=RequestMethod.POST)
 	public ModelAndView send(
 			ModelAndView mav,
-			@RequestParam("studentId") Integer studentId){
+			@RequestParam("studentId") Integer studentId
+			)
+	{
 		
 		session.setAttribute("authStudent",studentId);
 		
@@ -73,13 +81,13 @@ public class AuthenticationCodeController {
         Date NowDate = calendar.getTime();
 		
         //登録確認
-        Integer student = authentication.search(studentId);
+        AuthSearchDto asd = authentication.search(studentId);
         
-        if(student != null) {
+        if(asd != null) {
         	
         	String errMsg = "この学籍番号は既に登録されています。";
         	mav.addObject("errMsg",errMsg);
-        	
+        	mav.setViewName("TwoCheck");
         	
         	return mav;
         	
@@ -96,7 +104,7 @@ public class AuthenticationCodeController {
 		}else {
 			String errMsg = "学籍番号が正しくありません";
 			mav.addObject("errMsg",errMsg);
-			
+			mav.setViewName("TwoCheck");
 			return mav;
 		}
 	
@@ -104,7 +112,7 @@ public class AuthenticationCodeController {
 		authentication.insert(studentId, pass, NowDate);
 		
 		
-		mav.setViewName("get");
+		mav.setViewName("TwoConf");
 		
 				return mav;
 	}
@@ -119,11 +127,12 @@ public class AuthenticationCodeController {
 
         msg.setTo(mail);
         msg.setSubject("認証コード送信");
-        msg.setText("下記の認証コードを入力欄に入力してください。\n\n\n"+pass);
+        msg.setText("下記の認証コードを入力欄に入力してください。\n認証コードの期限は30分です。"
+        		+ "期限を超えた場合はお手数ですがもう一度学籍番号の入力を行ってもらいます。\n\n"+pass);
         this.sender.send(msg);
     }
 	
-	@RequestMapping(value = {"/approval"},method=RequestMethod.POST)
+	@RequestMapping(value = {"/TwoConf"},method=RequestMethod.POST)
 	public ModelAndView approval(
 			ModelAndView mav,
 			@RequestParam("passauth") String passauth
@@ -146,13 +155,18 @@ public class AuthenticationCodeController {
 			session.invalidate();
 			
 			//認証成功
-			mav.setViewName("");
+			mav.setViewName("Login");
 			
-		}else {
+		}else if(dto.getPass() != passauth){
 			//認証失敗
 			String errMsg = "認証コードが正しくありません";
 			mav.addObject("errMsg",errMsg);
-			mav.setViewName("");
+			mav.setViewName("TwoConf");
+		}else {
+			//認証コードの期限切れ
+			String errMsg = "認証コードの期限が切れています。もう一度学籍番号を入力してください。";
+			mav.addObject("errMsg",errMsg);
+			mav.setViewName("TwoCheck");
 		}
 		
 		

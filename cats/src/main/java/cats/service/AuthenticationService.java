@@ -5,9 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import cats.dto.AuthSearchDto;
 import cats.dto.AuthenticationDto;
 import cats.entity.AuthSearchEntity;
 import cats.entity.AuthenticationEntity;
+import cats.repository.AuthSearchRepository;
 import cats.repository.AuthenticationRepository;
 
 @Service
@@ -16,6 +18,9 @@ public class AuthenticationService {
 	
 	@Autowired
 	AuthenticationRepository authRepository;
+	
+	@Autowired
+	AuthSearchRepository authSearchRepository;
 	
 	
 	
@@ -52,21 +57,21 @@ public class AuthenticationService {
 		return dto;	 
 	}
 
-	public Integer search(Integer studentId) {
+	public AuthSearchDto search(Integer studentId) {
 		// TODO Auto-generated method stub
 		
 		AuthSearchEntity authEntity;
 		
-		authEntity = authRepository.searchstudentId(studentId);
+		AuthSearchDto dto = null;
 		
-		Integer presence = null ;
+		authEntity = authSearchRepository.searchstudentId(studentId);
 		
-		if(authEntity.getStudent_id() != null) {
-			
-			presence = authEntity.getStudent_id();
-					
+		if(authEntity != null ) {
+			dto = new AuthSearchDto();
+			dto.setStudentId(authEntity.getStudent_id());
 		}
-		return presence;
+		
+		return dto;
 	}
 	
 
