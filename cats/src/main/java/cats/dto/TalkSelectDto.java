@@ -7,11 +7,13 @@ public class TalkSelectDto {
 
 	private Integer talkId;
 
-	private Integer studentIdSent;
+	private Integer studentIdSend;
 
 	private Integer studentIdReceive;
 
-	private String studentName;
+	private String studentSendName;
+
+	private String studentReceiveName;
 
 
 }

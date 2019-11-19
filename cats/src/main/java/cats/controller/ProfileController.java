@@ -57,6 +57,10 @@ public class ProfileController {
 
 		ProfileDto dto = profileService.getDisplayBoard(loginInfo);
 
+		//ポイント反映
+		int point = loginInfo.getPoint();
+
+		mav.addObject("point",point);
 		mav.addObject("ProfileDto", dto);
 		mav.setViewName("ProfileView");
 		return mav;
@@ -82,6 +86,13 @@ public class ProfileController {
 
 		studentbeans.setHobbyId(hobbyId);
 
+		//ユーザー情報をセッションから取得
+		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
+
+		//ポイント反映
+		int point = loginInfo.getPoint();
+
+		mav.addObject("point",point);
 		mav.addObject("ProfileDto", dto);
 		mav.addObject("studentbeans",studentbeans);
 		mav.addObject("password",password);
@@ -104,6 +115,11 @@ public class ProfileController {
 		ProfileDto dto = new ProfileDto();
 		String ErrMsg;
 
+
+		//ユーザー情報をセッションから取得
+		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
+
+
 		//入力値チェック
 		ErrMsg = ValidationCheck(password,r_password);
 
@@ -115,8 +131,10 @@ public class ProfileController {
 			//学校一覧を取得
 			List<SchoolDto> schoollist = schoolService.getAllList();
 
+			//ポイント反映
+			int point = loginInfo.getPoint();
 
-
+			mav.addObject("point",point);
 			mav.addObject("hobbylist", hobbylist);
 			mav.addObject("schoollist", schoollist);
 			mav.setViewName("ProfileUpdate");
@@ -128,6 +146,10 @@ public class ProfileController {
 
 		dto = profileService.updateProfile(studentbeans,password);
 
+		//ポイント反映
+		int point = loginInfo.getPoint();
+
+		mav.addObject("point",point);
 		mav.addObject("ProfileDto", dto);
 		mav.setViewName("ProfileView");
 

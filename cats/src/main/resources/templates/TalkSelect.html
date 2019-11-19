@@ -18,7 +18,7 @@
 				</a>
 			</div>
 			<div class="col-5">
-				<img src="/img/coin.png" width="50"> 300ポイント
+				<img src="/img/coin.png" width="50" class="pointImg"><p  th:text="${point}" class="point" ></p><p class="point" > ポイント</p>
 			</div>
 			<div class="col-2">
 				<a th:href="@{/Logout}">ログアウト</a>
@@ -28,15 +28,6 @@
 
 
 
-	<!-- <div th:each="dto:${talkselectlist}">
-
-		<p th:text="${dto.TalkId}">
-		<p th:text="${dto.studentIdReceive}">
-		<p th:text="${dto.studentIdSent}">
-		</div>
-
-	 -->
-
 	<div class="txt">
 		<p>チャット</p>
 	</div>
@@ -44,16 +35,18 @@
 	<!-- 一人分のチャット -->
 
 	<div class="chat-list row" th:each="dto:${talkselectlist}">
-		<a href="chat.html"></a>
+		<a href="/Message/View" th:href="@{/Message/View(talkId=${dto.talkId},sendName=${dto.studentSendName},receiveName=${dto.studentReceiveName})}"></a>
 		<!-- このリンククリック範囲が親<div>まで広がる -->
 		<div class="box-icon col-3 center">
 			<!--左 アイコン部分-->
 			<a href="prof.html"><img src="/img/icon.jpg" alt="アイコン"
 				class="icon-image rounded img-fluid"></a>
 		</div>
-		<div class="col-9">
-			<h3 th:text="${dto.studentName}"></h3>
-			yes we can!
+		<div class="col-9" th:if="${selectId != dto.studentIdSend}">
+			<h3 th:text="${dto.studentSendName}"></h3>
+		</div>
+		<div class="col-9" th:if="${selectId == dto.studentIdSend}">
+			<h3 th:text="${dto.studentReceiveName}"></h3>
 		</div>
 		</a>
 	</div>

@@ -37,6 +37,7 @@ public class BoardController {
 	@Autowired
 	HttpSession session;
 
+
 	/**掲示板投稿画面表示
 	 * @param mav
 	 * @return
@@ -47,9 +48,15 @@ public class BoardController {
 		//カテゴリ一覧を取得
 		List<CategoryDto> categorylist = categoryService.getAllList();
 
+		//ユーザー情報をセッションから取得
+		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
+
+		//ポイント反映
+		int point = loginInfo.getPoint();
+
+		mav.addObject("point",point);
 		mav.setViewName("BordCreate");
 		mav.addObject("categorylist", categorylist);
-
 
 		return mav;
 	}
@@ -66,7 +73,10 @@ public class BoardController {
 		//ユーザー情報をセッションから取得
 		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
 
+		//ポイント反映
+		int point = loginInfo.getPoint();
 
+		mav.addObject("point",point);
 		mav.addObject("studentId",loginInfo.getStudentId());
 		mav.addObject("boardlist",boardlist);
 		mav.setViewName("Bord");
@@ -88,14 +98,18 @@ public class BoardController {
 
 		dto = getCreateBoardDto(boardbeans);
 
-			//掲示板作成処理
+		//掲示板作成処理
 		boardService.insert(dto);
 
 		List<BoardListDto> boardlist = boardService.getAllList();
+
 		//ユーザー情報をセッションから取得
 		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
 
+		//ポイント反映
+		int point = loginInfo.getPoint();
 
+		mav.addObject("point",point);
 		mav.addObject("studentId",loginInfo.getStudentId());
 		mav.addObject("boardlist",boardlist);
 		mav.setViewName("Bord");
@@ -120,6 +134,10 @@ public class BoardController {
 		//ユーザー情報をセッションから取得
 		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
 
+		//ポイント反映
+		int point = loginInfo.getPoint();
+
+		mav.addObject("point",point);
 		mav.addObject("studentId",loginInfo.getStudentId());
 		mav.setViewName("Bord");
 

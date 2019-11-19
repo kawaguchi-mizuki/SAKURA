@@ -50,10 +50,7 @@ public class TalkService {
 
 
 
-
-
-
-		List<TalkTblEntity> talkList = talkRepository.findAll(Specification.where(IdEqules(loginInfo.getStudentId())),new Sort(Sort.Direction.DESC,"TalkId"));
+		List<TalkTblEntity> talkList = talkRepository.findAll(Specification.where(IdEqules(loginInfo.getStudentId()).or(RIdEqules(loginInfo.getStudentId()))),new Sort(Sort.Direction.DESC,"TalkId"));
 
 
 		//entity -> DTO
@@ -61,14 +58,20 @@ public class TalkService {
 					TalkSelectDto dto = new TalkSelectDto();
 
 					dto.setTalkId(entity.getTalkId());
-					dto.setStudentIdSent(entity.getStudentIdSent());
+					dto.setStudentIdSend(entity.getStudentIdSent());
 					dto.setStudentIdReceive(entity.getStudentIdReceive());
 
 					StudentTblEntity studentEntity;
+					StudentTblEntity sendstudentEntity;
+
 
 					studentEntity = studentRepository.getOne(dto.getStudentIdReceive());
 
-					dto.setStudentName(studentEntity.getStudentName());
+					dto.setStudentReceiveName(studentEntity.getStudentName());
+
+					sendstudentEntity = studentRepository.getOne(dto.getStudentIdSend());
+
+					dto.setStudentSendName(sendstudentEntity.getStudentName());
 
 					list.add(dto);
 				}
@@ -89,6 +92,31 @@ public class TalkService {
 
 		talkRepository.save(entity);
 
+	}
+
+	public TalkSelectDto getTalk(Integer talkId) {
+
+		TalkSelectDto dto = new TalkSelectDto();
+
+		TalkTblEntity entity = talkRepository.getOne(talkId);
+
+		dto.setTalkId(entity.getTalkId());
+		dto.setStudentIdSend(entity.getStudentIdSent());
+		dto.setStudentIdReceive(entity.getStudentIdReceive());
+
+		StudentTblEntity studentEntity;
+		StudentTblEntity sendstudentEntity;
+
+
+		studentEntity = studentRepository.getOne(dto.getStudentIdReceive());
+
+		dto.setStudentReceiveName(studentEntity.getStudentName());
+
+		sendstudentEntity = studentRepository.getOne(dto.getStudentIdSend());
+
+		dto.setStudentSendName(sendstudentEntity.getStudentName());
+
+		return dto;
 	}
 
 
