@@ -509,4 +509,30 @@ button {
   	float: left;
   	margin-top:15px;
   }
+  .msgchat{
+	padding-bottom:60px;
+}
 
+/* モーダルを縦横中央に表示させるための設定 */
+.modal-dialog {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100%;
+  margin: auto;
+  pointer-events: none;
+}
+
+.modal-content {
+    pointer-events: all;
+}
+
+/* homeの初回ログインメッセージの表示*/
+.login-first-msg {
+    background: -moz-linear-gradient(top, #f48776, #df4444);
+    background: -webkit-linear-gradient(top, #f48776, #df4444);
+    background: linear-gradient(to bottom, #f48776, #df4444);
+    color: white;
+
+		border-radius: 35px;
+}
