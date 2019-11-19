@@ -71,7 +71,10 @@ public class LoginController {
 		//受け取ったリクエスト数を取得
 		int requestcount = requestlist.size();
 
+		//ポイント反映
+	    int point = loginInfo.getPoint();
 
+	    mav.addObject("point",point);
 		mav.addObject("count",requestcount);
 		mav.addObject("requestlist", requestlist);
 		mav.setViewName("Home");

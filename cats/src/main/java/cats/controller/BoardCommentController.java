@@ -14,6 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import cats.beans.BoardCommentBeans;
 import cats.dto.BoardCommentDto;
+import cats.dto.LoginInfoDto;
+import cats.param.SessionConst;
 import cats.service.BoardCommentService;
 
 //掲示板
@@ -42,7 +44,14 @@ public class BoardCommentController {
 
 		List<BoardCommentDto> commentlist = boardcommnetService.getAllList(boardId);
 
+		//ユーザー情報をセッションから取得
+		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
 
+		//ポイント反映
+		int point = loginInfo.getPoint();
+
+
+		mav.addObject("point",point);
 		mav.addObject("commentlist",commentlist);
 		mav.addObject("boardcommentbeans",boardcommentbeans);
 		mav.addObject("boardId",boardId);
@@ -60,19 +69,20 @@ public class BoardCommentController {
 
 		dto = getCreateComment(boardcommetbeans);
 
-
 		dto = boardcommnetService.insert(dto);
-
 
 		List<BoardCommentDto> commentlist = boardcommnetService.getAllList(dto.getBoardId());
 
-
-		mav.addObject("commentlist",commentlist);
-
 		int boardId = dto.getBoardId();
 
+		//ユーザー情報をセッションから取得
+		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
 
+		//ポイント反映
+		int point = loginInfo.getPoint();
 
+		mav.addObject("point",point);
+		mav.addObject("commentlist",commentlist);
 		mav.addObject("boardId",boardId);
 		mav.addObject("boardTitle",boardTitle);
 		mav.setViewName("BordComment");

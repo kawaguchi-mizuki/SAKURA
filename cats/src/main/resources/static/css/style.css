@@ -501,4 +501,12 @@ button {
 	  bottom:0;
 	  width: 100%;
   }
+  .pointImg{
+  	float: left;
+  	margin-right:10px;
+  }
+  .point{
+  	float: left;
+  	margin-top:15px;
+  }
 

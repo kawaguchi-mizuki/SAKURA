@@ -50,6 +50,10 @@ public class MessageController {
 		//ユーザー情報をセッションから取得
 		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
 
+		//ポイント反映
+		int point = loginInfo.getPoint();
+
+		mav.addObject("point",point);
 		mav.addObject("dto",dto);
 		mav.addObject("studentId",loginInfo.getStudentId());
 		mav.addObject("messagelist",messagelist);
@@ -78,6 +82,10 @@ public class MessageController {
 		//ユーザー情報をセッションから取得
 		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
 
+		//ポイント反映
+		int point = loginInfo.getPoint();
+
+		mav.addObject("point",point);
 		mav.addObject("dto",talkdto);
 		mav.addObject("studentId",loginInfo.getStudentId());
 		mav.addObject("messagelist",messagelist);

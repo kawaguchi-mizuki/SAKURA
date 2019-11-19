@@ -33,14 +33,16 @@ public class TalkSelectController {
 	public  ModelAndView TalkSelect(ModelAndView mav) {
 
 
+		//トークリストを取得
 		List<TalkSelectDto> talkselectlist = talkService.getAllList();
-
-
-
 
 		//ユーザー情報をセッションから取得
 		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
 
+		//ポイント反映
+		int point = loginInfo.getPoint();
+
+		mav.addObject("point",point);
 		mav.addObject("selectId",loginInfo.getStudentId());
 		mav.addObject("talkselectlist",talkselectlist);
 		mav.setViewName("TalkSelect");
