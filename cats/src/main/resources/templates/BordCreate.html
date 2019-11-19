@@ -45,8 +45,18 @@
 		<p><font color="red">個人情報</font>や他人を<font color="red">誹謗中傷</font>する内容は禁止しています。</p>
 		<br>
 		<p><font color="red">アダルト</font>内容のタイトルも禁止しています。</p>
+		<br>
+		<p>掲示板投稿は<font color="red">50ポイント</font>消費します</p>
+		<br>
+
+
 
 	</div>
+
+	<div th:if="${ErrMsg}">
+		<b><font color="red"><p th:text="${ErrMsg}"></p></font></b>
+	</div>
+
 	<form th:action="@{/Board/Insert}" th:object="${boardbeans}"   method="get">
 
 	    <p class="bg-primary rounded text-white title">カテゴリー</p>

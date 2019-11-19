@@ -54,11 +54,27 @@ public class BoardController {
 		//ポイント反映
 		int point = loginInfo.getPoint();
 
+
+
 		mav.addObject("point",point);
 		mav.setViewName("BordCreate");
 		mav.addObject("categorylist", categorylist);
 
 		return mav;
+	}
+
+	private String PointCheck(int point) {
+
+		String ErrMsg = "";
+
+		if(point<50) {
+
+			ErrMsg = "ポイントが足りていません";
+
+		}
+
+		return ErrMsg;
+
 	}
 
 	/**掲示板表示
@@ -109,7 +125,39 @@ public class BoardController {
 		//ポイント反映
 		int point = loginInfo.getPoint();
 
-		mav.addObject("point",point);
+		String ErrMsg;
+
+		 ErrMsg = PointCheck(point);
+
+		 //ポイントチェック
+		 if(!(ErrMsg.equals(""))){
+
+
+				//カテゴリ一覧を取得
+				List<CategoryDto> categorylist = categoryService.getAllList();
+
+				mav.addObject("ErrMsg",ErrMsg);
+				mav.addObject("point",point);
+				mav.setViewName("BordCreate");
+				mav.addObject("categorylist", categorylist);
+
+				return mav;
+
+		 }
+
+
+
+
+
+		loginInfo = boardService.boardPoint(point);
+
+		session.setAttribute(SessionConst.LOGININFO, loginInfo);
+
+
+
+
+
+		mav.addObject("point",loginInfo.getPoint());
 		mav.addObject("studentId",loginInfo.getStudentId());
 		mav.addObject("boardlist",boardlist);
 		mav.setViewName("Bord");

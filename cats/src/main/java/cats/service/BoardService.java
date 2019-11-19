@@ -4,15 +4,19 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import cats.dto.BoardListDto;
 import cats.dto.CreateBoardDto;
+import cats.dto.LoginInfoDto;
 import cats.entity.BoardTblEntity;
 import cats.entity.CategoryTblEntity;
 import cats.entity.StudentTblEntity;
+import cats.param.SessionConst;
 import cats.repository.BoardRepository;
 import cats.repository.CategoryRepository;
 import cats.repository.StudentRepository;
@@ -28,6 +32,9 @@ public class BoardService {
 
 	@Autowired
 	CategoryRepository categoryRepository;
+
+	@Autowired
+	HttpSession session;
 
 	public void insert(CreateBoardDto dto) {
 
@@ -87,6 +94,34 @@ public class BoardService {
 	public void BoardDelete(Integer boardId) {
 
 		this.boardRepository.deleteById(boardId);
+
+	}
+
+	public LoginInfoDto boardPoint(Integer point) {
+
+
+		//ユーザー情報をセッションから取得
+		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
+
+
+		StudentTblEntity entity = studentRepository.getOne(loginInfo.getStudentId());
+
+
+		point = point - 50;
+
+		entity.setPoint(point);
+
+		studentRepository.save(entity);
+
+		LoginInfoDto dto = new LoginInfoDto();
+
+		dto.setLastLog(entity.getLastLog());
+		dto.setPoint(entity.getPoint());
+		dto.setStudentId(entity.getStudentId());
+
+		session.invalidate();
+
+		return dto;
 
 	}
 
