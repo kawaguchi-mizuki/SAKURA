@@ -5,11 +5,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import cats.entity.AuthSearchEntity;
 import cats.entity.AuthenticationEntity;
 
 @Repository
-public interface AuthenticationRepository 
+public interface AuthenticationRepository
 extends JpaRepository<AuthenticationEntity,Integer>{
 
 	@Query("select a from AuthenticationEntity a where student_id = :student_id")

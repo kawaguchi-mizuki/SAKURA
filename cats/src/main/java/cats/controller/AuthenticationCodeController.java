@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import cats.beans.StudentBeans;
 import cats.dto.AuthSearchDto;
 import cats.dto.AuthenticationDto;
+import cats.dto.CourseDto;
 import cats.dto.CreateUserDto;
 import cats.dto.HobbyDto;
 import cats.dto.SchoolDto;
@@ -164,10 +165,13 @@ public class AuthenticationCodeController {
 
 		Integer time = date.compareTo(dto.getNowDate());
 
+		System.out.println(passauth);
+		System.out.println(dto.getPass());
+
 
 		if(dto.getPass().equals(passauth) && time<=0){
-			//セッションの破棄
-			session.invalidate();
+
+
 
 			//認証成功
 			//趣味一覧を取得
@@ -183,11 +187,17 @@ public class AuthenticationCodeController {
 
 			StudentBeans studentbeans = new StudentBeans();
 
+
+
+			mav.addObject("studentId",authStudent);
 			mav.addObject("studentbeans", studentbeans);
 			mav.addObject("createUserDto", createdto);
 			mav.setViewName("UserEntry");
 			mav.addObject("hobbylist", hobbylist);
 			mav.addObject("schoollist", schoollist);
+
+			//セッションの破棄
+			session.invalidate();
 
 
 			return mav;
@@ -208,6 +218,13 @@ public class AuthenticationCodeController {
 		return mav;
 
 	}
+	@RequestMapping("/GetCourseList")
+    public List<CourseDto> getucourselist(
+    		@RequestParam("schoolId")Integer schoolId) {
+
+
+        return courseService.getList(schoolId);
+    }
 
 }
 

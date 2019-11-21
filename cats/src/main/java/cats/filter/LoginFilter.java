@@ -23,6 +23,7 @@ public class LoginFilter implements Filter {
 		private String excludeDispList[] =
 			{
 				"/","/Login","/auth","/Logout","/css/.+","/img/.+","/error/.*","/User/Entry","/User/Check","/User/GetCourseList"
+				,"/check","/TwoCheck","/TwoConf"
 			};
 
 		@Autowired

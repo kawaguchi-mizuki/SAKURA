@@ -49,31 +49,31 @@ public class UserEntryController {
 	@Autowired
 	HttpSession session;
 
-	@RequestMapping(value = { "/Entry" }, method = RequestMethod.GET)
-	public ModelAndView UserEntry(ModelAndView mav) {
-
-		//趣味一覧を取得
-		List<HobbyDto> hobbylist = hobbyService.getAllList();
-		//学校一覧を取得
-		List<SchoolDto> schoollist = schoolService.getAllList();
-
-		//空のデータを作る
-		CreateUserDto dto = new CreateUserDto();
-
-
-
-
-		StudentBeans studentbeans = new StudentBeans();
-
-		mav.addObject("studentbeans", studentbeans);
-		mav.addObject("createUserDto", dto);
-		mav.setViewName("UserEntry");
-		mav.addObject("hobbylist", hobbylist);
-		mav.addObject("schoollist", schoollist);
-
-
-		return mav;
-	}
+//	@RequestMapping(value = { "/Entry" }, method = RequestMethod.GET)
+//	public ModelAndView UserEntry(ModelAndView mav) {
+//
+//		//趣味一覧を取得
+//		List<HobbyDto> hobbylist = hobbyService.getAllList();
+//		//学校一覧を取得
+//		List<SchoolDto> schoollist = schoolService.getAllList();
+//
+//		//空のデータを作る
+//		CreateUserDto dto = new CreateUserDto();
+//
+//
+//
+//
+//		StudentBeans studentbeans = new StudentBeans();
+//
+//		mav.addObject("studentbeans", studentbeans);
+//		mav.addObject("createUserDto", dto);
+//		mav.setViewName("UserEntry");
+//		mav.addObject("hobbylist", hobbylist);
+//		mav.addObject("schoollist", schoollist);
+//
+//
+//		return mav;
+//	}
 
 	/**
 	 * @param studentbeans

@@ -8,22 +8,33 @@
 </head>
 <body>
 <div class="t-center">
-	<form action="TwoCheckServlet" method="POST">
+	<form th:action="@{/TwoConf}" method="POST">
 		<img border="0" src="/img/rogo.jpg">
-		<p>認証コードが間違っています。</p>
+		<p th:text="${errMsg}" style="color:red"></p>
 		<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 
 
 
 			<div class="txbox">
-				<input type="text" class="usericon" placeholder="&#xf2bb; 認証コード入力" >
+				<input type="text" class="usericon" name="passauth" placeholder="&#xf2bb; 認証コード入力" id="passauth">
 			</div>
 
 		<div class="stylebutton">
-		<input type="submit" value="戻る" class="button"> <input
-			type="submit" value="認証" class="button">
+		<input type="button" onclick="history.back()" value="戻る" class="button">
+		<input type="submit" value="認証" class="button" onclick ="return check()">
 			</div>
 	</form>
 	</div>
 </body>
 </html>
+
+<script>
+function check(){
+	if(document.form.passauth.value == ""){
+		document.getElementById("errmsg").textContent = "認証コードを入力してください";
+		return false;
+	}else {
+		return true;
+	}
+}
+</script>
