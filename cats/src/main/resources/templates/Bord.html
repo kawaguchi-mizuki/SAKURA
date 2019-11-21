@@ -57,8 +57,20 @@
 					<!--右 情報部分-->
 					<div class="row mt-2 mb-2">
 						<!--右 1段目-->
-						<div class="col-7">
-							<button type="button" name="button" class="btn-category"><p th:text="${dto.categoryName}"></p></button>
+						<div class="col-7" th:if="${dto.categoryId == 1}">
+							<button type="button" name="button" class="btn-category1"><p th:text="${dto.categoryName}"></p></button>
+						</div>
+						<div class="col-7" th:if="${dto.categoryId == 2}">
+							<button type="button" name="button" class="btn-category2"><p th:text="${dto.categoryName}"></p></button>
+						</div>
+						<div class="col-7" th:if="${dto.categoryId == 3}">
+							<button type="button" name="button" class="btn-category3"><p th:text="${dto.categoryName}"></p></button>
+						</div>
+						<div class="col-7" th:if="${dto.categoryId == 4}">
+							<button type="button" name="button" class="btn-category4"><p th:text="${dto.categoryName}"></p></button>
+						</div>
+						<div class="col-7" th:if="${dto.categoryId == 5}">
+							<button type="button" name="button" class="btn-category5"><p th:text="${dto.categoryName}"></p></button>
 						</div>
 						<div class="col-5"><p th:text="${dto.boardDate}"></p></div>
 					</div>
