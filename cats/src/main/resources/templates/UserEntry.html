@@ -25,6 +25,7 @@
 	<form class="input" th:action="@{/User/Check}" th:object="${studentbeans}"   method="post" enctype="multipart/form-data" >
 
 
+		<input type="hidden" name="studentId" th:value="${studentId}"></input>
 		<input type="file" class="file" th:field="*{multipartFile}"/>
 
 		<br/>
@@ -171,10 +172,11 @@
 
 
 
+
 			  $.ajax({
 			    	cache: false,
 			        type : 'GET',
-			        url : /*[[@{/User/GetCourseList}]]*/"GetCourseList",
+			        url : /*[[@{/GetCourseList}]]*/"GetCourseList",
 			        data : params,
 			        dataType : 'json',
 			        processData : false,

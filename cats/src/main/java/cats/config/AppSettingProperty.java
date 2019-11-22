@@ -14,6 +14,7 @@ public class AppSettingProperty extends ConfigBase {
 	private static final String CONFIG_NAME = "app.properties";
 	private static final String CATS_UPLOAD_DIR = "cats.upload.directory";
 	private static final String CATS_UPLOAD_WK_DIR = "cats.upload.work.directory";
+	private static final String CATS_PROFILE_IMG_PREFIX = "cats.profile.img.prefix";
 
 
 	public AppSettingProperty() throws Exception {
@@ -45,6 +46,10 @@ public class AppSettingProperty extends ConfigBase {
 	public String getCatsUploadWorkDirectory(){
 		return getProperty(CATS_UPLOAD_WK_DIR);
 	}
+	public String getCatsProfileImgPrefix(){
+		return getProperty(CATS_PROFILE_IMG_PREFIX);
+	}
+
 
 
 }

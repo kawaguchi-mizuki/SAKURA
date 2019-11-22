@@ -62,6 +62,8 @@ public class ProfileController {
 
 		ProfileDto dto = profileService.getDisplayBoard(loginInfo);
 
+
+
 		//ポイント反映
 		int point = loginInfo.getPoint();
 

@@ -11,14 +11,14 @@
 </head>
 <body>
 	<div class="t-center">
-		<form action="TwoCheckServlet" method="POST">
+		<form th:action="@{/TwoCheck}" method="POST">
 			<img border="0" src="/img/rogo.jpg">
-			<p>入力された番号はすでに使われています。</p>
+			<p id = errmsg th:text="${errMsg}" style="color:red"></p>
 			<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
 				rel="stylesheet">
 
 			<div class="txbox">
-				<input type="text" class="usericon" placeholder="&#xf2bb; 学籍番号を入力">
+				<input type="number" class="usericon" placeholder="&#xf2bb; 学籍番号を入力" name="studentId" id="studenId">
 			</div>
 			<div class="cp_iptxt">
 
@@ -28,8 +28,8 @@
 
 			<p>学籍番号あてに認証コードを送ります</p>
 			<div class="stylebutton">
-				<input type="submit" value="戻る" class="button"> <input
-					type="submit" value="送信する" class="button">
+				<input type="button" onclick="history.back()" value="戻る" class="button">
+				<input type="submit" value="送信する" class="button" onclick ="return check()">
 			</div>
 
 
@@ -37,3 +37,16 @@
 	</div>
 </body>
 </html>
+<script>
+function check(){
+	if(document.form.studentId.value == ""){
+		document.getElementById("errmsg").textContent = "学籍番号を入力してください";
+		return false;
+	}else if(isNaN(document.form.studentId.value) == true ){
+		document.getElementById("errmsg").textContent = "数値を入力してください";
+		return false;
+	}else {
+		return true;
+	}
+}
+</script>

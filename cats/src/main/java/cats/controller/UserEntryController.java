@@ -209,32 +209,36 @@ public class UserEntryController {
 
 		if( !uploadFile.isEmpty() ) {
 			//アップロードディレクトリを取得する
-			uploadDir = (uploadDir == null ? mkdirs() : uploadDir);
+			Date now = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+			String profileImage = sdf.format(now);
+			uploadDir = mkdirs(profileImage);
 			//出力ファイル名を決定する
 			File uploadFilePath = new File(uploadDir.getPath() + "/" + uploadFile.getOriginalFilename());
 			//ファイルコピー
 			uploadFile.transferTo(uploadFilePath);
 			//アップロードしたファイル名を覚えておく
-			studentbeans.addUploadFilePath(uploadFilePath.toString(),uploadFile.getSize());
+			studentbeans.addUploadFilePath(profileImage+"/" + uploadFile.getOriginalFilename(),uploadFile.getSize());
 		}
 
 	}
 
 
-	private File mkdirs() throws Exception{
+	private File mkdirs(String profileImage) throws Exception{
 
 		//アップロードディレクトリを取得する
 		StringBuffer filePath = new StringBuffer(AppSettingProperty.getInstance().getCatsUploadWorkDirectory());
 
-		Date now = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
-		File uploadDir = new File(filePath.toString(), sdf.format(now));
+
+		File uploadDir = new File(filePath.toString(), profileImage);
+
+
 		// 既に存在する場合はプレフィックスをつける
 		int prefix = 0;
 		while(uploadDir.exists()){
 			prefix++;
 			uploadDir =
-					new File(filePath.toString() + sdf.format(now) + "-" + String.valueOf(prefix));
+					new File(filePath.toString() + profileImage + "-" + String.valueOf(prefix));
 		}
 
 		// フォルダ作成
@@ -265,7 +269,8 @@ public class UserEntryController {
 		dto.setBirthplace(studentbeans.getBirthplace());
 		dto.setSelfIntroduction(studentbeans.getIntroduction());
 		dto.setPassword(password);
-		dto.setImagePass("aaa");
+
+		dto.setImagePass(studentbeans.getUploadFilePathList().get(0).getFilePath());
 
 
 		return dto;

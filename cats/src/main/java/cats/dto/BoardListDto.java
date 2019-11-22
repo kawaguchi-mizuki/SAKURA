@@ -18,4 +18,6 @@ public class BoardListDto {
 	private String categoryName;
 
 	private String boardDate;
+
+	private String imagePath;
 }
