@@ -11,7 +11,7 @@ import cats.entity.StudentTblEntity;
 public interface AuthSearchRepository
 extends JpaRepository<StudentTblEntity,Integer>{
 
-	@Query("select studentId  from StudentTblEntity where studentId = :studentId")
+	@Query("select s from StudentTblEntity s where studentId = :studentId")
 	public StudentTblEntity searchstudentId(@Param("studentId")Integer studentId);
 
 }
