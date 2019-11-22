@@ -2,7 +2,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>プロフィール変更</title>
+<title>Insert title here</title>
+</head>
+<body>
+<title>プロフィール閲覧</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 <link href="/css/UserEntry.css" th:href="@{/css/UserEntry.css}" rel="stylesheet"></link>
@@ -25,11 +28,15 @@
 	</header>
 
 	<div class="txt">
-		<p>マイページ</p>
+		<p>プロフィール閲覧</p>
 	</div>
 
 	<div class="PL">
-	<form class="input" th:action="@{/Profile/Update}" th:object="${studentbeans}"   method="post" enctype="multipart/form-data" >
+
+
+	<form class="input" th:action="@{/Talk/Delete}"  method="get" enctype="multipart/form-data" >
+
+		<input type="hidden" name="talkId" th:value="${talkId}">
 
 		<label class="h5 a">名前</label>
 		<input type="text" name="name" class="form-control"  th:value="${ProfileDto.studentName}" readonly/>
@@ -67,39 +74,34 @@
 		<input type="text" name="introduction" class="form-control"  th:value="${ProfileDto.selfIntroduction}" readonly/>
 		<br/>
 
-		<label class="h5">パスワード</label>
-		<input type="text" name="password" class="form-control"  th:value="${ProfileDto.password}" readonly/>
-		<br/>
 
-		<input type="submit" class="btn btn-primary back"  value="修正"/>
-		<input type="botton" class="btn btn-danger entry" data-toggle="modal" data-target="#blockModal" value="退会"/>
-	</form>
 
+		<input type="button" class="btn btn-primary back"  onclick="history.back()" value="戻る"/>
+		<input type="botton" class="btn btn-danger entry" data-toggle="modal" data-target="#blockModal" value="ブロック"/>
 	<!-- Modal -->
 	<div class="modal fade" id="blockModal" tabindex="-1" role="dialog"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">退会確認</h5>
+					<h5 class="modal-title" id="exampleModalLabel">ブロック確認</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<div class="modal-body">※投稿した掲示板などもすべて消えます。</div>
+				<div class="modal-body">※トークなどすべて消えます。</div>
 				<div class="modal-footer">
-				<form th:action="@{/Profile/Delete}"  method="get"  >
+
 					<button type="button" class="btn btn-secondary"
 						data-dismiss="modal">戻る</button>
-					<button type="submit" class="btn btn-primary">退会する</button>
-				</form>
+					<button type="submit" class="btn btn-primary">ブロックする</button>
 				</div>
 			</div>
 		</div>
 	</div>
-
-	</div>
+</form>
+</div>
 
 
 	<footer>
@@ -140,4 +142,6 @@
 		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 		crossorigin="anonymous"></script>
 </body>
+
+
 </html>

@@ -133,6 +133,8 @@ public class UserEntryController {
     public List<CourseDto> getucourselist(
     		@RequestParam("schoolId")Integer schoolId) {
 
+		System.out.println(111111);
+
 
         return courseService.getList(schoolId);
     }

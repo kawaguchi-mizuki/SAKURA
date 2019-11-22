@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import cats.beans.StudentBeans;
+import cats.dto.CourseDto;
 import cats.dto.HobbyDto;
 import cats.dto.LoginInfoDto;
 import cats.dto.ProfileDto;
 import cats.dto.SchoolDto;
 import cats.param.SessionConst;
+import cats.service.CourseService;
 import cats.service.HobbyService;
 import cats.service.ProfileService;
 import cats.service.SchoolService;
@@ -40,6 +42,9 @@ public class ProfileController {
 
 	@Autowired
 	ProfileService profileService;
+
+	@Autowired
+	CourseService courseService;
 
 	@Autowired
 	HttpSession session;
@@ -67,6 +72,17 @@ public class ProfileController {
 		mav.setViewName("ProfileView");
 		return mav;
 	}
+
+	@RequestMapping("/GetCourseList")
+    public List<CourseDto> getucourselist(
+    		@RequestParam("schoolId")Integer schoolId) {
+
+		System.out.println(111111);
+
+
+        return courseService.getList(schoolId);
+    }
+
 
 	/**マイページ修正画面表示
 	 * @param studentbeans
@@ -194,6 +210,26 @@ public class ProfileController {
 
 		mav.setViewName("Login");
 
+		return mav;
+	}
+	@RequestMapping(value = { "/Browse" }, method = RequestMethod.GET)
+	public ModelAndView ProfileBrowse(@RequestParam Integer studentId,@RequestParam Integer talkId, ModelAndView mav) {
+
+
+
+
+		ProfileDto dto = profileService.getDisplayBoardBrowse(studentId);
+
+		//ユーザー情報をセッションから取得
+		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
+
+		//ポイント反映
+		int point = loginInfo.getPoint();
+
+		mav.addObject("talkId",talkId);
+		mav.addObject("point",point);
+		mav.addObject("ProfileDto", dto);
+		mav.setViewName("ProfileBrowse");
 		return mav;
 	}
 

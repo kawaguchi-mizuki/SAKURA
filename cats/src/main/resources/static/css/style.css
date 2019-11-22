@@ -150,13 +150,42 @@ button {
 }
 
 /* カテゴリーボタンのデザイン設定 */
-.btn-category {
+.btn-category1 {
 	background-color: #629cff;
 	border: 1px solid #629cff;
 	color: #f1f1f1;
 	padding-top:10px;
 	padding-bottom:0;
 }
+.btn-category2 {
+	background-color: #FF99FF;
+	border: 1px solid #FF99FF;
+	color: #f1f1f1;
+	padding-top:10px;
+	padding-bottom:0;
+}
+.btn-category3 {
+	background-color:#FF9900;
+	border: 1px solid #FF9900;
+	color: #f1f1f1;
+	padding-top:10px;
+	padding-bottom:0;
+}
+.btn-category4 {
+	background-color: #FF3300;
+	border: 1px solid #FF3300;
+	color: #f1f1f1;
+	padding-top:10px;
+	padding-bottom:0;
+}
+.btn-category5 {
+	background-color: #33CC99;
+	border: 1px solid #33CC99;
+	color: #f1f1f1;
+	padding-top:10px;
+	padding-bottom:0;
+}
+
 
 /* 削除ボタンのデザイン設定 */
 .btn-delete {
