@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -49,5 +50,30 @@ public class TalkSelectController {
 
 		return mav;
 	}
+
+	@RequestMapping(value = { "/Delete" }, method = RequestMethod.GET)
+	public  ModelAndView TalkDelete(@RequestParam Integer talkId,  ModelAndView mav) {
+		
+		
+		talkService.deleteTalk(talkId);
+
+
+		//トークリストを取得
+		List<TalkSelectDto> talkselectlist = talkService.getAllList();
+
+		//ユーザー情報をセッションから取得
+		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
+
+		//ポイント反映
+		int point = loginInfo.getPoint();
+
+		mav.addObject("point",point);
+		mav.addObject("selectId",loginInfo.getStudentId());
+		mav.addObject("talkselectlist",talkselectlist);
+		mav.setViewName("TalkSelect");
+
+		return mav;
+	}
+
 
 }

@@ -119,6 +119,12 @@ public class TalkService {
 		return dto;
 	}
 
+	public void deleteTalk(Integer talkId) {
+
+		talkRepository.deleteById(talkId);
+
+	}
+
 
 
 

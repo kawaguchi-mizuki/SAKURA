@@ -211,7 +211,7 @@ public class ProfileController {
 		return mav;
 	}
 	@RequestMapping(value = { "/Browse" }, method = RequestMethod.GET)
-	public ModelAndView ProfileBrowse(@RequestParam Integer studentId,ModelAndView mav) {
+	public ModelAndView ProfileBrowse(@RequestParam Integer studentId,@RequestParam Integer talkId, ModelAndView mav) {
 
 
 
@@ -224,6 +224,7 @@ public class ProfileController {
 		//ポイント反映
 		int point = loginInfo.getPoint();
 
+		mav.addObject("talkId",talkId);
 		mav.addObject("point",point);
 		mav.addObject("ProfileDto", dto);
 		mav.setViewName("ProfileBrowse");

@@ -32,7 +32,11 @@
 	</div>
 
 	<div class="PL">
-	<form class="input" th:action="@{/Profile/Update}" th:object="${studentbeans}"   method="post" enctype="multipart/form-data" >
+
+
+	<form class="input" th:action="@{/Talk/Delete}"  method="get" enctype="multipart/form-data" >
+
+		<input type="hidden" name="talkId" th:value="${talkId}">
 
 		<label class="h5 a">名前</label>
 		<input type="text" name="name" class="form-control"  th:value="${ProfileDto.studentName}" readonly/>
@@ -70,14 +74,10 @@
 		<input type="text" name="introduction" class="form-control"  th:value="${ProfileDto.selfIntroduction}" readonly/>
 		<br/>
 
-		<label class="h5">パスワード</label>
-		<input type="text" name="password" class="form-control"  th:value="${ProfileDto.password}" readonly/>
-		<br/>
+
 
 		<input type="button" class="btn btn-primary back"  onclick="history.back()" value="戻る"/>
 		<input type="botton" class="btn btn-danger entry" data-toggle="modal" data-target="#blockModal" value="ブロック"/>
-	</form>
-
 	<!-- Modal -->
 	<div class="modal fade" id="blockModal" tabindex="-1" role="dialog"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -92,17 +92,16 @@
 				</div>
 				<div class="modal-body">※トークなどすべて消えます。</div>
 				<div class="modal-footer">
-				<form th:action="@{/Profile/Delete}"  method="get"  >
+
 					<button type="button" class="btn btn-secondary"
 						data-dismiss="modal">戻る</button>
-					<button type="submit" class="btn btn-primary">退会する</button>
-				</form>
+					<button type="submit" class="btn btn-primary">ブロックする</button>
 				</div>
 			</div>
 		</div>
 	</div>
-
-	</div>
+</form>
+</div>
 
 
 	<footer>
