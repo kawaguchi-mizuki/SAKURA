@@ -148,6 +148,41 @@ public class ProfileService {
 		return entity;
 	}
 
+	public ProfileDto getDisplayBoardBrowse(Integer studentId) {
+		ProfileDto dto = new ProfileDto();
+
+		StudentTblEntity studentTblEntity;
+		HobbyTblEntity hobbyTblEntity;
+		SchoolTblEntity schoolTblEntity;
+		CourseTblEntity courseTblEntity;
+
+
+		studentTblEntity = studentRepository.getProfile(studentId);
+
+		dto.setHobbyId(studentTblEntity.getHobbyId());
+		dto.setSchoolId(studentTblEntity.getSchoolId());
+		dto.setCourseId(studentTblEntity.getCourseId());
+
+
+		hobbyTblEntity = hobbyRepository.getHobby(dto.getHobbyId());
+		schoolTblEntity = schoolRepository.getSchool(dto.getSchoolId());
+		courseTblEntity = courseRepository.getCourseSelect(dto.getCourseId());
+
+		dto.setStudentName(studentTblEntity.getStudentName());
+		dto.setStudentSex(studentTblEntity.getStudentSex());
+		dto.setHobbyName(hobbyTblEntity.gethobbyName());
+		dto.setSchoolName(schoolTblEntity.getschoolName());
+		dto.setCourseName(courseTblEntity.getcourseName());
+		dto.setGrade(studentTblEntity.getGrade());
+		dto.setAge(studentTblEntity.getAge());
+		dto.setBirthplace(studentTblEntity.getBirthplace());
+		dto.setSelfIntroduction(studentTblEntity.getSelfIntroduction());
+		dto.setPassword(studentTblEntity.getPassword());
+
+
+		return dto;
+	}
+
 
 
 

@@ -210,6 +210,25 @@ public class ProfileController {
 
 		return mav;
 	}
+	@RequestMapping(value = { "/Browse" }, method = RequestMethod.GET)
+	public ModelAndView ProfileBrowse(@RequestParam Integer studentId,ModelAndView mav) {
+
+
+
+
+		ProfileDto dto = profileService.getDisplayBoardBrowse(studentId);
+
+		//ユーザー情報をセッションから取得
+		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
+
+		//ポイント反映
+		int point = loginInfo.getPoint();
+
+		mav.addObject("point",point);
+		mav.addObject("ProfileDto", dto);
+		mav.setViewName("ProfileBrowse");
+		return mav;
+	}
 
 
 

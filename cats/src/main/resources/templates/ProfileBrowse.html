@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<title>プロフィール閲覧</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<link href="/css/UserEntry.css" th:href="@{/css/UserEntry.css}" rel="stylesheet"></link>
+<link href="/css/common.css" th:href="@{/css/common.css}" rel="stylesheet"></link>
+</head>
+<body>
+	<header>
+		<div class="row">
+			<div class="col-5">
+				<a href=""> <img src="/img/rogo.jpg" width="150">
+				</a>
+			</div>
+			<div class="col-5">
+				<img src="/img/coin.png" width="50" class="pointImg"><p  th:text="${point}" class="point" ></p><p class="point" > ポイント</p>
+			</div>
+			<div class="col-2">
+				<a th:href="@{/Logout}">ログアウト</a>
+			</div>
+		</div>
+	</header>
+
+	<div class="txt">
+		<p>プロフィール閲覧</p>
+	</div>
+
+	<div class="PL">
+	<form class="input" th:action="@{/Profile/Update}" th:object="${studentbeans}"   method="post" enctype="multipart/form-data" >
+
+		<label class="h5 a">名前</label>
+		<input type="text" name="name" class="form-control"  th:value="${ProfileDto.studentName}" readonly/>
+		<br/>
+
+		<label class="h5">性別</label>
+		<input type="text" name="sex" class="form-control"  th:value="${ProfileDto.studentSex}" readonly/>
+		<br/>
+
+		<label class="h5 hobby">趣味</label>
+		<input type="text" name="hobbyname" class="form-control"  th:value="${ProfileDto.hobbyName}" readonly/>
+		<br/>
+
+		<label class="h5">学校名</label>
+		<input type="text" class="form-control"  th:value="${ProfileDto.schoolName}" readonly/>
+		<br/>
+
+		<label class="h5">学科 </label>
+		<input type="text" class="form-control"  th:value="${ProfileDto.courseName}" readonly/>
+		<br/>
+
+		<label class="h5">学年</label>
+		<input type="text" name="grade" class="form-control"  th:value="${ProfileDto.grade}" readonly/>
+		<br/>
+
+		<label class="h5">年齢</label>
+		<input type="text" name="age" class="form-control"  th:value="${ProfileDto.age}" readonly/>
+		<br/>
+
+		<label class="h5">出身地</label>
+		<input type="text" name="birthplace" class="form-control"  th:value="${ProfileDto.birthplace}" readonly/>
+		<br/>
+
+		<label class="h5">自己紹介</label>
+		<input type="text" name="introduction" class="form-control"  th:value="${ProfileDto.selfIntroduction}" readonly/>
+		<br/>
+
+		<label class="h5">パスワード</label>
+		<input type="text" name="password" class="form-control"  th:value="${ProfileDto.password}" readonly/>
+		<br/>
+
+		<input type="button" class="btn btn-primary back"  onclick="history.back()" value="戻る"/>
+		<input type="botton" class="btn btn-danger entry" data-toggle="modal" data-target="#blockModal" value="ブロック"/>
+	</form>
+
+	<!-- Modal -->
+	<div class="modal fade" id="blockModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">ブロック確認</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">※投稿した掲示板などもすべて消えます。</div>
+				<div class="modal-footer">
+				<form th:action="@{/Profile/Delete}"  method="get"  >
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">戻る</button>
+					<button type="submit" class="btn btn-primary">退会する</button>
+				</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	</div>
+
+
+	<footer>
+		<div class="row">
+			<div class="col">
+				<a th:href="@{/Home}"><img src="/img/ie.png"> </a>
+			</div>
+			<div class="col">
+				<a th:href="@{/Board/Read}"><img src="/img/mrmo.png"> </a>
+			</div>
+
+			<div class="col">
+				<a href=""><img src="/img/hart.png"> </a>
+			</div>
+
+			<div class="col">
+				<a th:href="@{/Talk/Select}"><img src="/img/fukidashi.png"> </a>
+			</div>
+
+			<div class="col">
+				<a th:href="@{/Profile/View}"><img src="/img/hito.png"> </a>
+			</div>
+
+		</div>
+	</footer>
+
+
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+</body>
+
+
+</html>
