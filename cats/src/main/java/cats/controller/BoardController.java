@@ -1,6 +1,7 @@
 package cats.controller;
 
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -84,7 +85,14 @@ public class BoardController {
 	@RequestMapping(value = { "/Read" }, method = RequestMethod.GET)
 	public ModelAndView BoardRead(ModelAndView mav) {
 
-		List<BoardListDto> boardlist = boardService.getAllList();
+
+
+		List<BoardListDto> boardlist = new ArrayList<BoardListDto>();
+		try {
+			boardlist = boardService.getAllList();
+		} catch (Exception e) {
+
+		}
 
 		//ユーザー情報をセッションから取得
 		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
@@ -117,7 +125,12 @@ public class BoardController {
 		//掲示板作成処理
 		boardService.insert(dto);
 
-		List<BoardListDto> boardlist = boardService.getAllList();
+		List<BoardListDto> boardlist = new ArrayList<BoardListDto>();
+		try {
+			boardlist = boardService.getAllList();
+		} catch (Exception e) {
+
+		}
 
 		//ユーザー情報をセッションから取得
 		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
@@ -176,7 +189,12 @@ public class BoardController {
 
 		boardService.BoardDelete(boardId);
 
-		List<BoardListDto> boardlist = boardService.getAllList();
+		List<BoardListDto> boardlist = new ArrayList<BoardListDto>();
+		try {
+			boardlist = boardService.getAllList();
+		} catch (Exception e) {
+
+		}
 		mav.addObject("boardlist",boardlist);
 
 		//ユーザー情報をセッションから取得

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import cats.config.AppSettingProperty;
 import cats.dto.BoardListDto;
 import cats.dto.CreateBoardDto;
 import cats.dto.LoginInfoDto;
@@ -59,11 +60,13 @@ public class BoardService {
 		return entity;
 	}
 
-	public List<BoardListDto> getAllList() {
+	public List<BoardListDto> getAllList() throws Exception{
 
 		List<BoardListDto> list = new ArrayList<BoardListDto>();
 
 		List<BoardTblEntity> boardList = boardRepository.findAll(new Sort(Sort.Direction.DESC,"boardId"));
+
+		String imagepath = AppSettingProperty.getInstance().getCatsProfileImgPrefix();
 
 		//entity -> DTO
 		for( BoardTblEntity entity : boardList ) {
@@ -76,6 +79,8 @@ public class BoardService {
 			StudentTblEntity studentTblEntity;
 			studentTblEntity = studentRepository.getId(dto.getStudentId());
 			dto.setStudentName(studentTblEntity.getStudentName());
+
+			dto.setImagePath(imagepath+"/"+studentTblEntity.getImagePass());
 
 			dto.setCategoryId(entity.getCategoryId());
 			CategoryTblEntity categoryTblEntity;
