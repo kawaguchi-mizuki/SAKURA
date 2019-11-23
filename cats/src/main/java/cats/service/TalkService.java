@@ -12,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import cats.config.AppSettingProperty;
 import cats.dto.LoginInfoDto;
 import cats.dto.TalkSelectDto;
 import cats.entity.StudentTblEntity;
@@ -40,8 +41,9 @@ public class TalkService {
 
 	/**トーク一覧を取得する
 	 * @return
+	 * @throws Exception
 	 */
-	public List<TalkSelectDto> getAllList() {
+	public List<TalkSelectDto> getAllList() throws Exception {
 
 		List<TalkSelectDto> list = new ArrayList<TalkSelectDto>();
 
@@ -52,6 +54,7 @@ public class TalkService {
 
 		List<TalkTblEntity> talkList = talkRepository.findAll(Specification.where(IdEqules(loginInfo.getStudentId()).or(RIdEqules(loginInfo.getStudentId()))),new Sort(Sort.Direction.DESC,"TalkId"));
 
+		String imagepath = AppSettingProperty.getInstance().getCatsProfileImgPrefix();
 
 		//entity -> DTO
 				for(TalkTblEntity entity : talkList) {
@@ -68,10 +71,12 @@ public class TalkService {
 					studentEntity = studentRepository.getOne(dto.getStudentIdReceive());
 
 					dto.setStudentReceiveName(studentEntity.getStudentName());
+					dto.setReceiveImagePath(imagepath+"/"+studentEntity.getImagePass());
 
 					sendstudentEntity = studentRepository.getOne(dto.getStudentIdSend());
 
 					dto.setStudentSendName(sendstudentEntity.getStudentName());
+					dto.setSendImagePath(imagepath+"/"+sendstudentEntity.getImagePass());
 
 					list.add(dto);
 				}

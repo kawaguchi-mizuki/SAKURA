@@ -18,4 +18,6 @@ public class MessageDto {
 
 	private Integer studentIdSend;
 
+	private String imagePath;
+
 }

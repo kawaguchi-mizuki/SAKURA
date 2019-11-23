@@ -3,6 +3,7 @@ package cats.controller;
 
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -66,7 +67,13 @@ public class LoginController {
 		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
 
 		//受け取ったリクエスト一覧を取得
-		List<HomeRequestDto> requestlist = homeService.getAllList(loginInfo);
+		List<HomeRequestDto> requestlist = new ArrayList<HomeRequestDto>();
+		try {
+			requestlist = homeService.getAllList(loginInfo);
+		} catch (Exception e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
 
 		//受け取ったリクエスト数を取得
 		int requestcount = requestlist.size();

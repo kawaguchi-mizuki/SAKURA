@@ -1,5 +1,6 @@
 package cats.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -35,7 +36,13 @@ public class TalkSelectController {
 
 
 		//トークリストを取得
-		List<TalkSelectDto> talkselectlist = talkService.getAllList();
+		List<TalkSelectDto> talkselectlist = new ArrayList<TalkSelectDto>();
+		try {
+			talkselectlist = talkService.getAllList();
+		} catch (Exception e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
 
 		//ユーザー情報をセッションから取得
 		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
@@ -53,13 +60,19 @@ public class TalkSelectController {
 
 	@RequestMapping(value = { "/Delete" }, method = RequestMethod.GET)
 	public  ModelAndView TalkDelete(@RequestParam Integer talkId,  ModelAndView mav) {
-		
-		
+
+
 		talkService.deleteTalk(talkId);
 
 
 		//トークリストを取得
-		List<TalkSelectDto> talkselectlist = talkService.getAllList();
+		List<TalkSelectDto> talkselectlist = new ArrayList<TalkSelectDto>();
+		try {
+			talkselectlist = talkService.getAllList();
+		} catch (Exception e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
 
 		//ユーザー情報をセッションから取得
 		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);

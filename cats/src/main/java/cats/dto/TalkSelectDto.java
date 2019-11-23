@@ -15,5 +15,9 @@ public class TalkSelectDto {
 
 	private String studentReceiveName;
 
+	private String SendImagePath;
+
+	private String ReceiveImagePath;
+
 
 }

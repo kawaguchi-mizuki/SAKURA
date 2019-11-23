@@ -11,9 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import cats.config.AppSettingProperty;
 import cats.dto.MessageDto;
 import cats.entity.MessageTblEntity;
+import cats.entity.StudentTblEntity;
 import cats.repository.MessageRepository;
+import cats.repository.StudentRepository;
 
 @Service
 public class MessageService {
@@ -23,6 +26,11 @@ public class MessageService {
 
 	@Autowired
 	MessageRepository messageRepository;
+
+
+	@Autowired
+	StudentRepository studentRepository;
+
 
 
 	public void insert(MessageDto dto) {
@@ -47,12 +55,13 @@ public class MessageService {
 	}
 
 
-	public List<MessageDto> getAllList(Integer talkId) {
+	public List<MessageDto> getAllList(Integer talkId) throws Exception {
 
 		List<MessageDto> list = new ArrayList<MessageDto>();
 
 		List<MessageTblEntity> messageList = messageRepository.findAll(Specification.where(IdEqules(talkId)));
 
+		String imagepath = AppSettingProperty.getInstance().getCatsProfileImgPrefix();
 
 		//entity -> DTO
 		for(MessageTblEntity entity : messageList) {
@@ -63,6 +72,12 @@ public class MessageService {
 			dto.setMessage(entity.getMessage());
 			dto.setSendTime(entity.getSendTime());
 			dto.setStudentIdSend(entity.getStudentIdSend());
+
+			StudentTblEntity studentEntity;
+
+			studentEntity = studentRepository.getOne(entity.getStudentIdSend());
+
+			dto.setImagePath(imagepath+"/"+studentEntity.getImagePass());
 
 			list.add(dto);
 		}

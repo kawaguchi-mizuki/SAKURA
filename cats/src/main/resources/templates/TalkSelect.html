@@ -39,12 +39,12 @@
 		<!-- このリンククリック範囲が親<div>まで広がる -->
 		<div class="box-icon col-3 center" th:if="${selectId != dto.studentIdSend}">
 			<!--左 アイコン部分-->
-			<a  href="/Profile/Browse" th:href="@{/Profile/Browse(studentId=${dto.studentIdSend},talkId=${dto.talkId})}"><img src="/img/icon.jpg" alt="アイコン"
+			<a  href="/Profile/Browse" th:href="@{/Profile/Browse(studentId=${dto.studentIdSend},talkId=${dto.talkId})}"><img th:src="${dto.SendImagePath}" alt="アイコン"
 				class="icon-image rounded img-fluid"></a>
 		</div>
 		<div class="box-icon col-3 center" th:if="${selectId == dto.studentIdSend}">
 			<!--左 アイコン部分-->
-			<a  href="/Profile/Browse" th:href="@{/Profile/Browse(studentId=${dto.studentIdReceive},talkId=${dto.talkId})}"><img src="/img/icon.jpg" alt="アイコン"
+			<a  href="/Profile/Browse" th:href="@{/Profile/Browse(studentId=${dto.studentIdReceive},talkId=${dto.talkId})}"><img th:src="${dto.ReceiveImagePath}" alt="アイコン"
 				class="icon-image rounded img-fluid"></a>
 		</div>
 		<div class="col-9" th:if="${selectId != dto.studentIdSend}">

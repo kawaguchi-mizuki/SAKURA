@@ -16,6 +16,8 @@ public class HomeRequestDto {
 
 	private String studentName;
 
+	private String imagePath;
+
 
 
 

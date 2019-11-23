@@ -12,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import cats.config.AppSettingProperty;
 import cats.dto.HomeRequestDto;
 import cats.dto.LoginInfoDto;
 import cats.entity.HomeRequestTblEntity;
@@ -29,12 +30,13 @@ public class HomeService {
 	 * @param loginInfo
 	 * @return
 	 */
-	public List<HomeRequestDto> getAllList(LoginInfoDto loginInfo) {
+	public List<HomeRequestDto> getAllList(LoginInfoDto loginInfo) throws Exception{
 
 		List<HomeRequestDto> list = new ArrayList<HomeRequestDto>();
 
 		List<HomeRequestTblEntity> requestList = homeRequestRepository.findAll(Specification.where(studentIdEqules(loginInfo.getStudentId()).and(ApprovalEqules())),new Sort(Sort.Direction.DESC,"requestId"));
 
+		String imagepath = AppSettingProperty.getInstance().getCatsProfileImgPrefix();
 		//entity -> DTO
 		for( HomeRequestTblEntity entity : requestList ) {
 
@@ -45,6 +47,7 @@ public class HomeService {
 			dto.setReceiveId(entity.getStudentIdReceive());
 			dto.setApproval(entity.getApproval());
 			dto.setStudentName(entity.getStudentIdTbl().getStudentName());
+			dto.setImagePath(imagepath+"/"+entity.getStudentIdTbl().getImagePass());
 
 			list.add(dto);
 		}
