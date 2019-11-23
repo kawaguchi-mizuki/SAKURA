@@ -42,7 +42,7 @@
 		<!--②左コメント始-->
 		<div class="balloon6"  th:if="${dto.studentIdSend != studentId}">
 			<div class="faceicon">
-				<img src="/img/icon.jpg">
+				<img th:src="${dto.imagePath}">
 			</div>
 			<div class="chatting"  >
 				<div class="says">

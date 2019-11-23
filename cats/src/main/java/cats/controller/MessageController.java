@@ -1,6 +1,7 @@
 package cats.controller;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -42,7 +43,13 @@ public class MessageController {
 	public ModelAndView MessageView(@RequestParam Integer talkId,@RequestParam String receiveName,@RequestParam String sendName, ModelAndView mav) {
 
 
-		List<MessageDto> messagelist = messageService.getAllList(talkId);
+		List<MessageDto> messagelist = new ArrayList<MessageDto>();
+		try {
+			messagelist = messageService.getAllList(talkId);
+		} catch (Exception e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
 
 
 		TalkSelectDto dto = talkSerivce.getTalk(talkId);
@@ -77,7 +84,13 @@ public class MessageController {
 
 		TalkSelectDto talkdto = talkSerivce.getTalk(talkId);
 
-		List<MessageDto> messagelist = messageService.getAllList(talkId);
+		List<MessageDto> messagelist = new ArrayList<MessageDto>();
+		try {
+			messagelist = messageService.getAllList(talkId);
+		} catch (Exception e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
 
 		//ユーザー情報をセッションから取得
 		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
