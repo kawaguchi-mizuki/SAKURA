@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+.errtext{
+	margin-top: 10px;
+	margin-bottom: 20px;
+	color: red;
+}
+.line{
+	margin-top: 30px;
+}
+.yoko{
+	margin-right: 10px;
+	margin-left: 10px;
+}
+.gacha-img{
+	margin-bottom: 30px;
+}
+
