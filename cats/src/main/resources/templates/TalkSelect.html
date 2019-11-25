@@ -33,7 +33,7 @@
 	</div>
 
 	<!-- 一人分のチャット -->
-
+<div class="talk-list">
 	<div class="chat-list row" th:each="dto:${talkselectlist}">
 		<a href="/Message/View" th:href="@{/Message/View(talkId=${dto.talkId},sendName=${dto.studentSendName},receiveName=${dto.studentReceiveName})}"></a>
 		<!-- このリンククリック範囲が親<div>まで広がる -->
@@ -55,7 +55,7 @@
 		</div>
 		</a>
 	</div>
-
+</div>
 	<!-- ここまでが一人分 -->
 
 

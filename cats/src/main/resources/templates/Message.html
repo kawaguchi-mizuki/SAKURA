@@ -35,7 +35,7 @@
 		<div class="col-8"  th:if="${dto.studentIdSend != studentId}"><p th:text="${sendName}"></p></div>
 		<div class="col-2"></div>
 	</div>
-
+<div class="messlist">
 	<div class="line-bc" th:each="dto:${messagelist}">
 		<!--①LINE会話全体を囲う-->
 
@@ -59,6 +59,8 @@
 		<!--/③右コメント終-->
 
 	</div>
+
+</div>
 	<!--/①LINE会話終了-->
 	<div class="chatsend">
 		<form th:action="@{/Message/Insert}" method="post" >
