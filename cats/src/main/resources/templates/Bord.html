@@ -31,11 +31,18 @@
 		<p>掲示板</p>
 	</div>
 
-		<div class ="serchs mr-3">
-			<input type="text" class="serch" placeholder="ワード検索"> <input
-				type="submit" value="検索" class="btn btn-primary">
-		</div>
-		<div class=explain>
+
+	<div class="serchs mr-3">
+		<form th:action="@{/Board/Select}">
+			<select name="categoryId" class="category-select">
+				<option  th:value="0">全て</option>
+				<option th:each="dto:${categorylist}" th:value="${dto.categoryId}" th:text="${dto.categoryName}"></option>
+			</select> <input type="submit" value="検索" class="serch-bottom btn btn-danger">
+		</form>
+	</div>
+
+
+	<div class=explain>
 			<p>掲示板内の説明です</p>
 			<br>
 			<p>(男性の方のタイトルは、青、女性の方は、ピンク)</p>
@@ -50,8 +57,8 @@
 				<!--1つ分の一番外枠-->
 				<div class="box-icon">
 					<!--左 アイコン部分-->
-          
-          
+
+
 					<img th:src="${dto.imagePath}" alt="アイコン" class="icon-image rounded img-fluid">
 
 				</div>
