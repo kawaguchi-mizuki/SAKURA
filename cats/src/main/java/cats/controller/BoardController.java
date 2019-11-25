@@ -86,7 +86,10 @@ public class BoardController {
 	public ModelAndView BoardRead(ModelAndView mav) {
 
 
+		//カテゴリ一覧を取得
+		List<CategoryDto> categorylist = categoryService.getAllList();
 
+		//掲示板のリストを取得
 		List<BoardListDto> boardlist = new ArrayList<BoardListDto>();
 		try {
 			boardlist = boardService.getAllList();
@@ -102,6 +105,7 @@ public class BoardController {
 
 		mav.addObject("point",point);
 		mav.addObject("studentId",loginInfo.getStudentId());
+		mav.addObject("categorylist", categorylist);
 		mav.addObject("boardlist",boardlist);
 		mav.setViewName("Bord");
 
@@ -210,6 +214,52 @@ public class BoardController {
 		return mav;
 	}
 
+	@RequestMapping(value = { "/Select" }, method = RequestMethod.GET)
+	public ModelAndView BoardSelect(@RequestParam Integer categoryId,ModelAndView mav) {
+
+
+		//掲示板のリストを取得
+		List<BoardListDto> boardlist = new ArrayList<BoardListDto>();
+
+		//カテゴリ一覧を取得
+		List<CategoryDto> categorylist = categoryService.getAllList();
+
+		//全て表示
+		if(categoryId==0) {
+
+			try {
+				boardlist = boardService.getAllList();
+			} catch (Exception e) {
+
+			}
+
+		}else {
+
+			try {
+				boardlist = boardService.getCategorySelect(categoryId);
+			} catch (Exception e) {
+
+			}
+
+		}
+
+
+		//ユーザー情報をセッションから取得
+		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
+
+		//ポイント反映
+		int point = loginInfo.getPoint();
+
+		mav.addObject("point",point);
+		mav.addObject("studentId",loginInfo.getStudentId());
+		mav.addObject("categorylist", categorylist);
+		mav.addObject("boardlist",boardlist);
+		mav.setViewName("Bord");
+
+		return mav;
+	}
+
+
 	private CreateBoardDto getCreateBoardDto(@Valid BoardBeans boardbeans) {
 
 		CreateBoardDto dto = new CreateBoardDto();
@@ -226,6 +276,7 @@ public class BoardController {
 
 		return dto;
 	}
+
 
 
 }

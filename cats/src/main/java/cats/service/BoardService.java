@@ -1,5 +1,7 @@
 package cats.service;
 
+import static cats.repository.BoardSpecification.*;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import cats.config.AppSettingProperty;
@@ -128,6 +131,42 @@ public class BoardService {
 
 		return dto;
 
+	}
+
+	public List<BoardListDto> getCategorySelect(Integer categoryId) throws Exception {
+
+		List<BoardListDto> list = new ArrayList<BoardListDto>();
+
+		List<BoardTblEntity> boardList = boardRepository.findAll(Specification.where(CategorySelect(categoryId)),new Sort(Sort.Direction.DESC,"boardId"));
+
+		String imagepath = AppSettingProperty.getInstance().getCatsProfileImgPrefix();
+
+		//entity -> DTO
+		for( BoardTblEntity entity : boardList ) {
+			BoardListDto dto = new BoardListDto();
+
+			dto.setBoardId(entity.getBoardId());
+			dto.setStudentId(entity.getStudentId());
+			dto.setBoardTitle(entity.getBoardTitle());
+
+			StudentTblEntity studentTblEntity;
+			studentTblEntity = studentRepository.getId(dto.getStudentId());
+			dto.setStudentName(studentTblEntity.getStudentName());
+
+			dto.setImagePath(imagepath+"/"+studentTblEntity.getImagePass());
+
+			dto.setCategoryId(entity.getCategoryId());
+			CategoryTblEntity categoryTblEntity;
+			categoryTblEntity = categoryRepository.getId(dto.getCategoryId());
+			dto.setCategoryName(categoryTblEntity.getcategoryName());
+
+			 SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+
+			dto.setBoardDate(sdf.format(entity.getBoardDate()));
+
+			list.add(dto);
+		}
+		return list;
 	}
 
 
