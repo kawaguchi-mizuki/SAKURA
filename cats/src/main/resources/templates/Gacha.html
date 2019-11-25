@@ -36,21 +36,25 @@
 		<div class="col-8">きっかけガチャ</div>
 		<div class="col-2"></div>
 	</div>
+
+	<div class="line"></div>
 	<div th:if="${msg}">
 		<p th:text="${msg}"class="errtext"></p>
 	</div>
 	<div class="center">
 	<form class="input" th:action="@{/Gacha/Matching}" th:object="${gachabeans}"   method="get" enctype="multipart/form-data" >
 		<input type="image" src="/img/gacha.jpeg" width="150" class="gacha-img">
-	</div>
 
-	<div class="center">
+		<div class="yoko">
 		<select id="hobby" name="hobbyId" class="form-control" >
 			<option th:value="0" class="pldown gacha-category">趣味を選択してください</option>
 			<option th:each="dto:${hobbylist}" th:value="${dto.hobbyId}" th:text="${dto.hobbyName}" class="pldown gacha-category"></option>
 		</select>
+		</div>
 	</form>
+
 	</div>
+
 
 	<div class="gacha-message fadeout center">
 		<div class="img-box">
