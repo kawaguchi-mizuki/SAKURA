@@ -26,7 +26,10 @@
 
 
 		<input type="hidden" name="studentId" th:value="${studentId}"></input>
-		<input type="file" class="file" th:field="*{multipartFile}"/>
+
+		<label class="h5">アイコン画像</label><span class="badge badge-danger">必須</span>
+		<br/>
+		<input type="file" class="file" th:field="*{multipartFile}" required/>
 
 		<br/>
 

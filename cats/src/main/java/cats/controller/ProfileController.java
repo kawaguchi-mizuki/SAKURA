@@ -60,7 +60,13 @@ public class ProfileController {
 		//ユーザー情報をセッションから取得
 		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
 
-		ProfileDto dto = profileService.getDisplayBoard(loginInfo);
+		ProfileDto dto = new ProfileDto();
+		try {
+			dto = profileService.getDisplayBoard(loginInfo);
+		} catch (Exception e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
 
 
 
@@ -134,6 +140,9 @@ public class ProfileController {
 		String ErrMsg;
 
 
+
+
+
 		//ユーザー情報をセッションから取得
 		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
 
@@ -162,7 +171,12 @@ public class ProfileController {
 			return mav;
 		}
 
-		dto = profileService.updateProfile(studentbeans,password);
+		try {
+			dto = profileService.updateProfile(studentbeans,password);
+		} catch (Exception e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
 
 		//ポイント反映
 		int point = loginInfo.getPoint();
