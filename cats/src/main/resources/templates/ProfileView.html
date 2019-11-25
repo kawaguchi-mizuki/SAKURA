@@ -31,7 +31,11 @@
 	<div class="PL">
 	<form class="input" th:action="@{/Profile/Update}" th:object="${studentbeans}"   method="post" enctype="multipart/form-data" >
 
-		<label class="h5 a">名前</label>
+			<div class="box-icon">
+				<img th:src="${ProfileDto.imagePath}" alt="アイコン" class="icon-image rounded img-fluid">
+			</div>
+
+			<label class="h5 a">名前</label>
 		<input type="text" name="name" class="form-control"  th:value="${ProfileDto.studentName}" readonly/>
 		<br/>
 

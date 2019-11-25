@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cats.beans.StudentBeans;
+import cats.config.AppSettingProperty;
 import cats.dto.LoginInfoDto;
 import cats.dto.ProfileDto;
 import cats.entity.CourseTblEntity;
@@ -39,9 +40,11 @@ public class ProfileService {
 	@Autowired
 	HttpSession session;
 
-	public ProfileDto getDisplayBoard(LoginInfoDto loginInfo) {
+	public ProfileDto getDisplayBoard(LoginInfoDto loginInfo) throws Exception {
 
 		ProfileDto dto = new ProfileDto();
+
+		String imagepath = AppSettingProperty.getInstance().getCatsProfileImgPrefix();
 
 		StudentTblEntity studentTblEntity;
 		HobbyTblEntity hobbyTblEntity;
@@ -70,6 +73,7 @@ public class ProfileService {
 		dto.setBirthplace(studentTblEntity.getBirthplace());
 		dto.setSelfIntroduction(studentTblEntity.getSelfIntroduction());
 		dto.setPassword(studentTblEntity.getPassword());
+		dto.setImagePath(imagepath+"/"+studentTblEntity.getImagePass());
 
 
 
@@ -83,9 +87,11 @@ public class ProfileService {
 
 	}
 
-	public ProfileDto updateProfile(@Valid StudentBeans studentbeans, String password) {
+	public ProfileDto updateProfile(@Valid StudentBeans studentbeans, String password) throws Exception {
 
 		ProfileDto dto = new ProfileDto();
+
+		String imagepath = AppSettingProperty.getInstance().getCatsProfileImgPrefix();
 
 		StudentTblEntity studentTblEntity;
 		HobbyTblEntity hobbyTblEntity;
@@ -100,6 +106,8 @@ public class ProfileService {
 		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
 
 		studentTblEntity = studentRepository.getstatus(loginInfo.getStudentId());
+
+
 
 
 		dto.setStudentId(loginInfo.getStudentId());
@@ -122,7 +130,8 @@ public class ProfileService {
 		dto.setContinuouslogin(studentTblEntity.getContinuousLogin());
 		studentTblEntity = updateUserTblEntityFromDto(dto);
 
-		studentRepository.save(studentTblEntity);
+
+
 
 
 		return dto;
