@@ -194,6 +194,10 @@ public class BoardController {
 		boardService.BoardDelete(boardId);
 
 		List<BoardListDto> boardlist = new ArrayList<BoardListDto>();
+
+		//カテゴリ一覧を取得
+		List<CategoryDto> categorylist = categoryService.getAllList();
+
 		try {
 			boardlist = boardService.getAllList();
 		} catch (Exception e) {
@@ -207,6 +211,9 @@ public class BoardController {
 		//ポイント反映
 		int point = loginInfo.getPoint();
 
+
+
+		mav.addObject("categorylist", categorylist);
 		mav.addObject("point",point);
 		mav.addObject("studentId",loginInfo.getStudentId());
 		mav.setViewName("Bord");
