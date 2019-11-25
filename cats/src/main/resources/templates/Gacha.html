@@ -42,7 +42,7 @@
 	<form class="input" th:action="@{/Gacha/Matching}" th:object="${gachabeans}"   method="get" enctype="multipart/form-data" >
 		<input type="image" src="/img/gacha.jpeg" width="150" class="gacha-img">
 	</div>
-	
+
 	<div class="center">
 		<select id="hobby" name="hobbyId" class="form-control" >
 			<option th:value="0" class="pldown gacha-category">趣味を選択してください</option>
@@ -57,26 +57,26 @@
 		</div>
 
 	</div>
-	
+
 	<div th:if="${mode}">
 	<input type="hidden" name="mode" value="update">
 	</div>
-	
+
 	<footer>
 		<div class="row">
 			<div class="col">
-				<a href=""><img src="/img/ie.png"> </a>
+				<a th:href="@{/Home}"><img src="/img/ie.png"> </a>
 			</div>
 			<div class="col">
 				<a th:href="@{/Board/Read}"><img src="/img/mrmo.png"> </a>
 			</div>
 
 			<div class="col">
-				<a href=""><img src="/img/hart.png"> </a>
+				<a th:href="@{/Gacha/Top}"><img src="/img/hart.png"> </a>
 			</div>
 
 			<div class="col">
-				<a href=""><img src="/img/fukidashi.png"> </a>
+				<a th:href="@{/Talk/Select}"><img src="/img/fukidashi.png"> </a>
 			</div>
 
 			<div class="col">
@@ -98,7 +98,7 @@
 		document.querySelector('.gacha-message').classList.remove('fadeout');
     	document.querySelector('.gacha-message').classList.add('fadein');
 	}
-	
+
 	// ハート自体をクリックしたときにフェードアウトして消える処理
 	document.querySelector('.img-heart').onclick = function() {
 	  	document.querySelector('.gacha-message').classList.remove('fadein');
