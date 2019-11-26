@@ -34,15 +34,34 @@
 
 	<div class="serchs mr-3">
 		<form th:action="@{/Board/Select}">
-			<select name="sex" class="category-select">
+			<select name="sex" class="category-select" id="sex">
 				<option  th:value="全て">全て</option>
 				<option  th:value="男">男性</option>
 				<option  th:value="女">女性</option>
 			</select>
-			<select name="categoryId" class="category-select">
+			<script th:inline="javascript">
+			/*<![CDATA[*/
+		 	   var flag = /*[[${flag}]]*/ 'Sebastian';
+			/*]]>*/
+
+					document.getElementById('sex').options[flag].selected = true;
+			</script>
+
+
+			<select name="categoryId" class="category-select" id="category">
 				<option  th:value="0">全てのカテゴリー</option>
 				<option th:each="dto:${categorylist}" th:value="${dto.categoryId}" th:text="${dto.categoryName}"></option>
 			</select> <input type="submit" value="検索" class="serch-bottom btn btn-danger">
+
+
+			<script th:inline="javascript">
+			/*<![CDATA[*/
+		 	   var categoryId = /*[[${categoryId}]]*/ 'Sebastian';
+			/*]]>*/
+
+					document.getElementById('category').options[categoryId].selected = true;
+			</script>
+
 		</form>
 	</div>
 

@@ -231,6 +231,16 @@ public class BoardController {
 		//カテゴリ一覧を取得
 		List<CategoryDto> categorylist = categoryService.getAllList();
 
+		int flag;
+
+		if(sex.equals("男"))
+			flag = 1;
+		else if(sex.equals("女"))
+			flag = 2;
+		else
+			flag = 0;
+
+
 		//全て表示
 		if(categoryId==0&&sex.equals("全て")) {
 
@@ -244,6 +254,7 @@ public class BoardController {
 
 			try {
 				boardlist = boardService.getCategorySelect(categoryId);
+				mav.addObject("categoryId",categoryId);
 			} catch (Exception e) {
 
 			}
@@ -252,20 +263,23 @@ public class BoardController {
 
 			try {
 				boardlist = boardService.getSexSelect(sex);
+				mav.addObject("flag",flag);
 			} catch (Exception e) {
 				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
 			}
 
 		}else {
-			
+
 			try {
 				boardlist = boardService.getSelectList(categoryId,sex);
+				mav.addObject("categoryId",categoryId);
+				mav.addObject("flag",flag);
 			} catch (Exception e) {
 				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
 			}
-			
+
 		}
 
 
