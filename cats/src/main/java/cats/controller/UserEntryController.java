@@ -65,8 +65,6 @@ public class UserEntryController {
 
 		Integer time = date.compareTo(dto.getNowDate());
 
-		System.out.println(passauth);
-		System.out.println(dto.getPass());
 
 
 		if(dto.getPass().equals(passauth) && time<=0){
@@ -203,7 +201,6 @@ public class UserEntryController {
     public List<CourseDto> getucourselist(
     		@RequestParam("schoolId")Integer schoolId) {
 
-		System.out.println(111111);
 
 
         return courseService.getList(schoolId);
