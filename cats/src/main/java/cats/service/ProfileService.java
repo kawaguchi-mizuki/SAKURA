@@ -108,6 +108,7 @@ public class ProfileService {
 		studentTblEntity = studentRepository.getstatus(loginInfo.getStudentId());
 
 
+		System.out.println(imagepath);
 
 
 		dto.setStudentId(loginInfo.getStudentId());
@@ -128,11 +129,24 @@ public class ProfileService {
 		dto.setPoint(studentTblEntity.getPoint());
 		dto.setLastlog(studentTblEntity.getLastLog());
 		dto.setContinuouslogin(studentTblEntity.getContinuousLogin());
-		dto.setImagePath(imagepath+"/"+studentTblEntity.getImagePass());
+		dto.setImagePath(studentTblEntity.getImagePass());
+
+
+		if (!(studentbeans.getMultipartFile().getOriginalFilename().equals(""))) {
+			dto.setImagePath(studentbeans.getUploadFilePathList().get(0).getFilePath());
+		}
+
+
 		studentTblEntity = updateUserTblEntityFromDto(dto);
 
 
+		studentRepository.saveAndFlush(studentTblEntity);
 
+		if (!(studentbeans.getMultipartFile().getOriginalFilename().equals(""))) {
+			dto.setImagePath(imagepath+"/"+studentTblEntity.getImagePass());
+		}else {
+			dto.setImagePath(imagepath+"/"+dto.getImagePath());
+		}
 
 
 		return dto;

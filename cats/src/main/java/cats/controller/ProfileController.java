@@ -89,7 +89,6 @@ public class ProfileController {
     public List<CourseDto> getucourselist(
     		@RequestParam("schoolId")Integer schoolId) {
 
-		System.out.println(111111);
 
 
         return courseService.getList(schoolId);
@@ -145,6 +144,7 @@ public class ProfileController {
 		ProfileDto dto = new ProfileDto();
 		String ErrMsg;
 
+
 		//ユーザー情報をセッションから取得
 		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
 
@@ -173,15 +173,29 @@ public class ProfileController {
 			return mav;
 		}
 
+
+
+
+
 		try {
+
+			if (!(studentbeans.getMultipartFile().getOriginalFilename().equals(""))) {
+
+				uploadFiles(studentbeans);
+
+			}
+
 			dto = profileService.updateProfile(studentbeans,password);
 
-			//画像アップロード
-			uploadFiles(studentbeans);
 		} catch (Exception e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
+
+
+
+
+
 
 		//ポイント反映
 		int point = loginInfo.getPoint();
