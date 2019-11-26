@@ -19,13 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import cats.beans.StudentBeans;
 import cats.dto.AuthSearchDto;
-import cats.dto.AuthenticationDto;
 import cats.dto.CourseDto;
-import cats.dto.CreateUserDto;
-import cats.dto.HobbyDto;
-import cats.dto.SchoolDto;
 import cats.service.AuthenticationService;
 import cats.service.CourseService;
 import cats.service.HobbyService;
@@ -155,76 +150,76 @@ public class AuthenticationCodeController {
         this.sender.send(msg);
     }
 
-	@RequestMapping(value = {"/TwoConf"},method=RequestMethod.POST)
-	public ModelAndView approval(
-			ModelAndView mav,
-			@RequestParam("passauth") String passauth
-			){
-
-		AuthenticationDto dto = new AuthenticationDto();
-
-		Integer authStudent = (Integer)session.getAttribute("authStudent");
-
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        Date date = new Date();
-
-		dto = authentication.apptova(authStudent);
-
-		Integer time = date.compareTo(dto.getNowDate());
-
-		System.out.println(passauth);
-		System.out.println(dto.getPass());
-
-
-		if(dto.getPass().equals(passauth) && time<=0){
-
-
-
-			//認証成功
-			//趣味一覧を取得
-			List<HobbyDto> hobbylist = hobbyService.getAllList();
-			//学校一覧を取得
-			List<SchoolDto> schoollist = schoolService.getAllList();
-
-			//空のデータを作る
-			CreateUserDto createdto = new CreateUserDto();
-
-
-
-
-			StudentBeans studentbeans = new StudentBeans();
-
-
-
-			mav.addObject("studentId",authStudent);
-			mav.addObject("studentbeans", studentbeans);
-			mav.addObject("createUserDto", createdto);
-			mav.setViewName("UserEntry");
-			mav.addObject("hobbylist", hobbylist);
-			mav.addObject("schoollist", schoollist);
-
-			//セッションの破棄
-			session.invalidate();
-
-
-			return mav;
-
-		}else if(dto.getPass() != passauth){
-			//認証失敗
-			String errMsg = "認証コードが正しくありません";
-			mav.addObject("errMsg",errMsg);
-			mav.setViewName("TwoConf");
-		}else {
-			//認証コードの期限切れ
-			String errMsg = "認証コードの期限が切れています。もう一度学籍番号を入力してください。";
-			mav.addObject("errMsg",errMsg);
-			mav.setViewName("TwoCheck");
-		}
-
-
-		return mav;
-
-	}
+//	@RequestMapping(value = {"/TwoConf"},method=RequestMethod.POST)
+//	public ModelAndView approval(
+//			ModelAndView mav,
+//			@RequestParam("passauth") String passauth
+//			){
+//
+//		AuthenticationDto dto = new AuthenticationDto();
+//
+//		Integer authStudent = (Integer)session.getAttribute("authStudent");
+//
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+//        Date date = new Date();
+//
+//		dto = authentication.apptova(authStudent);
+//
+//		Integer time = date.compareTo(dto.getNowDate());
+//
+//		System.out.println(passauth);
+//		System.out.println(dto.getPass());
+//
+//
+//		if(dto.getPass().equals(passauth) && time<=0){
+//
+//
+//
+//			//認証成功
+//			//趣味一覧を取得
+//			List<HobbyDto> hobbylist = hobbyService.getAllList();
+//			//学校一覧を取得
+//			List<SchoolDto> schoollist = schoolService.getAllList();
+//
+//			//空のデータを作る
+//			CreateUserDto createdto = new CreateUserDto();
+//
+//
+//
+//
+//			StudentBeans studentbeans = new StudentBeans();
+//
+//
+//
+//			mav.addObject("studentId",authStudent);
+//			mav.addObject("studentbeans", studentbeans);
+//			mav.addObject("createUserDto", createdto);
+//			mav.setViewName("UserEntry");
+//			mav.addObject("hobbylist", hobbylist);
+//			mav.addObject("schoollist", schoollist);
+//
+//			//セッションの破棄
+//			session.invalidate();
+//
+//
+//			return mav;
+//
+//		}else if(dto.getPass() != passauth){
+//			//認証失敗
+//			String errMsg = "認証コードが正しくありません";
+//			mav.addObject("errMsg",errMsg);
+//			mav.setViewName("TwoConf");
+//		}else {
+//			//認証コードの期限切れ
+//			String errMsg = "認証コードの期限が切れています。もう一度学籍番号を入力してください。";
+//			mav.addObject("errMsg",errMsg);
+//			mav.setViewName("TwoCheck");
+//		}
+//
+//
+//		return mav;
+//
+//	}
 
 
 }
