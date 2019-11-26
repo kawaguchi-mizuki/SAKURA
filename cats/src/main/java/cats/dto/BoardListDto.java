@@ -20,4 +20,6 @@ public class BoardListDto {
 	private String boardDate;
 
 	private String imagePath;
+
+	private String sex;
 }

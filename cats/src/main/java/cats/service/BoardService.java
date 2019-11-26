@@ -82,6 +82,7 @@ public class BoardService {
 			StudentTblEntity studentTblEntity;
 			studentTblEntity = studentRepository.getId(dto.getStudentId());
 			dto.setStudentName(studentTblEntity.getStudentName());
+			dto.setSex(studentTblEntity.getStudentSex());
 
 			dto.setImagePath(imagepath+"/"+studentTblEntity.getImagePass());
 
@@ -152,6 +153,7 @@ public class BoardService {
 			StudentTblEntity studentTblEntity;
 			studentTblEntity = studentRepository.getId(dto.getStudentId());
 			dto.setStudentName(studentTblEntity.getStudentName());
+			dto.setSex(studentTblEntity.getStudentSex());
 
 			dto.setImagePath(imagepath+"/"+studentTblEntity.getImagePass());
 

@@ -552,3 +552,10 @@ button {
 .messlist{
 	margin:110px 0;
 }
+.titleColor{
+	color:pink;
+}
+.titleColor:hover{
+	color:pink;
+}
+

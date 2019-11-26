@@ -84,11 +84,24 @@
 						</div>
 						<div class="col-5"><p th:text="${dto.boardDate}"></p></div>
 					</div>
-					<div class="row mt-2 mb-2">
-						<!--右 2段目-->
-							<div class="col-12"><a href="/BoardComment/Read" th:href="@{/BoardComment/Read(boardId=${dto.boardId},boardTitle=${dto.boardTitle})}"><p class="bring" th:text="${dto.boardTitle}" ></p></a></div>
+
+				<div class="row mt-2 mb-2">
+					<!--右 2段目-->
+					<div class="col-12" th:if="${dto.sex  == '男'}">
+						<a href="/BoardComment/Read"
+							th:href="@{/BoardComment/Read(boardId=${dto.boardId},boardTitle=${dto.boardTitle})}">
+							<p class="bring" th:text="${dto.boardTitle}"></p>
+						</a>
 					</div>
-					<div class="row mt-2 mb-2">
+					<div class="col-12" th:if="${dto.sex == '女'}">
+						<a href="/BoardComment/Read"
+							th:href="@{/BoardComment/Read(boardId=${dto.boardId},boardTitle=${dto.boardTitle})}"
+							class="titleColor"><p class="bring" th:text="${dto.boardTitle}"></p>
+						</a>
+					</div>
+				</div>
+
+				<div class="row mt-2 mb-2">
 						<!--右 3段目-->
 						<div class="col-8 "><p th:text="${dto.studentName}"  class="bring"></p></div>
 						<div class="col-4" th:if="${dto.studentId == studentId}"><input type="botton" class="btn btn-danger entry" data-toggle="modal" data-target="#blockModal" th:data-whatever="${dto.boardId}" value="削除"/>
