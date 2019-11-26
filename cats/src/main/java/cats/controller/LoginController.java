@@ -89,7 +89,7 @@ public class LoginController {
 
 	@RequestMapping(value = { "/Config" }, method = RequestMethod.POST)
 	public ModelAndView UserCheck(@Valid StudentBeans studentbeans,
-			@RequestParam("password") String password, @RequestParam("r_password") String r_password,
+			@RequestParam("password") String password, @RequestParam("rpassword") String r_password,
 			BindingResult bindingResult, ModelAndView mav) throws Exception {
 
 		List<HobbyDto> hobbylist = hobbyService.getAllList();
@@ -99,20 +99,7 @@ public class LoginController {
 
 		String ErrMsg;
 
-		//入力値チェック
-		ErrMsg = ValidationCheck(password,r_password);
 
-		//エラーメッセージがあればリダイレクト
-		if(!(ErrMsg.equals(""))){
-			mav.addObject("hobbylist", hobbylist);
-			mav.addObject("schoollist", schoollist);
-			mav.setViewName("UserEntry");
-			mav.addObject("studentbeans", studentbeans);
-			mav.addObject("createUserDto", dto);
-			mav.addObject("msg", ErrMsg);
-
-			return mav;
-		}
 
 		//画像アップロード
 		uploadFiles(studentbeans);
@@ -357,18 +344,7 @@ public class LoginController {
 		return uploadDir;
 	}
 
-	private String ValidationCheck(String password, String r_password) {
 
-		String errMsg = "";
-
-		if(!(password.equals(r_password))){
-			errMsg = "パスワードが一致していません";
-		}else if(password.length()<7){
-			errMsg = "パスワードが短すぎます";
-		}
-
-		return errMsg;
-	}
 
 	/**追加ポイント処理
 	 * @param dto
