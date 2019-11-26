@@ -128,6 +128,7 @@ public class ProfileService {
 		dto.setPoint(studentTblEntity.getPoint());
 		dto.setLastlog(studentTblEntity.getLastLog());
 		dto.setContinuouslogin(studentTblEntity.getContinuousLogin());
+		dto.setImagePath(imagepath+"/"+studentTblEntity.getImagePass());
 		studentTblEntity = updateUserTblEntityFromDto(dto);
 
 
@@ -154,6 +155,7 @@ public class ProfileService {
 		entity.setPoint(dto.getPoint());
 		entity.setLastLog(dto.getLastlog());
 		entity.setContinuousLogin(dto.getContinuouslogin());
+		entity.setImagePass(dto.getImagePath());
 		return entity;
 	}
 
