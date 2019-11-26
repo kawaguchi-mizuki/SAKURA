@@ -222,7 +222,7 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = { "/Select" }, method = RequestMethod.GET)
-	public ModelAndView BoardSelect(@RequestParam Integer categoryId,ModelAndView mav) {
+	public ModelAndView BoardSelect(@RequestParam Integer categoryId,@RequestParam String sex, ModelAndView mav) {
 
 
 		//掲示板のリストを取得
@@ -232,7 +232,7 @@ public class BoardController {
 		List<CategoryDto> categorylist = categoryService.getAllList();
 
 		//全て表示
-		if(categoryId==0) {
+		if(categoryId==0&&sex.equals("全て")) {
 
 			try {
 				boardlist = boardService.getAllList();
@@ -240,7 +240,7 @@ public class BoardController {
 
 			}
 
-		}else {
+		}else if(categoryId!=0&&sex.equals("全て")) {
 
 			try {
 				boardlist = boardService.getCategorySelect(categoryId);
@@ -248,6 +248,24 @@ public class BoardController {
 
 			}
 
+		}else if(categoryId==0&&(!(sex.equals("全て")))){
+
+			try {
+				boardlist = boardService.getSexSelect(sex);
+			} catch (Exception e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
+
+		}else {
+			
+			try {
+				boardlist = boardService.getSelectList(categoryId,sex);
+			} catch (Exception e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
+			
 		}
 
 

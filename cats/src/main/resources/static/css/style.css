@@ -552,3 +552,19 @@ button {
 .messlist{
 	margin:110px 0;
 }
+.titleColor{
+	color:pink;
+}
+.titleColor:hover{
+	color:pink;
+}
+.blueTitle{
+	color:blue;
+}
+.pinkTitle{
+	color:pink;
+}
+.entry{
+	padding:5px 5px;
+}
+
