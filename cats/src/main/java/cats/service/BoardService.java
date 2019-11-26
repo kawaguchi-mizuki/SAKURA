@@ -171,6 +171,82 @@ public class BoardService {
 		return list;
 	}
 
+	public List<BoardListDto> getSexSelect(String sex) throws Exception{
+		List<BoardListDto> list = new ArrayList<BoardListDto>();
+
+		List<BoardTblEntity> boardList = boardRepository.findAll(new Sort(Sort.Direction.DESC,"boardId"));
+
+		String imagepath = AppSettingProperty.getInstance().getCatsProfileImgPrefix();
+
+		//entity -> DTO
+		for( BoardTblEntity entity : boardList ) {
+			BoardListDto dto = new BoardListDto();
+
+			dto.setBoardId(entity.getBoardId());
+			dto.setStudentId(entity.getStudentId());
+			dto.setBoardTitle(entity.getBoardTitle());
+
+			StudentTblEntity studentTblEntity;
+			studentTblEntity = studentRepository.getId(dto.getStudentId());
+			dto.setStudentName(studentTblEntity.getStudentName());
+			dto.setSex(studentTblEntity.getStudentSex());
+
+			dto.setImagePath(imagepath+"/"+studentTblEntity.getImagePass());
+
+			dto.setCategoryId(entity.getCategoryId());
+			CategoryTblEntity categoryTblEntity;
+			categoryTblEntity = categoryRepository.getId(dto.getCategoryId());
+			dto.setCategoryName(categoryTblEntity.getcategoryName());
+
+			 SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+
+			dto.setBoardDate(sdf.format(entity.getBoardDate()));
+
+			if(dto.getSex().equals(sex)) {
+				list.add(dto);
+			}
+		}
+		return list;
+	}
+
+	public List<BoardListDto> getSelectList(Integer categoryId, String sex) throws Exception {
+		List<BoardListDto> list = new ArrayList<BoardListDto>();
+
+		List<BoardTblEntity> boardList = boardRepository.findAll(Specification.where(CategorySelect(categoryId)),new Sort(Sort.Direction.DESC,"boardId"));
+
+		String imagepath = AppSettingProperty.getInstance().getCatsProfileImgPrefix();
+
+		//entity -> DTO
+		for( BoardTblEntity entity : boardList ) {
+			BoardListDto dto = new BoardListDto();
+
+			dto.setBoardId(entity.getBoardId());
+			dto.setStudentId(entity.getStudentId());
+			dto.setBoardTitle(entity.getBoardTitle());
+
+			StudentTblEntity studentTblEntity;
+			studentTblEntity = studentRepository.getId(dto.getStudentId());
+			dto.setStudentName(studentTblEntity.getStudentName());
+			dto.setSex(studentTblEntity.getStudentSex());
+
+			dto.setImagePath(imagepath+"/"+studentTblEntity.getImagePass());
+
+			dto.setCategoryId(entity.getCategoryId());
+			CategoryTblEntity categoryTblEntity;
+			categoryTblEntity = categoryRepository.getId(dto.getCategoryId());
+			dto.setCategoryName(categoryTblEntity.getcategoryName());
+
+			 SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+
+			dto.setBoardDate(sdf.format(entity.getBoardDate()));
+
+			if(dto.getSex().equals(sex)) {
+				list.add(dto);
+			}
+		}
+		return list;
+	}
+
 
 
 }

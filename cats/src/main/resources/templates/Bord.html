@@ -34,8 +34,13 @@
 
 	<div class="serchs mr-3">
 		<form th:action="@{/Board/Select}">
+			<select name="sex" class="category-select">
+				<option  th:value="全て">全て</option>
+				<option  th:value="男">男性</option>
+				<option  th:value="女">女性</option>
+			</select>
 			<select name="categoryId" class="category-select">
-				<option  th:value="0">全て</option>
+				<option  th:value="0">全てのカテゴリー</option>
 				<option th:each="dto:${categorylist}" th:value="${dto.categoryId}" th:text="${dto.categoryName}"></option>
 			</select> <input type="submit" value="検索" class="serch-bottom btn btn-danger">
 		</form>
