@@ -45,7 +45,7 @@
 	<div class=explain>
 			<p>掲示板内の説明です</p>
 			<br>
-			<p>(男性の方のタイトルは、青、女性の方は、ピンク)</p>
+			<p>(男性の方のタイトルは<font class="blueTitle">青</font>,女性の方は<font class="pinkTitle">ピンク</font>)</p>
 		</div>
 		<p></p>
 
@@ -104,7 +104,7 @@
 				<div class="row mt-2 mb-2">
 						<!--右 3段目-->
 						<div class="col-8 "><p th:text="${dto.studentName}"  class="bring"></p></div>
-						<div class="col-4" th:if="${dto.studentId == studentId}"><input type="botton" class="btn btn-danger entry" data-toggle="modal" data-target="#blockModal" th:data-whatever="${dto.boardId}" value="削除"/>
+						<div class="col-1" th:if="${dto.studentId == studentId}"><input type="botton" class="btn btn-danger entry" data-toggle="modal" data-target="#blockModal" th:data-whatever="${dto.boardId}" value="削除"/>
 
 						</div>
 					</div>

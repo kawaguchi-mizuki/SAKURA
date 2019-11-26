@@ -558,4 +558,13 @@ button {
 .titleColor:hover{
 	color:pink;
 }
+.blueTitle{
+	color:blue;
+}
+.pinkTitle{
+	color:pink;
+}
+.entry{
+	padding:5px 5px;
+}
 
