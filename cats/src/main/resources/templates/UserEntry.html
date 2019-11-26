@@ -152,8 +152,10 @@
 		<input type="password" class="form-control" name="rpassword" id="r-password"/>
 
 
+		<a href="/Login" th:href="@{/Login}">
+		<input type="button" class="btn btn-primary back"  value="戻る"/>
+		</a>
 
-		<input type="button" class="btn btn-primary back"  onclick="history.back()" value="戻る"/>
 		<input type="submit" class="btn btn-danger entry"  value="登録" onclick= "return check()"/>
 
 
