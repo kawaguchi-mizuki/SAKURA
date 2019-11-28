@@ -87,7 +87,15 @@ public class TalkService {
 					List<String> lastmess = messageRepository.getLastMessage(dto.getTalkId());
 
 
-					dto.setLastMessage(lastmess.get(0));
+
+					//メッセージがあるか確認
+					if (lastmess == null || lastmess.size() == 0) {
+
+					}else {
+						dto.setLastMessage(lastmess.get(0));
+					}
+
+
 
 
 					list.add(dto);
