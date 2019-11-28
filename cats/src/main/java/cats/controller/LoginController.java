@@ -4,14 +4,15 @@ package cats.controller;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -55,6 +56,7 @@ public class LoginController {
 
 	@Autowired
 	LoginService loginService;
+
 	@Autowired
 	HttpSession session;
 
@@ -80,7 +82,7 @@ public class LoginController {
 	@RequestMapping(value = {"/Login"}, method = RequestMethod.GET)
 	public ModelAndView login(ModelAndView mav)throws Exception{
 
-		mav.setViewName("login");
+		mav.setViewName("Login");
 
 		return mav;
 	}
@@ -115,20 +117,36 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = {"/Home"}, method = RequestMethod.GET)
-	public ModelAndView home(ModelAndView mav, HttpServletResponse response)throws Exception{
-		
-       
+	public ModelAndView home(ModelAndView mav, HttpServletResponse response) {
+
+
 		//	ユーザー情報をセッションから取得
 		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
-		
-		mav.addObject("add",loginInfo.getStudentId());
-		
-		mav.setViewName("home");
+
+		//受け取ったリクエスト一覧を取得
+		List<HomeRequestDto> requestlist = new ArrayList<HomeRequestDto>();
+		try {
+			requestlist = homeService.getAllList(loginInfo);
+		} catch (Exception e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+
+		//受け取ったリクエスト数を取得
+		int requestcount = requestlist.size();
+
+		//ポイント反映
+	    int point = loginInfo.getPoint();
+
+	    mav.addObject("point",point);
+		mav.addObject("count",requestcount);
+		mav.addObject("requestlist", requestlist);
+		mav.setViewName("Home");
 
 		return mav;
-	}	
-	
-	
+	}
+
+
 	/**
 	 * ログイン処理
 	 * @param redirectAttributes
@@ -158,6 +176,7 @@ public class LoginController {
 		String mode = "count";
 		int num = 0;
 		int point = 0;
+		//String flag = "";
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 		Date today = new Date();
@@ -166,7 +185,7 @@ public class LoginController {
 		LoginInfoDto loginInfo= null;
 		
 		
-		//	ログイン処理
+		//	ログイン処理 from.getStudentId(),from.getPassWord()
 		loginInfo = loginService.Login(studentId,pass);
 		
 		if(loginInfo != null) {
@@ -182,6 +201,7 @@ public class LoginController {
 			check = sdf.format(loginInfo.getLastLog());
 			if(!(log.equals(check))) {
 				redirectAttributes.addFlashAttribute("mode",mode);
+				//flag = "log";
 			}
 			
 			url = "redirect:Home";
@@ -306,7 +326,7 @@ public class LoginController {
 		//
 		return num;
 }
-	
+
 	/**
 	 * ログアウト処理
 	 * @param redirectAttributes
@@ -315,10 +335,10 @@ public class LoginController {
 	 */
 	@RequestMapping(value= {"/Logout"}, method=RequestMethod.GET)
 	public String logout(HttpServletRequest request,RedirectAttributes redirectAttributes) throws Exception {
-				
+
 		//	セッション破棄
 		session.invalidate();
-		
+
 		//	ログイン画面へリダイレクト
 		return "redirect:Login";
 	}
