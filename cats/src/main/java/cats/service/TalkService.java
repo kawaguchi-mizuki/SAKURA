@@ -15,10 +15,12 @@ import org.springframework.stereotype.Service;
 import cats.config.AppSettingProperty;
 import cats.dto.LoginInfoDto;
 import cats.dto.TalkSelectDto;
+import cats.entity.MessageTblEntity;
 import cats.entity.StudentTblEntity;
 import cats.entity.TalkTblEntity;
 import cats.param.SessionConst;
 import cats.repository.HomeRequestRepository;
+import cats.repository.MessageRepository;
 import cats.repository.StudentRepository;
 import cats.repository.TalkRepository;
 
@@ -35,6 +37,9 @@ public class TalkService {
 
 	@Autowired
 	StudentRepository studentRepository;
+
+	@Autowired
+	MessageRepository messageRepository;
 
 	@Autowired
 	HttpSession session;
@@ -66,6 +71,7 @@ public class TalkService {
 
 					StudentTblEntity studentEntity;
 					StudentTblEntity sendstudentEntity;
+					MessageTblEntity messageEntity = new MessageTblEntity();
 
 
 					studentEntity = studentRepository.getOne(dto.getStudentIdReceive());
@@ -77,6 +83,12 @@ public class TalkService {
 
 					dto.setStudentSendName(sendstudentEntity.getStudentName());
 					dto.setSendImagePath(imagepath+"/"+sendstudentEntity.getImagePass());
+
+					List<String> lastmess = messageRepository.getLastMessage(dto.getTalkId());
+
+
+					dto.setLastMessage(lastmess.get(0));
+
 
 					list.add(dto);
 				}
