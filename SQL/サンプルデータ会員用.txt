@@ -20,6 +20,7 @@ insert into student values(1701110,"TAKEFUMI","男",7,4,4,3,27,"山口県","山登れま
 
 insert into student values(1701111,"江越伊織（少年期）","男",1,4,4,3,27,"長崎県","えりかすきっさ","aaaaaaa","20191123115833955/ego_fuck.JPG",500,null,0);
 
+☆
 insert into student values(1701112,"姫野マリ","女",3,4,4,3,27,"鹿児島県","自己紹介","aaaaaaa","20191123122642515/er.png",500,null,0);
 
 insert into student values(1701113,"池田エロいざ","女",8,4,4,3,27,"鹿児島県","自己紹介","aaaaaaa","20191123122642515/er.png",500,null,0);
