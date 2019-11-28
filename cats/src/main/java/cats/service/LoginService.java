@@ -35,6 +35,7 @@ public class LoginService {
 	 */
 	public LoginInfoDto Login(int number,String password)throws Exception {
 		LoginInfoDto dto = null;
+		Date today = new Date();
 		
 		//	ログイン検索
 		StudentTblEntity entity = loginRepository.getlogin(number,password);
@@ -46,7 +47,7 @@ public class LoginService {
 			
 			dto.setStudentId(entity.getStudentId());
 			dto.setPoint(entity.getPoint());
-			dto.setLastLog(entity.getLastLog());
+			dto.setLastLog(today);
 		}
 		return dto;
 	}
@@ -144,17 +145,49 @@ public class LoginService {
 	}
 	
 	/**
+	 * ログインボーナスのポイントを取得
+	 * 
+	 * 
+	 */
+	public int HomePoint(Integer num){
+		int point = 0;
+		//	ログインボーナス（ポイント）
+		int[] bar  = {50,100,150,200,300};
+		
+		//	ログインボーナス表示
+		for(int i = 0;i<6;i++) {
+			for(int j = 0;j<bar.length;j++) {
+				if(num == i) {
+					if(i-1 == j) {
+						point = bar[j];	
+					}
+				}
+			}
+		}
+		return point;
+	}
+	
+	/**
 	 * ログアウト処理
 	 * 
 	 * @param token
 	 */
-	public void logout(Integer studentId) {
-
+	public void logout(Integer studentId)
+	{
 		StudentTblEntity StudentTblEntity = loginRepository.getlogout(studentId);
 		if( StudentTblEntity != null ) {
 			loginRepository.delete(StudentTblEntity);
 		}
 	}
+	/**
+	 * エラーチェック処理
+	 * 
+	 * @param token
+	 */
+	//public String LoginCheack() {
+		
+		
+	//}
 	
 	
 }

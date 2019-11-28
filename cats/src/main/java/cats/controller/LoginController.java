@@ -159,7 +159,6 @@ public class LoginController {
 	 * @return
 	 * @throws Exception
 	 */
-	//string hennkou
 	@RequestMapping(value = {"/auth"}, method = RequestMethod.POST)
 	public String auth(
 			RedirectAttributes redirectAttributes,
@@ -169,29 +168,49 @@ public class LoginController {
 			HttpServletRequest request,
 			HttpServletResponse response
 			)throws Exception {
-
+		
 		String ErrMsg;
 		String url;
-
+		String log;
+		String check;
+		String mode = "count";
+		int num = 0;
+		int point = 0;
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+		Date today = new Date();
+		
+		
 		LoginInfoDto loginInfo= null;
-
-		//	ログイン処理
-		loginInfo = loginService.Login(studentId, pass);
-
-		//	セッション情報を入れ替えるuserInfo =
-
+		
+		
+		//	ログイン処理 from.getStudentId(),from.getPassWord()
+		loginInfo = loginService.Login(studentId,pass);
+		
 		if(loginInfo != null) {
+			num = DayCheck(loginInfo);
+			point = loginService.HomePoint(num);
+			
+			redirectAttributes.addFlashAttribute("num",num);
+			redirectAttributes.addFlashAttribute("point",point);
+			
+			log = sdf.format(today);
+			check = sdf.format(loginInfo.getLastLog());
+			if(!(log.equals(check))) {
+				redirectAttributes.addFlashAttribute("mode",mode);
+			}
+			
 			//	セッションにログイン情報を保存
 			session.setAttribute(SessionConst.LOGININFO, loginInfo);
-			DayCheck(loginInfo);
 			url = "redirect:Home";
-
+			
 		}else{
 			ErrMsg = "学籍番号とパスワードが一致しません";
 			redirectAttributes.addFlashAttribute("msg",ErrMsg);
 			url = "redirect:Login";
 		}
 		return url;
+		
 	}
 
 	/**
@@ -200,7 +219,7 @@ public class LoginController {
 	 * @return
 	 * @throws Exception
 	 */
-	private void DayCheck(LoginInfoDto loginInfo)throws Exception {
+	private int DayCheck(LoginInfoDto loginInfo)throws Exception {
 
 		LoginDayDto dto = null;
 		String cheinday = null;
@@ -266,19 +285,42 @@ public class LoginController {
 				}
 				if(num >= 6) {
 					num = 0;
+					point = loginInfo.getPoint();
+					point = point+bar[num];
+					loginService.LoginPoint(loginInfo.getStudentId(),point);
+					num++;
 				}
 				loginService.UpdateCount(loginInfo.getStudentId(),num);
 				loginService.UpdateDate(loginInfo.getStudentId(),date);
+				//
+				return num;
 			}
 			else {
+			num = 0;
+			point = loginInfo.getPoint();
+			point = point+bar[num];
+			loginService.LoginPoint(loginInfo.getStudentId(),point);
+			num++;
 			loginService.UpdateCount(loginInfo.getStudentId(),num);
 			loginService.UpdateDate(loginInfo.getStudentId(),date);
+
+			//
+			return num;
 			}
 		}
 	}else {
+		num = 0;
+		point = loginInfo.getPoint();
+		point = point+bar[num];
+		loginService.LoginPoint(loginInfo.getStudentId(),point);
+		num++;
 		loginService.UpdateCount(loginInfo.getStudentId(),num);
 		loginService.UpdateDate(loginInfo.getStudentId(),date);
+		//
+		return num;
 	}
+		//
+		return num;
 }
 
 	/**
