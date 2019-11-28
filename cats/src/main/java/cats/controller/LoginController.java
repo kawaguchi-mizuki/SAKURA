@@ -167,7 +167,7 @@ public class LoginController {
 			HttpServletRequest request,
 			HttpServletResponse response
 			)throws Exception {
-
+		
 		String ErrMsg;
 		String url;
 		String log;
@@ -175,44 +175,41 @@ public class LoginController {
 		String mode = "count";
 		int num = 0;
 		int point = 0;
-		//String flag = "";
-
+		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 		Date today = new Date();
-
-
+		
+		
 		LoginInfoDto loginInfo= null;
-
-
+		
+		
 		//	ログイン処理 from.getStudentId(),from.getPassWord()
 		loginInfo = loginService.Login(studentId,pass);
-
+		
 		if(loginInfo != null) {
-			//	セッションにログイン情報を保存
-
-
 			num = DayCheck(loginInfo);
-
-			session.setAttribute(SessionConst.LOGININFO, loginInfo);
 			point = loginService.HomePoint(num);
-
+			
 			redirectAttributes.addFlashAttribute("num",num);
 			redirectAttributes.addFlashAttribute("point",point);
-
+			
 			log = sdf.format(today);
 			check = sdf.format(loginInfo.getLastLog());
 			if(!(log.equals(check))) {
 				redirectAttributes.addFlashAttribute("mode",mode);
 			}
-
+			
+			//	セッションにログイン情報を保存
+			session.setAttribute(SessionConst.LOGININFO, loginInfo);
 			url = "redirect:Home";
-
+			
 		}else{
 			ErrMsg = "学籍番号とパスワードが一致しません";
 			redirectAttributes.addFlashAttribute("msg",ErrMsg);
 			url = "redirect:Login";
 		}
 		return url;
+		
 	}
 
 	/**

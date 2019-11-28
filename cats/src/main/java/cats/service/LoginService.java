@@ -35,6 +35,7 @@ public class LoginService {
 	 */
 	public LoginInfoDto Login(int number,String password)throws Exception {
 		LoginInfoDto dto = null;
+		Date today = new Date();
 		
 		//	ログイン検索
 		StudentTblEntity entity = loginRepository.getlogin(number,password);
@@ -46,7 +47,7 @@ public class LoginService {
 			
 			dto.setStudentId(entity.getStudentId());
 			dto.setPoint(entity.getPoint());
-			dto.setLastLog(entity.getLastLog());
+			dto.setLastLog(today);
 		}
 		return dto;
 	}
