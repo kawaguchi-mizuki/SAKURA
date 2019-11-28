@@ -196,6 +196,10 @@ public class LoginController {
 			
 			log = sdf.format(today);
 			check = sdf.format(loginInfo.getLastLog());
+			if(loginInfo.getLastLog() == null) {
+				redirectAttributes.addFlashAttribute("mode",mode);
+				loginInfo.setLastLog(today);
+			}
 			if(!(log.equals(check))) {
 				redirectAttributes.addFlashAttribute("mode",mode);
 			}
