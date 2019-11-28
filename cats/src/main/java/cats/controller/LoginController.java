@@ -145,8 +145,7 @@ public class LoginController {
 
 		return mav;
 	}
-
-
+	
 	/**
 	 * ログイン処理
 	 * @param redirectAttributes
@@ -190,8 +189,11 @@ public class LoginController {
 		
 		if(loginInfo != null) {
 			//	セッションにログイン情報を保存
-			session.setAttribute(SessionConst.LOGININFO, loginInfo);
+			
+			
 			num = DayCheck(loginInfo);
+			
+			session.setAttribute(SessionConst.LOGININFO, loginInfo);
 			point = loginService.HomePoint(num);
 			
 			redirectAttributes.addFlashAttribute("num",num);
@@ -201,7 +203,6 @@ public class LoginController {
 			check = sdf.format(loginInfo.getLastLog());
 			if(!(log.equals(check))) {
 				redirectAttributes.addFlashAttribute("mode",mode);
-				//flag = "log";
 			}
 			
 			url = "redirect:Home";
@@ -212,10 +213,6 @@ public class LoginController {
 			url = "redirect:Login";
 		}
 		return url;
-		
-	}
-	
-	
 	
 	/**
 	 * 連続ログイン判定
