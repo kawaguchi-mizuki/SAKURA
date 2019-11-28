@@ -4,15 +4,14 @@ package cats.controller;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -56,7 +55,6 @@ public class LoginController {
 
 	@Autowired
 	LoginService loginService;
-
 	@Autowired
 	HttpSession session;
 
@@ -82,7 +80,7 @@ public class LoginController {
 	@RequestMapping(value = {"/Login"}, method = RequestMethod.GET)
 	public ModelAndView login(ModelAndView mav)throws Exception{
 
-		mav.setViewName("Login");
+		mav.setViewName("login");
 
 		return mav;
 	}
@@ -117,36 +115,20 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = {"/Home"}, method = RequestMethod.GET)
-	public ModelAndView home(ModelAndView mav, HttpServletResponse response) {
-
-
+	public ModelAndView home(ModelAndView mav, HttpServletResponse response)throws Exception{
+		
+       
 		//	ユーザー情報をセッションから取得
 		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
-
-		//受け取ったリクエスト一覧を取得
-		List<HomeRequestDto> requestlist = new ArrayList<HomeRequestDto>();
-		try {
-			requestlist = homeService.getAllList(loginInfo);
-		} catch (Exception e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		}
-
-		//受け取ったリクエスト数を取得
-		int requestcount = requestlist.size();
-
-		//ポイント反映
-	    int point = loginInfo.getPoint();
-
-	    mav.addObject("point",point);
-		mav.addObject("count",requestcount);
-		mav.addObject("requestlist", requestlist);
-		mav.setViewName("Home");
+		
+		mav.addObject("add",loginInfo.getStudentId());
+		
+		mav.setViewName("home");
 
 		return mav;
-	}
-
-
+	}	
+	
+	
 	/**
 	 * ログイン処理
 	 * @param redirectAttributes
@@ -159,7 +141,6 @@ public class LoginController {
 	 * @return
 	 * @throws Exception
 	 */
-	//string hennkou
 	@RequestMapping(value = {"/auth"}, method = RequestMethod.POST)
 	public String auth(
 			RedirectAttributes redirectAttributes,
@@ -169,40 +150,62 @@ public class LoginController {
 			HttpServletRequest request,
 			HttpServletResponse response
 			)throws Exception {
-
+		
 		String ErrMsg;
 		String url;
-
+		String log;
+		String check;
+		String mode = "count";
+		int num = 0;
+		int point = 0;
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+		Date today = new Date();
+		
+		
 		LoginInfoDto loginInfo= null;
-
+		
+		
 		//	ログイン処理
-		loginInfo = loginService.Login(studentId, pass);
-
-		//	セッション情報を入れ替えるuserInfo =
-
+		loginInfo = loginService.Login(studentId,pass);
+		
 		if(loginInfo != null) {
 			//	セッションにログイン情報を保存
 			session.setAttribute(SessionConst.LOGININFO, loginInfo);
-			DayCheck(loginInfo);
+			num = DayCheck(loginInfo);
+			point = loginService.HomePoint(num);
+			
+			redirectAttributes.addFlashAttribute("num",num);
+			redirectAttributes.addFlashAttribute("point",point);
+			
+			log = sdf.format(today);
+			check = sdf.format(loginInfo.getLastLog());
+			if(!(log.equals(check))) {
+				redirectAttributes.addFlashAttribute("mode",mode);
+			}
+			
 			url = "redirect:Home";
-
+			
 		}else{
 			ErrMsg = "学籍番号とパスワードが一致しません";
 			redirectAttributes.addFlashAttribute("msg",ErrMsg);
 			url = "redirect:Login";
 		}
 		return url;
+		
 	}
-
+	
+	
+	
 	/**
 	 * 連続ログイン判定
 	 * @param loginInfo
 	 * @return
 	 * @throws Exception
 	 */
-	private void DayCheck(LoginInfoDto loginInfo)throws Exception {
-
-		LoginDayDto dto = null;
+	private int DayCheck(LoginInfoDto loginInfo)throws Exception {
+	
+		LoginDayDto dto = null;	
 		String cheinday = null;
 		String lastday = null;
 		String today =null;
@@ -212,40 +215,40 @@ public class LoginController {
 		int point = 0;
 		//	ログインボーナス（ポイント）
 		int[] bar  = {50,100,150,200,300};
-
-
+		
+		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 		Date date = new Date();
-
+		
 		dto = loginService.LastDay(loginInfo.getStudentId());
-
+		
 		if(dto.getLastLog() != null) {
 		//	Date型の日時をCalendar型に変換
         Calendar calendar = Calendar.getInstance();
         Calendar calenday = Calendar.getInstance();
-
+        
         calendar.setTime(date);
         calenday.setTime(dto.getLastLog());
-
+        
         //	日時を減算する
         calendar.add(Calendar.DATE, -1);
-
+        
         cheinday = sdf.format(calendar.getTime());
         lastday = sdf.format(calenday.getTime());
         today = sdf.format(date);
-
+        
         //format
         last = sdf.parse(lastday);
         chein = sdf.parse(cheinday);
         date = sdf.parse(today);
-
+        
         System.out.println(last);
         System.out.println(chein);
         System.out.println(date);
-
+        
 		//	現在の日付を超えているか
 		if(last.before(date)) {
-
+			
 			//	最後にログインした値を取得して-1したものと現在日付が一致するか
 			if(last.equals(chein)) {
 				num = dto.getContinuousLogin();
@@ -258,7 +261,7 @@ public class LoginController {
 								if(i-1 == j) {
 									point = loginInfo.getPoint();
 									point = point+bar[j];
-									loginService.LoginPoint(loginInfo.getStudentId(),point);
+									loginService.LoginPoint(loginInfo.getStudentId(),point);	
 								}
 							}
 						}
@@ -266,21 +269,44 @@ public class LoginController {
 				}
 				if(num >= 6) {
 					num = 0;
+					point = loginInfo.getPoint();
+					point = point+bar[num];
+					loginService.LoginPoint(loginInfo.getStudentId(),point);
+					num++;
 				}
 				loginService.UpdateCount(loginInfo.getStudentId(),num);
 				loginService.UpdateDate(loginInfo.getStudentId(),date);
+				//
+				return num;
 			}
 			else {
+			num = 0;
+			point = loginInfo.getPoint();
+			point = point+bar[num];
+			loginService.LoginPoint(loginInfo.getStudentId(),point);
+			num++;
 			loginService.UpdateCount(loginInfo.getStudentId(),num);
 			loginService.UpdateDate(loginInfo.getStudentId(),date);
+			
+			//
+			return num;
 			}
 		}
 	}else {
+		num = 0;
+		point = loginInfo.getPoint();
+		point = point+bar[num];
+		loginService.LoginPoint(loginInfo.getStudentId(),point);
+		num++;
 		loginService.UpdateCount(loginInfo.getStudentId(),num);
 		loginService.UpdateDate(loginInfo.getStudentId(),date);
+		//
+		return num;
 	}
+		//
+		return num;
 }
-
+	
 	/**
 	 * ログアウト処理
 	 * @param redirectAttributes
@@ -289,10 +315,10 @@ public class LoginController {
 	 */
 	@RequestMapping(value= {"/Logout"}, method=RequestMethod.GET)
 	public String logout(HttpServletRequest request,RedirectAttributes redirectAttributes) throws Exception {
-
+				
 		//	セッション破棄
 		session.invalidate();
-
+		
 		//	ログイン画面へリダイレクト
 		return "redirect:Login";
 	}
