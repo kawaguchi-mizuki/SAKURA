@@ -84,13 +84,10 @@ public class TalkService {
 					dto.setStudentSendName(sendstudentEntity.getStudentName());
 					dto.setSendImagePath(imagepath+"/"+sendstudentEntity.getImagePass());
 
-					String LastMessage = messageRepository.getLastMessage(dto.getTalkId());
+					List<String> lastmess = messageRepository.getLastMessage(dto.getTalkId());
 
-					System.out.println(dto.getTalkId());
 
-					dto.setLastMessage(LastMessage);
-
-					System.out.println(LastMessage);
+					dto.setLastMessage(lastmess.get(0));
 
 
 					list.add(dto);
