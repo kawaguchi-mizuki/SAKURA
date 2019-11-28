@@ -251,7 +251,13 @@ public class ProfileController {
 
 
 
-		ProfileDto dto = profileService.getDisplayBoardBrowse(studentId);
+		ProfileDto dto = new ProfileDto();
+		try {
+			dto = profileService.getDisplayBoardBrowse(studentId);
+		} catch (Exception e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
 
 		//ユーザー情報をセッションから取得
 		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);

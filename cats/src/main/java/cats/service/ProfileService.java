@@ -173,8 +173,10 @@ public class ProfileService {
 		return entity;
 	}
 
-	public ProfileDto getDisplayBoardBrowse(Integer studentId) {
+	public ProfileDto getDisplayBoardBrowse(Integer studentId) throws Exception {
 		ProfileDto dto = new ProfileDto();
+
+		String imagepath = AppSettingProperty.getInstance().getCatsProfileImgPrefix();
 
 		StudentTblEntity studentTblEntity;
 		HobbyTblEntity hobbyTblEntity;
@@ -203,6 +205,7 @@ public class ProfileService {
 		dto.setBirthplace(studentTblEntity.getBirthplace());
 		dto.setSelfIntroduction(studentTblEntity.getSelfIntroduction());
 		dto.setPassword(studentTblEntity.getPassword());
+		dto.setImagePath(imagepath+"/"+studentTblEntity.getImagePass());
 
 
 		return dto;

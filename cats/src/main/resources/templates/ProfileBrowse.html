@@ -38,6 +38,11 @@
 
 		<input type="hidden" name="talkId" th:value="${talkId}">
 
+		<label class="h5">アイコン画像</label>
+		<div class="box-icon">
+			<img th:src="${ProfileDto.imagePath}" alt="アイコン" class="icon-image rounded img-fluid">
+		</div>
+
 		<label class="h5 a">名前</label>
 		<input type="text" name="name" class="form-control"  th:value="${ProfileDto.studentName}" readonly/>
 		<br/>
@@ -76,8 +81,12 @@
 
 
 
-		<input type="button" class="btn btn-primary back"  onclick="history.back()" value="戻る"/>
-		<input type="botton" class="btn btn-danger entry" data-toggle="modal" data-target="#blockModal" value="ブロック"/>
+			<input type="button" class="btn btn-primary back"  onclick="history.back()" value="戻る"/>
+		<div th:if="${talkId != 0}">
+			<input type="botton" class="btn btn-danger entry" data-toggle="modal" data-target="#blockModal" value="ブロック"/>
+		</div>
+
+
 	<!-- Modal -->
 	<div class="modal fade" id="blockModal" tabindex="-1" role="dialog"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -100,6 +109,8 @@
 			</div>
 		</div>
 	</div>
+
+
 </form>
 </div>
 
