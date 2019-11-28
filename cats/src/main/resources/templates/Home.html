@@ -116,6 +116,33 @@
 			</div>
 
 		</div>
+		
+<!---------------- ログインpop処理  -------------------------->
+<div th:if="${mode}">
+<input type="hidden" name="mode" value="count">
+
+	
+	<div class="modal fade " tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content login-first-msg">
+	      <div class="modal-body">
+	      <div th:if="${num == 1}">
+		　　		<p>ログインしてくれてありがとう！</p>
+		　　</div>
+		　　<div th:if="${num != 1}">
+		　　		<p>今日も来てくれてありがとう！</p>
+		　　</div>
+					<p th:text="'連続ログインボーナス:'+${num}+'日目'"></p>
+					<p th:text="${point}+'ポイントGET!'"></p>
+					<p>※５日到達すると１日目から再開されます</p>
+	      </div>
+	      <div class="text-center pb-3">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</div>
 
 	<footer>
 		<div class="row">
