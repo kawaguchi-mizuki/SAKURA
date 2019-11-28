@@ -49,9 +49,11 @@
 		</div>
 		<div class="col-9" th:if="${selectId != dto.studentIdSend}">
 			<h3 th:text="${dto.studentSendName}"></h3>
+			<p th:text="${dto.lastMessage}"></p>
 		</div>
 		<div class="col-9" th:if="${selectId == dto.studentIdSend}">
 			<h3 th:text="${dto.studentReceiveName}"></h3>
+			<p th:text="${dto.lastMessage}"></p>
 		</div>
 		</a>
 	</div>
