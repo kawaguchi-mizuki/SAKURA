@@ -40,9 +40,12 @@
 		<!--①LINE会話全体を囲う-->
 
 		<!--②左コメント始-->
+		<a  href="/Profile/Browse" th:href="@{/Profile/Browse(studentId=${dto.studentIdSend},talkId=${dto.talkId})}" >
 		<div class="balloon6"  th:if="${dto.studentIdSend != studentId}">
 			<div class="faceicon">
-				<img th:src="${dto.imagePath}">
+
+					<img th:src="${dto.imagePath}">
+
 			</div>
 			<div class="chatting"  >
 				<div class="says">
@@ -50,6 +53,7 @@
 				</div>
 			</div>
 		</div>
+		</a>
 		<!--②/左コメント終-->
 
 		<!--③右コメント始-->

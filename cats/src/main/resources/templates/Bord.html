@@ -82,8 +82,9 @@
 				<div class="box-icon">
 					<!--左 アイコン部分-->
 
-
-					<img th:src="${dto.imagePath}" alt="アイコン" class="icon-image rounded img-fluid">
+					<a  href="/Profile/Browse" th:href="@{/Profile/Browse(studentId=${dto.studentId},talkId=0)}" >
+						<img th:src="${dto.imagePath}" alt="アイコン" class="icon-image rounded img-fluid">
+					</a>
 
 				</div>
 
