@@ -144,7 +144,7 @@ public class LoginService {
 	}
 	
 	/**
-	 * ログインボーナスのポイントを取得
+	 * ログインボーナス ポイント 取得
 	 * 
 	 * 
 	 */
@@ -164,19 +164,6 @@ public class LoginService {
 			}
 		}
 		return point;
-	}
-	
-	/**
-	 * ログアウト処理
-	 * 
-	 * @param token
-	 */
-	public void logout(Integer studentId)
-	{
-		StudentTblEntity StudentTblEntity = loginRepository.getlogout(studentId);
-		if( StudentTblEntity != null ) {
-			loginRepository.delete(StudentTblEntity);
-		}
 	}
 	/**
 	 * エラーチェック処理
