@@ -168,57 +168,57 @@ public class LoginController {
 			HttpServletRequest request,
 			HttpServletResponse response
 			)throws Exception {
-		
+
 		String ErrMsg;
 		String url;
 		String log;
 		String check;
 		String mode = "count";
 		int num = 0;
-		int point = 0;
-		
+		int Logpoint = 0;
+
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 		Date today = new Date();
-		
+
 		LoginInfoDto loginInfo= null;
-		
-		//	ログイン処理 
+
+		//	ログイン処理
 		loginInfo = loginService.Login(studentId,pass);
-		
+
 		if(loginInfo != null) {
-			
+
 			log = sdf.format(today);
 			if(loginInfo.getLastLog() == null) {
 				redirectAttributes.addFlashAttribute("mode",mode);
 				loginInfo.setLastLog(today);
 			}
-			
+
 			check = sdf.format(loginInfo.getLastLog());
 			if(!(log.equals(check))) {
 					redirectAttributes.addFlashAttribute("mode",mode);
 			}
-			
+
 			num = DayCheck(loginInfo);
-			point = loginService.HomePoint(num);
-			
+			Logpoint = loginService.HomePoint(num);
+
 			redirectAttributes.addFlashAttribute("num",num);
-			redirectAttributes.addFlashAttribute("point",point);
-			
+			redirectAttributes.addFlashAttribute("Logpoint",Logpoint);
+
 			//	セッションにログイン情報を保存
 			session.setAttribute(SessionConst.LOGININFO, loginInfo);
 			url = "redirect:Home";
-			
+
 		}else{
 			ErrMsg = "学籍番号とパスワードが一致しません";
 			redirectAttributes.addFlashAttribute("msg",ErrMsg);
 			url = "redirect:Login";
 		}
 		return url;
-		
+
 	}
-	
-	
-	
+
+
+
 	/**
 	 * 連続ログイン判定
 	 * @param loginInfo
@@ -226,8 +226,8 @@ public class LoginController {
 	 * @throws Exception
 	 */
 	private int DayCheck(LoginInfoDto loginInfo)throws Exception {
-	
-		LoginDayDto dto = null;	
+
+		LoginDayDto dto = null;
 		String cheinday = null;
 		String lastday = null;
 		String today =null;
@@ -237,40 +237,40 @@ public class LoginController {
 		int point = 0;
 		//	ログインボーナス（ポイント）
 		int[] bar  = {50,100,150,200,300};
-		
-		
+
+
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 		Date date = new Date();
-		
+
 		dto = loginService.LastDay(loginInfo.getStudentId());
-		
+
 		if(dto.getLastLog() != null) {
 		//	Date型の日時をCalendar型に変換
         Calendar calendar = Calendar.getInstance();
         Calendar calenday = Calendar.getInstance();
-        
+
         calendar.setTime(date);
         calenday.setTime(dto.getLastLog());
-        
+
         //	日時を減算する
         calendar.add(Calendar.DATE, -1);
-        
+
         cheinday = sdf.format(calendar.getTime());
         lastday = sdf.format(calenday.getTime());
         today = sdf.format(date);
-        
+
         //format
         last = sdf.parse(lastday);
         chein = sdf.parse(cheinday);
         date = sdf.parse(today);
-        
+
         System.out.println(last);
         System.out.println(chein);
         System.out.println(date);
-        
+
 		//	現在の日付を超えているか
 		if(last.before(date)) {
-			
+
 			//	最後にログインした値を取得して-1したものと現在日付が一致するか
 			if(last.equals(chein)) {
 				num = dto.getContinuousLogin();
@@ -283,7 +283,7 @@ public class LoginController {
 								if(i-1 == j) {
 									point = loginInfo.getPoint();
 									point = point+bar[j];
-									loginService.LoginPoint(loginInfo.getStudentId(),point);	
+									loginService.LoginPoint(loginInfo.getStudentId(),point);
 								}
 							}
 						}
@@ -309,7 +309,7 @@ public class LoginController {
 			num++;
 			loginService.UpdateCount(loginInfo.getStudentId(),num);
 			loginService.UpdateDate(loginInfo.getStudentId(),date);
-			
+
 			//
 			return num;
 			}
