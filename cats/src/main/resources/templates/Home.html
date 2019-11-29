@@ -178,7 +178,12 @@
 		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 		crossorigin="anonymous"></script>
 	<script>
+	var mode = document.querySelector('input[name="mode"]');
+	//mode = null はそもそもあるかの判定
+	if( mode != null && mode.value == 'count'){
 		$('div.modal').modal('show')
+	}
+	
 	</script>
 
 
