@@ -205,8 +205,24 @@ public class LoginController {
 			redirectAttributes.addFlashAttribute("Logpoint",Logpoint);
 			loginInfo = loginService.LastPoint(loginInfo.getStudentId());
 
+			//受け取ったリクエスト一覧を取得
+			List<HomeRequestDto> requestlist = new ArrayList<HomeRequestDto>();
+			try {
+				requestlist = homeService.getAllList(loginInfo);
+			} catch (Exception e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
+
+			//受け取ったリクエスト数を取得
+			int requestcount = requestlist.size();
+
 			//	セッションにログイン情報を保存
 			session.setAttribute(SessionConst.LOGININFO, loginInfo);
+
+
+			redirectAttributes.addFlashAttribute("requestlist", requestlist);
+			redirectAttributes.addFlashAttribute("count",requestcount);
 			url = "redirect:Home";
 
 		}else{
