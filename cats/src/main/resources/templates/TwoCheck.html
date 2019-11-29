@@ -2,6 +2,7 @@
 <html>
 <head>
 <link href="/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"></link>
+<link href="/css/login.css" th:href="@{/css/login.css}" rel="stylesheet"></link>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet"
@@ -13,23 +14,26 @@
 	<div class="t-center">
 		<form th:action="@{/TwoCheck}" method="POST">
 			<img border="0" src="/img/rogo.jpg">
-			<p id = errmsg th:text="${errMsg}" style="color:red"></p>
+			<p id=errmsg th:text="${errMsg}" style="color: red"></p>
 			<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
 				rel="stylesheet">
 
+
+			<div>
+				<p>学籍番号あてに認証コードを送ります</p>
+			</div>
+
 			<div class="txbox">
-				<input type="number" class="usericon" placeholder="&#xf2bb; 学籍番号を入力" name="studentId" id="studenId">
-			</div>
-			<div class="cp_iptxt">
-
-				<!--  <input type="text" placeholder="学籍番号を入力">-->
-				<!-- <i class="fa fa-user fa-lg fa-fw" aria-hidden="true"></i> -->
+				<img src="img/IDcard.png" class="pix"> <input type="number"
+					class="usericon" placeholder="&#xf2bb; 学籍番号を入力" name="studentId"
+					id="studenId" />
 			</div>
 
-			<p>学籍番号あてに認証コードを送ります</p>
+
 			<div class="stylebutton">
-				<input type="button" onclick="history.back()" value="戻る" class="button">
-				<input type="submit" value="送信する" class="button" onclick ="return check()">
+				<input type="button" onclick="history.back()" value="戻る"
+					class="button"> <input type="submit" value="送信する"
+					class="button" onclick="return check()">
 			</div>
 
 
@@ -38,15 +42,15 @@
 </body>
 </html>
 <script>
-function check(){
-	if(document.form.studentId.value == ""){
-		document.getElementById("errmsg").textContent = "学籍番号を入力してください";
-		return false;
-	}else if(isNaN(document.form.studentId.value) == true ){
-		document.getElementById("errmsg").textContent = "数値を入力してください";
-		return false;
-	}else {
-		return true;
+	function check() {
+		if (document.form.studentId.value == "") {
+			document.getElementById("errmsg").textContent = "学籍番号を入力してください";
+			return false;
+		} else if (isNaN(document.form.studentId.value) == true) {
+			document.getElementById("errmsg").textContent = "数値を入力してください";
+			return false;
+		} else {
+			return true;
+		}
 	}
-}
 </script>

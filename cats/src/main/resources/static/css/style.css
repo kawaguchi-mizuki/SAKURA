@@ -570,8 +570,7 @@ button {
 .entry{
 	padding:5px 5px;
 }
-/*pop*/
-/* 繝｢繝ｼ繝�繝ｫ繧堤ｸｦ讓ｪ荳ｭ螟ｮ縺ｫ陦ｨ遉ｺ縺輔○繧九◆繧√�ｮ險ｭ螳� */
+
 .modal-dialog {
   display: flex;
   flex-direction: column;
@@ -585,7 +584,6 @@ button {
     pointer-events: all;
 }
 
-/* home縺ｮ蛻晏屓繝ｭ繧ｰ繧､繝ｳ繝｡繝�繧ｻ繝ｼ繧ｸ縺ｮ陦ｨ遉ｺ*/
 .login-first-msg {
     background: -moz-linear-gradient(top, #f48776, #df4444);
     background: -webkit-linear-gradient(top, #f48776, #df4444);
@@ -593,5 +591,9 @@ button {
     color: white;
 
 		border-radius: 35px;
+
+.lastmessage{
+	color:#C0C0C0;
+
 }
 

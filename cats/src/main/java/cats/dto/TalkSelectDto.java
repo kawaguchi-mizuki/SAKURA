@@ -19,5 +19,7 @@ public class TalkSelectDto {
 
 	private String ReceiveImagePath;
 
+	private String lastMessage;
+
 
 }

@@ -48,10 +48,12 @@
 				class="icon-image rounded img-fluid"></a>
 		</div>
 		<div class="col-9" th:if="${selectId != dto.studentIdSend}">
-			<h3 th:text="${dto.studentSendName}"></h3>
+			<h3 th:text="${dto.studentSendName}" class="row"></h3>
+			<p th:text="${dto.lastMessage}" class="row lastmessage"></p>
 		</div>
 		<div class="col-9" th:if="${selectId == dto.studentIdSend}">
-			<h3 th:text="${dto.studentReceiveName}"></h3>
+			<h3 th:text="${dto.studentReceiveName}" class="row"></h3>
+			<p th:text="${dto.lastMessage}" class="row lastmessage"></p>
 		</div>
 		</a>
 	</div>
