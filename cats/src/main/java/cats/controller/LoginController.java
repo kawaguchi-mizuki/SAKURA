@@ -159,7 +159,6 @@ public class LoginController {
 	 * @return
 	 * @throws Exception
 	 */
-	//string hennkou
 	@RequestMapping(value = {"/auth"}, method = RequestMethod.POST)
 	public String auth(
 			RedirectAttributes redirectAttributes,
@@ -172,18 +171,58 @@ public class LoginController {
 
 		String ErrMsg;
 		String url;
+		String log;
+		String check;
+		String mode = "count";
+		int num = 0;
+		int Logpoint = 0;
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+		Date today = new Date();
 
 		LoginInfoDto loginInfo= null;
 
 		//	ログイン処理
-		loginInfo = loginService.Login(studentId, pass);
-
-		//	セッション情報を入れ替えるuserInfo =
+		loginInfo = loginService.Login(studentId,pass);
 
 		if(loginInfo != null) {
+
+			log = sdf.format(today);
+			if(loginInfo.getLastLog() == null) {
+				redirectAttributes.addFlashAttribute("mode",mode);
+				loginInfo.setLastLog(today);
+			}
+
+			check = sdf.format(loginInfo.getLastLog());
+			if(!(log.equals(check))) {
+					redirectAttributes.addFlashAttribute("mode",mode);
+			}
+
+			num = DayCheck(loginInfo);
+			Logpoint = loginService.HomePoint(num);
+
+			redirectAttributes.addFlashAttribute("num",num);
+			redirectAttributes.addFlashAttribute("Logpoint",Logpoint);
+			loginInfo = loginService.LastPoint(loginInfo.getStudentId());
+
+			//受け取ったリクエスト一覧を取得
+			List<HomeRequestDto> requestlist = new ArrayList<HomeRequestDto>();
+			try {
+				requestlist = homeService.getAllList(loginInfo);
+			} catch (Exception e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
+
+			//受け取ったリクエスト数を取得
+			int requestcount = requestlist.size();
+
 			//	セッションにログイン情報を保存
 			session.setAttribute(SessionConst.LOGININFO, loginInfo);
-			DayCheck(loginInfo);
+
+
+			redirectAttributes.addFlashAttribute("requestlist", requestlist);
+			redirectAttributes.addFlashAttribute("count",requestcount);
 			url = "redirect:Home";
 
 		}else{
@@ -192,7 +231,10 @@ public class LoginController {
 			url = "redirect:Login";
 		}
 		return url;
+
 	}
+
+
 
 	/**
 	 * 連続ログイン判定
@@ -200,7 +242,7 @@ public class LoginController {
 	 * @return
 	 * @throws Exception
 	 */
-	private void DayCheck(LoginInfoDto loginInfo)throws Exception {
+	private int DayCheck(LoginInfoDto loginInfo)throws Exception {
 
 		LoginDayDto dto = null;
 		String cheinday = null;
@@ -266,19 +308,42 @@ public class LoginController {
 				}
 				if(num >= 6) {
 					num = 0;
+					point = loginInfo.getPoint();
+					point = point+bar[num];
+					loginService.LoginPoint(loginInfo.getStudentId(),point);
+					num++;
 				}
 				loginService.UpdateCount(loginInfo.getStudentId(),num);
 				loginService.UpdateDate(loginInfo.getStudentId(),date);
+				//
+				return num;
 			}
 			else {
+			num = 0;
+			point = loginInfo.getPoint();
+			point = point+bar[num];
+			loginService.LoginPoint(loginInfo.getStudentId(),point);
+			num++;
 			loginService.UpdateCount(loginInfo.getStudentId(),num);
 			loginService.UpdateDate(loginInfo.getStudentId(),date);
+
+			//
+			return num;
 			}
 		}
 	}else {
+		num = 0;
+		point = loginInfo.getPoint();
+		point = point+bar[num];
+		loginService.LoginPoint(loginInfo.getStudentId(),point);
+		num++;
 		loginService.UpdateCount(loginInfo.getStudentId(),num);
 		loginService.UpdateDate(loginInfo.getStudentId(),date);
+		//
+		return num;
 	}
+		//
+		return num;
 }
 
 	/**

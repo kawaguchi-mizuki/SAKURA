@@ -47,75 +47,104 @@
 		</div>
 
 		<!-- スレ１つ分 ここから-->
-		<div th:each="dto:${requestlist}">
-			<div class="d-flex topic p-3 mt-3 border border-success rounded">
-				<!--1つ分の一番外枠-->
-				<div class="box-icon ">
-					<!--左 アイコン部分-->
-					<a  href="/Profile/Browse" th:href="@{/Profile/Browse(studentId=${dto.sentId.studentId},talkId=0)}" >
-						<img th:src="${dto.imagePath}" alt="アイコン" class="icon-image rounded img-fluid">
-					</a>
-				</div>
+	<div th:each="dto:${requestlist}">
+		<div class="d-flex topic p-3 mt-3 border border-success rounded">
+			<!--1つ分の一番外枠-->
+			<div class="box-icon ">
+				<!--左 アイコン部分-->
+				<a href="/Profile/Browse"
+					th:href="@{/Profile/Browse(studentId=${dto.sentId.studentId},talkId=0)}">
+					<img th:src="${dto.imagePath}" alt="アイコン"
+					class="icon-image rounded img-fluid">
+				</a>
+			</div>
 
-				<div class="box-info">
-					<!--右 情報部分-->
-					<div class="row mt-2 mb-2">
-						<!--右 1段目-->
-						<div class="col-4">
-							<p th:text="${dto.studentName}"></p>
-						</div>
-						<div class="col-8"></div>
+			<div class="box-info">
+				<!--右 情報部分-->
+				<div class="row mt-2 mb-2">
+					<!--右 1段目-->
+					<div class="col-4">
+						<p th:text="${dto.studentName}"></p>
 					</div>
-					<div class="row mt-2 mb-2">
-						<!--右 2段目-->
-						<div class="col-12"></div>
-					</div>
-					<div class="row mt-2 mb-2">
-						<!--右 3段目-->
-						<div class="col-7"></div>
-						<div class="col-2">
-						<form th:action="@{/Request/Approval}"  method="post">
+					<div class="col-8"></div>
+				</div>
+				<div class="row mt-2 mb-2">
+					<!--右 2段目-->
+					<div class="col-12"></div>
+				</div>
+				<div class="row mt-2 mb-2">
+					<!--右 3段目-->
+					<div class="col-7"></div>
+					<div class="col-2">
+						<form th:action="@{/Request/Approval}" method="post">
 							<input type="hidden" name="requestId" th:value="${dto.requestId}">
 							<button type="submit" name="button" id="openModal"
 								class="btn-insert btn btn-primary">追加</button>
 						</form>
-						</div>
+					</div>
 
-						<div class="col-2">
-							<button type="button" name="button"
-								class="btn-delete btn btn-danger" data-toggle="modal" data-target="#blockModal" th:data-whatever="${dto.requestId}">拒否</button>
+					<div class="col-2">
+						<button type="button" name="button"
+							class="btn-delete btn btn-danger" data-toggle="modal"
+							data-target="#blockModal" th:data-whatever="${dto.requestId}">拒否</button>
 
-						</div>
 					</div>
 				</div>
 			</div>
-
-			<!-- Modal -->
-			<div class="modal fade" id="blockModal" tabindex="-1" role="dialog"
-				aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">拒否確認</h5>
-							<button type="button" class="close" data-dismiss="modal"
-								aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">※リクエストを拒否します</div>
-						<div class="modal-footer">
-							<form th:action="@{/Request/Delete}" method="post" >
-								<input type="hidden" name="requestId" th:value="${dto.requestId}">
-								<button type="button" class="btn btn-secondary"
-									data-dismiss="modal">戻る</button>
-								<button type="submit" class="btn btn-primary">拒否する</button>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-
 		</div>
+
+		<!-- Modal -->
+		<div class="modal fade" id="blockModal" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">拒否確認</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">※リクエストを拒否します</div>
+					<div class="modal-footer">
+						<form th:action="@{/Request/Delete}" method="post">
+							<input type="hidden" name="requestId" th:value="${dto.requestId}">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">戻る</button>
+							<button type="submit" class="btn btn-primary">拒否する</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div th:if="${mode}">
+		<input type="hidden" name="mode" value="count">
+
+
+		<div class="modal fade " tabindex="-1" role="dialog" id="login">
+			<div class="modal-dialog" role="document" id="login">
+				<div class="modal-content login-first-msg" id="login">
+					<div class="modal-body" id="login">
+						<div th:if="${num == 1}">
+							<p>ログインしてくれてありがとう！</p>
+						</div>
+						<div th:if="${num != 1}">
+							<p>今日も来てくれてありがとう！</p>
+						</div>
+						<p th:text="'連続ログインボーナス:'+${num}+'日目'"></p>
+						<p th:text="${Logpoint}+'ポイントGET!'"></p>
+						<p>※５日到達すると１日目から再開されます</p>
+					</div>
+					<div class="text-center pb-3">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal" id="login">閉じる</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<footer>
 		<div class="row">
@@ -153,6 +182,14 @@
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 		crossorigin="anonymous"></script>
+	<script>
+	var mode = document.querySelector('input[name="mode"]');
+	//mode = null はそもそもあるかの判定
+	if( mode != null && mode.value == 'count'){
+		$('#login').modal('show')
+	}
+
+	</script>
 
 
 </body>
