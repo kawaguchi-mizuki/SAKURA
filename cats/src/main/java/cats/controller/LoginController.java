@@ -188,21 +188,23 @@ public class LoginController {
 		loginInfo = loginService.Login(studentId,pass);
 		
 		if(loginInfo != null) {
+			
+			//	ログイン時ポップアップ
+			log = sdf.format(today);
+			if(loginInfo.getLastLog() == null) {
+				redirectAttributes.addFlashAttribute("mode",mode);
+				loginInfo.setLastLog(today);
+			}
+			check = sdf.format(loginInfo.getLastLog());
+			
+			if(!(log.equals(check))) {
+				redirectAttributes.addFlashAttribute("mode",mode);
+			}
 			num = DayCheck(loginInfo);
 			point = loginService.HomePoint(num);
 			
 			redirectAttributes.addFlashAttribute("num",num);
 			redirectAttributes.addFlashAttribute("point",point);
-			
-			log = sdf.format(today);
-			check = sdf.format(loginInfo.getLastLog());
-			if(loginInfo.getLastLog() == null) {
-				redirectAttributes.addFlashAttribute("mode",mode);
-				loginInfo.setLastLog(today);
-			}
-			if(!(log.equals(check))) {
-				redirectAttributes.addFlashAttribute("mode",mode);
-			}
 			
 			//	セッションにログイン情報を保存
 			session.setAttribute(SessionConst.LOGININFO, loginInfo);
