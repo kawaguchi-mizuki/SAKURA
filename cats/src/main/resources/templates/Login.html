@@ -3,15 +3,15 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
   <meta charset="utf-8">
-  
-  <link rel="stylesheet" type="text/css" href="css/style.css">
+
+  <link href="/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"></link>
   <link href="/css/login.css" th:href="@{/css/login.css}" rel="stylesheet"></link>
-  
+
   <link rel="stylesheet"
   href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
   integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
   crossorigin="anonymous">
-  
+
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cat's Login</title>
@@ -21,16 +21,16 @@
 <img  src="img/rogo.jpg">
    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 
-   
+
    <div th:if="${msg}">
 		<p th:text="${msg}"class="text-danger err"></p>
 	</div>
-   
+
 	<p id="msg" style="color:red"></p>
 	<p id="result" style="color:red"></p>
 	<p id="Pmsg" style="color:red"></p>
 	<p id="Lmsg" style="color:red"></p>
-	
+
    <form th:action="@{/auth}" method="post" role="form" th:object="${LoginFrom}"name="form">
 
         <div class="txbox">
@@ -41,39 +41,39 @@
         <img  src="img/zyou.png" class="pix">
         <input type="password" class="usericon" placeholder="PASSWORD" id="password" name="password"/><br/>
         </div>
-        
+
         <!-- URL未入力 -->
    		<div>
-    	<u><a href="/User/Entry">新規登録</a></u>
+    	<u><a th:href="@{/check}">新規登録</a></u>
    		</div>
-        
+
         <div class="style-button">
-        <input type="submit" id="login" value="Login" onclick ="return check()" class ="buttons">
+        <input type="submit" id="login" value="Login" onclick= "return check()"  class ="buttons">
         </div>
    </form>
 </div>
 </body>
 </html>
 
-<script>	
+<script>
 var hako = "";
 var Pmsg = "";
 //	端末がGeoLocation APIに対応しているかの判定
 	//	対応している
 	if( navigator.geolocation ){
-		
+
 		//	現在地を取得
 		navigator.geolocation.getCurrentPosition(
 			//	第1引数の取得に成功した時
 			function(position){
-				
+
 				var data = position.coords;
 
 				//	緯度
 				var lat = 33.583561;//data.latitude;
 				//	経度
 				var lng = 130.421263;//data.longitude;
-			
+
 				//	学校範囲指定
 				if (lat > 33.583163 && lat < 33.585223 &&
 	                	lng > 130.420642 && lat < 130.421951) {
@@ -101,11 +101,11 @@ var Pmsg = "";
 
 //	フォーム判定
 function check(){
-	
+
 	//	範囲外
-	if(hako == "path"){ 
+	if(hako == "path"){
 		document.getElementById("Pmsg").textContent = "麻生学区の範囲内でログインしてください！";
-		return false; 
+		return false;
 	}else if(document.form.studentId.value == "" && document.form.password.value == ""){
 		document.getElementById("Lmsg").textContent = "学籍番号とパスワードを入力してください";
 		return false;
@@ -117,8 +117,8 @@ function check(){
 		return false;
     }
 	//	範囲内
-	if(hako == "key"){ 
-           return true;   
+	if(hako == "key"){
+           return true;
 	}else{
     	document.getElementById("Lmsg").textContent = "位置情報が許可されていません";
     	return false;

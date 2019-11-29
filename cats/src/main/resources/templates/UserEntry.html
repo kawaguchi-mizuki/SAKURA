@@ -12,20 +12,18 @@
 
 	<h1>プロフィール登録</h1>
 
-	<div th:if="${msg}">
-		<p th:text="${msg}"class="text-danger err"></p>
-	</div>
 	<div th:unless="${msg}">
     	<p class="err text-muted"><span class="badge badge-success">任意</span> を入力すると追加ポイントもらえるよ！</p>
 	</div>
 
+	<form class="input" th:action="@{/Config}" th:object="${studentbeans}"   method="post" enctype="multipart/form-data" name="form">
 
 
+		<input type="hidden" name="studentId" th:value="${studentId}"></input>
 
-	<form class="input" th:action="@{/User/Check}" th:object="${studentbeans}"   method="post" enctype="multipart/form-data" >
-
-
-		<input type="file" class="file" th:field="*{multipartFile}"/>
+		<label class="h5">アイコン画像</label><span class="badge badge-danger">必須</span>
+		<br/>
+		<input type="file" class="file" th:field="*{multipartFile}" required/>
 
 		<br/>
 
@@ -57,7 +55,7 @@
 		<label class="h5">学科名</label><span class="badge badge-success">任意</span>
 		<br/>
 		 <select id="course"  name="courseId" class="form-control" >
-			<option  th:value="0">※学校から選択してください</option>
+			<option  th:value="1">※学校から選択してください</option>
 		 </select>
 		<br/>
 
@@ -144,19 +142,21 @@
 			<textarea name="introduction" class="form-control" rows="4" cols="40"></textarea>
 		<br/>
 
-		<label class="h5">パスワード (7文字以上) </label><span class="badge badge-danger">必須</span>
+		<label class="h5">パスワード (7文字以上) </label><span class="badge badge-danger" id="errmsg">必須</span>
 		<br/>
-		 <input type="password" class="form-control" name="password" th:value= "${createUserDto.password}"  />
+		 <input type="password" class="form-control" name="password" th:value= "${createUserDto.password}" id="password"  />
 		<br/>
 
-		<label class="h5">パスワード再入力</label><span class="badge badge-danger">必須</span>
+		<label class="h5">パスワード再入力</label><span class="badge badge-danger" id="msg">必須</span>
 		<br/>
-		<input type="password" class="form-control" name="r_password" />
+		<input type="password" class="form-control" name="rpassword" id="r-password"/>
 
 
+		<a href="/Login" th:href="@{/Login}">
+		<input type="button" class="btn btn-primary back"  value="戻る"/>
+		</a>
 
-		<input type="button" class="btn btn-primary back"  onclick="history.back()" value="戻る"/>
-		<input type="submit" class="btn btn-danger entry"  value="登録"/>
+		<input type="submit" class="btn btn-danger entry"  value="登録" onclick= "return check()"/>
 
 
 	</form>
@@ -171,10 +171,11 @@
 
 
 
+
 			  $.ajax({
 			    	cache: false,
 			        type : 'GET',
-			        url : /*[[@{/User/GetCourseList}]]*/"GetCourseList",
+			        url : /*[[@{/GetCourseList}]]*/"GetCourseList",
 			        data : params,
 			        dataType : 'json',
 			        processData : false,
@@ -193,6 +194,25 @@
 	});
 
 
+
+
+	function check(){
+
+		var len = document.form.password.value;
+
+
+		 if(document.form.password.value !=  document.form.rpassword.value ){
+			document.getElementById("msg").textContent = "パスワードが一致しません";
+			return false;
+		 }
+
+
+		 if(len.length <  7 ){
+				document.getElementById("errmsg").textContent = "パスワードが短すぎます";
+			return false;
+		}
+		 return true;
+	}
 
 
 	</script>

@@ -11,7 +11,7 @@ import cats.utils.FileUtils;
 import lombok.Data;
 @Data
 public class StudentBeans implements Serializable {
-	private int studentId = 1701128;
+	private int studentId;
 	private String name;
 	private String sex;
 	private int hobbyId;

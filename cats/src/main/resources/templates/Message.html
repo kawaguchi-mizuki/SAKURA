@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>メッセージ</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<link href="/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"></link>
+</head>
+<body>
+
+	<header>
+		<div class="row">
+			<div class="col-5">
+				<a href=""> <img src="/img/rogo.jpg" width="150">
+				</a>
+			</div>
+			<div class="col-5">
+				<img src="/img/coin.png" width="50" class="pointImg"><p  th:text="${point}" class="point" ></p><p class="point" > ポイント</p>
+			</div>
+			<div class="col-2">
+				<a th:href="@{/Logout}">ログアウト</a>
+			</div>
+		</div>
+	</header>
+
+	<div class="txt row">
+
+		<div class="col-2">
+			<a href="/Message/View" th:href="@{/Talk/Select}" class="back"> 戻る </a>
+		</div>
+		<div class="col-8"   th:if="${dto.studentIdSend == studentId}"><p th:text="${receiveName}"></p></div>
+		<div class="col-8"  th:if="${dto.studentIdSend != studentId}"><p th:text="${sendName}"></p></div>
+		<div class="col-2"></div>
+	</div>
+<div class="messlist">
+	<div class="line-bc" th:each="dto:${messagelist}">
+		<!--①LINE会話全体を囲う-->
+
+		<!--②左コメント始-->
+		<a  href="/Profile/Browse" th:href="@{/Profile/Browse(studentId=${dto.studentIdSend},talkId=${dto.talkId})}" >
+		<div class="balloon6"  th:if="${dto.studentIdSend != studentId}">
+			<div class="faceicon">
+
+					<img th:src="${dto.imagePath}">
+
+			</div>
+			<div class="chatting"  >
+				<div class="says">
+					<p th:text="${dto.message}"></p>
+				</div>
+			</div>
+		</div>
+		</a>
+		<!--②/左コメント終-->
+
+		<!--③右コメント始-->
+		<div class="mycomment" th:if="${dto.studentIdSend == studentId}">
+			<p th:text="${dto.message}">右ふきだし文</p>
+		</div>
+		<!--/③右コメント終-->
+
+	</div>
+
+</div>
+	<!--/①LINE会話終了-->
+	<div class="chatsend">
+		<form th:action="@{/Message/Insert}" method="post" >
+			<input type="hidden" name="receiveName" th:value="${receiveName}">
+			<input type="hidden" name="sendName" th:value="${sendName}">
+			<input type="hidden" name="talkId" th:value="${talkId}">
+			<input type="text" name="talk"> <input type="submit"
+				value="送信">
+		</form>
+	</div>
+
+
+
+</body>
+</html>

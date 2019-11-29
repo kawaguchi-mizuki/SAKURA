@@ -18,7 +18,7 @@
 				</a>
 			</div>
 			<div class="col-5">
-				<img src="/img/coin.png" width="50">300ポイント
+				<img src="/img/coin.png" width="50" class="pointImg"><p  th:text="${point}" class="point" ></p><p class="point" > ポイント</p>
 			</div>
 			<div class="col-2">
 				<a th:href="@{/Logout}">ログアウト</a>
@@ -36,7 +36,7 @@
 	</div>
 
 	<div class="wrapper">
-	<form action="">
+	<form  th:action="@{/BoardComment/Insert}"th:object="${boardcommnetbeans}"  method="post">
 
 
 
@@ -46,34 +46,25 @@
 		<p></p>
 
     <div>
-      <div class="chat">
-        <p>Aさんが掲示板を立てました</p>
-        <p>Aさん：ああああ</p>
-        <p>Bさん：ああああ</p>
-        <p>Aさん：ああああ</p>
-        <p>Bさん：ああああ</p>
-        <p>Aさん：ああああ</p>
-        <p>Bさん：ああああ</p>
-        <p>Aさん：ああああ</p>
-        <p>Bさん：ああああ</p>
-        <p>Aさん：ああああ</p>
-        <p>Bさん：ああああ</p>
-        <p>Aさん：ああああ</p>
-        <p>Bさん：ああああ</p>
-        <p>Aさん：ああああ</p>
-        <p>Bさん：ああああ</p>
-        <p>Aさん：ああああ</p>
-        <p>Bさん：ああああ</p>
-        <p>Aさん：ああああ</p>
-        <p>Bさん：ああああ</p>
-        <p>Aさん：ああああ</p>
-        <p>Bさん：ああああ</p>
-        <p>Aさん：ああああ</p>
-        <p>Bさん：ああああ</p>
+      <div class="chat" >
+
+      	<div  th:each="dto:${commentlist}" >
+
+
+
+			 <p th:text="${dto.commentName}" class="comment col-4 text-danger" ></p>
+      		 <p th:text="${dto.comment}"class="col-8" ></p>
+
+
+      	</div>
+
+
 
       </div>
 
-      <input type="text" name="" value="">　<button type="button" name="button">送信</button>
+	  <input type="hidden" name="boardId" th:value="${boardId}">
+	  <input type="hidden" name="boardTitle" th:value="${boardTitle}">
+      <input type="text" name="boardComment"><button type="submit" name="button">送信</button>
 
 
     </div>
@@ -89,18 +80,18 @@
 	<footer>
 		<div class="row">
 			<div class="col">
-				<a th:href="@{/Home/Read}"><img src="/img/ie.png"> </a>
+				<a th:href="@{/Home}"><img src="/img/ie.png"> </a>
 			</div>
 			<div class="col">
 				<a th:href="@{/Board/Read}"><img src="/img/mrmo.png"> </a>
 			</div>
 
 			<div class="col">
-				<a href=""><img src="/img/hart.png"> </a>
+				<a th:href="@{/Gacha/Top}"><img src="/img/hart.png"> </a>
 			</div>
 
 			<div class="col">
-				<a href=""><img src="/img/fukidashi.png"> </a>
+				<a th:href="@{/Talk/Select}"><img src="/img/fukidashi.png"> </a>
 			</div>
 
 			<div class="col">

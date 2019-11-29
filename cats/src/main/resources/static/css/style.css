@@ -104,6 +104,7 @@ footer {
 	padding: 30px 0;
 	position: fixed; /*←絶対位置*/
 	bottom: 0; /*下に固定*/
+	z-index: 999;
 }
 
 .explain {
@@ -145,17 +146,48 @@ footer {
 
 /*buttonタグは一律、横幅150pxで角丸 */
 button {
-	width: 200px;
 	border-radius: 10px;
 }
 
 /* カテゴリーボタンのデザイン設定 */
-.btn-category {
+.btn-category1 {
 	background-color: #629cff;
 	border: 1px solid #629cff;
 	color: #f1f1f1;
-	padding-top:10px;
-	padding-bottom:0;
+	padding-top: 10px;
+	padding-bottom: 0;
+}
+
+.btn-category2 {
+	background-color: #FF99FF;
+	border: 1px solid #FF99FF;
+	color: #f1f1f1;
+	padding-top: 10px;
+	padding-bottom: 0;
+}
+
+.btn-category3 {
+	background-color: #FF9900;
+	border: 1px solid #FF9900;
+	color: #f1f1f1;
+	padding-top: 10px;
+	padding-bottom: 0;
+}
+
+.btn-category4 {
+	background-color: #FF3300;
+	border: 1px solid #FF3300;
+	color: #f1f1f1;
+	padding-top: 10px;
+	padding-bottom: 0;
+}
+
+.btn-category5 {
+	background-color: #33CC99;
+	border: 1px solid #33CC99;
+	color: #f1f1f1;
+	padding-top: 10px;
+	padding-bottom: 0;
 }
 
 /* 削除ボタンのデザイン設定 */
@@ -168,8 +200,6 @@ button {
 .topiclist {
 	padding: 110px 0;
 }
-
-
 
 .serchs {
 	text-align: right;
@@ -195,9 +225,10 @@ input[class=serch] {
 }
 
 .title {
-	margin-left:3%;
+	margin-left: 3%;
 }
-.bring{
+
+.bring {
 	text-align: left;
 }
 
@@ -213,20 +244,20 @@ input[class=serch] {
 
 /*セレクトボタンの設定*/
 .pldown {
-	margin:auto;
-	width:80% !important;
+	margin: auto;
+	width: 80% !important;
 	margin-top: 10px !important;
-	margin-left:3% !important;
-	margin-bottom:20px !important;
+	margin-left: 3% !important;
+	margin-bottom: 20px !important;
 }
 /*コメントエリアの設定*/
 .chat {
 	overflow: auto;
 	height: 500px;
 	padding: 0 0 0 50px;
-	margin-left:10px;
-	margin-right:10px;
-	border:1px solid #000000;
+	margin-left: 10px;
+	margin-right: 10px;
+	border: 1px solid #000000;
 }
 
 .chat p {
@@ -251,7 +282,7 @@ input[class=serch] {
 #page {
 	position: fixed; /*位置を固定*/
 	bottom: 110px;
-	right:20px; /*右から２０px*/
+	right: 20px; /*右から２０px*/
 }
 
 #page img {
@@ -260,8 +291,9 @@ input[class=serch] {
 	height: 60px; /*縦幅*/
 	cursor: pointer; /*カーソルを指にする*/
 }
-.center{
-	text-align:center;
+
+.center {
+	text-align: center;
 }
 
 /* きっかけガチャのページ設定 start ***********************************/
@@ -275,26 +307,26 @@ select.gacha-category {
 }
 
 .fadein {
-	opacity : 1;
-  transform: translateY(-150px);
-  transition: all 1s;
+	opacity: 1;
+	transform: translateY(-150px);
+	transition: all 1s;
 }
 
 .fadeout {
-	opacity : 0;
-  transform: translateY(150px);
-  transition: all 1s;
+	opacity: 0;
+	transform: translateY(150px);
+	transition: all 1s;
 }
 
 .gacha-message {
-    position: relative;
-    width: 100%;
-    height: 100%;
+	position: relative;
+	width: 100%;
+	height: 100%;
 }
 
 .img-box {
 	position: relative;
-    /*top: -150px;*/
+	/*top: -150px;*/
 	/*position: relative;
 	top: -250px;
 	*/
@@ -310,7 +342,6 @@ select.gacha-category {
 }
 
 /* きっかけガチャのページ設定 e.n.d ***********************************/
-
 @media screen and (max-width:600px) {
 	/*　画面サイズが600px以下はここを読み込む　*/
 	body {
@@ -321,12 +352,223 @@ select.gacha-category {
 	}
 }
 
-.chat-list{
-	border-bottom:1px solid #007bff;
-	padding-bottom:10px;
-	padding-top:10px;
+.chat-list {
+	border-bottom: 1px solid #007bff;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	position: relative;
+	z-index: 1;
 }
 
-.chat-list a{
-	display:block;
+.chat-list a {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	text-indent: -999px;
+	z-index: 2;
 }
+
+.comment {
+	float: left;
+	padding-right: 100px;
+}
+
+.chat-list .box-icon a {
+	position: relative; /*「別リンク」は普通に配置するため */
+	z-index: 3; /* リンク要素の重なり順を上にするため */
+}
+
+/* チャット一覧画面の設定 e.n.d *************************************/
+* {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Avenir', 'Helvetica, Neue', 'Helvetica', 'Arial';
+}
+
+/* モーダルCSS */
+.modalArea {
+	display: none;
+	position: fixed;
+	z-index: 10; /*サイトによってここの数値は調整 */
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.modalBg {
+	width: 100%;
+	height: 100%;
+	background-color: rgba(30, 30, 30, 0.9);
+}
+
+.modalWrapper {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 70%;
+	max-width: 500px;
+	padding: 10px 30px;
+	background-color: #fff;
+}
+
+.closeModal {
+	position: absolute;
+	top: 0.5rem;
+	right: 1rem;
+	cursor: pointer;
+}
+
+/* 以下ボタンスタイル */
+button {
+	padding: 10px;
+	background-color: #fff;
+	border: 1px solid #282828;
+	border-radius: 2px;
+	cursor: pointer;
+}
+
+#openModal {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+/**ChatのCSS **/
+/*以下、①背景色など*/
+.line-bc {
+	padding: 20px 10px;
+	max-width: 600px;
+	margin: 15px auto;
+	text-align: right;
+	font-size: 14px;
+}
+
+/*以下、②左側のコメント*/
+.balloon6 {
+	width: 100%;
+	margin: 10px 0;
+	overflow: hidden;
+}
+
+.balloon6 .faceicon {
+	float: left;
+	margin-right: -50px;
+	width: 40px;
+}
+
+.balloon6 .faceicon img {
+	width: 100%;
+	height: auto;
+	border-radius: 50%;
+}
+
+.balloon6 .chatting {
+	width: 100%;
+	text-align: left;
+}
+
+.says {
+	display: inline-block;
+	position: relative;
+	margin: 0 0 0 50px;
+	padding: 10px;
+	max-width: 250px;
+	border-radius: 12px;
+	background: #edf1ee;
+}
+
+.says:after {
+	content: "";
+	display: inline-block;
+	position: absolute;
+	top: 3px;
+	left: -19px;
+	border: 8px solid transparent;
+	border-right: 18px solid #edf1ee;
+	-webkit-transform: rotate(35deg);
+	transform: rotate(35deg);
+}
+
+.says p {
+	margin: 0;
+	padding: 0;
+}
+
+/*以下、③右側の緑コメント*/
+.mycomment {
+	margin: 10px 0;
+}
+
+.mycomment p {
+	display: inline-block;
+	position: relative;
+	margin: 0 10px 0 0;
+	padding: 8px;
+	max-width: 250px;
+	border-radius: 12px;
+	background: #30e852;
+	font-size: 15px:
+}
+
+.mycomment p:after {
+	content: "";
+	position: absolute;
+	top: 3px;
+	right: -19px;
+	border: 8px solid transparent;
+	border-left: 18px solid #30e852;
+	-webkit-transform: rotate(-35deg);
+	transform: rotate(-35deg);
+}
+
+.chatsend {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+}
+
+.pointImg {
+	float: left;
+	margin-right: 10px;
+}
+
+.point {
+	float: left;
+	margin-top: 15px;
+}
+
+.serch-bottom {
+	margin-left: 15px;
+}
+.talk-list{
+	margin:110px 0;
+}
+.messlist{
+	margin:110px 0;
+}
+.titleColor{
+	color:pink;
+}
+.titleColor:hover{
+	color:pink;
+}
+.blueTitle{
+	color:blue;
+}
+.pinkTitle{
+	color:pink;
+}
+.entry{
+	padding:5px 5px;
+}
+.lastmessage{
+	color:#C0C0C0;
+}
+

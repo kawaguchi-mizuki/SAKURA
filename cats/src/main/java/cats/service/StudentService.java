@@ -25,12 +25,7 @@ public class StudentService {
 		//dto -> entity
 				StudentTblEntity entity = createUserTblEntityFromDto(userdto);
 
-
-
 				studentRepository.saveAndFlush(entity);
-
-
-
 
 	}
 

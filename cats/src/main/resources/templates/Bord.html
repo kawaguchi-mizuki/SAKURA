@@ -19,7 +19,7 @@
 				</a>
 			</div>
 			<div class="col-5">
-				<img src="/img/coin.png" width="50">  300ポイント
+				<img src="/img/coin.png" width="50" class="pointImg"><p  th:text="${point}" class="point" ></p><p class="point" > ポイント</p>
 			</div>
 			<div class="col-2">
 				<a th:href="@{/Logout}">ログアウト</a>
@@ -31,14 +31,45 @@
 		<p>掲示板</p>
 	</div>
 
-		<div class ="serchs mr-3">
-			<input type="text" class="serch" placeholder="ワード検索"> <input
-				type="submit" value="検索" class="btn btn-primary">
-		</div>
-		<div class=explain>
+
+	<div class="serchs mr-3">
+		<form th:action="@{/Board/Select}">
+			<select name="sex" class="category-select" id="sex">
+				<option  th:value="全て">全て</option>
+				<option  th:value="男">男性</option>
+				<option  th:value="女">女性</option>
+			</select>
+			<script th:inline="javascript">
+			/*<![CDATA[*/
+		 	   var flag = /*[[${flag}]]*/ 'Sebastian';
+			/*]]>*/
+
+					document.getElementById('sex').options[flag].selected = true;
+			</script>
+
+
+			<select name="categoryId" class="category-select" id="category">
+				<option  th:value="0">全てのカテゴリー</option>
+				<option th:each="dto:${categorylist}" th:value="${dto.categoryId}" th:text="${dto.categoryName}"></option>
+			</select> <input type="submit" value="検索" class="serch-bottom btn btn-danger">
+
+
+			<script th:inline="javascript">
+			/*<![CDATA[*/
+		 	   var categoryId = /*[[${categoryId}]]*/ 'Sebastian';
+			/*]]>*/
+
+					document.getElementById('category').options[categoryId].selected = true;
+			</script>
+
+		</form>
+	</div>
+
+
+	<div class=explain>
 			<p>掲示板内の説明です</p>
 			<br>
-			<p>(男性の方のタイトルは、青、女性の方は、ピンク)</p>
+			<p>(男性の方のタイトルは<font class="blueTitle">青</font>,女性の方は<font class="pinkTitle">ピンク</font>)</p>
 		</div>
 		<p></p>
 
@@ -50,26 +81,55 @@
 				<!--1つ分の一番外枠-->
 				<div class="box-icon">
 					<!--左 アイコン部分-->
-					<img src="/img/icon.jpg" alt="アイコン" class="icon-image rounded img-fluid">
+
+					<a  href="/Profile/Browse" th:href="@{/Profile/Browse(studentId=${dto.studentId},talkId=0)}" >
+						<img th:src="${dto.imagePath}" alt="アイコン" class="icon-image rounded img-fluid">
+					</a>
+
 				</div>
 
 				<div class="box-info">
 					<!--右 情報部分-->
 					<div class="row mt-2 mb-2">
 						<!--右 1段目-->
-						<div class="col-7">
-							<button type="button" name="button" class="btn-category"><p th:text="${dto.categoryName}"></p></button>
+						<div class="col-7" th:if="${dto.categoryId == 1}">
+							<button type="button" name="button" class="btn-category1"><p th:text="${dto.categoryName}"></p></button>
+						</div>
+						<div class="col-7" th:if="${dto.categoryId == 2}">
+							<button type="button" name="button" class="btn-category2"><p th:text="${dto.categoryName}"></p></button>
+						</div>
+						<div class="col-7" th:if="${dto.categoryId == 3}">
+							<button type="button" name="button" class="btn-category3"><p th:text="${dto.categoryName}"></p></button>
+						</div>
+						<div class="col-7" th:if="${dto.categoryId == 4}">
+							<button type="button" name="button" class="btn-category4"><p th:text="${dto.categoryName}"></p></button>
+						</div>
+						<div class="col-7" th:if="${dto.categoryId == 5}">
+							<button type="button" name="button" class="btn-category5"><p th:text="${dto.categoryName}"></p></button>
 						</div>
 						<div class="col-5"><p th:text="${dto.boardDate}"></p></div>
 					</div>
-					<div class="row mt-2 mb-2">
-						<!--右 2段目-->
-							<div class="col-12"><a href="/BoardComment/Read" th:href="@{/BoardComment/Read(boardId=${dto.boardId},boardTitle=${dto.boardTitle})}"><p class="bring" th:text="${dto.boardTitle}" ></p></a></div>
+
+				<div class="row mt-2 mb-2">
+					<!--右 2段目-->
+					<div class="col-12" th:if="${dto.sex  == '男'}">
+						<a href="/BoardComment/Read"
+							th:href="@{/BoardComment/Read(boardId=${dto.boardId},boardTitle=${dto.boardTitle})}">
+							<p class="bring" th:text="${dto.boardTitle}"></p>
+						</a>
 					</div>
-					<div class="row mt-2 mb-2">
+					<div class="col-12" th:if="${dto.sex == '女'}">
+						<a href="/BoardComment/Read"
+							th:href="@{/BoardComment/Read(boardId=${dto.boardId},boardTitle=${dto.boardTitle})}"
+							class="titleColor"><p class="bring" th:text="${dto.boardTitle}"></p>
+						</a>
+					</div>
+				</div>
+
+				<div class="row mt-2 mb-2">
 						<!--右 3段目-->
 						<div class="col-8 "><p th:text="${dto.studentName}"  class="bring"></p></div>
-						<div class="col-4" th:if="${dto.studentId == studentId}"><input type="botton" class="btn btn-danger entry" data-toggle="modal" data-target="#blockModal" th:data-whatever="${dto.boardId}" value="削除"/>
+						<div class="col-1" th:if="${dto.studentId == studentId}"><input type="botton" class="btn btn-danger entry" data-toggle="modal" data-target="#blockModal" th:data-whatever="${dto.boardId}" value="削除"/>
 
 						</div>
 					</div>
@@ -146,18 +206,18 @@
 	<footer>
 		<div class="row">
 			<div class="col">
-				<a th:href="@{/Home/Read}"><img src="/img/ie.png"> </a>
+				<a th:href="@{/Home}"><img src="/img/ie.png"> </a>
 			</div>
 			<div class="col">
 				<a th:href="@{/Board/Read}"><img src="/img/mrmo.png"> </a>
 			</div>
 
 			<div class="col">
-				<a href=""><img src="/img/hart.png"> </a>
+				<a th:href="@{/Gacha/Top}"><img src="/img/hart.png"> </a>
 			</div>
 
 			<div class="col">
-				<a href=""><img src="/img/fukidashi.png"> </a>
+				<a th:href="@{/Talk/Select}"><img src="/img/fukidashi.png"> </a>
 			</div>
 
 			<div class="col">

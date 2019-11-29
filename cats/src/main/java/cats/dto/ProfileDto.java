@@ -40,6 +40,6 @@ public class ProfileDto {
 
 	private Integer continuouslogin;
 
-	private String imagePass;
+	private String imagePath;
 
 }

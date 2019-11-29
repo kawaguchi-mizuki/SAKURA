@@ -1,0 +1,42 @@
+
+
+
+
+
+
+insert into student values(1701102,"ラプソーン江越","男",4,4,4,3,27,"熊本県","腹減った","aaaaaaa","20191122183106729/S__13615108.jpg",500,null,0);
+
+insert into student values(1701103,"あすか","女",2,4,4,3,27,"鹿児島県","めんへらです","aaaaaaa","20191126172721526/S__18145286.jpg",500,null,0);
+
+insert into student values(1701104,"アイスクライマー","男",1,4,4,3,27,"鹿児島県","双子です","aaaaaaa","20191126172654826/S__18145282.jpg",500,null,0);
+
+insert into student values(1701105,"たまご","女",8,4,4,3,27,"宮崎県","彼氏います","aaaaaaa","20191123122642515/er.png",500,null,0);
+
+insert into student values(1701106,"内堀たかや","男",1,4,4,3,27,"鹿児島県","自己紹介","aaaaaaa","20191125123036938/udd.JPG",500,null,0);
+
+insert into student values(1701108,"ケイリー","女",5,4,4,3,27,"北海道","tiktokやってます","aaaaaaa","20191126172709906/S__18145287.jpg",500,null,0);
+
+insert into student values(1701110,"TAKEFUMI","男",7,4,4,3,27,"山口県","山登れます","aaaaaaa","20191126172639125/S__18145288.jpg",500,null,0);
+
+insert into student values(1701111,"江越伊織（少年期）","男",1,4,4,3,27,"長崎県","えりかすきっさ","aaaaaaa","20191123115833955/ego_fuck.JPG",500,null,0);
+
+☆
+insert into student values(1701112,"姫野マリ","女",3,4,4,3,27,"鹿児島県","自己紹介","aaaaaaa","20191123122642515/er.png",500,null,0);
+
+insert into student values(1701113,"池田エロいざ","女",8,4,4,3,27,"鹿児島県","自己紹介","aaaaaaa","20191123122642515/er.png",500,null,0);
+
+insert into student values(1701114,"上原亜衣","女",6,4,4,3,27,"鹿児島県","自己紹介","aaaaaaa","20191123122642515/er.png",500,null,0);
+
+insert into student values(1701115,"アンアン","女",5,4,4,3,27,"鹿児島県","自己紹介","aaaaaaa","20191123122642515/er.png",500,null,0);
+
+insert into student values(1701116,"前田ゴードン","男",3,4,4,3,27,"鹿児島県","自己紹介","aaaaaaa","20191123115833955/ego_fuck.JPG",500,null,0);
+
+insert into student values(1701117,"松坂大輔","男",7,4,4,3,27,"鹿児島県","自己紹介","aaaaaaa","20191123115833955/ego_fuck.JPG",500,null,0);
+
+insert into student values(1701118,"鳳かなめ","女",6,4,4,3,27,"鹿児島県","自己紹介","aaaaaaa","20191123122642515/er.png",500,null,0);
+
+insert into student values(1701118,"柴田りえ","女",2,4,4,3,27,"鹿児島県","自己紹介","aaaaaaa","20191123122642515/er.png",500,null,0);
+
+insert into student values(1701119,"荒木ゆうり","女",8,4,4,3,27,"鹿児島県","自己紹介","aaaaaaa","20191123122642515/er.png",500,null,0);
+
+insert into student values(1701120,"松平片栗粉","男",3,4,4,3,27,"鹿児島県","自己紹介","aaaaaaa","20191123115833955/ego_fuck.JPG",500,null,0);

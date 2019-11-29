@@ -25,7 +25,7 @@
 			</div>
 
 			<div class="col-5">
-				<img src="/img/coin.png" width="50">300ポイント
+				<img src="/img/coin.png" width="50" class="pointImg"><p  th:text="${point}" class="point" ></p><p class="point" > ポイント</p>
 			</div>
 			<div class="col-2">
 				<a th:href="@{/Logout}">ログアウト</a>
@@ -37,24 +37,101 @@
 		<p>ホーム</p>
 	</div>
 
+		<div th:if="${count != 0}"class="center">
+			<span class="badge badge-danger"><p  class="countpop">新しいリクエストが</p><p th:text="${count}" class="countpop"></p><p  class="countpop">件届いています</p></span>
+		</div>
 
-	<p th:text="${add}"></p>
+		<div th:if="${approvalName}" class="center">
+			<span class="badge badge-success"><p th:text="${approvalName}" class="countpop"></p><p  class="countpop">さんを追加しました</p></span>
+
+		</div>
+
+		<!-- スレ１つ分 ここから-->
+		<div th:each="dto:${requestlist}">
+			<div class="d-flex topic p-3 mt-3 border border-success rounded">
+				<!--1つ分の一番外枠-->
+				<div class="box-icon ">
+					<!--左 アイコン部分-->
+					<a  href="/Profile/Browse" th:href="@{/Profile/Browse(studentId=${dto.sentId.studentId},talkId=0)}" >
+						<img th:src="${dto.imagePath}" alt="アイコン" class="icon-image rounded img-fluid">
+					</a>
+				</div>
+
+				<div class="box-info">
+					<!--右 情報部分-->
+					<div class="row mt-2 mb-2">
+						<!--右 1段目-->
+						<div class="col-4">
+							<p th:text="${dto.studentName}"></p>
+						</div>
+						<div class="col-8"></div>
+					</div>
+					<div class="row mt-2 mb-2">
+						<!--右 2段目-->
+						<div class="col-12"></div>
+					</div>
+					<div class="row mt-2 mb-2">
+						<!--右 3段目-->
+						<div class="col-7"></div>
+						<div class="col-2">
+						<form th:action="@{/Request/Approval}"  method="post">
+							<input type="hidden" name="requestId" th:value="${dto.requestId}">
+							<button type="submit" name="button" id="openModal"
+								class="btn-insert btn btn-primary">追加</button>
+						</form>
+						</div>
+
+						<div class="col-2">
+							<button type="button" name="button"
+								class="btn-delete btn btn-danger" data-toggle="modal" data-target="#blockModal" th:data-whatever="${dto.requestId}">拒否</button>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Modal -->
+			<div class="modal fade" id="blockModal" tabindex="-1" role="dialog"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">拒否確認</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">※リクエストを拒否します</div>
+						<div class="modal-footer">
+							<form th:action="@{/Request/Delete}" method="post" >
+								<input type="hidden" name="requestId" th:value="${dto.requestId}">
+								<button type="button" class="btn btn-secondary"
+									data-dismiss="modal">戻る</button>
+								<button type="submit" class="btn btn-primary">拒否する</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
 
 	<footer>
 		<div class="row">
 			<div class="col">
-				<a href=""><img src="/img/ie.png"> </a>
+				<a th:href="@{/Home}"><img src="/img/ie.png"> </a>
 			</div>
 			<div class="col">
 				<a th:href="@{/Board/Read}"><img src="/img/mrmo.png"> </a>
 			</div>
 
 			<div class="col">
-				<a href=""><img src="/img/hart.png"> </a>
+				<a th:href="@{/Gacha/Top}"><img src="/img/hart.png"> </a>
 			</div>
 
 			<div class="col">
-				<a href=""><img src="/img/fukidashi.png"> </a>
+				<a th:href="@{/Talk/Select}"><img src="/img/fukidashi.png"> </a>
 			</div>
 
 			<div class="col">
