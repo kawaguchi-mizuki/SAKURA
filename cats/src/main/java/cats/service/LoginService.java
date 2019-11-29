@@ -144,6 +144,25 @@ public class LoginService {
 	}
 	
 	/**
+	 * セッションポイント　　更新
+	 *
+	 * @throws Exception
+	 * 
+	 */
+	
+	public LoginInfoDto LastPoint(Integer studentId){
+
+		StudentTblEntity entity = loginRepository.getloginByStudentId(studentId);	
+		
+		LoginInfoDto dto = new LoginInfoDto();
+
+		dto.setPoint(entity.getPoint());
+
+		return dto;
+	}
+	
+	
+	/**
 	 * ログインボーナス ポイント 取得
 	 * 
 	 * 

@@ -123,10 +123,10 @@
 		<input type="hidden" name="mode" value="count">
 
 
-		<div class="modal fade " tabindex="-1" role="dialog">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content login-first-msg">
-					<div class="modal-body">
+		<div class="modal fade " tabindex="-1" role="dialog" id="login">
+			<div class="modal-dialog" role="document" id="login">
+				<div class="modal-content login-first-msg" id="login">
+					<div class="modal-body" id="login">
 						<div th:if="${num == 1}">
 							<p>ログインしてくれてありがとう！</p>
 						</div>
@@ -139,7 +139,7 @@
 					</div>
 					<div class="text-center pb-3">
 						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal">閉じる</button>
+							data-dismiss="modal" id="login">閉じる</button>
 					</div>
 				</div>
 			</div>
@@ -186,7 +186,7 @@
 	var mode = document.querySelector('input[name="mode"]');
 	//mode = null はそもそもあるかの判定
 	if( mode != null && mode.value == 'count'){
-		$('div.modal').modal('show')
+		$('#login').modal('show')
 	}
 
 	</script>

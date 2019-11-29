@@ -203,6 +203,7 @@ public class LoginController {
 
 			redirectAttributes.addFlashAttribute("num",num);
 			redirectAttributes.addFlashAttribute("Logpoint",Logpoint);
+			loginInfo = loginService.LastPoint(loginInfo.getStudentId());
 
 			//	セッションにログイン情報を保存
 			session.setAttribute(SessionConst.LOGININFO, loginInfo);
