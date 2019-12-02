@@ -40,6 +40,9 @@ public class GachaController {
 	@Autowired
 	HttpSession session;
 
+	@Autowired
+	LoginService loginService;
+
 	@RequestMapping(value = {"/Top"}, method = RequestMethod.GET)
 	public ModelAndView Matching(ModelAndView mav)throws Exception{
 
