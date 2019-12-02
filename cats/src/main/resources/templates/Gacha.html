@@ -66,6 +66,26 @@
 	<div th:if="${mode}">
 	<input type="hidden" name="mode" value="update">
 	</div>
+	
+	<div th:if="${pop}">
+	<input type="hidden" name="pop" value="miss">
+		<div class="modal fade " tabindex="-1" role="dialog"id="gacha">
+	  <div class="modal-dialog" role="document"id="gacha">
+	    <div class="modal-content login-first-msg "id="gacha">
+	      <div class="modal-body"id="gacha">
+	      		<p>マッチングに失敗しました！</p>
+	      		<div th:if="${misspoint != 0}">
+				<p th:text="${misspoint}+'	ポイント還元されました。"></p>
+				</div>
+	      </div>
+	      <div class="text-center pb-3"id="gacha">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</div>
+	
 
 	<footer>
 		<div class="row">
@@ -94,6 +114,20 @@
 </body>
 </html>
 
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+
+<script>
+
 
 <script>
 	var mode = document.querySelector('input[name="mode"]');
@@ -102,12 +136,15 @@
 		// ハートをフェードインで表示させる処理
 		document.querySelector('.gacha-message').classList.remove('fadeout');
     	document.querySelector('.gacha-message').classList.add('fadein');
+    	
+    	// ハート自体をクリックしたときにフェードアウトして消える処理
+    	document.querySelector('.img-heart').onclick = function() {
+    	  	document.querySelector('.gacha-message').classList.remove('fadein');
+    	 	document.querySelector('.gacha-message').classList.add('fadeout');
+    	}
 	}
-
-	// ハート自体をクリックしたときにフェードアウトして消える処理
-	document.querySelector('.img-heart').onclick = function() {
-	  	document.querySelector('.gacha-message').classList.remove('fadein');
-	 	document.querySelector('.gacha-message').classList.add('fadeout');
+	else if( pop != null && pop.value == 'miss'){
+		$('#gacha').modal('show')
 	}
 </script>
 

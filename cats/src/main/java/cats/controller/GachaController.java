@@ -65,6 +65,8 @@ public class GachaController {
 
 			String ErrMsg ="";
 			String mode = null;
+			String pop = null;
+			int misspoint = 0;
 
 			//	ユーザー情報をセッションから取得
 			LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
@@ -72,7 +74,7 @@ public class GachaController {
 
 			if(hobbyId == 0){
 				ErrMsg = "趣味を選択してください！";
-			}else if(loginInfo.getPoint() > 100) {
+			}else if(loginInfo.getPoint() >= 100) {
 				GachaDto dto = gachaService.getGacha(loginInfo.getStudentId(),hobbyId);
 				RequestDto set = gachaService.getGachaList(dto.getStudentId(),dto.getHobbyIdSearch(),dto.getStudentSex());
 				loginInfo = gachaService.gachaPoint(loginInfo.getPoint());
@@ -84,7 +86,9 @@ public class GachaController {
 
 				}else {
 					ErrMsg = "マッチング失敗！";
-					loginInfo = gachaService.gachaMissPoint(loginInfo.getPoint());
+					misspoint = gachaService.gachaMissPoint(loginInfo.getPoint());
+					loginInfo = loginService.LastPoint(loginInfo.getStudentId());
+					pop = "miss";
 				}
 			  }else {
 				ErrMsg = "ポイントが足りません！";
@@ -95,6 +99,7 @@ public class GachaController {
 
 		mav.addObject("hobbylist", hobbylist);
 		mav.addObject("point",loginInfo.getPoint());
+		mav.addObject("misspoint",misspoint);
 		mav.addObject("msg", ErrMsg);
 		mav.addObject("mode", mode);
 		mav.setViewName("Gacha");
