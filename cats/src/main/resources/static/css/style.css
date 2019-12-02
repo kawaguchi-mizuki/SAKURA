@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 .cp_iptxt {
 	position: relative;
 }
@@ -14,16 +16,16 @@
 	outline: none;
 }
 
-/** テキストフィールドにカーソル当たったときの処理 **/
+/** 繝�繧ｭ繧ｹ繝医ヵ繧｣繝ｼ繝ｫ繝峨↓繧ｫ繝ｼ繧ｽ繝ｫ蠖薙◆縺｣縺溘→縺阪�ｮ蜃ｦ逅� **/
 .cp_iptxt input[type=text]:focus {
 	border-color: #da3c41;
 }
-/** アイコンを左端に表示するので、その分を左側余白を空ける **/
+/** 繧｢繧､繧ｳ繝ｳ繧貞ｷｦ遶ｯ縺ｫ陦ｨ遉ｺ縺吶ｋ縺ｮ縺ｧ縲√◎縺ｮ蛻�繧貞ｷｦ蛛ｴ菴咏區繧堤ｩｺ縺代ｋ **/
 .cp_iptxt input[type=text] {
 	padding-left: 40px;
 }
 
-/** アイコンの位置を動かす **/
+/** 繧｢繧､繧ｳ繝ｳ縺ｮ菴咲ｽｮ繧貞虚縺九☆ **/
 .cp_iptxt i {
 	position: absolute;
 	top: 10px;
@@ -43,25 +45,25 @@
 
 .button {
 	display: inline-block;
-	border-radius: 5%; /* 角丸       */
-	font-size: 18pt; /* 文字サイズ */
-	text-align: center; /* 文字位置   */
-	cursor: pointer; /* カーソル   */
-	padding: 25px 25px; /* 余白       */
-	background: #cccccc; /* 背景色     */
-	color: #1a1aff; /* 文字色     */
-	line-height: 1em; /* 1行の高さ  */
-	transition: .3s; /* なめらか変化 */
-	box-shadow: 6px 6px 3px #666666; /* 影の設定 */
-	border: 2px solid #cccccc; /* 枠の指定 */
+	border-radius: 5%; /* 隗剃ｸｸ       */
+	font-size: 18pt; /* 譁�蟄励し繧､繧ｺ */
+	text-align: center; /* 譁�蟄嶺ｽ咲ｽｮ   */
+	cursor: pointer; /* 繧ｫ繝ｼ繧ｽ繝ｫ   */
+	padding: 25px 25px; /* 菴咏區       */
+	background: #cccccc; /* 閭梧勹濶ｲ     */
+	color: #1a1aff; /* 譁�蟄苓牡     */
+	line-height: 1em; /* 1陦後�ｮ鬮倥＆  */
+	transition: .3s; /* 縺ｪ繧√ｉ縺句､牙喧 */
+	box-shadow: 6px 6px 3px #666666; /* 蠖ｱ縺ｮ險ｭ螳� */
+	border: 2px solid #cccccc; /* 譫�縺ｮ謖�螳� */
 	margin-right: 100px;
 	width: 150px;
 }
 
 .button:hover {
-	box-shadow: none; /* カーソル時の影消去 */
-	color: #cccccc; /* 背景色     */
-	background: #1a1aff; /* 文字色     */
+	box-shadow: none; /* 繧ｫ繝ｼ繧ｽ繝ｫ譎ゅ�ｮ蠖ｱ豸亥悉 */
+	color: #cccccc; /* 閭梧勹濶ｲ     */
+	background: #1a1aff; /* 譁�蟄苓牡     */
 }
 
 p {
@@ -88,9 +90,9 @@ input[type=text] {
 .wrapper {
 	height: 100%;
 	min-height: 100vh;
-	position: relative; /*←相対位置*/
-	padding-bottom: 120px; /*←footerの高さ*/
-	box-sizing: border-box; /*←全て含めてmin-height:100vhに*/
+	position: relative; /*竊千嶌蟇ｾ菴咲ｽｮ*/
+	padding-bottom: 120px; /*竊診ooter縺ｮ鬮倥＆*/
+	box-sizing: border-box; /*竊仙�ｨ縺ｦ蜷ｫ繧√※min-height:100vh縺ｫ*/
 }
 
 footer img {
@@ -102,8 +104,8 @@ footer {
 	background-color: rgba(238, 238, 238, 0.9);
 	text-align: center;
 	padding: 30px 0;
-	position: fixed; /*←絶対位置*/
-	bottom: 0; /*下に固定*/
+	position: fixed; /*竊千ｵｶ蟇ｾ菴咲ｽｮ*/
+	bottom: 0; /*荳九↓蝗ｺ螳�*/
 	z-index: 999;
 }
 
@@ -144,12 +146,12 @@ footer {
 	width: 70%;
 }
 
-/*buttonタグは一律、横幅150pxで角丸 */
+/*button繧ｿ繧ｰ縺ｯ荳�蠕九�∵ｨｪ蟷�150px縺ｧ隗剃ｸｸ */
 button {
 	border-radius: 10px;
 }
 
-/* カテゴリーボタンのデザイン設定 */
+/* 繧ｫ繝�繧ｴ繝ｪ繝ｼ繝懊ち繝ｳ縺ｮ繝�繧ｶ繧､繝ｳ險ｭ螳� */
 .btn-category1 {
 	background-color: #629cff;
 	border: 1px solid #629cff;
@@ -190,7 +192,7 @@ button {
 	padding-bottom: 0;
 }
 
-/* 削除ボタンのデザイン設定 */
+/* 蜑企勁繝懊ち繝ｳ縺ｮ繝�繧ｶ繧､繝ｳ險ｭ螳� */
 .btn-delete {
 	background-color: #a80a0a;
 	border: 1px solid #a80a0a;
@@ -235,14 +237,14 @@ input[class=serch] {
 .bord-title {
 	margin-top: 10px !important;
 }
-/*注意事項のところ */
+/*豕ｨ諢丈ｺ矩��縺ｮ縺ｨ縺薙ｍ */
 .explain {
 	margin: 10px 0;
 	margin-left: 10px;
 	margin-right: 10px;
 }
 
-/*セレクトボタンの設定*/
+/*繧ｻ繝ｬ繧ｯ繝医�懊ち繝ｳ縺ｮ險ｭ螳�*/
 .pldown {
 	margin: auto;
 	width: 80% !important;
@@ -250,7 +252,7 @@ input[class=serch] {
 	margin-left: 3% !important;
 	margin-bottom: 20px !important;
 }
-/*コメントエリアの設定*/
+/*繧ｳ繝｡繝ｳ繝医お繝ｪ繧｢縺ｮ險ｭ螳�*/
 .chat {
 	overflow: auto;
 	height: 500px;
@@ -265,7 +267,7 @@ input[class=serch] {
 }
 
 @media screen and (max-width:600px) {
-	/*　画面サイズが600px以下はここを読み込む　*/
+	/*縲�逕ｻ髱｢繧ｵ繧､繧ｺ縺�600px莉･荳九�ｯ縺薙％繧定ｪｭ縺ｿ霎ｼ繧�縲�*/
 	body {
 		font-size: 0.5rem;
 	}
@@ -280,28 +282,28 @@ input[class=serch] {
 }
 
 #page {
-	position: fixed; /*位置を固定*/
+	position: fixed; /*菴咲ｽｮ繧貞崋螳�*/
 	bottom: 110px;
-	right: 20px; /*右から２０px*/
+	right: 20px; /*蜿ｳ縺九ｉ�ｼ抵ｼ壬x*/
 }
 
 #page img {
-	z-index: 999; /*重なりの順番を最上位に*/
-	width: 60px; /*横幅*/
-	height: 60px; /*縦幅*/
-	cursor: pointer; /*カーソルを指にする*/
+	z-index: 999; /*驥阪↑繧翫�ｮ鬆�逡ｪ繧呈怙荳贋ｽ阪↓*/
+	width: 60px; /*讓ｪ蟷�*/
+	height: 60px; /*邵ｦ蟷�*/
+	cursor: pointer; /*繧ｫ繝ｼ繧ｽ繝ｫ繧呈欠縺ｫ縺吶ｋ*/
 }
 
 .center {
 	text-align: center;
 }
 
-/* きっかけガチャのページ設定 start ***********************************/
+/* 縺阪▲縺九¢繧ｬ繝√Ε縺ｮ繝壹�ｼ繧ｸ險ｭ螳� start ***********************************/
 select.gacha-category {
 	width: 500px !important;
 }
 
-/* 表示を非表示にする設定 */
+/* 陦ｨ遉ｺ繧帝撼陦ｨ遉ｺ縺ｫ縺吶ｋ險ｭ螳� */
 .passive {
 	display: none;
 }
@@ -341,9 +343,9 @@ select.gacha-category {
 		*/
 }
 
-/* きっかけガチャのページ設定 e.n.d ***********************************/
+/* 縺阪▲縺九¢繧ｬ繝√Ε縺ｮ繝壹�ｼ繧ｸ險ｭ螳� e.n.d ***********************************/
 @media screen and (max-width:600px) {
-	/*　画面サイズが600px以下はここを読み込む　*/
+	/*縲�逕ｻ髱｢繧ｵ繧､繧ｺ縺�600px莉･荳九�ｯ縺薙％繧定ｪｭ縺ｿ霎ｼ繧�縲�*/
 	body {
 		font-size: 0.5rem;
 	}
@@ -376,11 +378,11 @@ select.gacha-category {
 }
 
 .chat-list .box-icon a {
-	position: relative; /*「別リンク」は普通に配置するため */
-	z-index: 3; /* リンク要素の重なり順を上にするため */
+	position: relative; /*縲悟挨繝ｪ繝ｳ繧ｯ縲阪�ｯ譎ｮ騾壹↓驟咲ｽｮ縺吶ｋ縺溘ａ */
+	z-index: 3; /* 繝ｪ繝ｳ繧ｯ隕∫ｴ�縺ｮ驥阪↑繧企��繧剃ｸ翫↓縺吶ｋ縺溘ａ */
 }
 
-/* チャット一覧画面の設定 e.n.d *************************************/
+/* 繝√Ε繝�繝井ｸ�隕ｧ逕ｻ髱｢縺ｮ險ｭ螳� e.n.d *************************************/
 * {
 	box-sizing: border-box;
 }
@@ -389,11 +391,11 @@ body {
 	font-family: 'Avenir', 'Helvetica, Neue', 'Helvetica', 'Arial';
 }
 
-/* モーダルCSS */
+/* 繝｢繝ｼ繝�繝ｫCSS */
 .modalArea {
 	display: none;
 	position: fixed;
-	z-index: 10; /*サイトによってここの数値は調整 */
+	z-index: 10; /*繧ｵ繧､繝医↓繧医▲縺ｦ縺薙％縺ｮ謨ｰ蛟､縺ｯ隱ｿ謨ｴ */
 	top: 0;
 	left: 0;
 	width: 100%;
@@ -424,7 +426,7 @@ body {
 	cursor: pointer;
 }
 
-/* 以下ボタンスタイル */
+/* 莉･荳九�懊ち繝ｳ繧ｹ繧ｿ繧､繝ｫ */
 button {
 	padding: 10px;
 	background-color: #fff;
@@ -440,8 +442,8 @@ button {
 	transform: translate(-50%, -50%);
 }
 
-/**ChatのCSS **/
-/*以下、①背景色など*/
+/**Chat縺ｮCSS **/
+/*莉･荳九�≫蔵閭梧勹濶ｲ縺ｪ縺ｩ*/
 .line-bc {
 	padding: 20px 10px;
 	max-width: 600px;
@@ -450,7 +452,7 @@ button {
 	font-size: 14px;
 }
 
-/*以下、②左側のコメント*/
+/*莉･荳九�≫贈蟾ｦ蛛ｴ縺ｮ繧ｳ繝｡繝ｳ繝�*/
 .balloon6 {
 	width: 100%;
 	margin: 10px 0;
@@ -501,7 +503,7 @@ button {
 	padding: 0;
 }
 
-/*以下、③右側の緑コメント*/
+/*莉･荳九�≫造蜿ｳ蛛ｴ縺ｮ邱代さ繝｡繝ｳ繝�*/
 .mycomment {
 	margin: 10px 0;
 }
@@ -568,7 +570,30 @@ button {
 .entry{
 	padding:5px 5px;
 }
+
+.modal-dialog {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100%;
+  margin: auto;
+  pointer-events: none;
+}
+
+.modal-content {
+    pointer-events: all;
+}
+
+.login-first-msg {
+    background: -moz-linear-gradient(top, #f48776, #df4444);
+    background: -webkit-linear-gradient(top, #f48776, #df4444);
+    background: linear-gradient(to bottom, #f48776, #df4444);
+    color: white;
+
+		border-radius: 35px;
+
 .lastmessage{
 	color:#C0C0C0;
+
 }
 
