@@ -21,6 +21,7 @@ import cats.dto.RequestDto;
 import cats.param.SessionConst;
 import cats.service.GachaService;
 import cats.service.HobbyService;
+import cats.service.LoginService;
 
 //	ガチャ
 @RestController
@@ -32,6 +33,9 @@ public class GachaController {
 
 	@Autowired
 	HobbyService hobbyService;
+	
+	@Autowired
+	LoginService loginService;
 
 	@Autowired
 	HttpSession session;
@@ -102,6 +106,7 @@ public class GachaController {
 		mav.addObject("misspoint",misspoint);
 		mav.addObject("msg", ErrMsg);
 		mav.addObject("mode", mode);
+		mav.addObject("pop", pop);
 		mav.setViewName("Gacha");
 
 		return mav;

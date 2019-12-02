@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Cat's Matching</title>
+
 <link href="/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"></link>
 <link href="/css/gacha.css" th:href="@{/css/gacha.css}" rel="stylesheet"></link>
 <link rel="stylesheet"
@@ -66,7 +67,7 @@
 	<div th:if="${mode}">
 	<input type="hidden" name="mode" value="update">
 	</div>
-	
+
 	<div th:if="${pop}">
 	<input type="hidden" name="pop" value="miss">
 		<div class="modal fade " tabindex="-1" role="dialog"id="gacha">
@@ -75,7 +76,7 @@
 	      <div class="modal-body"id="gacha">
 	      		<p>マッチングに失敗しました！</p>
 	      		<div th:if="${misspoint != 0}">
-				<p th:text="${misspoint}+'	ポイント還元されました。"></p>
+				<p th:text="${misspoint}+'ポイント還元されました。"></p>
 				</div>
 	      </div>
 	      <div class="text-center pb-3"id="gacha">
@@ -111,7 +112,6 @@
 		</div>
 	</footer>
 </body>
-</body>
 </html>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -126,11 +126,10 @@
 		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 		crossorigin="anonymous"></script>
 
-<script>
-
 
 <script>
 	var mode = document.querySelector('input[name="mode"]');
+	var pop = document.querySelector('input[name="pop"]');
 	//mode = null はそもそもあるかの判定
 	if( mode != null && mode.value == 'update'){
 		// ハートをフェードインで表示させる処理
@@ -143,8 +142,10 @@
     	 	document.querySelector('.gacha-message').classList.add('fadeout');
     	}
 	}
+	//	追加
 	else if( pop != null && pop.value == 'miss'){
 		$('#gacha').modal('show')
 	}
+
 </script>
 
