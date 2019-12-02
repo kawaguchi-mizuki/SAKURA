@@ -33,15 +33,14 @@ public class GachaController {
 
 	@Autowired
 	HobbyService hobbyService;
-	
+
 	@Autowired
 	LoginService loginService;
 
 	@Autowired
 	HttpSession session;
 
-	@Autowired
-	LoginService loginService;
+
 
 	@RequestMapping(value = {"/Top"}, method = RequestMethod.GET)
 	public ModelAndView Matching(ModelAndView mav)throws Exception{

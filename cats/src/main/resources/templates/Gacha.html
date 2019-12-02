@@ -75,8 +75,11 @@
 	    <div class="modal-content login-first-msg "id="gacha">
 	      <div class="modal-body"id="gacha">
 	      		<p>マッチングに失敗しました！</p>
-	      		<div th:if="${misspoint != 0}">
-				<p th:text="${misspoint}+'ポイント還元されました。"></p>
+	      		<div th:if="${misspoint != 0 && misspoint == 300}">
+				<p th:text="'大当たり！'+${misspoint}+'ポイント還元されました。'"></p>
+				</div>
+				<div th:if="${misspoint == 50 && misspoint !=0}">
+				<p th:text="'当たり！'+${misspoint}+'ポイント還元されました。'"></p>
 				</div>
 	      </div>
 	      <div class="text-center pb-3"id="gacha">
