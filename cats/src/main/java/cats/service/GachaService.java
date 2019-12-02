@@ -158,17 +158,19 @@ public class GachaService {
 		return dto;
 	}
 		
-	public LoginInfoDto gachaMissPoint(Integer point){
+	public int gachaMissPoint(Integer point){
 		Random random = new Random();
 		int index = 0;
+		int hako = 0;
 		//	リスト0 ガチャテーブル
-		int[] gachapoint = {50,50,50,50,50,50,50,100,100,300};
+		int[] gachapoint = {0,0,0,0,0,0,50,50,50,300};
 		//	ユーザー情報をセッションから取得
 		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
 		StudentTblEntity entity = gachaRepository.getGachaUser(loginInfo.getStudentId());
 		
 		index = random.nextInt(gachapoint.length);
-		point = point+gachapoint[index];
+		hako = gachapoint[index];
+		point = point+hako;
 		
 		entity.setPoint(point);
 		studentRepository.save(entity);
@@ -179,10 +181,6 @@ public class GachaService {
 		dto.setPoint(entity.getPoint());
 		dto.setStudentId(entity.getStudentId());
 
-		session.invalidate();
-
-		return dto;
+		return hako;
 	}
-	
-	
 }
